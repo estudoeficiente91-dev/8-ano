@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Estudos Visual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .task-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- Título -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800">Meu Plano de Estudos</h1>
+            <p class="text-lg text-gray-600 mt-2">Uma rotina visual para otimizar seu aprendizado.</p>
+        </header>
+
+        <!-- Legenda de Cores -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 rounded-full bg-sky-500"></div>
+                <span class="text-sm font-medium text-gray-700">Matemática</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 rounded-full bg-amber-500"></div>
+                <span class="text-sm font-medium text-gray-700">Linguagens & Humanas</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 rounded-full bg-emerald-500"></div>
+                <span class="text-sm font-medium text-gray-700">Ciências da Natureza</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 rounded-full bg-violet-500"></div>
+                <span class="text-sm font-medium text-gray-700">Flashcards & Questões</span>
+            </div>
+             <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 rounded-full bg-rose-500"></div>
+                <span class="text-sm font-medium text-gray-700">Redação</span>
+            </div>
+             <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 rounded-full bg-indigo-500"></div>
+                <span class="text-sm font-medium text-gray-700">Simulado & Correção</span>
+            </div>
+        </div>
+
+        <!-- Grid da Semana -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-6">
+            
+            <!-- Dias da Semana (Segunda a Sexta) -->
+            <script>
+                const weekDays = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"];
+                const tasks = `
+                    <!-- Matemática -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-sky-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-sky-100 p-2 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M9 11h.01M12 11h.01M15 11h.01M5.05 6.05a7 7 0 119.9 9.9L19 20" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Matemática</h3>
+                                <p class="text-sm text-gray-500">1 hora</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Linguagens & Humanas -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-amber-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-amber-100 p-2 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Linguagens & Humanas</h3>
+                                <p class="text-sm text-gray-500">1 hora</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ciências da Natureza -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-emerald-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-emerald-100 p-2 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v4.517l-1.581.79a12.045 12.045 0 01-3.838 0L8 10.517V5L7 4z" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Ciências da Natureza</h3>
+                                <p class="text-sm text-gray-500">2 horas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Flashcards & Questões -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-violet-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-violet-100 p-2 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Flashcards & Questões</h3>
+                                <p class="text-sm text-gray-500">2 horas</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                weekDays.forEach(day => {
+                    document.write(`
+                        <div class="bg-gray-50 p-5 rounded-2xl flex flex-col space-y-4">
+                            <h2 class="text-xl font-bold text-gray-700 text-center">${day}</h2>
+                            <div class="space-y-4">${tasks}</div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- Sábado -->
+            <div class="bg-gray-50 p-5 rounded-2xl flex flex-col space-y-4">
+                <h2 class="text-xl font-bold text-gray-700 text-center">Sábado</h2>
+                <div class="space-y-4">
+                    <!-- Simulado -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-indigo-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-indigo-100 p-2 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Simulado ENEM - 2º Dia</h3>
+                                <p class="text-sm text-gray-500">Foco total e gerenciamento de tempo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Redação 1 -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-rose-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-rose-100 p-2 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Redação 1</h3>
+                                <p class="text-sm text-gray-500">Prática de escrita.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domingo -->
+            <div class="bg-gray-50 p-5 rounded-2xl flex flex-col space-y-4">
+                <h2 class="text-xl font-bold text-gray-700 text-center">Domingo</h2>
+                <div class="space-y-4">
+                    <!-- Correção do Simulado -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-indigo-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-indigo-100 p-2 rounded-full">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Correção do Simulado</h3>
+                                <p class="text-sm text-gray-500">Análise de erros e acertos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Redação 2 -->
+                    <div class="task-card bg-white rounded-xl shadow-md p-4 border-l-4 border-rose-500">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-rose-100 p-2 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Redação 2</h3>
+                                <p class="text-sm text-gray-500">Revisão e reescrita.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

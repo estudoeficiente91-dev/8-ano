@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sujeito Paciente e Sujeito Indeterminado - 8º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open + .accordion-content { max-height: 1000px; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Português - 8º Ano: Sujeito Paciente e Indeterminado</h1>
+            <p class="text-slate-600 mt-2">Aprenda a identificar e diferenciar o sujeito paciente e o sujeito indeterminado!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">O que é Sujeito Paciente?</h2>
+                    <p>
+                        O sujeito paciente é aquele que <strong>sofre</strong> a ação verbal, ou seja, recebe a ação praticada por outro agente. Ele aparece principalmente em frases na <strong>voz passiva</strong>.
+                    </p>
+                    <ul class="list-disc pl-6 mt-3">
+                        <li><strong>Exemplo:</strong> <em>O bolo foi comido pelos alunos.</em> <br>
+                            <span class="text-sky-700">Sujeito paciente:</span> <strong>O bolo</strong> (sofreu a ação de ser comido)</li>
+                        <li><strong>Como identificar?</strong> Pergunte: "Quem sofreu a ação?"</li>
+                        <li><strong>Voz passiva analítica:</strong> Verbo auxiliar + particípio + agente da passiva (opcional).<br>
+                            <em>Exemplo: A carta foi escrita por Ana.</em></li>
+                        <li><strong>Voz passiva sintética:</strong> Verbo na 3ª pessoa + pronome "se".<br>
+                            <em>Exemplo: Vendem-se casas.</em></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">O que é Sujeito Indeterminado?</h2>
+                    <p>
+                        O sujeito indeterminado é aquele que <strong>não se quer ou não se pode identificar</strong> quem pratica a ação verbal. O foco está na ação, não em quem a pratica.
+                    </p>
+                    <ul class="list-disc pl-6 mt-3">
+                        <li><strong>Formas de indeterminar o sujeito:</strong>
+                            <ul class="list-disc pl-6">
+                                <li><strong>Verbo na 3ª pessoa do plural:</strong> <em>Disseram que vai chover.</em></li>
+                                <li><strong>Verbo na 3ª pessoa do singular + "se" (índice de indeterminação):</strong> <em>Precisa-se de vendedores.</em></li>
+                                <li><strong>Obs:</strong> Só verbos intransitivos, transitivos indiretos ou de ligação podem ser indeterminados com "se".</li>
+                            </ul>
+                        </li>
+                        <li><strong>Exemplo:</strong> <em>Vive-se bem aqui.</em> (Não se sabe quem vive, o sujeito é indeterminado)</li>
+                        <li><strong>Como identificar?</strong> Não é possível saber quem faz a ação, nem mesmo com contexto.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Resumo Visual</h2>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-2">
+                        <div class="flex-1 bg-sky-50 border border-sky-200 rounded-lg p-4">
+                            <h3 class="font-bold text-sky-700 mb-2">Sujeito Paciente</h3>
+                            <ul class="list-disc pl-5">
+                                <li>Sofre a ação</li>
+                                <li>Voz passiva</li>
+                                <li>Ex: O carro foi vendido.</li>
+                            </ul>
+                        </div>
+                        <div class="flex-1 bg-amber-50 border border-amber-200 rounded-lg p-4">
+                            <h3 class="font-bold text-amber-700 mb-2">Sujeito Indeterminado</h3>
+                            <ul class="list-disc pl-5">
+                                <li>Não se sabe quem faz a ação</li>
+                                <li>Verbo 3ª pessoa plural ou 3ª singular + "se"</li>
+                                <li>Ex: Falaram sobre você. / Vive-se bem aqui.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Classifique o sujeito das frases abaixo como <strong>Paciente</strong> ou <strong>Indeterminado</strong>.</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz();
+            });
+
+            // Quiz de sujeito paciente e indeterminado
+            const quizData = [
+                {question: "1. O prêmio foi entregue aos vencedores.", answer: "Paciente", explanation: "O sujeito 'O prêmio' sofreu a ação de ser entregue (voz passiva)."},
+                {question: "2. Precisa-se de voluntários para o evento.", answer: "Indeterminado", explanation: "Verbo na 3ª pessoa do singular + 'se' (índice de indeterminação). Não se sabe quem precisa."},
+                {question: "3. Falaram sobre o novo projeto.", answer: "Indeterminado", explanation: "Verbo na 3ª pessoa do plural sem sujeito explícito. Não se sabe quem falou."},
+                {question: "4. As cartas foram escritas por Maria.", answer: "Paciente", explanation: "O sujeito 'As cartas' sofreu a ação de ser escrita (voz passiva)."},
+                {question: "5. Vive-se bem nesta cidade.", answer: "Indeterminado", explanation: "Verbo intransitivo na 3ª pessoa do singular + 'se'. Não se sabe quem vive."},
+                {question: "6. O carro foi consertado ontem.", answer: "Paciente", explanation: "O sujeito 'O carro' sofreu a ação de ser consertado (voz passiva)."},
+                {question: "7. Disseram que a prova será difícil.", answer: "Indeterminado", explanation: "Verbo na 3ª pessoa do plural sem sujeito explícito. Não se sabe quem disse."},
+                {question: "8. Vendem-se apartamentos no centro.", answer: "Paciente", explanation: "Voz passiva sintética: 'apartamentos' é sujeito paciente."},
+                {question: "9. Precisa-se de atenção.", answer: "Indeterminado", explanation: "Verbo na 3ª pessoa do singular + 'se'. Não se sabe quem precisa."},
+                {question: "10. O livro foi lido pelos alunos.", answer: "Paciente", explanation: "O sujeito 'O livro' sofreu a ação de ser lido (voz passiva)."}
+            ];
+
+            let score = 0;
+            let currentQuestion = 0;
+            let lastAnswerWasCorrect = false;
+
+            function startQuiz() {
+                score = 0;
+                currentQuestion = 0;
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = quizData[currentQuestion];
+                document.getElementById('question-progress').textContent = `Questão ${currentQuestion + 1} de ${quizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                ["Paciente", "Indeterminado"].forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                currentQuestion++;
+                if (currentQuestion < quizData.length) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Você acertou ${score} de ${quizData.length} questões!`;
+                document.getElementById('score-bar').style.width = `${(score / quizData.length) * 100}%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

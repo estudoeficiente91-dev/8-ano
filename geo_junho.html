@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geografia - América: Espaço Rural e Exploração Mineral (8º Ano)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open + .accordion-content { max-height: 2000px; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Geografia - 8º Ano: América Rural e Mineração</h1>
+            <p class="text-slate-600 mt-2">Estude o espaço rural, a exploração mineral e os impactos socioambientais na América!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Conteúdo Resumido</h2>
+                    <div id="accordion-container" class="space-y-3">
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Organização do Espaço Rural Americano</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>O espaço rural americano é marcado por grandes propriedades (latifúndios) nos EUA e Canadá, com agricultura mecanizada e voltada para exportação. Na América Latina, predominam pequenas propriedades (minifúndios) e agricultura familiar, mas também há grandes fazendas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Regiões e Produções Agrícolas</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>Nos EUA, destacam-se os cinturões agrícolas (belts): <strong>Corn Belt</strong> (milho), <strong>Wheat Belt</strong> (trigo), <strong>Cotton Belt</strong> (algodão). Na América Latina, há produção de soja, café, cana-de-açúcar, milho e frutas tropicais.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Contrastes Regionais: América Latina x Anglo-Saxônica</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>Na América Anglo-Saxônica (EUA/Canadá), predomina agricultura moderna, mecanizada e com alto uso de tecnologia. Na América Latina, há mais desigualdade, com coexistência de agricultura moderna e tradicional, além de problemas de concentração fundiária.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Modernização das Atividades Agropecuárias</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>Inclui uso de máquinas, sementes modificadas, irrigação, fertilizantes e agrotóxicos. Aumenta a produtividade, mas pode causar desemprego no campo e impactos ambientais.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Transformações e Movimentos Sociais no Espaço Rural</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>O campo passa por êxodo rural, mecanização e concentração de terras. Movimentos sociais (como MST no Brasil) lutam por reforma agrária, melhores condições de vida e acesso à terra.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Redemocratização e Fortalecimento dos Movimentos Sociais</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>Com a redemocratização em vários países latino-americanos, movimentos sociais rurais ganharam força, reivindicando direitos, políticas públicas e justiça social no campo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Impactos Socioambientais das Atividades Agropecuárias</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <ul class="list-disc list-inside">
+                                        <li><strong>Contaminação por insumos químicos:</strong> Uso excessivo de agrotóxicos e fertilizantes polui solo e água.</li>
+                                        <li><strong>Assoreamento de cursos hídricos:</strong> Erosão do solo leva terra para rios, prejudicando a vida aquática.</li>
+                                        <li><strong>Poluição atmosférica:</strong> Queima de resíduos agrícolas e uso de máquinas liberam poluentes.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Exploração Mineral na América e Impactos</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>A América é rica em minérios (ferro, cobre, ouro, prata, petróleo). A extração mineral gera empregos e riqueza, mas causa desmatamento, poluição de rios, contaminação do solo e conflitos com populações locais.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Circulação de Mercadorias e Integração Econômica</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>O comércio entre países latino-americanos cresce com blocos como Mercosul e projetos como a IIRSA (Iniciativa para a Integração da Infraestrutura Regional Sul-Americana), que busca melhorar estradas, portos e ferrovias para facilitar a circulação de mercadorias e integração territorial.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as questões sobre o espaço rural e a mineração na América. Se errar, a questão volta para o final da fila!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="flex justify-center mt-10 mb-6">
+        <button onclick="printQuizQuestions()" class="px-8 py-3 bg-pink-700 text-white text-lg font-semibold rounded-lg shadow hover:bg-pink-800 transition-colors flex items-center gap-2">
+            🖨️ Imprimir questões em PDF
+        </button>
+    </div>
+    <script>
+        function printQuizQuestions() {
+            const quizData = [
+                { question: "O que caracteriza o espaço rural americano nos EUA e Canadá?", options: ["Grandes propriedades e agricultura mecanizada", "Pequenas propriedades e agricultura familiar", "Predomínio de agricultura orgânica", "Ausência de exportação agrícola"] },
+                { question: "O que são os 'belts' agrícolas dos EUA?", options: ["Regiões especializadas em certos produtos", "Cinturões industriais", "Áreas de mineração", "Regiões de floresta"] },
+                { question: "Qual é o principal contraste entre o espaço rural da América Latina e da Anglo-Saxônica?", options: ["Mais desigualdade e coexistência de agricultura moderna e tradicional na América Latina", "Mais mecanização na América Latina", "Mais agricultura familiar nos EUA", "Menor uso de tecnologia na América Anglo-Saxônica"] },
+                { question: "O que a modernização agropecuária trouxe para o campo?", options: ["Aumento da produtividade e impactos ambientais", "Redução do uso de máquinas", "Menor produção de alimentos", "Fim do êxodo rural"] },
+                { question: "O que são movimentos sociais rurais?", options: ["Grupos que lutam por reforma agrária e direitos no campo", "Empresas de exportação agrícola", "Associações de mineradoras", "Clubes de fazendeiros"] },
+                { question: "O que a redemocratização trouxe para os movimentos sociais rurais?", options: ["Fortalecimento e mais reivindicações por direitos", "Redução das lutas sociais", "Fim dos sindicatos", "Aumento da concentração de terras"] },
+                { question: "Qual é um impacto ambiental do uso excessivo de agrotóxicos?", options: ["Contaminação do solo e da água", "Aumento da biodiversidade", "Redução da produção agrícola", "Melhora da qualidade do ar"] },
+                { question: "O que é assoreamento de cursos hídricos?", options: ["Acúmulo de terra nos rios, prejudicando a vida aquática", "Poluição do ar", "Aumento da vazão dos rios", "Construção de barragens"] },
+                { question: "Como a poluição atmosférica pode ser causada no campo?", options: ["Queima de resíduos agrícolas e uso de máquinas", "Plantio de árvores", "Uso de energia solar", "Rotação de culturas"] },
+                { question: "Quais são alguns impactos da exploração mineral na América?", options: ["Desmatamento, poluição de rios e conflitos sociais", "Aumento da biodiversidade", "Redução da produção agrícola", "Melhora da qualidade do solo"] },
+                { question: "O que é a IIRSA?", options: ["Projeto de integração de infraestrutura na América do Sul", "Associação de produtores rurais", "Sindicato de mineradores", "Empresa de exportação"] },
+                { question: "O que o Mercosul busca promover?", options: ["Integração econômica e circulação de mercadorias", "Fechamento das fronteiras", "Redução do comércio", "Aumento de tarifas"] },
+                { question: "Qual é uma produção agrícola típica da América Latina?", options: ["Soja, café e cana-de-açúcar", "Trigo e cevada", "Batata e centeio", "Aveia e lúpulo"] },
+                { question: "O que é êxodo rural?", options: ["Saída de pessoas do campo para a cidade", "Chegada de imigrantes ao campo", "Aumento da população rural", "Construção de novas cidades rurais"] },
+                { question: "Como a mecanização pode impactar o campo?", options: ["Reduz empregos e aumenta a produtividade", "Aumenta empregos", "Diminui a produção", "Favorece agricultura familiar"] }
+            ];
+            let html = `<h2 style="text-align:center;font-family:sans-serif;">Questões sobre Geografia Rural e Mineração na América</h2><ol style="font-size:16px;font-family:sans-serif;">`;
+            quizData.forEach((q, i) => {
+                html += `<li style="margin-bottom:18px;"><strong>${i+1}.</strong> ${q.question}<br>`;
+                html += `<ul style="list-style-type: lower-alpha; margin-left:20px;">`;
+                q.options.forEach(opt => {
+                    html += `<li>${opt}</li>`;
+                });
+                html += `</ul></li>`;
+            });
+            html += `</ol>`;
+            const win = window.open('', '', 'width=800,height=900');
+            win.document.write(`
+                <html>
+                <head>
+                    <title>Questões sobre Geografia Rural e Mineração na América</title>
+                </head>
+                <body>${html}</body>
+                </html>
+            `);
+            win.document.close();
+            win.print();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const icon = button.querySelector('span:last-child');
+                    const isOpen = button.classList.toggle('open');
+                    icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                });
+            });
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            const quizData = [
+                { question: "O que caracteriza o espaço rural americano nos EUA e Canadá?", answer: "Grandes propriedades e agricultura mecanizada", options: ["Grandes propriedades e agricultura mecanizada", "Pequenas propriedades e agricultura familiar", "Predomínio de agricultura orgânica", "Ausência de exportação agrícola"], explanation: "Nos EUA e Canadá predominam grandes propriedades e agricultura moderna." },
+                { question: "O que são os 'belts' agrícolas dos EUA?", answer: "Regiões especializadas em certos produtos", options: ["Regiões especializadas em certos produtos", "Cinturões industriais", "Áreas de mineração", "Regiões de floresta"], explanation: "Os 'belts' são regiões agrícolas especializadas, como Corn Belt (milho)." },
+                { question: "Qual é o principal contraste entre o espaço rural da América Latina e da Anglo-Saxônica?", answer: "Mais desigualdade e coexistência de agricultura moderna e tradicional na América Latina", options: ["Mais desigualdade e coexistência de agricultura moderna e tradicional na América Latina", "Mais mecanização na América Latina", "Mais agricultura familiar nos EUA", "Menor uso de tecnologia na América Anglo-Saxônica"], explanation: "A América Latina tem mais desigualdade e coexistência de modelos agrícolas." },
+                { question: "O que a modernização agropecuária trouxe para o campo?", answer: "Aumento da produtividade e impactos ambientais", options: ["Aumento da produtividade e impactos ambientais", "Redução do uso de máquinas", "Menor produção de alimentos", "Fim do êxodo rural"], explanation: "A modernização aumenta a produção, mas pode causar impactos ambientais." },
+                { question: "O que são movimentos sociais rurais?", answer: "Grupos que lutam por reforma agrária e direitos no campo", options: ["Grupos que lutam por reforma agrária e direitos no campo", "Empresas de exportação agrícola", "Associações de mineradoras", "Clubes de fazendeiros"], explanation: "Movimentos sociais rurais reivindicam direitos e acesso à terra." },
+                { question: "O que a redemocratização trouxe para os movimentos sociais rurais?", answer: "Fortalecimento e mais reivindicações por direitos", options: ["Fortalecimento e mais reivindicações por direitos", "Redução das lutas sociais", "Fim dos sindicatos", "Aumento da concentração de terras"], explanation: "A redemocratização fortaleceu os movimentos sociais rurais." },
+                { question: "Qual é um impacto ambiental do uso excessivo de agrotóxicos?", answer: "Contaminação do solo e da água", options: ["Contaminação do solo e da água", "Aumento da biodiversidade", "Redução da produção agrícola", "Melhora da qualidade do ar"], explanation: "Agrotóxicos poluem solo e água." },
+                { question: "O que é assoreamento de cursos hídricos?", answer: "Acúmulo de terra nos rios, prejudicando a vida aquática", options: ["Acúmulo de terra nos rios, prejudicando a vida aquática", "Poluição do ar", "Aumento da vazão dos rios", "Construção de barragens"], explanation: "Assoreamento é o acúmulo de sedimentos nos rios." },
+                { question: "Como a poluição atmosférica pode ser causada no campo?", answer: "Queima de resíduos agrícolas e uso de máquinas", options: ["Queima de resíduos agrícolas e uso de máquinas", "Plantio de árvores", "Uso de energia solar", "Rotação de culturas"], explanation: "A queima de resíduos e o uso de máquinas poluem o ar." },
+                { question: "Quais são alguns impactos da exploração mineral na América?", answer: "Desmatamento, poluição de rios e conflitos sociais", options: ["Desmatamento, poluição de rios e conflitos sociais", "Aumento da biodiversidade", "Redução da produção agrícola", "Melhora da qualidade do solo"], explanation: "A mineração pode causar desmatamento e poluição." },
+                { question: "O que é a IIRSA?", answer: "Projeto de integração de infraestrutura na América do Sul", options: ["Projeto de integração de infraestrutura na América do Sul", "Associação de produtores rurais", "Sindicato de mineradores", "Empresa de exportação"], explanation: "A IIRSA visa integrar a infraestrutura sul-americana." },
+                { question: "O que o Mercosul busca promover?", answer: "Integração econômica e circulação de mercadorias", options: ["Integração econômica e circulação de mercadorias", "Fechamento das fronteiras", "Redução do comércio", "Aumento de tarifas"], explanation: "O Mercosul busca integração econômica entre países." },
+                { question: "Qual é uma produção agrícola típica da América Latina?", answer: "Soja, café e cana-de-açúcar", options: ["Soja, café e cana-de-açúcar", "Trigo e cevada", "Batata e centeio", "Aveia e lúpulo"], explanation: "Soja, café e cana são produtos típicos da América Latina." },
+                { question: "O que é êxodo rural?", answer: "Saída de pessoas do campo para a cidade", options: ["Saída de pessoas do campo para a cidade", "Chegada de imigrantes ao campo", "Aumento da população rural", "Construção de novas cidades rurais"], explanation: "Êxodo rural é a migração do campo para a cidade." },
+                { question: "Como a mecanização pode impactar o campo?", answer: "Reduz empregos e aumenta a produtividade", options: ["Reduz empregos e aumenta a produtividade", "Aumenta empregos", "Diminui a produção", "Favorece agricultura familiar"], explanation: "A mecanização aumenta a produção, mas reduz empregos." }
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+        });
+    </script>
+</body>
+</html>

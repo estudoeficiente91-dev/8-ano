@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gramática 8º Ano - Comparação, Paronomásia, Mal x Mau: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open + .accordion-content { max-height: 1000px; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Gramática 8º Ano: Comparação, Paronomásia, Mal x Mau</h1>
+            <p class="text-slate-600 mt-2">Aprenda sobre comparação explícita e implícita, paronomásia e a diferença entre mal e mau!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Comparação Explícita</h2>
+                    <p>É quando a comparação entre dois elementos é feita de forma clara, usando conectivos como <strong>como</strong>, <strong>tal qual</strong>, <strong>assim como</strong>, <strong>igual a</strong>, <strong>feito</strong>, <strong>que nem</strong>, entre outros.</p>
+                    <p class="mt-2"><strong>Exemplo:</strong> Ela é <u>rápida como</u> um raio.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Comparação Implícita</h2>
+                    <p>Ocorre quando a comparação não é feita de forma direta, mas está subentendida no contexto, geralmente por meio de adjetivos no grau comparativo ou advérbios.</p>
+                    <p class="mt-2"><strong>Exemplo:</strong> João é <u>mais alto</u> que Pedro.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Paronomásia</h2>
+                    <p>É uma figura de linguagem que consiste na aproximação de palavras com sons parecidos, mas significados diferentes, para criar efeito de sentido ou sonoridade.</p>
+                    <p class="mt-2"><strong>Exemplo:</strong> "O rato roeu a roupa do rei de Roma."</p>
+                    <p class="mt-2">Palavras parônimas: <strong>descrição</strong> (ato de descrever) e <strong>discrição</strong> (qualidade de ser discreto).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Diferença entre Mal e Mau</h2>
+                    <ul class="list-disc pl-5">
+                        <li><strong>Mal</strong> (com L): pode ser advérbio (oposto de bem) ou substantivo (problema, doença).</li>
+                        <li><strong>Mau</strong> (com U): é adjetivo (oposto de bom).</li>
+                    </ul>
+                    <p class="mt-2"><strong>Exemplos:</strong></p>
+                    <ul class="list-disc pl-5">
+                        <li>Ele acordou <u>mal</u> (oposto de bem).</li>
+                        <li>Ele é um <u>mau</u> aluno (oposto de bom).</li>
+                        <li>O <u>mal</u> do século é o estresse.</li>
+                        <li>Ela não é <u>má</u>, só está de <u>mau</u> humor.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as questões sobre comparação, paronomásia e o uso de mal e mau. Se errar, a questão volta para o final da fila!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tabs
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz();
+            });
+
+            // Quiz
+            const quizData = [
+                {
+                    question: "1. Em 'Ela é rápida como um raio', temos um exemplo de:",
+                    answer: "Comparação explícita",
+                    options: [
+                        "Comparação explícita",
+                        "Comparação implícita",
+                        "Paronomásia",
+                        "Uso de mal"
+                    ],
+                    explanation: "A comparação é feita de forma clara, usando o conectivo 'como'."
+                },
+                {
+                    question: "2. Em 'João é mais alto que Pedro', temos um exemplo de:",
+                    answer: "Comparação implícita",
+                    options: [
+                        "Comparação explícita",
+                        "Comparação implícita",
+                        "Paronomásia",
+                        "Uso de mau"
+                    ],
+                    explanation: "A comparação está implícita no uso do grau comparativo 'mais alto'."
+                },
+                {
+                    question: "3. Assinale a alternativa que apresenta uma comparação explícita:",
+                    answer: "Ele é forte como um touro.",
+                    options: [
+                        "Ele é forte como um touro.",
+                        "Ela é mais estudiosa que o irmão.",
+                        "Pedro é o melhor da turma.",
+                        "Ele é tão rápido."
+                    ],
+                    explanation: "A frase usa 'como' para fazer a comparação de forma explícita."
+                },
+                {
+                    question: "4. Qual frase apresenta comparação implícita?",
+                    answer: "Maria é menos paciente que Ana.",
+                    options: [
+                        "Maria é menos paciente que Ana.",
+                        "Ele é corajoso como um leão.",
+                        "Ela é igual à mãe.",
+                        "Ele é tão alto quanto o pai."
+                    ],
+                    explanation: "O uso de 'menos... que' indica comparação implícita."
+                },
+                {
+                    question: "5. O que é paronomásia?",
+                    answer: "Figura que aproxima palavras parecidas na forma e som",
+                    options: [
+                        "Figura que aproxima palavras parecidas na forma e som",
+                        "Comparação explícita",
+                        "Uso de advérbios",
+                        "Erro de ortografia"
+                    ],
+                    explanation: "Paronomásia é a aproximação de palavras semelhantes na forma e som, mas de significados diferentes."
+                },
+                {
+                    question: "6. Assinale o exemplo de paronomásia:",
+                    answer: "O cavaleiro era muito cavalheiro.",
+                    options: [
+                        "O cavaleiro era muito cavalheiro.",
+                        "Ele é mais alto que o irmão.",
+                        "Ela é boa aluna.",
+                        "Ele acordou mal."
+                    ],
+                    explanation: "'Cavaleiro' e 'cavalheiro' são palavras parônimas."
+                },
+                {
+                    question: "7. Em 'O rato roeu a roupa do rei de Roma', ocorre:",
+                    answer: "Paronomásia",
+                    options: [
+                        "Comparação explícita",
+                        "Comparação implícita",
+                        "Paronomásia",
+                        "Uso de mal"
+                    ],
+                    explanation: "A frase aproxima palavras de sons parecidos (rato, roeu, roupa, rei, Roma)."
+                },
+                {
+                    question: "8. Assinale a alternativa em que o uso de 'mal' está correto:",
+                    answer: "Ele acordou mal.",
+                    options: [
+                        "Ele acordou mal.",
+                        "Ele é um mal aluno.",
+                        "Ela é uma mal pessoa.",
+                        "Hoje está um dia mau."
+                    ],
+                    explanation: "'Mal' (com L) é o oposto de 'bem'."
+                },
+                {
+                    question: "9. Assinale a alternativa em que o uso de 'mau' está correto:",
+                    answer: "Ele é um mau amigo.",
+                    options: [
+                        "Ele é um mau amigo.",
+                        "Ele acordou mau.",
+                        "Ela está de mal humor.",
+                        "O mal venceu."
+                    ],
+                    explanation: "'Mau' (com U) é o oposto de 'bom'."
+                },
+                {
+                    question: "10. Complete corretamente: 'Ele não é ___, só está de ___ humor.'",
+                    answer: "mau / mau",
+                    options: [
+                        "mau / mau",
+                        "mal / mal",
+                        "mal / mau",
+                        "mau / mal"
+                    ],
+                    explanation: "Ambos os espaços pedem o adjetivo 'mau' (oposto de bom)."
+                },
+                {
+                    question: "11. Complete: 'O ___ do século é o estresse.'",
+                    answer: "mal",
+                    options: [
+                        "mal",
+                        "mau"
+                    ],
+                    explanation: "'Mal' (com L) é substantivo, significa problema, doença."
+                },
+                {
+                    question: "12. Complete: 'Ela não é ___, só acordou ___.'",
+                    answer: "má / mal",
+                    options: [
+                        "má / mal",
+                        "mau / mau",
+                        "mal / mau",
+                        "má / mau"
+                    ],
+                    explanation: "'Má' é o feminino de 'mau' (adjetivo), 'mal' é advérbio (oposto de bem)."
+                },
+                {
+                    question: "13. Em 'Ele é tão inteligente quanto o irmão', temos:",
+                    answer: "Comparação explícita",
+                    options: [
+                        "Comparação explícita",
+                        "Comparação implícita",
+                        "Paronomásia",
+                        "Uso de mal"
+                    ],
+                    explanation: "O uso de 'tão... quanto' faz a comparação de forma explícita."
+                },
+                {
+                    question: "14. Assinale a alternativa em que ocorre comparação implícita:",
+                    answer: "Ela é melhor que você.",
+                    options: [
+                        "Ela é melhor que você.",
+                        "Ele é forte como um touro.",
+                        "Ela é igual à mãe.",
+                        "Ele é tão rápido quanto o pai."
+                    ],
+                    explanation: "'Melhor que' é um comparativo implícito."
+                },
+                {
+                    question: "15. Assinale a alternativa em que ocorre paronomásia:",
+                    answer: "Descrição e discrição são palavras diferentes.",
+                    options: [
+                        "Descrição e discrição são palavras diferentes.",
+                        "Ele é mais alto que o irmão.",
+                        "Ela é boa aluna.",
+                        "Ele acordou mal."
+                    ],
+                    explanation: "'Descrição' (ato de descrever) e 'discrição' (ser discreto) são parônimas."
+                },
+                {
+                    question: "16. Complete: 'Ele saiu de casa ___ humor.'",
+                    answer: "mau",
+                    options: [
+                        "mau",
+                        "mal"
+                    ],
+                    explanation: "O correto é 'mau humor' (oposto de bom humor)."
+                },
+                {
+                    question: "17. Complete: 'Ele respondeu ___ à pergunta.'",
+                    answer: "mal",
+                    options: [
+                        "mal",
+                        "mau"
+                    ],
+                    explanation: "'Mal' (com L) é advérbio, oposto de 'bem'."
+                },
+                {
+                    question: "18. Assinale a alternativa em que o uso de 'mal' está INCORRETO:",
+                    answer: "Ele é um mal amigo.",
+                    options: [
+                        "Ele é um mal amigo.",
+                        "Ele acordou mal.",
+                        "Ela respondeu mal.",
+                        "O mal do século é o estresse."
+                    ],
+                    explanation: "O correto seria 'mau amigo' (oposto de bom amigo)."
+                },
+                {
+                    question: "19. Assinale a alternativa em que ocorre comparação explícita:",
+                    answer: "Ele é corajoso como um leão.",
+                    options: [
+                        "Ele é corajoso como um leão.",
+                        "Ela é menos paciente que Ana.",
+                        "Ele é melhor que o irmão.",
+                        "Ele é tão alto."
+                    ],
+                    explanation: "O uso de 'como' faz a comparação explícita."
+                },
+                {
+                    question: "20. O que são palavras parônimas?",
+                    answer: "Palavras parecidas na forma e som, mas com significados diferentes",
+                    options: [
+                        "Palavras parecidas na forma e som, mas com significados diferentes",
+                        "Palavras iguais",
+                        "Palavras opostas",
+                        "Palavras estrangeiras"
+                    ],
+                    explanation: "Parônimas são palavras semelhantes na escrita e pronúncia, mas com significados diferentes."
+                }
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = [...quizData]; // Ordem fixa, enumerada
+                showQuestion();
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão Matemática 2 - 9º Ano: Polígonos e Quadriláteros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+        .content-text { font-size: 1rem; line-height: 1.6; }
+        .term-highlight {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-3xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Revisão Matemática 2 - 9º Ano</h1>
+            <p class="text-slate-600 mt-2">Polígonos e Quadriláteros</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <section class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">O que são Polígonos?</h2>
+                    <p class="content-text mb-2">
+                        Polígonos são figuras planas fechadas formadas apenas por segmentos de reta. Exemplos: triângulo, quadrado, pentágono, hexágono, etc.
+                    </p>
+                    <ul class="list-disc pl-6 content-text">
+                        <li>O número de lados de um polígono é igual ao número de ângulos e vértices.</li>
+                        <li>Polígonos podem ser regulares (todos os lados e ângulos iguais) ou irregulares.</li>
+                    </ul>
+                </section>
+
+                <section class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Soma dos Ângulos Internos</h2>
+                    <p class="content-text mb-2">
+                        A soma dos ângulos internos (<span class="term-highlight">S</span>) de um polígono com <span class="term-highlight">n</span> lados é dada por:
+                    </p>
+                    <p class="content-text font-semibold mb-2 text-center">
+                        <span class="term-highlight">S = (n - 2) × 180°</span>
+                    </p>
+                    <p class="content-text mb-2">
+                        Exemplo: Um hexágono (<span class="term-highlight">n = 6</span>)<br>
+                        <span class="term-highlight">S = (6 - 2) × 180° = 4 × 180° = 720°</span>
+                    </p>
+                </section>
+
+                <section class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Soma dos Ângulos Externos</h2>
+                    <p class="content-text mb-2">
+                        A soma dos ângulos externos de qualquer polígono convexo é sempre <span class="term-highlight">360°</span>.
+                    </p>
+                </section>
+
+                <section class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Diagonais de um Polígono</h2>
+                    <p class="content-text mb-2">
+                        O número de diagonais (<span class="term-highlight">D</span>) de um polígono de <span class="term-highlight">n</span> lados:
+                    </p>
+                    <p class="content-text font-semibold mb-2 text-center">
+                        <span class="term-highlight">D = n × (n - 3) / 2</span>
+                    </p>
+                    <p class="content-text mb-2">
+                        Exemplo: Um octógono (<span class="term-highlight">n = 8</span>)<br>
+                        <span class="term-highlight">D = 8 × 5 / 2 = 20</span>
+                    </p>
+                </section>
+
+                <section class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Quadriláteros</h2>
+                    <p class="content-text mb-2">
+                        Quadriláteros são polígonos com 4 lados. A soma dos ângulos internos é sempre <span class="term-highlight">360°</span>.
+                    </p>
+                    <ul class="list-disc pl-6 content-text">
+                        <li><b>Paralelogramo:</b> Lados opostos paralelos e iguais, ângulos opostos iguais.</li>
+                        <li><b>Retângulo:</b> Paralelogramo com 4 ângulos retos (90°).</li>
+                        <li><b>Losango:</b> Paralelogramo com 4 lados iguais.</li>
+                        <li><b>Quadrado:</b> Paralelogramo com 4 lados iguais e 4 ângulos retos.</li>
+                        <li><b>Trapézio:</b> Apenas um par de lados paralelos (bases).</li>
+                    </ul>
+                </section>
+
+                <section class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Dicas para a Prova</h2>
+                    <ul class="list-disc pl-6 content-text">
+                        <li>Use as fórmulas para calcular soma dos ângulos e diagonais.</li>
+                        <li>Em quadriláteros, se souber três ângulos, basta subtrair a soma deles de 360° para achar o quarto.</li>
+                        <li>Quadrados, retângulos e losangos são tipos especiais de paralelogramos.</li>
+                        <li>Trapézios têm apenas um par de lados paralelos.</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as 30 questões sobre polígonos e quadriláteros. Se errar, tente novamente!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz();
+            });
+
+            // 30 questões enumeradas sobre polígonos e quadriláteros
+            const quizData = [
+                {question: "1. Qual é a soma dos ângulos internos de um triângulo?", answer: "180°", options: ["90°", "180°", "270°", "360°"], explanation: "S = (3-2) × 180° = 180°."},
+                {question: "2. Qual é a soma dos ângulos internos de um quadrilátero?", answer: "360°", options: ["180°", "270°", "360°", "540°"], explanation: "S = (4-2) × 180° = 360°."},
+                {question: "3. Qual é a soma dos ângulos internos de um pentágono?", answer: "540°", options: ["360°", "540°", "720°", "900°"], explanation: "S = (5-2) × 180° = 540°."},
+                {question: "4. Qual é a soma dos ângulos internos de um hexágono?", answer: "720°", options: ["540°", "720°", "900°", "1080°"], explanation: "S = (6-2) × 180° = 720°."},
+                {question: "5. Qual é a soma dos ângulos internos de um octógono?", answer: "1080°", options: ["900°", "1080°", "1260°", "1440°"], explanation: "S = (8-2) × 180° = 1080°."},
+                {question: "6. Quantos lados tem um polígono cuja soma dos ângulos internos é 900°?", answer: "7", options: ["5", "6", "7", "8"], explanation: "S = (n-2) × 180° = 900° → n = 7."},
+                {question: "7. Quantas diagonais tem um pentágono?", answer: "5", options: ["5", "7", "8", "10"], explanation: "D = 5 × (5-3)/2 = 5."},
+                {question: "8. Quantas diagonais tem um hexágono?", answer: "9", options: ["6", "9", "12", "15"], explanation: "D = 6 × (6-3)/2 = 9."},
+                {question: "9. Quantas diagonais tem um octógono?", answer: "20", options: ["12", "16", "20", "24"], explanation: "D = 8 × (8-3)/2 = 20."},
+                {question: "10. Um polígono tem 20 diagonais. Quantos lados ele possui?", answer: "8", options: ["6", "8", "10", "12"], explanation: "D = n(n-3)/2 = 20 → n=8."},
+                {question: "11. Qual é a soma dos ângulos externos de qualquer polígono convexo?", answer: "360°", options: ["180°", "270°", "360°", "540°"], explanation: "A soma dos ângulos externos é sempre 360°."},
+                {question: "12. Um quadrilátero tem três ângulos medindo 70°, 100° e 110°. Qual a medida do quarto ângulo?", answer: "80°", options: ["70°", "80°", "90°", "100°"], explanation: "Soma dos conhecidos: 70+100+110=280°. Quarto ângulo: 360-280=80°."},
+                {question: "13. Em um paralelogramo, os ângulos opostos são sempre:", answer: "Iguais", options: ["Iguais", "Diferentes", "Suplementares", "Complementares"], explanation: "Ângulos opostos em paralelogramos são iguais."},
+                {question: "14. Em um paralelogramo, os lados opostos são sempre:", answer: "Paralelos e iguais", options: ["Paralelos e iguais", "Perpendiculares", "Diferentes", "Congruentes apenas"], explanation: "Lados opostos são paralelos e iguais."},
+                {question: "15. Qual quadrilátero tem todos os lados iguais e todos os ângulos retos?", answer: "Quadrado", options: ["Retângulo", "Losango", "Quadrado", "Trapézio"], explanation: "O quadrado tem lados iguais e ângulos retos."},
+                {question: "16. Qual quadrilátero tem apenas um par de lados paralelos?", answer: "Trapézio", options: ["Paralelogramo", "Trapézio", "Quadrado", "Retângulo"], explanation: "Trapézio tem só um par de lados paralelos."},
+                {question: "17. Se um lado de um losango mede 7 cm, qual o seu perímetro?", answer: "28 cm", options: ["14 cm", "21 cm", "28 cm", "49 cm"], explanation: "Perímetro = 4 × 7 = 28 cm."},
+                {question: "18. As diagonais de um losango são sempre:", answer: "Perpendiculares", options: ["Congruentes", "Paralelas", "Perpendiculares", "Menores que os lados"], explanation: "Diagonais do losango são perpendiculares."},
+                {question: "19. Um paralelogramo tem lados opostos medindo (x + 5) cm e 10 cm. Qual o valor de x?", answer: "5", options: ["3", "5", "10", "15"], explanation: "x+5 = 10 → x = 5."},
+                {question: "20. Em um trapézio retângulo, quantos ângulos retos ele possui?", answer: "Dois", options: ["Um", "Dois", "Três", "Quatro"], explanation: "Trapézio retângulo tem dois ângulos de 90°."},
+                {question: "21. Se um ângulo de um paralelogramo mede 115°, qual a medida de um ângulo consecutivo?", answer: "65°", options: ["115°", "75°", "65°", "245°"], explanation: "Ângulos consecutivos são suplementares: 180-115=65°."},
+                {question: "22. Qual quadrilátero tem lados opostos paralelos e todos os ângulos internos retos?", answer: "Retângulo", options: ["Losango", "Trapézio", "Retângulo", "Paralelogramo qualquer"], explanation: "Retângulo tem lados opostos paralelos e ângulos retos."},
+                {question: "23. Um quadrilátero tem ângulos expressos por x, 2x, 3x e 4x. Qual o valor de x?", answer: "36°", options: ["30°", "36°", "40°", "45°"], explanation: "x+2x+3x+4x=360 → 10x=360 → x=36°."},
+                {question: "24. As diagonais de um quadrado formam que tipo de ângulo ao se cruzarem?", answer: "90°", options: ["45°", "60°", "90°", "180°"], explanation: "Diagonais do quadrado são perpendiculares."},
+                {question: "25. Um trapézio tem bases medindo 10cm e 16cm. A medida da sua base média é:", answer: "13 cm", options: ["10 cm", "16 cm", "26 cm", "13 cm"], explanation: "Base média = (10+16)/2 = 13 cm."},
+                {question: "26. Um dos ângulos internos de um losango mede 120°. Qual a medida do ângulo oposto a ele?", answer: "120°", options: ["60°", "90°", "120°", "Não é possível saber"], explanation: "Ângulos opostos em losango são iguais."},
+                {question: "27. Se as diagonais de um paralelogramo são congruentes, ele é um:", answer: "Retângulo (ou Quadrado)", options: ["Losango", "Retângulo (ou Quadrado)", "Trapézio", "Paralelogramo qualquer"], explanation: "Diagonais congruentes só em retângulo/quadrado."},
+                {question: "28. Um lado de um retângulo mede 8 cm e seu perímetro é 28 cm. Qual a medida do outro lado?", answer: "6 cm", options: ["6 cm", "8 cm", "10 cm", "14 cm"], explanation: "2×(8+x)=28 → x=6 cm."},
+                {question: "29. Qual tipo de trapézio possui os lados não paralelos congruentes?", answer: "Trapézio Isósceles", options: ["Trapézio Retângulo", "Trapézio Escaleno", "Trapézio Isósceles", "Nenhum trapézio"], explanation: "Trapézio isósceles tem lados não paralelos iguais."},
+                {question: "30. Os ângulos de um quadrilátero são x, x+10°, x+20° e x+30°. Qual o valor de x?", answer: "75°", options: ["60°", "70°", "75°", "80°"], explanation: "x+(x+10)+(x+20)+(x+30)=360 → 4x+60=360 → x=75°."}
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+            let questionStatus = Array(quizData.length).fill(null); // null, 'correct', 'wrong'
+            let currentQuestionIndex = 0;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz(index = 0) {
+                score = 0;
+                shuffledQuizData = [...quizData];
+                currentQuestionIndex = index;
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion(index);
+                renderQuestionButtons();
+            }
+
+            function showQuestion(index) {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = quizData[index];
+                document.getElementById('question-progress').textContent = `Questão ${index + 1} de ${quizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation, index));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation, index) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    questionStatus[index] = 'correct';
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    questionStatus[index] = 'wrong';
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Tente novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+                renderQuestionButtons();
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (currentQuestionIndex < quizData.length - 1) {
+                    currentQuestionIndex++;
+                    showQuestion(currentQuestionIndex);
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Você respondeu todas as questões!`;
+                document.getElementById('score-bar').style.width = `${(questionStatus.filter(s => s === 'correct').length / quizData.length) * 100}%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', () => {
+                questionStatus = Array(quizData.length).fill(null);
+                startQuiz(0);
+            });
+
+            function renderQuestionButtons() {
+                let btns = '';
+                for (let i = 0; i < quizData.length; i++) {
+                    let color = 'bg-stone-200 text-slate-700';
+                    if (questionStatus[i] === 'correct') color = 'bg-emerald-500 text-white border-emerald-700';
+                    if (questionStatus[i] === 'wrong') color = 'bg-red-500 text-white border-red-700';
+                    btns += `<button class="qnav-btn px-3 py-1 m-1 rounded border font-bold ${color}" onclick="goToQuestion(${i})">${i + 1}</button>`;
+                }
+                let navDiv = document.getElementById('question-nav');
+                if (!navDiv) {
+                    navDiv = document.createElement('div');
+                    navDiv.id = 'question-nav';
+                    navDiv.className = 'flex flex-wrap justify-center mb-4';
+                    document.getElementById('quiz-container').insertBefore(navDiv, document.getElementById('question-progress'));
+                }
+                navDiv.innerHTML = btns;
+            }
+
+            // Expor função para HTML
+            window.goToQuestion = function(idx) {
+                currentQuestionIndex = idx;
+                showQuestion(idx);
+            };
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

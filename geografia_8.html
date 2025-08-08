@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelos Agrários - 8º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1; /* Sky-700 */
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 1000px; /* Increased max-height for potentially longer content */
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important; /* Emerald-500 */
+            color: white !important;
+            border-color: #059669 !important; /* Emerald-600 */
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important; /* Red-500 */
+            color: white !important;
+            border-color: #dc2626 !important; /* Red-600 */
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Modelos Agrários - 8º Ano</h1>
+            <p class="text-slate-600 mt-2">Explore os diferentes modelos agrários e suas características!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-semibold text-sky-700">Belts dos EUA</h2>
+                    <p>A agricultura nos Estados Unidos é organizada em diferentes "belts" que refletem as condições climáticas e os tipos de cultivo predominantes. Os principais belts incluem:</p>
+                    <ul class="list-disc pl-5">
+                        <li><strong>Corn Belt:</strong> Região central dos EUA, famosa pela produção de milho.</li>
+                        <li><strong>Wheat Belt:</strong> Abrange as Grandes Planícies, focando na produção de trigo.</li>
+                        <li><strong>Rice Belt:</strong> Localizado principalmente no sul, onde o cultivo de arroz é predominante.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-semibold text-sky-700">Revolução Verde</h2>
+                    <p>A Revolução Verde refere-se ao período de grandes avanços na agricultura, especialmente nas décadas de 1960 e 1970, que resultaram em aumentos significativos na produção de alimentos. Isso foi alcançado através do uso de:</p>
+                    <ul class="list-disc pl-5">
+                        <li>Novas variedades de sementes de alto rendimento.</li>
+                        <li>Uso intensivo de fertilizantes e pesticidas.</li>
+                        <li>Melhorias nas práticas de irrigação.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-semibold text-sky-700">Agricultura Orgânica</h2>
+                    <p>A agricultura orgânica é um sistema de cultivo que evita o uso de produtos químicos sintéticos, priorizando métodos naturais. Seus princípios incluem:</p>
+                    <ul class="list-disc pl-5">
+                        <li>Uso de compostagem e adubação verde.</li>
+                        <li>Controle biológico de pragas.</li>
+                        <li>Rotação de culturas para manter a saúde do solo.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-semibold text-sky-700">Mineração</h2>
+                    <p>A mineração é uma atividade que envolve a extração de recursos minerais do solo. Embora não seja uma prática agrícola, ela pode impactar a agricultura de várias maneiras, como:</p>
+                    <ul class="list-disc pl-5">
+                        <li>Desmatamento e degradação do solo.</li>
+                        <li>Contaminação de fontes de água.</li>
+                        <li>Alterações nos ecossistemas locais.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as questões sobre modelos agrários, Revolução Verde, agricultura orgânica e mineração.</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    practiceSection.classList.add('hidden');
+                    learnSection.classList.remove('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnPractice.classList.add('active');
+                    btnLearn.classList.remove('active');
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            switchView('learn');
+        });
+    </script>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const quizData = [
+        {
+            question: "O que são os 'belts' agrícolas dos EUA?",
+            answer: "Regiões especializadas em certos cultivos",
+            options: [
+                "Regiões especializadas em certos cultivos",
+                "Áreas de mineração",
+                "Regiões de floresta",
+                "Cinturões industriais"
+            ],
+            explanation: "Os 'belts' são faixas agrícolas especializadas, como Corn Belt (milho) e Wheat Belt (trigo)."
+        },
+        {
+            question: "O que caracteriza o Corn Belt?",
+            answer: "Região central dos EUA com produção de milho",
+            options: [
+                "Região central dos EUA com produção de milho",
+                "Área de produção de arroz",
+                "Região de mineração",
+                "Área de pecuária leiteira"
+            ],
+            explanation: "O Corn Belt é famoso pela produção de milho nos EUA."
+        },
+        {
+            question: "O que é o Wheat Belt?",
+            answer: "Região das Grandes Planícies focada em trigo",
+            options: [
+                "Região das Grandes Planícies focada em trigo",
+                "Área de produção de leite",
+                "Região de mineração",
+                "Área de produção de arroz"
+            ],
+            explanation: "O Wheat Belt é uma região produtora de trigo nos EUA."
+        },
+        {
+            question: "O que caracteriza o Rice Belt?",
+            answer: "Produção predominante de arroz no sul dos EUA",
+            options: [
+                "Produção predominante de arroz no sul dos EUA",
+                "Produção de milho",
+                "Produção de trigo",
+                "Produção de algodão"
+            ],
+            explanation: "O Rice Belt é voltado ao cultivo de arroz."
+        },
+        {
+            question: "O que caracteriza o sistema plantation?",
+            answer: "Monocultura exportadora em grandes propriedades",
+            options: [
+                "Monocultura exportadora em grandes propriedades",
+                "Pequenas propriedades familiares",
+                "Agricultura orgânica",
+                "Produção para subsistência"
+            ],
+            explanation: "Plantation é típico da colonização, com monocultura, exportação e grandes propriedades."
+        },
+        {
+            question: "Qual é a principal característica da monocultura?",
+            answer: "Cultivo de um único produto em larga escala",
+            options: [
+                "Cultivo de um único produto em larga escala",
+                "Diversidade de culturas",
+                "Produção apenas para subsistência",
+                "Uso exclusivo de técnicas orgânicas"
+            ],
+            explanation: "Monocultura é o cultivo de uma única espécie vegetal."
+        },
+        {
+            question: "O que é concentração fundiária?",
+            answer: "Grande parte das terras nas mãos de poucos proprietários",
+            options: [
+                "Grande parte das terras nas mãos de poucos proprietários",
+                "Distribuição igualitária de terras",
+                "Apenas pequenas propriedades",
+                "Uso coletivo da terra"
+            ],
+            explanation: "Concentração fundiária ocorre quando poucas pessoas detêm grandes áreas de terra."
+        },
+        {
+            question: "Qual é uma característica da agricultura familiar?",
+            answer: "Produção em pequena escala para subsistência",
+            options: [
+                "Produção em pequena escala para subsistência",
+                "Grandes propriedades exportadoras",
+                "Uso intensivo de máquinas",
+                "Monocultura"
+            ],
+            explanation: "A agricultura familiar geralmente é feita em pequenas propriedades e voltada para o consumo próprio."
+        },
+        {
+            question: "A agricultura orgânica se caracteriza por:",
+            answer: "Não usar agrotóxicos ou químicos sintéticos",
+            options: [
+                "Não usar agrotóxicos ou químicos sintéticos",
+                "Uso intensivo de fertilizantes químicos",
+                "Monocultura para exportação",
+                "Uso de sementes transgênicas"
+            ],
+            explanation: "A agricultura orgânica prioriza métodos naturais e não usa químicos sintéticos."
+        },
+        {
+            question: "Qual é o principal objetivo da Revolução Verde?",
+            answer: "Aumentar a produção agrícola com tecnologia",
+            options: [
+                "Aumentar a produção agrícola com tecnologia",
+                "Reduzir o uso de máquinas",
+                "Promover agricultura orgânica",
+                "Diminuir a exportação"
+            ],
+            explanation: "A Revolução Verde trouxe sementes melhoradas, máquinas e insumos para aumentar a produção."
+        },
+        {
+            question: "Uma consequência negativa da Revolução Verde foi:",
+            answer: "Exclusão de pequenos produtores",
+            options: [
+                "Exclusão de pequenos produtores",
+                "Redução da produção",
+                "Aumento da biodiversidade",
+                "Menor uso de agrotóxicos"
+            ],
+            explanation: "O alto custo da tecnologia excluiu muitos pequenos agricultores."
+        },
+        {
+            question: "O que são sementes transgênicas?",
+            answer: "Sementes geneticamente modificadas",
+            options: [
+                "Sementes geneticamente modificadas",
+                "Sementes orgânicas",
+                "Sementes naturais sem alteração",
+                "Sementes de plantas silvestres"
+            ],
+            explanation: "Transgênicos são organismos geneticamente modificados."
+        },
+        {
+            question: "O que é adubação verde?",
+            answer: "Uso de plantas para enriquecer o solo",
+            options: [
+                "Uso de plantas para enriquecer o solo",
+                "Uso de fertilizantes químicos",
+                "Uso de agrotóxicos",
+                "Uso de irrigação artificial"
+            ],
+            explanation: "Adubação verde utiliza plantas para melhorar a fertilidade do solo."
+        },
+        {
+            question: "O que é controle biológico de pragas?",
+            answer: "Uso de organismos vivos para combater pragas",
+            options: [
+                "Uso de organismos vivos para combater pragas",
+                "Aplicação de pesticidas químicos",
+                "Queima de plantações",
+                "Uso de irrigação"
+            ],
+            explanation: "O controle biológico utiliza predadores naturais das pragas."
+        },
+        {
+            question: "O que é rotação de culturas?",
+            answer: "Alternância de diferentes culturas no mesmo solo",
+            options: [
+                "Alternância de diferentes culturas no mesmo solo",
+                "Plantio contínuo de uma só cultura",
+                "Uso de fertilizantes químicos",
+                "Plantio apenas de milho"
+            ],
+            explanation: "A rotação de culturas ajuda a manter a saúde do solo."
+        },
+        {
+            question: "Sobre a mineração, marque a alternativa correta:",
+            answer: "Pode causar poluição da água e do solo",
+            options: [
+                "Pode causar poluição da água e do solo",
+                "Não gera impactos ambientais",
+                "É sempre sustentável",
+                "Só traz benefícios econômicos"
+            ],
+            explanation: "A mineração pode causar poluição, desmatamento e outros impactos ambientais."
+        },
+        {
+            question: "O que são rejeitos na mineração?",
+            answer: "Resíduos resultantes da extração mineral",
+            options: [
+                "Resíduos resultantes da extração mineral",
+                "Produtos agrícolas",
+                "Água potável",
+                "Fertilizantes naturais"
+            ],
+            explanation: "Rejeitos são resíduos que sobram após a extração dos minerais."
+        },
+        {
+            question: "Uma medida importante para prevenir desastres ambientais na mineração é:",
+            answer: "Fiscalização e reaproveitamento de rejeitos",
+            options: [
+                "Fiscalização e reaproveitamento de rejeitos",
+                "Aumentar o uso de agrotóxicos",
+                "Expandir monoculturas",
+                "Reduzir a fiscalização"
+            ],
+            explanation: "A fiscalização e o reaproveitamento de rejeitos ajudam a evitar desastres como rompimento de barragens."
+        },
+        {
+            question: "Qual é um impacto ambiental da mineração?",
+            answer: "Desmatamento e degradação do solo",
+            options: [
+                "Desmatamento e degradação do solo",
+                "Aumento da biodiversidade",
+                "Melhora da qualidade da água",
+                "Recuperação imediata do solo"
+            ],
+            explanation: "A mineração pode causar desmatamento e degradação ambiental."
+        },
+        {
+            question: "O que é subsistência na agricultura?",
+            answer: "Produção voltada para o consumo próprio",
+            options: [
+                "Produção voltada para o consumo próprio",
+                "Produção para exportação",
+                "Produção em larga escala",
+                "Produção de sementes transgênicas"
+            ],
+            explanation: "Agricultura de subsistência é para o consumo da família produtora."
+        },
+        {
+            question: "O que é agricultura de exportação?",
+            answer: "Produção agrícola voltada para o mercado externo",
+            options: [
+                "Produção agrícola voltada para o mercado externo",
+                "Produção apenas para subsistência",
+                "Produção orgânica",
+                "Produção de sementes naturais"
+            ],
+            explanation: "Agricultura de exportação visa vender para outros países."
+        },
+        {
+            question: "O que é agricultura intensiva?",
+            answer: "Uso intensivo de insumos e tecnologia para alta produtividade",
+            options: [
+                "Uso intensivo de insumos e tecnologia para alta produtividade",
+                "Uso de técnicas tradicionais",
+                "Baixa produtividade",
+                "Produção apenas orgânica"
+            ],
+            explanation: "Agricultura intensiva utiliza muita tecnologia e insumos."
+        },
+        {
+            question: "O que é agricultura extensiva?",
+            answer: "Baixo uso de insumos e grandes áreas",
+            options: [
+                "Baixo uso de insumos e grandes áreas",
+                "Alta tecnologia em pequenas áreas",
+                "Produção apenas orgânica",
+                "Uso de sementes transgênicas"
+            ],
+            explanation: "Agricultura extensiva usa grandes áreas e poucos insumos."
+        },
+        {
+            question: "Qual é uma vantagem da agricultura orgânica?",
+            answer: "Preserva o solo e a saúde",
+            options: [
+                "Preserva o solo e a saúde",
+                "Aumenta o uso de agrotóxicos",
+                "Reduz a biodiversidade",
+                "Causa poluição"
+            ],
+            explanation: "A agricultura orgânica é mais sustentável e saudável."
+        },
+        {
+            question: "O que é tecnificação do campo?",
+            answer: "Uso de máquinas e tecnologia na agricultura",
+            options: [
+                "Uso de máquinas e tecnologia na agricultura",
+                "Uso apenas de mão de obra humana",
+                "Plantio manual",
+                "Produção sem irrigação"
+            ],
+            explanation: "Tecnificação é a modernização do campo com máquinas e tecnologia."
+        },
+        {
+            question: "O que é poluição do solo?",
+            answer: "Contaminação do solo por produtos químicos",
+            options: [
+                "Contaminação do solo por produtos químicos",
+                "Aumento da fertilidade natural",
+                "Plantio de árvores",
+                "Uso de adubação verde"
+            ],
+            explanation: "Poluição do solo ocorre pelo uso excessivo de químicos."
+        },
+        {
+            question: "O que é poluição da água na agricultura?",
+            answer: "Contaminação de rios e lagos por fertilizantes e agrotóxicos",
+            options: [
+                "Contaminação de rios e lagos por fertilizantes e agrotóxicos",
+                "Aumento da biodiversidade aquática",
+                "Uso de irrigação natural",
+                "Plantio de culturas aquáticas"
+            ],
+            explanation: "O uso de químicos pode contaminar a água."
+        },
+        {
+            question: "O que é biodiversidade?",
+            answer: "Variedade de seres vivos em um ambiente",
+            options: [
+                "Variedade de seres vivos em um ambiente",
+                "Uso de uma só espécie",
+                "Plantio de milho",
+                "Uso de fertilizantes químicos"
+            ],
+            explanation: "Biodiversidade é a variedade de espécies em um local."
+        },
+        {
+            question: "O que é degradação ambiental?",
+            answer: "Danos ao meio ambiente causados por atividades humanas",
+            options: [
+                "Danos ao meio ambiente causados por atividades humanas",
+                "Aumento da fertilidade do solo",
+                "Recuperação de áreas degradadas",
+                "Plantio de culturas variadas"
+            ],
+            explanation: "Degradação ambiental é a destruição do meio ambiente."
+        },
+        {
+            question: "O que é fiscalização ambiental?",
+            answer: "Acompanhamento e controle das atividades que impactam o meio ambiente",
+            options: [
+                "Acompanhamento e controle das atividades que impactam o meio ambiente",
+                "Uso de agrotóxicos",
+                "Plantio de monoculturas",
+                "Produção de sementes transgênicas"
+            ],
+            explanation: "Fiscalização ambiental busca evitar danos ao meio ambiente."
+        },
+        {
+            question: "O que é reaproveitamento de rejeitos?",
+            answer: "Uso dos resíduos da mineração para outros fins",
+            options: [
+                "Uso dos resíduos da mineração para outros fins",
+                "Descartar resíduos em rios",
+                "Queimar resíduos",
+                "Enterrar resíduos sem tratamento"
+            ],
+            explanation: "Reaproveitar rejeitos reduz impactos ambientais."
+        },
+        {
+            question: "O que é produção em larga escala?",
+            answer: "Produção de grandes quantidades para o mercado",
+            options: [
+                "Produção de grandes quantidades para o mercado",
+                "Produção apenas para subsistência",
+                "Produção orgânica",
+                "Produção de sementes naturais"
+            ],
+            explanation: "Produção em larga escala visa atender grandes mercados."
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let shuffledQuizData = [];
+    let lastAnswerWasCorrect = false;
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        shuffledQuizData = shuffleArray([...quizData]);
+        document.getElementById('quiz-container').classList.remove('hidden');
+        document.getElementById('score-container').classList.add('hidden');
+        showQuestion();
+    }
+
+    function showQuestion() {
+        document.getElementById('feedback-container').classList.add('hidden');
+        document.getElementById('next-question-btn').classList.add('hidden');
+
+        const questionData = shuffledQuizData[0];
+        document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+        document.getElementById('question-text').innerHTML = questionData.question;
+
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+        let currentOptions = shuffleArray([...questionData.options]);
+        currentOptions.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+            button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+            optionsContainer.appendChild(button);
+        });
+    }
+
+    function selectAnswer(selectedOption, correctAnswer, explanation) {
+        const buttons = document.querySelectorAll('.quiz-option');
+        lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+        if (lastAnswerWasCorrect) {
+            score++;
+            document.getElementById('feedback-text').textContent = '🎉 Correto!';
+            document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+        } else {
+            document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+            document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+        }
+
+        document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+        document.getElementById('feedback-container').classList.remove('hidden');
+
+        buttons.forEach(button => {
+            button.disabled = true;
+            if (button.textContent === correctAnswer) {
+                button.classList.add('correct-answer');
+            } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                button.classList.add('wrong-answer');
+            }
+        });
+
+        document.getElementById('next-question-btn').classList.remove('hidden');
+    }
+
+    document.getElementById('next-question-btn').addEventListener('click', () => {
+        if (lastAnswerWasCorrect) {
+            shuffledQuizData.shift();
+        } else {
+            const failedQuestion = shuffledQuizData.shift();
+            shuffledQuizData.push(failedQuestion);
+        }
+
+        if (shuffledQuizData.length > 0) {
+            showQuestion();
+        } else {
+            showScore();
+        }
+    });
+
+    function showScore() {
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('score-container').classList.remove('hidden');
+        document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+        document.getElementById('score-bar').style.width = `100%`;
+    }
+
+    document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+    // Ative o quiz ao clicar em "Praticar"
+    const btnPractice = document.getElementById('btn-practice');
+    btnPractice.addEventListener('click', startQuiz);
+});
+    </script>
+</body>
+</html>

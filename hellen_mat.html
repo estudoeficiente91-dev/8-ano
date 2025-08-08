@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatística e Probabilidade - 8º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open + .accordion-content { max-height: 1000px; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+        table { border-collapse: collapse; margin: 0.5rem auto; }
+        th, td { border: 1px solid #cbd5e1; padding: 0.3rem 0.7rem; text-align: center; }
+        th { background: #f1f5f9; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Estatística e Probabilidade - 8º Ano</h1>
+            <p class="text-slate-600 mt-2">Aprenda sobre amplitude, frequências, probabilidade, contagem e interpretação de gráficos!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Amplitude</h2>
+                    <p>A <strong>amplitude</strong> de um conjunto de dados é a diferença entre o maior e o menor valor.</p>
+                    <p class="mt-2"><strong>Exemplo:</strong> Dados: 2, 4, 7, 10. Amplitude = 10 - 2 = 8.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Frequência Absoluta, Relativa e Acumulada</h2>
+                    <ul class="list-disc pl-5">
+                        <li><strong>Frequência Absoluta (f):</strong> Quantidade de vezes que um valor aparece.</li>
+                        <li><strong>Frequência Relativa (fr):</strong> Proporção de vezes que um valor aparece em relação ao total. <br> <em>fr = f / total</em></li>
+                        <li><strong>Frequência Acumulada (fa):</strong> Soma das frequências absolutas até determinado valor.</li>
+                    </ul>
+                    <p class="mt-2"><strong>Exemplo:</strong></p>
+                    <table>
+                        <tr><th>Nota</th><th>f</th><th>fr</th><th>fa</th></tr>
+                        <tr><td>5</td><td>2</td><td>2/10 = 0,2</td><td>2</td></tr>
+                        <tr><td>6</td><td>3</td><td>3/10 = 0,3</td><td>5</td></tr>
+                        <tr><td>7</td><td>4</td><td>4/10 = 0,4</td><td>9</td></tr>
+                        <tr><td>8</td><td>1</td><td>1/10 = 0,1</td><td>10</td></tr>
+                    </table>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Probabilidade</h2>
+                    <p>A <strong>probabilidade</strong> de um evento é a chance de ele acontecer. <br>
+                    <em>Probabilidade = número de casos favoráveis / número de casos possíveis</em></p>
+                    <p class="mt-2"><strong>Exemplo:</strong> Jogar um dado e sair 4: 1/6.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Contagem</h2>
+                    <p>Usamos técnicas de contagem para descobrir quantas possibilidades existem em uma situação.</p>
+                    <p class="mt-2"><strong>Exemplo:</strong> Se posso escolher 2 camisas e 3 calças, tenho 2 x 3 = 6 combinações.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mt-6">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Interpretação de Gráficos</h2>
+                    <p>É a habilidade de ler e analisar informações em gráficos de barras, colunas, setores (pizza) e tabelas.</p>
+                    <p class="mt-2"><strong>Exemplo:</strong> Um gráfico mostra as notas de alunos. Você pode descobrir quantos tiraram nota 7, qual a nota mais comum, etc.</p>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as questões sobre estatística e probabilidade. Se errar, a questão volta para o final da fila!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Adicione este bloco logo acima do <main> para o botão de imprimir as questões -->
+            <div class="flex justify-end mb-4">
+                <button onclick="printQuizQuestions()" class="px-6 py-2 bg-sky-700 text-white font-semibold rounded-lg shadow hover:bg-sky-800 transition-colors">
+                    🖨️ Imprimir Questões
+                </button>
+            </div>
+            <script>
+            function printQuizQuestions() {
+                const quizData = [
+                    {
+                        question: "1. Qual é a amplitude do conjunto: 3, 7, 10, 15, 20?",
+                        options: ["17", "7", "15", "20"]
+                    },
+                    {
+                        question: "2. Veja a tabela de frequências:\nNota | f\n6 | 2\n7 | 5\n8 | 3\nQual a frequência absoluta da nota 7?",
+                        options: ["2", "3", "5", "7"]
+                    },
+                    {
+                        question: "3. Usando a tabela anterior, qual a frequência acumulada da nota 8?",
+                        options: ["2", "5", "8", "10"]
+                    },
+                    {
+                        question: "4. Usando a tabela anterior, qual a frequência relativa da nota 6?",
+                        options: ["0,2", "0,5", "0,3", "0,7"]
+                    },
+                    {
+                        question: "5. Em uma pesquisa, 8 alunos preferem futebol, 6 preferem vôlei e 6 preferem basquete. Qual a frequência relativa dos que preferem vôlei?",
+                        options: ["0,3", "0,4", "0,2", "0,5"]
+                    },
+                    {
+                        question: "6. Qual a probabilidade de sair cara ao lançar uma moeda?",
+                        options: ["1/2", "1/3", "1/4", "2/3"]
+                    },
+                    {
+                        question: "7. Qual a probabilidade de tirar um número par ao lançar um dado comum?",
+                        options: ["1/2", "1/3", "1/6", "2/3"]
+                    },
+                    {
+                        question: "8. Quantas senhas diferentes podem ser formadas com 3 letras (A, B, C) sem repetir?",
+                        options: ["3", "6", "9", "12"]
+                    },
+                    {
+                        question: "9. Se posso escolher entre 2 camisas e 4 calças, quantas combinações diferentes posso fazer?",
+                        options: ["4", "6", "8", "2"]
+                    },
+                    {
+                        question: "10. Veja a tabela:\nCor | f\nAzul | 5\nVerde | 3\nVermelho | 2\nQual a cor mais frequente?",
+                        options: ["Azul", "Verde", "Vermelho", "Todas iguais"]
+                    },
+                    {
+                        question: "11. Em um gráfico de barras, a barra mais alta representa:",
+                        options: ["O valor de maior frequência", "O menor valor", "A média", "A amplitude"]
+                    },
+                    {
+                        question: "12. Veja a tabela:\nIdade | f\n12 | 4\n13 | 6\n14 | 5\nQual a frequência acumulada da idade 13?",
+                        options: ["4", "6", "10", "15"]
+                    },
+                    {
+                        question: "13. Em uma urna com 5 bolas vermelhas e 3 bolas azuis, qual a probabilidade de tirar uma bola azul?",
+                        options: ["3/8", "5/8", "1/2", "1/3"]
+                    },
+                    {
+                        question: "14. Qual é a amplitude dos dados: 12, 15, 18, 20, 25?",
+                        options: ["13", "12", "25", "18"]
+                    },
+                    {
+                        question: "15. Em uma pesquisa, 10 alunos gostam de matemática, 5 de português e 5 de ciências. Qual a frequência relativa dos que gostam de matemática?",
+                        options: ["0,5", "0,25", "0,1", "0,75"]
+                    },
+                    {
+                        question: "16. Em um gráfico de setores (pizza), um setor representa 25% dos alunos. Se há 40 alunos, quantos estão nesse setor?",
+                        options: ["10", "25", "4", "15"]
+                    },
+                    {
+                        question: "17. Em uma tabela:\nNúmero | f\n1 | 2\n2 | 3\n3 | 5\nQual a frequência acumulada do número 2?",
+                        options: ["2", "3", "5", "10"]
+                    },
+                    {
+                        question: "18. Se um dado é lançado duas vezes, quantos resultados diferentes são possíveis?",
+                        options: ["6", "12", "36", "18"]
+                    },
+                    {
+                        question: "19. Em uma pesquisa, 12 alunos têm olhos castanhos, 6 têm olhos azuis e 2 têm olhos verdes. Qual a frequência relativa dos olhos verdes?",
+                        options: ["0,1", "0,2", "0,5", "0,05"]
+                    },
+                    {
+                        question: "20. Em um gráfico de barras, se a barra da categoria 'B' tem altura 8 e a da categoria 'A' tem altura 5, qual categoria tem maior frequência?",
+                        options: ["A", "B", "Ambas iguais", "Não é possível saber"]
+                    }
+                ];
+                let html = `<h2 style="text-align:center;font-family:sans-serif;">Questões de Estatística e Probabilidade - 8º Ano</h2><ol style="font-size:16px;font-family:sans-serif;">`;
+                quizData.forEach((q, i) => {
+                    html += `<li style="margin-bottom:18px;"><strong>${i+1}.</strong> ${q.question.replace(/\n/g, "<br>")}<br>`;
+                    html += `<ul style="list-style-type: lower-alpha; margin-left:20px;">`;
+                    q.options.forEach(opt => {
+                        html += `<li>${opt}</li>`;
+                    });
+                    html += `</ul></li>`;
+                });
+                html += `</ol>`;
+                const win = window.open('', '', 'width=800,height=900');
+                win.document.write(`
+                    <html>
+                    <head>
+                        <title>Questões de Estatística e Probabilidade - 8º Ano</title>
+                    </head>
+                    <body>${html}</body>
+                    </html>
+                `);
+                win.document.close();
+                win.print();
+            }
+            </script>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tabs
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz();
+            });
+
+            // Quiz
+            const quizData = [
+                {
+                    question: "1. Qual é a amplitude do conjunto: 3, 7, 10, 15, 20?",
+                    answer: "17",
+                    options: ["17", "7", "15", "20"],
+                    explanation: "Amplitude = maior - menor = 20 - 3 = 17."
+                },
+                {
+                    question: "2. Veja a tabela de frequências:\n<table><tr><th>Nota</th><th>f</th></tr><tr><td>6</td><td>2</td></tr><tr><td>7</td><td>5</td></tr><tr><td>8</td><td>3</td></tr></table>Qual a frequência absoluta da nota 7?",
+                    answer: "5",
+                    options: ["2", "3", "5", "7"],
+                    explanation: "Frequência absoluta é o número de vezes que a nota aparece: 5."
+                },
+                {
+                    question: "3. Usando a tabela anterior, qual a frequência acumulada da nota 8?",
+                    answer: "10",
+                    options: ["2", "5", "8", "10"],
+                    explanation: "Frequência acumulada: 2 (nota 6) + 5 (nota 7) + 3 (nota 8) = 10."
+                },
+                {
+                    question: "4. Usando a tabela anterior, qual a frequência relativa da nota 6?",
+                    answer: "0,2",
+                    options: ["0,2", "0,5", "0,3", "0,7"],
+                    explanation: "Total = 2+5+3 = 10. Frequência relativa = 2/10 = 0,2."
+                },
+                {
+                    question: "5. Em uma pesquisa, 8 alunos preferem futebol, 6 preferem vôlei e 6 preferem basquete. Qual a frequência relativa dos que preferem vôlei?",
+                    answer: "0,3",
+                    options: ["0,3", "0,4", "0,2", "0,5"],
+                    explanation: "Total = 8+6+6 = 20. Frequência relativa do vôlei = 6/20 = 0,3."
+                },
+                {
+                    question: "6. Qual a probabilidade de sair cara ao lançar uma moeda?",
+                    answer: "1/2",
+                    options: ["1/2", "1/3", "1/4", "2/3"],
+                    explanation: "São 2 resultados possíveis (cara ou coroa), só 1 é favorável: 1/2."
+                },
+                {
+                    question: "7. Qual a probabilidade de tirar um número par ao lançar um dado comum?",
+                    answer: "1/2",
+                    options: ["1/2", "1/3", "1/6", "2/3"],
+                    explanation: "Números pares: 2, 4, 6. São 3 em 6: 3/6 = 1/2."
+                },
+                {
+                    question: "8. Quantas senhas diferentes podem ser formadas com 3 letras (A, B, C) sem repetir?",
+                    answer: "6",
+                    options: ["3", "6", "9", "12"],
+                    explanation: "3! = 3x2x1 = 6 possibilidades."
+                },
+                {
+                    question: "9. Se posso escolher entre 2 camisas e 4 calças, quantas combinações diferentes posso fazer?",
+                    answer: "8",
+                    options: ["4", "6", "8", "2"],
+                    explanation: "2 x 4 = 8 combinações."
+                },
+                {
+                    question: "10. Veja a tabela:\n<table><tr><th>Cor</th><th>f</th></tr><tr><td>Azul</td><td>5</td></tr><tr><td>Verde</td><td>3</td></tr><tr><td>Vermelho</td><td>2</td></tr></table>Qual a cor mais frequente?",
+                    answer: "Azul",
+                    options: ["Azul", "Verde", "Vermelho", "Todas iguais"],
+                    explanation: "Azul tem frequência 5, maior que as outras."
+                },
+                {
+                    question: "11. Em um gráfico de barras, a barra mais alta representa:",
+                    answer: "O valor de maior frequência",
+                    options: ["O valor de maior frequência", "O menor valor", "A média", "A amplitude"],
+                    explanation: "A barra mais alta mostra o valor que mais aparece."
+                },
+                {
+                    question: "12. Veja a tabela:\n<table><tr><th>Idade</th><th>f</th></tr><tr><td>12</td><td>4</td></tr><tr><td>13</td><td>6</td></tr><tr><td>14</td><td>5</td></tr></table>Qual a frequência acumulada da idade 13?",
+                    answer: "10",
+                    options: ["4", "6", "10", "15"],
+                    explanation: "Frequência acumulada até 13: 4 + 6 = 10."
+                },
+                {
+                    question: "13. Em uma urna com 5 bolas vermelhas e 3 bolas azuis, qual a probabilidade de tirar uma bola azul?",
+                    answer: "3/8",
+                    options: ["3/8", "5/8", "1/2", "1/3"],
+                    explanation: "Total: 5+3=8. Probabilidade: 3/8."
+                },
+                {
+                    question: "14. Qual é a amplitude dos dados: 12, 15, 18, 20, 25?",
+                    answer: "13",
+                    options: ["13", "12", "25", "18"],
+                    explanation: "Amplitude = 25 - 12 = 13."
+                },
+                {
+                    question: "15. Em uma pesquisa, 10 alunos gostam de matemática, 5 de português e 5 de ciências. Qual a frequência relativa dos que gostam de matemática?",
+                    answer: "0,5",
+                    options: ["0,5", "0,25", "0,1", "0,75"],
+                    explanation: "Total = 10+5+5 = 20. Frequência relativa = 10/20 = 0,5."
+                },
+                {
+                    question: "16. Em um gráfico de setores (pizza), um setor representa 25% dos alunos. Se há 40 alunos, quantos estão nesse setor?",
+                    answer: "10",
+                    options: ["10", "25", "4", "15"],
+                    explanation: "25% de 40 = 0,25 x 40 = 10."
+                },
+                {
+                    question: "17. Em uma tabela:\n<table><tr><th>Número</th><th>f</th></tr><tr><td>1</td><td>2</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3</td><td>5</td></tr></table>Qual a frequência acumulada do número 2?",
+                    answer: "5",
+                    options: ["2", "3", "5", "10"],
+                    explanation: "Frequência acumulada até 2: 2+3=5."
+                },
+                {
+                    question: "18. Se um dado é lançado duas vezes, quantos resultados diferentes são possíveis?",
+                    answer: "36",
+                    options: ["6", "12", "36", "18"],
+                    explanation: "6 faces na 1ª vez x 6 na 2ª vez = 36 possibilidades."
+                },
+                {
+                    question: "19. Em uma pesquisa, 12 alunos têm olhos castanhos, 6 têm olhos azuis e 2 têm olhos verdes. Qual a frequência relativa dos olhos verdes?",
+                    answer: "0,1",
+                    options: ["0,1", "0,2", "0,5", "0,05"],
+                    explanation: "Total = 12+6+2 = 20. Frequência relativa = 2/20 = 0,1."
+                },
+                {
+                    question: "20. Em um gráfico de barras, se a barra da categoria 'B' tem altura 8 e a da categoria 'A' tem altura 5, qual categoria tem maior frequência?",
+                    answer: "B",
+                    options: ["A", "B", "Ambas iguais", "Não é possível saber"],
+                    explanation: "A barra mais alta indica maior frequência: categoria B."
+                }
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = [...quizData]; // Ordem fixa, enumerada
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

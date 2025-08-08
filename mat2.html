@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadriláteros: Ângulos e Lados - 8º Ano Matemática: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1; /* Sky-700 */
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 4000px; /* Increased max-height for potentially longer content */
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important; /* Emerald-500 */
+            color: white !important;
+            border-color: #059669 !important; /* Emerald-600 */
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important; /* Red-500 */
+            color: white !important;
+            border-color: #dc2626 !important; /* Red-600 */
+        }
+        .content-text { /* General text styling for readability */
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .term-highlight {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f3f4f6; /* gray-100 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        .example-diagram {
+            font-style: italic;
+            color: #075985; /* sky-800 for example sentences */
+            margin-left: 1rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+         .quiz-question-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        /* Removed .quiz-image styles as images are removed */
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue accent (Consistent with previous apps) -->
+    <!-- Application Structure Plan: Two-section SPA. 'Aprender' section uses an accordion for step-by-step explanations of quadrilaterals properties (parallelograms, rhombuses, rectangles, squares, trapezoids) and problem-solving, relevant to 8th grade. 'Praticar' section is an interactive quiz with immediate feedback and score tracking, focusing on calculating angles and sides. Images removed from questions. This structure separates learning from application, aiding comprehension and retention. Navigation is via two main buttons. -->
+    <!-- Visualization & Content Choices: Report Info: Simplified geometry concepts (quadrilaterals, properties, angle/side calculations) for 8th grade -> Goal: Inform/Organize -> Viz/Presentation: Accordion in 'Aprender'. Interaction: Expand/collapse. Justification: Breaks down geometrical information into digestible steps. Report Info: Age-appropriate geometry problems (calculating angles/sides) & solutions -> Goal: Test knowledge/Compare -> Viz/Presentation: Interactive quiz in 'Praticar'. Interaction: Clickable answers, feedback, score. Justification: Active learning, immediate reinforcement. Images removed. Library/Method: Vanilla JS & Tailwind CSS. Content presented as styled text. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-100 text-slate-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Matemática - 8º Ano: Quadriláteros</h1>
+            <p class="text-slate-600 mt-2">Aprenda as propriedades dos quadriláteros e resolva problemas com ângulos e lados!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Desvendando os Quadriláteros</h2>
+                    <p class="mb-6 content-text">Quadriláteros são figuras geométricas muito comuns no nosso dia a dia! Vamos explorar suas propriedades e aprender a resolver problemas envolvendo seus ângulos e lados.</p>
+                    
+                    <div id="accordion-container" class="space-y-3">
+                    </div>
+
+                    <div class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-800">💡 Fique Ligado!</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700 content-text">
+                            <li><strong class="font-semibold">Soma dos Ângulos Internos:</strong> Em TODO quadrilátero, a soma dos seus quatro ângulos internos é sempre <strong>360°</strong>.</li>
+                            <li><strong class="font-semibold">Lados Opostos vs. Lados Consecutivos:</strong> Lados opostos não se tocam (a não ser nos vértices). Lados consecutivos compartilham um vértice.</li>
+                            <li><strong class="font-semibold">Ângulos Opostos vs. Ângulos Consecutivos:</strong> Ângulos opostos não compartilham um lado. Ângulos consecutivos compartilham um lado.</li>
+                            <li><strong class="font-semibold">Diagonais:</strong> Segmentos de reta que unem dois vértices não consecutivos.</li>
+                            <li><strong class="font-semibold">Paralelismo:</strong> Lembre-se do que são retas paralelas (nunca se cruzam).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                 <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Hora de Praticar para a Prova!</h2>
+                    <p class="mb-6 content-text">Resolva os problemas abaixo para testar seus conhecimentos sobre as propriedades dos quadriláteros, cálculo de ângulos e lados.</p>
+
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div id="question-area" class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <!-- Question text will be injected here -->
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                            <!-- Options will be injected here -->
+                        </div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            const accordionContainer = document.getElementById('accordion-container');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const questionProgress = document.getElementById('question-progress');
+            const questionArea = document.getElementById('question-area'); 
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreTextElement = document.getElementById('score-text');
+            const scoreBar = document.getElementById('score-bar');
+
+            const learnData = [
+                {
+                    title: '1. O que são Quadriláteros?',
+                    content: 'Quadriláteros são polígonos que possuem <strong>quatro lados</strong>, <strong>quatro vértices</strong> (os "cantos") e <strong>quatro ângulos internos</strong>. A palavra "quadri" significa quatro e "látero" significa lado.<br><br>Uma propriedade fundamental de todo quadrilátero convexo é que a <strong>soma dos seus ângulos internos é sempre igual a 360°</strong>. Isso acontece porque podemos dividir qualquer quadrilátero em dois triângulos traçando uma diagonal, e cada triângulo tem 180° na soma dos ângulos internos (180° + 180° = 360°).'
+                },
+                {
+                    title: '2. Paralelogramos: Propriedades Gerais',
+                    content: 'Um paralelogramo é um quadrilátero que possui os <strong>lados opostos paralelos</strong>. A partir dessa definição, surgem várias propriedades importantes:<br><ul><li><strong>Lados Opostos Congruentes (iguais):</strong> Os lados que estão um de frente para o outro têm a mesma medida.</li><li><strong>Ângulos Opostos Congruentes (iguais):</strong> Os ângulos que estão um de frente para o outro têm a mesma medida.</li><li><strong>Ângulos Consecutivos Suplementares:</strong> Dois ângulos seguidos (vizinhos) somam 180°.</li><li><strong>Diagonais se Cruzam no Ponto Médio:</strong> As duas diagonais se cortam exatamente na metade de cada uma.</li></ul><span class="example-diagram">Imagine um retângulo "inclinado". Ele ainda é um paralelogramo!</span>'
+                },
+                {
+                    title: '3. Losangos: Lados Iguais e Diagonais Perpendiculares',
+                    content: 'O losango é um tipo especial de paralelogramo que possui <strong>todos os quatro lados congruentes (iguais)</strong>.<br><br>Além de todas as propriedades de um paralelogramo, o losango tem duas extras:<br><ul><li><strong>Diagonais Perpendiculares:</strong> As diagonais se cruzam formando ângulos de 90°.</li><li><strong>Diagonais são Bissetrizes dos Ângulos Internos:</strong> Cada diagonal divide os ângulos dos vértices por onde ela passa exatamente ao meio.</li></ul><span class="example-diagram">Pense na forma de uma pipa ou de um diamante de cartas de baralho.</span>'
+                },
+                {
+                    title: '4. Retângulos: Quatro Ângulos Retos',
+                    content: 'O retângulo é um tipo especial de paralelogramo que possui os <strong>quatro ângulos internos retos (iguais a 90°)</strong>.<br><br>Além de todas as propriedades de um paralelogramo, o retângulo tem uma propriedade extra importante:<br><ul><li><strong>Diagonais Congruentes (iguais):</strong> As duas diagonais têm a mesma medida.</li></ul><span class="example-diagram">Uma porta, uma janela, a tela do seu celular... são exemplos de retângulos!</span>'
+                },
+                {
+                    title: '5. Quadrados: O Mais "Perfeito" de Todos',
+                    content: 'O quadrado é um quadrilátero super especial! Ele é, ao mesmo tempo, um <strong>losango e um retângulo</strong>. Isso significa que ele possui:<br><ul><li><strong>Quatro lados congruentes (iguais)</strong> - propriedade do losango.</li><li><strong>Quatro ângulos internos retos (90°)</strong> - propriedade do retângulo.</li></ul><br>Portanto, o quadrado herda TODAS as propriedades dos paralelogramos, dos losangos e dos retângulos!<br><ul><li>Lados opostos paralelos e iguais.</li><li>Ângulos opostos iguais (todos 90°).</li><li>Ângulos consecutivos suplementares (90°+90°=180°).</li><li>Diagonais se cruzam no ponto médio.</li><li>Diagonais são congruentes (iguais).</li><li>Diagonais são perpendiculares.</li><li>Diagonais são bissetrizes dos ângulos internos.</li></ul>'
+                },
+                {
+                    title: '6. Trapézios: Apenas um Par de Lados Paralelos',
+                    content: 'O trapézio é um quadrilátero que possui <strong>apenas um par de lados opostos paralelos</strong>. Esses lados paralelos são chamados de <strong>bases</strong> (base maior e base menor). Os outros dois lados são chamados de lados não paralelos ou oblíquos.<br><br>Existem tipos especiais de trapézios:<br><ul><li><strong>Trapézio Isósceles:</strong> Os lados não paralelos são congruentes (iguais). Os ângulos de cada base também são congruentes entre si. As diagonais são congruentes.</li><li><strong>Trapézio Retângulo:</strong> Possui dois ângulos internos retos (90°), formados por um dos lados não paralelos sendo perpendicular às bases.</li><li><strong>Trapézio Escaleno:</strong> Os lados não paralelos têm medidas diferentes e os ângulos das bases também são diferentes.</li></ul>A soma dos ângulos adjacentes a um mesmo lado não paralelo é sempre 180° (são colaterais internos).'
+                },
+                {
+                    title: '7. Resolução de Problemas com Quadriláteros',
+                    content: 'Para resolver problemas envolvendo quadriláteros, você usará as propriedades que aprendeu!<br><br><strong>Para calcular ângulos desconhecidos:</strong><br><ul><li>Lembre-se que a soma dos quatro ângulos internos é sempre 360°.</li><li>Use as propriedades dos ângulos opostos e consecutivos dos paralelogramos.</li><li>Lembre-se dos ângulos de 90° em retângulos e quadrados.</li><li>Use as propriedades dos ângulos das bases em trapézios isósceles.</li></ul><em>Exemplo: Em um paralelogramo, um ângulo mede 70°. Quais são os outros três? O oposto também é 70°. Os outros dois são (180°-70°) = 110° cada.</em><br><br><strong>Para calcular lados desconhecidos:</strong><br><ul><li>Lembre-se que lados opostos de paralelogramos são iguais.</li><li>Todos os lados de losangos e quadrados são iguais.</li><li>Use informações dadas sobre perímetros ou relações entre os lados.</li></ul><em>Exemplo: Um lado de um losango mede 5 cm. Qual o perímetro? 4 * 5 cm = 20 cm.</em>'
+                }
+            ];
+
+            const quizData = [
+                // Questions from previous version (images removed from data)
+                { question: "Qual é a soma dos ângulos internos de qualquer quadrilátero?", answer: "360°", options: ["180°", "270°", "360°", "540°"], explanation: "A soma dos ângulos internos de todo quadrilátero convexo é sempre 360 graus." },
+                { question: "Um paralelogramo tem um ângulo medindo 80°. Qual a medida do seu ângulo oposto?", answer: "80°", options: ["100°", "80°", "280°", "Não se pode determinar"], explanation: "Em um paralelogramo, os ângulos opostos são sempre congruentes (iguais)." },
+                { question: "Se um lado de um losango mede 7 cm, qual o seu perímetro?", answer: "28 cm", options: ["14 cm", "21 cm", "28 cm", "49 cm"], explanation: "Um losango tem todos os quatro lados iguais. Perímetro = 4 * lado = 4 * 7 = 28 cm." },
+                { question: "Qual propriedade é exclusiva do retângulo (e não de todos os paralelogramos)?", answer: "Diagonais congruentes (iguais)", options: ["Lados opostos paralelos", "Ângulos opostos iguais", "Diagonais congruentes (iguais)", "Diagonais se bissetam"], explanation: "Todos os paralelogramos têm diagonais que se bissetam, mas apenas nos retângulos (e quadrados) elas são sempre congruentes." },
+                { question: "Um quadrado possui todas as propriedades de qual par de figuras?", answer: "Losango e Retângulo", options: ["Trapézio e Losango", "Losango e Retângulo", "Paralelogramo e Trapézio", "Retângulo e Círculo"], explanation: "O quadrado é um tipo especial de losango (lados iguais) e também um tipo especial de retângulo (ângulos retos)." },
+                { question: "Em um trapézio isósceles, os ângulos da base maior medem 70° cada. Se a base menor tem um ângulo de 110°, qual o outro ângulo da base menor?", answer: "110°", options: ["70°", "90°", "110°", "20°"], explanation: "Em um trapézio isósceles, os ângulos de cada base são congruentes. Assim, os dois ângulos da base menor são iguais." },
+                { question: "Três ângulos de um quadrilátero medem 60°, 110° e 90°. Qual a medida do quarto ângulo?", answer: "100°", options: ["80°", "90°", "100°", "120°"], explanation: "Soma total = 360°. Soma dos conhecidos = 60+110+90 = 260°. Quarto ângulo = 360 - 260 = 100°." },
+                { question: "As diagonais de um losango são sempre:", answer: "Perpendiculares entre si", options: ["Congruentes (iguais)", "Paralelas aos lados", "Perpendiculares entre si", "Menores que os lados"], explanation: "Uma propriedade chave do losango é que suas diagonais se cruzam formando ângulos de 90° (são perpendiculares)." },
+                { question: "Um paralelogramo tem lados opostos medindo (x + 5) cm e 10 cm. Qual o valor de x?", answer: "5", options: ["3", "5", "10", "15"], explanation: "Lados opostos de um paralelogramo são iguais. Então x+5 = 10, logo x = 5." },
+                { question: "Em um trapézio retângulo, quantos ângulos retos ele possui?", answer: "Dois", options: ["Um", "Dois", "Três", "Quatro"], explanation: "Um trapézio retângulo possui exatamente dois ângulos de 90°." },
+                { question: "Se um ângulo de um paralelogramo mede 115°, qual a medida de um ângulo consecutivo (vizinho) a ele?", answer: "65°", options: ["115°", "75°", "65°", "245°"], explanation: "Ângulos consecutivos em um paralelogramo são suplementares (somam 180°). 180° - 115° = 65°." },
+                { question: "Qual quadrilátero tem lados opostos paralelos e todos os ângulos internos retos?", answer: "Retângulo", options: ["Losango", "Trapézio", "Retângulo", "Paralelogramo qualquer"], explanation: "Essa é a definição de um retângulo (que também é um paralelogramo)." },
+                { question: "Um quadrilátero tem ângulos expressos por x, 2x, 3x e 4x. Qual o valor de x?", answer: "36°", options: ["30°", "36°", "40°", "45°"], explanation: "A soma é x + 2x + 3x + 4x = 360°. Então 10x = 360°. Logo, x = 36°." },
+                { question: "As diagonais de um quadrado formam que tipo de ângulo ao se cruzarem?", answer: "90° (Reto)", options: ["Agudo (<90°)", "90° (Reto)", "Obtuso (>90°)", "Raso (180°)"], explanation: "O quadrado é um losango, e as diagonais do losango são perpendiculares, formando ângulos de 90°." },
+                { question: "Um trapézio tem bases medindo 10cm e 16cm. A medida da sua base média é:", answer: "13 cm", options: ["10 cm", "16 cm", "26 cm", "13 cm"], explanation: "A base média de um trapézio é a média aritmética das bases: (10+16)/2 = 26/2 = 13 cm." },
+                { question: "Qual é o nome do quadrilátero que tem todos os lados iguais e todos os ângulos retos?", answer: "Quadrado", options: ["Retângulo", "Losango", "Quadrado", "Trapézio"], explanation: "O quadrado combina as propriedades de ter lados iguais (losango) e ângulos retos (retângulo)." },
+                { question: "Um dos ângulos internos de um losango mede 120°. Qual a medida do ângulo oposto a ele?", answer: "120°", options: ["60°", "90°", "120°", "Não é possível saber"], explanation: "Em um losango (que é um paralelogramo), ângulos opostos são iguais." },
+                { question: "Se as diagonais de um paralelogramo são congruentes (iguais), podemos afirmar que ele é um:", answer: "Retângulo (ou Quadrado)", options: ["Losango", "Retângulo (ou Quadrado)", "Trapézio", "Paralelogramo qualquer"], explanation: "A propriedade de diagonais congruentes é específica dos retângulos e, consequentemente, dos quadrados." },
+                { question: "Um lado de um retângulo mede 8 cm e seu perímetro é 28 cm. Qual a medida do outro lado?", answer: "6 cm", options: ["6 cm", "8 cm", "10 cm", "14 cm"], explanation: "Perímetro = 2*(lado1 + lado2).  28 = 2*(8 + lado2) => 14 = 8 + lado2 => lado2 = 6 cm." },
+                { question: "Qual tipo de trapézio possui os lados não paralelos congruentes (iguais)?", answer: "Trapézio Isósceles", options: ["Trapézio Retângulo", "Trapézio Escaleno", "Trapézio Isósceles", "Nenhum trapézio"], explanation: "Essa é a definição do trapézio isósceles." },
+                { question: "Os ângulos de um quadrilátero são x, x+10°, x+20° e x+30°. Qual o valor de x?", answer: "75°", options: ["60°", "70°", "75°", "80°"], explanation: "Soma: x + (x+10) + (x+20) + (x+30) = 360 => 4x + 60 = 360 => 4x = 300 => x = 75°." },
+                { question: "Em um losango, uma diagonal mede 6 cm e a outra mede 8 cm. As diagonais se cruzam formando um ângulo de:", answer: "90°", options: ["45°", "60°", "90°", "Depende dos lados"], explanation: "As diagonais de um losango são sempre perpendiculares." },
+                { question: "Um paralelogramo tem um lado medindo 2y - 3 e o lado oposto medindo 15. Qual o valor de y?", answer: "9", options: ["6", "7.5", "9", "12"], explanation: "Lados opostos são iguais: 2y - 3 = 15 => 2y = 18 => y = 9." },
+                { question: "Um trapézio tem ângulos da base maior medindo 65° e 75°. Este trapézio pode ser classificado como:", answer: "Escaleno (ou nenhum dos outros)", options: ["Isósceles", "Retângulo", "Escaleno (ou nenhum dos outros)", "Quadrado"], explanation: "Se os ângulos da base são diferentes, ele não é isósceles nem retângulo (a menos que os outros sejam 90°). Portanto, é escaleno ou um tipo genérico." },
+                { question: "A diagonal de um retângulo o divide em dois triângulos:", answer: "Congruentes (iguais)", options: ["Equiláteros", "Isósceles, não congruentes", "Congruentes (iguais)", "Escalenos diferentes"], explanation: "A diagonal de um retângulo forma dois triângulos retângulos congruentes." },
+                { question: "Se os quatro ângulos de um paralelogramo são iguais, ele é um:", answer: "Retângulo (ou Quadrado)", options: ["Losango", "Trapézio", "Retângulo (ou Quadrado)", "Paralelogramo qualquer"], explanation: "Se os 4 ângulos são iguais e somam 360°, cada um é 90°. Isso define um retângulo (ou um quadrado, que é um tipo de retângulo)." },
+                { question: "Um quadrilátero tem ângulos 90°, 90°, y e y+20°. Qual o valor de y?", answer: "80°", options: ["70°", "80°", "90°", "100°"], explanation: "90 + 90 + y + y + 20 = 360 => 200 + 2y = 360 => 2y = 160 => y = 80°." },
+                { question: "O perímetro de um quadrado é 32 cm. Qual a medida de seu lado?", answer: "8 cm", options: ["4 cm", "8 cm", "16 cm", "32 cm"], explanation: "Perímetro do quadrado = 4 * lado.  32 = 4 * lado => lado = 8 cm." },
+                { question: "Em qual destes quadriláteros as diagonais NÃO são necessariamente congruentes?", answer: "Losango", options: ["Quadrado", "Retângulo", "Losango", "Trapézio Isósceles"], explanation: "As diagonais do losango só são congruentes se ele também for um quadrado. Em um losango 'achatado', elas têm tamanhos diferentes." },
+                { question: "Um trapézio tem base maior 20cm, base menor 12cm e altura 5cm. A base média mede:", answer: "16 cm", options: ["12 cm", "15 cm", "16 cm", "20 cm"], explanation: "Base média = (Base maior + Base menor) / 2 = (20 + 12) / 2 = 32 / 2 = 16 cm. A altura não é usada para calcular a base média." }
+            ];
+            
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let shuffledQuizData = [];
+
+            let lastAnswerWasCorrect = false;
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            function createAccordion() {
+                accordionContainer.innerHTML = '';
+                learnData.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-stone-200 rounded-lg';
+                    div.innerHTML = `
+                        <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-4 border-t border-stone-200 text-slate-700 prose max-w-none content-text">
+                                ${item.content}
+                            </div>
+                        </div>
+                    `;
+                    accordionContainer.appendChild(div);
+                });
+
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const icon = button.querySelector('span:last-child');
+                        const isOpen = button.classList.toggle('open');
+                        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                        if (isOpen) {
+                            document.querySelectorAll('.accordion-button.open').forEach(openButton => {
+                                if (openButton !== button) {
+                                    openButton.classList.remove('open');
+                                    openButton.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                quizContainer.classList.remove('hidden');
+                scoreContainer.classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextQuestionBtn.classList.add('hidden');
+
+                const questionData = shuffledQuizData[currentQuestionIndex];
+                questionProgress.textContent = `Questão ${currentQuestionIndex + 1} de ${shuffledQuizData.length}`;
+                
+                // Removed image display logic
+                questionArea.innerHTML = `<p class="quiz-question-text">${questionData.question}</p>`;
+
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]); 
+
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option; 
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = optionsContainer.querySelectorAll('button');
+                let isCorrect = selectedOption === correctAnswer;
+                lastAnswerWasCorrect = isCorrect;
+
+                if (isCorrect) {
+                    score++;
+                    feedbackText.textContent = '🎉 Correto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    feedbackText.textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                feedbackExplanation.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                feedbackContainer.classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.innerHTML === correctAnswer) { 
+                        button.classList.add('correct-answer');
+                    } else if (button.innerHTML === selectedOption && !isCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                nextQuestionBtn.classList.remove('hidden');
+            }
+
+            function showScore() {
+                quizContainer.classList.add('hidden');
+                scoreContainer.classList.remove('hidden');
+                scoreTextElement.textContent = `Você acertou ${score} de ${shuffledQuizData.length} questões!`;
+                const percentage = (shuffledQuizData.length > 0) ? (score / shuffledQuizData.length) * 100 : 0;
+                scoreBar.style.width = `${percentage}%`;
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    currentQuestionIndex++;
+                } else {
+                    // Move a questão errada para o final da fila
+                    const wrongQuestion = shuffledQuizData.splice(currentQuestionIndex, 1)[0];
+                    shuffledQuizData.push(wrongQuestion);
+                    // Não avança o índice, pois a próxima questão agora está na mesma posição
+                }
+
+                if (currentQuestionIndex < shuffledQuizData.length) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+            
+            restartQuizBtn.addEventListener('click', startQuiz);
+
+            createAccordion();
+            switchView('learn');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equações de Primeiro Grau com Frações: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1; /* Sky-700 */
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 1000px; /* Increased max-height for potentially longer content */
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important; /* Emerald-500 */
+            color: white !important;
+            border-color: #059669 !important; /* Emerald-600 */
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important; /* Red-500 */
+            color: white !important;
+            border-color: #dc2626 !important; /* Red-600 */
+        }
+        .equation-text {
+            font-family: 'Times New Roman', Times, serif; /* More mathematical look for equations */
+            font-size: 1.25rem; /* Larger font for equations */
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue accent (Consistent with previous app) -->
+    <!-- Application Structure Plan: Two-section SPA. 'Aprender' section uses an accordion for step-by-step explanations of first-degree equations with fractions, including MMC and solved examples. 'Praticar' section is an interactive quiz with immediate feedback and score tracking. This structure separates learning from application, aiding comprehension and retention, following the user's preferred style. Navigation is via two main buttons. -->
+    <!-- Visualization & Content Choices: Report Info: Concepts of 1st-degree equations, fractions, MMC -> Goal: Inform/Organize -> Viz/Presentation: Accordion in 'Aprender'. Interaction: Expand/collapse. Justification: Breaks down complex math into digestible steps. Report Info: Equation problems & solutions -> Goal: Test knowledge/Compare -> Viz/Presentation: Interactive quiz in 'Praticar'. Interaction: Clickable answers, feedback, score. Justification: Active learning, immediate reinforcement. Library/Method: Vanilla JS & Tailwind CSS. Equations will be presented as text, styled for readability. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-100 text-slate-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Equações de Primeiro Grau com Frações</h1>
+            <p class="text-slate-600 mt-2">Aprenda a resolver e pratique com exercícios interativos.</p>
+            <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+                    ⬅ Voltar para o Início
+                </a>
+            </div>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Entendendo as Equações com Frações</h2>
+                    <p class="mb-6">Resolver equações de primeiro grau que envolvem frações pode parecer complicado, mas seguindo alguns passos se torna bem mais simples. O segredo é eliminar os denominadores usando o Mínimo Múltiplo Comum (MMC). Explore os tópicos abaixo:</p>
+                    
+                    <div id="accordion-container" class="space-y-3">
+                    </div>
+
+                    <div class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-800">💡 Lembretes Importantes</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                            <li><strong class="font-semibold">MMC é seu amigo:</strong> Use-o para eliminar os denominadores.</li>
+                            <li><strong class="font-semibold">Equivalência:</strong> O que você faz de um lado da igualdade, deve fazer do outro.</li>
+                            <li><strong class="font-semibold">Sinais:</strong> Muita atenção com os sinais de positivo e negativo, especialmente ao multiplicar ou dividir.</li>
+                            <li><strong class="font-semibold">Parênteses:</strong> Use parênteses ao multiplicar termos compostos para aplicar a distributiva corretamente.</li>
+                            <li><strong class="font-semibold">Verifique:</strong> Se possível, substitua a raiz encontrada na equação original para confirmar sua resposta.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                 <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Hora de Praticar!</h2>
+                    <p class="mb-6">Resolva as equações abaixo. Lembre-se de aplicar o que aprendeu sobre MMC e manipulação de frações. Feedback imediato será fornecido!</p>
+
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="equation-text"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
+                        </div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            const accordionContainer = document.getElementById('accordion-container');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const questionProgress = document.getElementById('question-progress');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreText = document.getElementById('score-text');
+            const scoreBar = document.getElementById('score-bar');
+
+            const learnData = [
+                {
+                    title: '1. O que é uma Equação de Primeiro Grau?',
+                    content: 'Uma equação de primeiro grau é uma sentença matemática que estabelece uma igualdade entre duas expressões, envolvendo uma ou mais incógnitas (geralmente representadas por letras como x, y, z) com expoente igual a 1.<br><br>A forma geral é <strong>ax + b = 0</strong>, onde \'a\' e \'b\' são números conhecidos (coeficientes) e \'a\' deve ser diferente de zero. O objetivo ao resolver uma equação de primeiro grau é encontrar o valor da incógnita que torna a igualdade verdadeira. Esse valor é chamado de <strong>raiz</strong> ou <strong>solução</strong> da equação.'
+                },
+                {
+                    title: '2. Resolvendo Equações (Passos Gerais)',
+                    content: 'Para resolver uma equação de primeiro grau, o objetivo principal é isolar a incógnita (por exemplo, \'x\') em um dos lados da igualdade.<br><br><strong>Princípios básicos:</strong><br>1. <strong>Adição/Subtração:</strong> Você pode somar ou subtrair o mesmo número em ambos os lados da equação.<br><em>Ex: Se x - 3 = 7, some 3 dos dois lados: x - 3 + 3 = 7 + 3  ⇨  x = 10.</em><br>2. <strong>Multiplicação/Divisão:</strong> Você pode multiplicar ou dividir ambos os lados da equação pelo mesmo número (diferente de zero).<br><em>Ex: Se 2x = 8, divida os dois lados por 2: 2x / 2 = 8 / 2  ⇨  x = 4.</em><br><br>O objetivo é mover todos os termos com a incógnita para um lado e os termos constantes (números puros) para o outro.'
+                },
+                {
+                    title: '3. Trabalhando com Frações: O Mínimo Múltiplo Comum (MMC)',
+                    content: 'Quando uma equação de primeiro grau envolve frações, o primeiro passo importante é eliminar os denominadores. Isso é feito utilizando o Mínimo Múltiplo Comum (MMC) dos denominadores presentes na equação.<br><br><strong>Passos:</strong><br>1. <strong>Identifique todos os denominadores</strong> das frações na equação.<br>2. <strong>Calcule o MMC</strong> desses denominadores. Se houver termos inteiros, considere o denominador como 1.<br>3. <strong>Transforme a equação:</strong> Existem duas abordagens comuns:<br>    a) <strong>Multiplicar toda a equação pelo MMC:</strong> Multiplique cada termo da equação (ambos os lados) pelo valor do MMC. Isso fará com que os denominadores sejam cancelados.<br>    b) <strong>Reduzir todas as frações ao mesmo denominador (o MMC):</strong> Divida o MMC pelo denominador original de cada fração e multiplique o resultado pelo numerador correspondente. Após todas as frações terem o mesmo denominador (o MMC), você pode "eliminar" os denominadores (desde que o MMC seja diferente de zero).'
+                },
+                {
+                    title: '4. Exemplo Prático 1: x/2 + 1/4 = 5/4',
+                    content: 'Vamos resolver a equação: <span class="equation-text">x/2 + 1/4 = 5/4</span><br><br>1. <strong>Denominadores:</strong> 2 e 4.<br>2. <strong>MMC(2, 4):</strong> O MMC entre 2 e 4 é 4.<br>3. <strong>Eliminar denominadores (multiplicando pelo MMC):</strong><br>   Multiplique cada termo por 4:<br>   4 * (x/2) + 4 * (1/4) = 4 * (5/4)<br>   (4x)/2 + 4/4 = 20/4<br>   2x + 1 = 5<br>4. <strong>Resolver a equação simplificada:</strong><br>   2x = 5 - 1<br>   2x = 4<br>   x = 4 / 2<br>   <strong>x = 2</strong><br>5. <strong>Verificação (opcional):</strong><br>   (2)/2 + 1/4 = 5/4<br>   1 + 1/4 = 5/4<br>   4/4 + 1/4 = 5/4<br>   5/4 = 5/4 (Correto!)'
+                },
+                {
+                    title: '5. Exemplo Prático 2: (x - 3)/5 + x/2 = (2x + 1)/10',
+                    content: 'Vamos resolver: <span class="equation-text">(x - 3)/5 + x/2 = (2x + 1)/10</span><br><br>1. <strong>Denominadores:</strong> 5, 2 e 10.<br>2. <strong>MMC(5, 2, 10):</strong> O MMC é 10.<br>3. <strong>Eliminar denominadores (reescrevendo com denominador comum 10):</strong><br>   Para (x-3)/5: (10/5) * (x-3) = 2(x-3) = 2x - 6. Fração: (2x-6)/10<br>   Para x/2: (10/2) * x = 5x. Fração: 5x/10<br>   Para (2x+1)/10: Já está com denominador 10.<br><br>   A equação fica: (2x - 6)/10 + 5x/10 = (2x + 1)/10<br>4. <strong>Eliminar os denominadores (multiplicando tudo por 10 ou simplesmente desconsiderando-os agora):</strong><br>   (2x - 6) + 5x = (2x + 1)<br>5. <strong>Resolver a equação simplificada:</strong><br>   2x - 6 + 5x = 2x + 1<br>   7x - 6 = 2x + 1<br>   7x - 2x = 1 + 6<br>   5x = 7<br>   <strong>x = 7/5</strong>'
+                }
+            ];
+
+            const quizData = [
+                { question: "x/2 + x/3 = 5", answer: "x = 6", options: ["x = 5", "x = 6", "x = 10", "x = 1"], explanation: "MMC(2,3)=6. (3x + 2x)/6 = 30/6 ⇨ 5x = 30 ⇨ x = 6." },
+                { question: "(x+1)/4 - x/5 = 1/2", answer: "x = 5", options: ["x = 1/2", "x = 10", "x = 5", "x = -5"], explanation: "MMC(4,5,2)=20. 5(x+1) - 4x = 10 ⇨ 5x + 5 - 4x = 10 ⇨ x + 5 = 10 ⇨ x = 5." },
+                { question: "2x/3 + 1/2 = x/4 + 5/6", answer: "x = 1", options: ["x = 1", "x = 2/5", "x = 5/3", "x = -1"], explanation: "MMC(3,2,4,6)=12. 8x + 6 = 3x + 10 ⇨ 5x = 4 ⇨ x = 4/5. CORREÇÃO: 8x + 6 = 3x + 10 => 5x = 4 => x = 4/5. Ops, a resposta correta é x=1. Recalculando: MMC=12. 4(2x) + 6(1) = 3(x) + 2(5) => 8x + 6 = 3x + 10 => 5x = 4 => x = 4/5. O gabarito original estava x=1. Vamos usar x=4/5 como correto. Se o gabarito for x=1, a equação seria 2x/3 - x/4 = 5/6 - 1/2 => (8x-3x)/12 = (5-3)/6 => 5x/12 = 2/6 => 5x/12 = 4/12 => 5x=4 => x=4/5. A questão original do PDF tinha x=1 como resposta. Vamos ajustar a questão para ter x=1 como resposta: 2x/3 - x/4 = 1/12. MMC=12. 8x - 3x = 1 => 5x = 1 => x = 1/5. Vamos usar a primeira questão com x=1 como resposta: 2x/3 + 1/6 = x/2 + 1/3. MMC=6. 4x+1 = 3x+2 => x=1." },
+                { question: "(3x-1)/2 = (2x+3)/3", answer: "x = 9/5", options: ["x = 1", "x = 5", "x = 9/5", "x = 5/9"], explanation: "Multiplicando em cruz: 3(3x-1) = 2(2x+3) ⇨ 9x - 3 = 4x + 6 ⇨ 5x = 9 ⇨ x = 9/5." },
+                { question: "x/4 - 2 = x/6", answer: "x = 24", options: ["x = 12", "x = 24", "x = 6", "x = -12"], explanation: "MMC(4,6)=12. 3x - 24 = 2x ⇨ x = 24." },
+                { question: "x/3 + 5 = 2x/3 - 1", answer: "x = 18", options: ["x = 6", "x = -18", "x = 18", "x = 4"], explanation: "5 + 1 = 2x/3 - x/3 ⇨ 6 = x/3 ⇨ x = 18." },
+                { question: "(x+7)/2 - (x-1)/3 = 5", answer: "x = 7", options: ["x = 5", "x = 7", "x = 1", "x = 23/5"], explanation: "MMC(2,3)=6. 3(x+7) - 2(x-1) = 30 ⇨ 3x + 21 - 2x + 2 = 30 ⇨ x + 23 = 30 ⇨ x = 7." },
+                { question: "x/5 + x/10 + x/2 = 16", answer: "x = 20", options: ["x = 10", "x = 16", "x = 20", "x = 80"], explanation: "MMC(5,10,2)=10. 2x + x + 5x = 160 ⇨ 8x = 160 ⇨ x = 20." },
+                { question: "3x/4 + 1/2 = 2x/3 + 5/6", answer: "x = 2", options: ["x = 1", "x = 2", "x = 4/3", "x = 6"], explanation: "MMC(4,2,3,6)=12. 9x + 6 = 8x + 10 ⇨ x = 4. CORREÇÃO: A resposta correta é x=2. 9x + 6 = 8x + 10 => x = 4. Se x=2: 3(2)/4 + 1/2 = 6/4 + 1/2 = 3/2 + 1/2 = 4/2 = 2. E 2(2)/3 + 5/6 = 4/3 + 5/6 = 8/6 + 5/6 = 13/6. Não bate. Vamos usar a questão original do PDF que tinha x=1 para 2x/3 + 1/2 = x/4 + 5/6. E a resposta era x=4/5. Vamos criar uma que dê x=2.  x/2 + 1 = x/3 + 4/3. MMC=6. 3x + 6 = 2x + 8 => x=2. Esta é a questão que usaremos." },
+                { question: "x/2 - (x-5)/3 = 2", answer: "x = -4", options: ["x = 1", "x = -1", "x = 4", "x = -4"], explanation: "MMC(2,3)=6. 3x - 2(x-5) = 12 ⇨ 3x - 2x + 10 = 12 ⇨ x + 10 = 12 ⇨ x = 2. CORREÇÃO: A resposta correta é x=-4. Se x=-4: -4/2 - (-4-5)/3 = -2 - (-9)/3 = -2 - (-3) = -2+3 = 1. Não bate. Vamos usar a questão x/2 - (x+10)/3 = 2. MMC=6. 3x - 2(x+10) = 12 => 3x -2x -20 = 12 => x - 20 = 12 => x = 32.  Vamos usar x/3 - (x-1)/2 = 1. MMC=6. 2x - 3(x-1) = 6 => 2x -3x + 3 = 6 => -x = 3 => x = -3. Opções: x=-3, x=3, x=1, x=-1. Resposta: x=-3." }
+            ];
+            
+             // Ajustando a terceira e nona e décima questão para ter respostas mais simples e consistentes.
+            quizData[2] = { question: "2x/3 + 1/6 = x/2 + 1/3", answer: "x = 1", options: ["x = 1", "x = 1/2", "x = 2", "x = 5/6"], explanation: "MMC(3,6,2)=6. (4x + 1)/6 = (3x + 2)/6 ⇨ 4x + 1 = 3x + 2 ⇨ x = 1." };
+            quizData[8] = { question: "x/2 + 1 = x/3 + 4/3", answer: "x = 2", options: ["x = 1", "x = 2", "x = 1/3", "x = 4"], explanation: "MMC(2,3)=6. (3x + 6)/6 = (2x + 8)/6 ⇨ 3x + 6 = 2x + 8 ⇨ x = 2." };
+            quizData[9] = { question: "x/3 - (x-1)/2 = 1", answer: "x = -3", options: ["x = -3", "x = 3", "x = 1", "x = -1"], explanation: "MMC(3,2)=6. 2x - 3(x-1) = 6 ⇨ 2x - 3x + 3 = 6 ⇨ -x = 3 ⇨ x = -3." };
+
+
+            const allBaseOptions = ["x = 1", "x = 2", "x = 3", "x = 4", "x = 5", "x = 6", "x = 1/2", "x = 3/2", "x = 5/3", "x = 9/5", "x = 24", "x = 18", "x = 7", "x = 20", "x = -3", "x = -4"];
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let shuffledQuizData = [];
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            function createAccordion() {
+                accordionContainer.innerHTML = '';
+                learnData.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-stone-200 rounded-lg';
+                    div.innerHTML = `
+                        <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-4 border-t border-stone-200 text-slate-700 prose max-w-none">
+                                <p>${item.content}</p>
+                            </div>
+                        </div>
+                    `;
+                    accordionContainer.appendChild(div);
+                });
+
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const icon = button.querySelector('span:last-child');
+                        const isOpen = button.classList.toggle('open');
+                        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                    });
+                });
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                quizContainer.classList.remove('hidden');
+                scoreContainer.classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextQuestionBtn.classList.add('hidden');
+
+                const questionData = shuffledQuizData[currentQuestionIndex];
+                questionProgress.textContent = `Questão ${currentQuestionIndex + 1} de ${shuffledQuizData.length}`;
+                questionText.innerHTML = questionData.question.replace(/x/g, '<em>x</em>'); // Italicize x
+                
+                optionsContainer.innerHTML = '';
+                let currentOptions = [...questionData.options];
+                
+                // Ensure the correct answer is among the options
+                if (!currentOptions.includes(questionData.answer)) {
+                     // Replace a random wrong option with the correct answer if not enough options
+                    if(currentOptions.length < 3) currentOptions.push(questionData.answer);
+                    else currentOptions[Math.floor(Math.random() * currentOptions.length)] = questionData.answer;
+                }
+
+                // Fill up to 3-4 options if not enough, avoiding duplicates with correct answer
+                let tempBaseOptions = shuffleArray([...allBaseOptions]);
+                while(currentOptions.length < 3 && tempBaseOptions.length > 0) {
+                    let opt = tempBaseOptions.pop();
+                    if (!currentOptions.includes(opt) && opt !== questionData.answer) {
+                        currentOptions.push(opt);
+                    }
+                }
+                 // Ensure there are at least 2 options, max 4. Prefer 3 or 4.
+                currentOptions = shuffleArray(currentOptions.slice(0, Math.max(2, Math.min(4, currentOptions.length))));
+
+
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option.replace(/x/g, '<em>x</em>');
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = optionsContainer.querySelectorAll('button');
+                let isCorrect = selectedOption === correctAnswer;
+
+                if (isCorrect) {
+                    score++;
+                    feedbackText.textContent = '🎉 Correto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    feedbackText.textContent = '🤔 Incorreto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                feedbackExplanation.innerHTML = `<strong>Explicação:</strong> ${explanation.replace(/x/g, '<em>x</em>')}`;
+                feedbackContainer.classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer.replace(/x/g, 'x')) { // Compare textContent which is not italicized
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption.replace(/x/g, 'x') && !isCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                nextQuestionBtn.classList.remove('hidden');
+            }
+            
+            function showScore() {
+                quizContainer.classList.add('hidden');
+                scoreContainer.classList.remove('hidden');
+                scoreText.textContent = `Você acertou ${score} de ${shuffledQuizData.length} questões!`;
+                const percentage = (shuffledQuizData.length > 0) ? (score / shuffledQuizData.length) * 100 : 0;
+                scoreBar.style.width = `${percentage}%`;
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < shuffledQuizData.length) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+            
+            restartQuizBtn.addEventListener('click', startQuiz);
+
+            createAccordion();
+        });
+    </script>
+</body>
+</html>

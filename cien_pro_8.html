@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Planeta Giratório - Terra, Lua, Luz (8º Ano)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Nosso Planeta Giratório - Terra, Lua e Luz</h1>
+            <p class="text-slate-600 mt-2">Entenda os movimentos da Terra e da Lua, eclipses, fusos horários, estações do ano e fenômenos da luz!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Fusos Horários</h2>
+                    <p>Como a Terra gira, o Sol não ilumina todos os lugares ao mesmo tempo. Por isso, o mundo foi dividido em 24 fusos horários, cada um com uma hora diferente. Cada fuso corresponde a 15° de longitude. O ponto de partida é o Meridiano de Greenwich (UTC 0). Se você viaja para o Leste, adianta as horas; para o Oeste, atrasa. O Brasil está a Oeste de Greenwich, por isso nosso horário oficial é UTC-3.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Movimentos da Terra</h2>
+                    <ul class="list-disc pl-6">
+                        <li><b>Rotação:</b> Giro da Terra em torno do próprio eixo. Dura cerca de 24 horas e causa os dias e noites.</li>
+                        <li><b>Translação:</b> Volta da Terra ao redor do Sol. Dura cerca de 365 dias e 6 horas. Essas horas extras formam o ano bissexto a cada 4 anos (com 366 dias).</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Estações do Ano</h2>
+                    <p>As estações NÃO são causadas pela distância da Terra ao Sol, mas sim pela inclinação do eixo da Terra (~23,5°).</p>
+                    <ul class="list-disc pl-6">
+                        <li>Quando o Hemisfério Sul está inclinado para o Sol, é verão aqui e inverno no Norte.</li>
+                        <li>Quando está inclinado para longe do Sol, é inverno aqui e verão no Norte.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Equinócio e Solstício</h2>
+                    <ul class="list-disc pl-6">
+                        <li><b>Solstício:</b> Quando um hemisfério atinge sua inclinação máxima em direção ao Sol.<br>
+                            - Solstício de Verão (Dezembro no Sul): dia mais longo do ano.<br>
+                            - Solstício de Inverno (Junho no Sul): noite mais longa do ano.
+                        </li>
+                        <li><b>Equinócio:</b> Quando nenhum hemisfério está inclinado para o Sol. Dia e noite têm duração quase igual.<br>
+                            - Equinócio de Outono (Março no Sul)<br>
+                            - Equinócio de Primavera (Setembro no Sul)
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Eclipses</h2>
+                    <ul class="list-disc pl-6">
+                        <li><b>Eclipse Lunar:</b> A Terra fica entre o Sol e a Lua, e sua sombra cobre a Lua. Ocorre só na Lua Cheia. A Lua pode ficar avermelhada ("Lua de Sangue") porque a atmosfera da Terra desvia a luz do Sol.</li>
+                        <li><b>Eclipse Solar:</b> A Lua fica entre o Sol e a Terra, projetando sua sombra em uma pequena área da Terra. Ocorre só na Lua Nova. Nunca olhe diretamente para um eclipse solar sem proteção especial!</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Luz e Sombra</h2>
+                    <ul class="list-disc pl-6">
+                        <li><b>Luz:</b> É uma forma de energia que nos permite enxergar. Viaja em linha reta.</li>
+                        <li><b>Sombra:</b> Região sem luz direta, pois um objeto opaco bloqueou a luz.<br>
+                            - <b>Umbra:</b> Parte mais escura da sombra, onde a luz é totalmente bloqueada.<br>
+                            - <b>Penumbra:</b> Sombra parcial, mais clara, onde a luz é parcialmente bloqueada.
+                        </li>
+                        <li><b>Reflexão:</b> Quando a luz bate em uma superfície e retorna. É por isso que vemos objetos e nosso reflexo no espelho.</li>
+                        <li><b>Refração:</b> Quando a luz muda de meio (ex: do ar para a água) e sofre desvio. Exemplo: um canudo parece "quebrado" dentro do copo.</li>
+                        <li><b>Difração:</b> Capacidade da luz de se curvar ou se espalhar ao passar por uma fenda pequena ou contornar um obstáculo. Exemplo: padrões coloridos em CDs.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as questões sobre Terra, Lua, eclipses e luz. Se errar, tente novamente!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz();
+            });
+
+            const quizData = [
+                {question: "1. Qual movimento da Lua é responsável por girar em torno do seu próprio eixo?", answer: "Rotação", options: ["Translação com a Terra", "Revolução", "Rotação", "Orbitação solar"], explanation: "Rotação é o movimento em torno do próprio eixo."},
+                {question: "2. O que explica sempre vermos a mesma face da Lua da Terra?", answer: "A rotação e a revolução da Lua têm a mesma duração", options: ["A rotação da Terra é muito rápida", "A Lua não gira", "A rotação e a revolução da Lua têm a mesma duração", "A Terra bloqueia metade da Lua"], explanation: "A Lua leva o mesmo tempo para girar em torno de si e da Terra."},
+                {question: "3. Qual fase da Lua ocorre quando a face visível está totalmente iluminada?", answer: "Lua Cheia", options: ["Lua Nova", "Lua Crescente", "Lua Minguante", "Lua Cheia"], explanation: "Na Lua Cheia, vemos toda a face iluminada."},
+                {question: "4. O que acontece na fase de Lua Nova?", answer: "A Lua não é visível da Terra", options: ["Vemos metade da Lua iluminada", "A Lua está completamente visível", "A Lua não é visível da Terra", "A Terra está entre o Sol e a Lua"], explanation: "Na Lua Nova, a face iluminada está voltada para o lado oposto da Terra."},
+                {question: "5. Qual é o nome do ciclo completo das fases da Lua?", answer: "Lunação", options: ["Ano lunar", "Lunação", "Fase elíptica", "Período lunar"], explanation: "Lunação é o ciclo de cerca de 29,5 dias das fases da Lua."},
+                {question: "6. O que é o perigeu da Lua?", answer: "Ponto mais próximo da Terra", options: ["Ponto mais afastado da Terra", "Quando a Lua está invisível", "Ponto mais próximo da Terra", "Fase da Lua Cheia"], explanation: "Perigeu é o ponto mais próximo da órbita da Lua em relação à Terra."},
+                {question: "7. Quando ocorre uma Superlua?", answer: "Quando a Lua está no perigeu e cheia", options: ["Durante um eclipse solar", "Quando a Lua está no apogeu", "Quando a Lua está no perigeu e cheia", "Quando a Terra está mais próxima do Sol"], explanation: "Superlua ocorre quando a Lua Cheia coincide com o perigeu."},
+                {question: "8. Qual é o principal responsável pelas marés na Terra?", answer: "A gravidade da Lua", options: ["O vento", "O Sol", "A gravidade da Lua", "O movimento de rotação da Terra"], explanation: "A gravidade da Lua é o principal fator das marés."},
+                {question: "9. O que causa a existência de duas marés altas por dia?", answer: "A rotação da Terra e a atração lunar", options: ["Mudança nas fases da Lua", "Influência solar", "A rotação da Terra e a atração lunar", "O movimento das nuvens"], explanation: "A rotação da Terra e a atração da Lua criam duas marés altas diárias."},
+                {question: "10. Quantos graus cada fuso horário representa na Terra?", answer: "15°", options: ["10°", "12°", "15°", "24°"], explanation: "Cada fuso horário corresponde a 15 graus de longitude."},
+                {question: "11. Se viajarmos para o Oeste em relação a Greenwich, devemos:", answer: "Diminuir as horas", options: ["Aumentar as horas", "Diminuir as horas", "Não alterar o relógio", "Voltar um dia no calendário"], explanation: "Viajando para o Oeste, atrasamos o relógio."},
+                {question: "12. Qual movimento da Terra causa o dia e a noite?", answer: "Rotação", options: ["Translação", "Inclinação axial", "Rotação", "Gravidade"], explanation: "A rotação da Terra causa o dia e a noite."},
+                {question: "13. O que é responsável pelas estações do ano?", answer: "Inclinação do eixo da Terra", options: ["Distância da Terra ao Sol", "Fases da Lua", "Inclinação do eixo da Terra", "Fusos horários"], explanation: "A inclinação do eixo da Terra causa as estações."},
+                {question: "14. Quando ocorre o solstício de verão no Hemisfério Sul?", answer: "Dezembro", options: ["Março", "Junho", "Setembro", "Dezembro"], explanation: "No Hemisfério Sul, o solstício de verão ocorre em dezembro."},
+                {question: "15. Durante um equinócio, o que ocorre?", answer: "Dia e noite têm duração semelhante", options: ["Um hemisfério recebe mais luz", "A Lua bloqueia o Sol", "Dia e noite têm duração semelhante", "A Terra para de girar"], explanation: "No equinócio, dia e noite têm quase a mesma duração."},
+                {question: "16. Qual é o movimento da Terra ao redor do Sol?", answer: "Translação", options: ["Rotação", "Translação", "Revolução lunar", "Reflexão"], explanation: "Translação é o movimento da Terra ao redor do Sol."},
+                {question: "17. O ano bissexto serve para:", answer: "Compensar 6 horas excedentes por ano", options: ["Ajustar o horário de verão", "Corrigir os fusos horários", "Compensar 6 horas excedentes por ano", "Marcar eclipses"], explanation: "O ano bissexto compensa as horas extras da translação."},
+                {question: "18. O que é um eclipse lunar?", answer: "A Lua entra na sombra da Terra", options: ["O Sol bloqueia a Lua", "A Terra entra na sombra da Lua", "A Lua entra na sombra da Terra", "O Sol é coberto pela Terra"], explanation: "No eclipse lunar, a Lua entra na sombra da Terra."},
+                {question: "19. Em que fase da Lua ocorre o eclipse lunar?", answer: "Lua Cheia", options: ["Lua Nova", "Lua Crescente", "Lua Cheia", "Lua Minguante"], explanation: "O eclipse lunar só ocorre na Lua Cheia."},
+                {question: "20. Por que a Lua pode parecer avermelhada em um eclipse lunar?", answer: "A atmosfera da Terra desvia a luz do Sol", options: ["É iluminada por Marte", "A atmosfera da Terra desvia a luz do Sol", "A Lua reflete luz infravermelha", "A Lua entra em combustão"], explanation: "A atmosfera da Terra desvia a luz do Sol, dando cor avermelhada à Lua."},
+                {question: "21. Quando ocorre um eclipse solar?", answer: "Lua entre a Terra e o Sol", options: ["Lua entre a Terra e o Sol", "Terra entre Sol e Lua", "Sol entre Terra e Lua", "Durante a Lua Cheia"], explanation: "O eclipse solar ocorre quando a Lua fica entre a Terra e o Sol."},
+                {question: "22. Qual é o risco de observar diretamente um eclipse solar?", answer: "Perda de visão", options: ["Desmaio", "Perda de visão", "Dor de cabeça", "Cegueira noturna"], explanation: "Olhar diretamente pode causar danos graves à visão."},
+                {question: "23. O que é necessário para ver um eclipse solar com segurança?", answer: "Filtro especial", options: ["Óculos escuros comuns", "Binóculo", "Filtro especial", "Lente de aumento"], explanation: "É preciso usar filtro especial para proteger os olhos."},
+                {question: "24. O que é a umbra?", answer: "Parte escura e total da sombra", options: ["Parte mais clara da sombra", "Parte escura e total da sombra", "Reflexo da luz", "Sombra parcial"], explanation: "Umbra é a parte mais escura da sombra."},
+                {question: "25. O que é penumbra?", answer: "Sombra parcial", options: ["Luz intensa", "Reflexo da Lua", "Sombra parcial", "Sombra escura total"], explanation: "Penumbra é a sombra parcial, mais clara."},
+                {question: "26. A luz se propaga em linha:", answer: "Reta", options: ["Curva", "Zig-zague", "Reta", "Circular"], explanation: "A luz viaja em linha reta."},
+                {question: "27. O que é a reflexão da luz?", answer: "Luz que volta após atingir uma superfície", options: ["Luz absorvida", "Quando a luz se apaga", "Luz que passa de um meio para outro", "Luz que volta após atingir uma superfície"], explanation: "Reflexão é o retorno da luz ao atingir uma superfície."},
+                {question: "28. O que é refração da luz?", answer: "Desvio da luz ao mudar de meio", options: ["Desvio da luz ao mudar de meio", "Reflexo da luz na água", "Sombra criada por objetos", "Luz que se apaga"], explanation: "Refração é o desvio da luz ao mudar de meio."},
+                {question: "29. O que é difração da luz?", answer: "Quando a luz contorna obstáculos ou passa por fendas", options: ["Quando a luz reflete totalmente", "Quando a luz contorna obstáculos ou passa por fendas", "Quando a luz é absorvida pelo vidro"], explanation: "Difração é a capacidade da luz de contornar obstáculos ou passar por fendas."},
+                {question: "30. Um exemplo de refração da luz é:", answer: "Um canudo parecer quebrado na água", options: ["Ver o reflexo no espelho", "O arco-íris", "A sombra de um objeto", "Um canudo parecer quebrado na água"], explanation: "O canudo parece quebrado devido à refração da luz na água."}
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = [...quizData];
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+            btnLearn.classList.add('active');
+        });
+    </script>
+</body>
+</html>

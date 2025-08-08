@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Present, Past e Future - 8º Ano Inglês: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1; /* Sky-700 */
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 4000px; /* Increased max-height for potentially longer content */
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important; /* Emerald-500 */
+            color: white !important;
+            border-color: #059669 !important; /* Emerald-600 */
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important; /* Red-500 */
+            color: white !important;
+            border-color: #dc2626 !important; /* Red-600 */
+        }
+        .content-text { /* General text styling for readability */
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .term-highlight {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f3f4f6; /* gray-100 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        .example-sentence {
+            font-style: italic;
+            color: #075985; /* sky-800 for example sentences */
+            margin-left: 1rem;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue accent (Consistent with previous apps) -->
+    <!-- Application Structure Plan: Two-section SPA. 'Aprender' section uses an accordion for step-by-step explanations of Simple Present, Simple Past, and Simple Future (will), relevant to 8th grade (uses, forms, adverbs/time expressions). 'Praticar' section is an interactive quiz with immediate feedback and score tracking. This structure separates learning from application, aiding comprehension and retention. Navigation is via two main buttons. -->
+    <!-- Visualization & Content Choices: Report Info: Simplified English grammar concepts (Simple Present, Simple Past, Simple Future) for 8th grade -> Goal: Inform/Organize -> Viz/Presentation: Accordion in 'Aprender'. Interaction: Expand/collapse. Justification: Breaks down grammatical information into digestible steps suitable for the age group. Report Info: Age-appropriate grammar exercises & solutions -> Goal: Test knowledge/Compare -> Viz/Presentation: Interactive quiz in 'Praticar'. Interaction: Clickable answers, feedback, score. Justification: Active learning, immediate reinforcement. Library/Method: Vanilla JS & Tailwind CSS. Content presented as styled text. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+        <a href="ing2.html" class="inline-block px-6 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow hover:bg-purple-700 transition-colors">
+            Ir para Quiz de Transformação
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Inglês - 8º Ano: Simple Present, Past & Future</h1>
+            <p class="text-slate-600 mt-2">Aprenda a usar os tempos verbais para falar sobre rotinas, o passado e o futuro!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Desvendando os Tempos Verbais Essenciais</h2>
+                    <p class="mb-6 content-text">No inglês, usamos diferentes tempos verbais para expressar quando uma ação acontece. Hoje vamos focar no <strong>Simple Present</strong> (para rotinas e fatos), no <strong>Simple Past</strong> (para ações concluídas no passado) e no <strong>Simple Future com "will"</strong> (para previsões e decisões espontâneas).</p>
+                    
+                    <div id="accordion-container" class="space-y-3">
+                    </div>
+
+                    <div class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-800">💡 Fique Ligado!</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700 content-text">
+                            <li><strong class="font-semibold">Simple Present (He/She/It):</strong> Lembre-se do "-s", "-es" ou "-ies" nos verbos na afirmativa! Auxiliares: <span class="term-highlight">DO</span> / <span class="term-highlight">DOES</span>.</li>
+                            <li><strong class="font-semibold">Simple Past (Regular Verbs):</strong> Adicione <span class="term-highlight">-ED</span> ao verbo. Para negativas e perguntas, use o auxiliar <span class="term-highlight">DID</span> (e o verbo principal volta à forma base).</li>
+                            <li><strong class="font-highlight">Simple Past (Irregular Verbs):</strong> Eles não seguem a regra do -ED! É preciso memorizar a forma passada (ex: go &rarr; went, see &rarr; saw).</li>
+                            <li><strong class="font-semibold">Simple Future (Will):</strong> Use <span class="term-highlight">WILL</span> + verbo na forma base para todos os sujeitos. Para negar: <span class="term-highlight">WILL NOT (WON'T)</span>.</li>
+                            <li><strong class="font-semibold">Palavras-chave:</strong> Ajudam a identificar o tempo!
+                                <ul>
+                                    <li>Simple Present: <span class="term-highlight">always, usually, every day...</span></li>
+                                    <li>Simple Past: <span class="term-highlight">yesterday, last night/week/year, ago...</span></li>
+                                    <li>Simple Future: <span class="term-highlight">tomorrow, next week/month/year, soon...</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                 <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Hora de Praticar!</h2>
+                    <p class="mb-6 content-text">Mostre que você aprendeu! Complete as frases e escolha a melhor opção para cada situação, usando o Simple Present, Simple Past ou Simple Future.</p>
+
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl content-text"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        </div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            const accordionContainer = document.getElementById('accordion-container');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const questionProgress = document.getElementById('question-progress');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreTextElement = document.getElementById('score-text');
+            const scoreBar = document.getElementById('score-bar');
+
+            const learnData = [
+                {
+                    title: '1. Simple Present: Rotinas e Fatos',
+                    content: 'Usamos o <strong>Simple Present</strong> para falar sobre:<br><ul><li><strong>Rotinas e hábitos:</strong> Coisas que fazemos regularmente.</li><p class="example-sentence"><em>I <strong>wake up</strong> at 7 AM every day.</em> (Eu acordo às 7h todo dia.)</p><p class="example-sentence"><em>She <strong>studies</strong> English on Mondays.</em> (Ela estuda inglês às segundas.)</p><li><strong>Fatos e verdades universais:</strong> Coisas que são sempre verdade.</li><p class="example-sentence"><em>The sun <strong>rises</strong> in the east.</em> (O sol nasce no leste.)</p></ul><br><strong>Forma Afirmativa:</strong><br>Para <span class="term-highlight">I, You, We, They</span>: verbo na forma base.<br><p class="example-sentence"><em>We <strong>play</strong> soccer.</em></p>Para <span class="term-highlight">He, She, It</span>: verbo + <span class="term-highlight">-s</span>, <span class="term-highlight">-es</span> ou <span class="term-highlight">-ies</span>.<br><p class="example-sentence"><em>He <strong>plays</strong> soccer.</em> (play &rarr; plays)</p><p class="example-sentence"><em>She <strong>watches</strong> TV.</em> (watch &rarr; watches)</p><p class="example-sentence"><em>It <strong>studies</strong> hard.</em> (study &rarr; studies)</p><br><strong>Forma Negativa:</strong><br>Use <span class="term-highlight">DO NOT (DON\'T)</span> + verbo para <span class="term-highlight">I, You, We, They</span>.<br><p class="example-sentence"><em>I <strong>don\'t like</strong> coffee.</em></p>Use <span class="term-highlight">DOES NOT (DOESN\'T)</span> + verbo (sem -s) para <span class="term-highlight">He, She, It</span>.<br><p class="example-sentence"><em>She <strong>doesn\'t like</strong> tea.</em></p><br><strong>Forma Interrogativa (Perguntas):</strong><br>Use <span class="term-highlight">DO</span> + sujeito + verbo...? para <span class="term-highlight">I, You, We, They</span>.<br><p class="example-sentence"><em><strong>Do</strong> you <strong>speak</strong> English?</em></p>Use <span class="term-highlight">DOES</span> + sujeito + verbo (sem -s)...? para <span class="term-highlight">He, She, It</span>.<br><p class="example-sentence"><em><strong>Does</strong> he <strong>speak</strong> French?</em></p><br><strong>Advérbios de Frequência:</strong> <span class="term-highlight">always</span> (sempre), <span class="term-highlight">usually</span> (geralmente), <span class="term-highlight">often</span> (frequentemente), <span class="term-highlight">sometimes</span> (às vezes), <span class="term-highlight">rarely/seldom</span> (raramente), <span class="term-highlight">never</span> (nunca), <span class="term-highlight">every day/week/month</span> (todo dia/semana/mês).<br><p class="example-sentence"><em>They <strong>always</strong> travel in July.</em></p>'
+                },
+                {
+                    title: '2. Simple Past: Ações Concluídas no Passado',
+                    content: 'Usamos o <strong>Simple Past</strong> para falar sobre ações que começaram e terminaram em um tempo específico no passado.<br><br><strong>Forma Afirmativa (Verbos Regulares):</strong><br>Adicione <span class="term-highlight">-ED</span> ao final do verbo na forma base.<br><p class="example-sentence"><em>I <strong>played</strong> basketball yesterday.</em> (play &rarr; played)</p><p class="example-sentence"><em>She <strong>watched</strong> a movie last night.</em> (watch &rarr; watched)</p>Se o verbo terminar em <span class="term-highlight">-e</span>, adicione apenas <span class="term-highlight">-d</span>: <span class="term-highlight">like &rarr; liked</span>.<br>Se o verbo terminar em consoante + <span class="term-highlight">-y</span>, troque o <span class="term-highlight">-y</span> por <span class="term-highlight">-ied</span>: <span class="term-highlight">study &rarr; studied</span>.<br>Se o verbo curto terminar em CVC (Consoante-Vogal-Consoante), dobre a última consoante: <span class="term-highlight">stop &rarr; stopped</span>.<br><br><strong>Forma Afirmativa (Verbos Irregulares):</strong><br>Eles NÃO seguem a regra do -ED! Cada um tem sua forma própria no passado, que precisa ser memorizada.<br><p class="example-sentence"><em>I <strong>went</strong> to the park.</em> (go &rarr; went)</p><p class="example-sentence"><em>She <strong>saw</strong> her friends.</em> (see &rarr; saw)</p><p class="example-sentence"><em>We <strong>had</strong> pizza for dinner.</em> (have &rarr; had)</p><br><strong>Forma Negativa:</strong><br>Use <span class="term-highlight">DID NOT (DIDN\'T)</span> + verbo na forma base (sem -ED ou forma irregular) para TODOS os sujeitos.<br><p class="example-sentence"><em>I <strong>didn\'t play</strong> basketball yesterday.</em></p><p class="example-sentence"><em>She <strong>didn\'t see</strong> her friends.</em></p><br><strong>Forma Interrogativa (Perguntas):</strong><br>Use <span class="term-highlight">DID</span> + sujeito + verbo na forma base (sem -ED ou forma irregular)...? para TODOS os sujeitos.<br><p class="example-sentence"><em><strong>Did</strong> you <strong>play</strong> basketball yesterday?</em></p><p class="example-sentence"><em><strong>Did</strong> she <strong>see</strong> her friends?</em></p><br><strong>Expressões de Tempo Comuns:</strong> <span class="term-highlight">yesterday</span> (ontem), <span class="term-highlight">last night</span> (ontem à noite), <span class="term-highlight">last week/month/year</span> (semana/mês/ano passado), <span class="term-highlight">two days ago</span> (dois dias atrás), <span class="term-highlight">in 2010</span> (em 2010).'
+                },
+                {
+                    title: '3. Simple Future com "WILL": Previsões e Decisões Espontâneas',
+                    content: 'Usamos o <strong>Simple Future com "WILL"</strong> para:<br><ul><li><strong>Previsões sobre o futuro:</strong> O que achamos que vai acontecer.</li><p class="example-sentence"><em>I think it <strong>will rain</strong> tomorrow.</em> (Eu acho que vai chover amanhã.)</p><li><strong>Decisões espontâneas:</strong> Decisões tomadas no momento da fala.</li><p class="example-sentence"><em>A: The phone is ringing. B: I <strong>will get</strong> it!</em> (A: O telefone está tocando. B: Eu vou atender!)</p><li><strong>Promessas, ofertas, pedidos:</strong></li><p class="example-sentence"><em>I <strong>will help</strong> you with your homework.</em> (Eu vou te ajudar com sua tarefa.)</p></ul><br><strong>Forma Afirmativa:</strong><br>Sujeito + <span class="term-highlight">WILL</span> + verbo na forma base. (Vale para todos os sujeitos!)<br><p class="example-sentence"><em>I <strong>will travel</strong> next year.</em></p><p class="example-sentence"><em>She <strong>will call</strong> you later.</em></p>Forma contraída: <span class="term-highlight">\'ll</span> (ex: <span class="term-highlight">I\'ll, She\'ll</span>)<br><br><strong>Forma Negativa:</strong><br>Sujeito + <span class="term-highlight">WILL NOT (WON\'T)</span> + verbo na forma base.<br><p class="example-sentence"><em>I <strong>will not (won\'t) be</strong> late.</em></p><p class="example-sentence"><em>They <strong>won\'t come</strong> to the party.</em></p><br><strong>Forma Interrogativa (Perguntas):</strong><br><span class="term-highlight">WILL</span> + sujeito + verbo na forma base...?<br><p class="example-sentence"><em><strong>Will</strong> you <strong>help</strong> me?</em></p><p class="example-sentence"><em><strong>Will</strong> it <strong>be</strong> sunny tomorrow?</em></p><br><strong>Expressões de Tempo Comuns:</strong> <span class="term-highlight">tomorrow</span> (amanhã), <span class="term-highlight">next week/month/year</span> (próxima semana/mês/ano), <span class="term-highlight">soon</span> (em breve), <span class="term-highlight">later</span> (mais tarde), <span class="term-highlight">in the future</span> (no futuro).'
+                }
+            ];
+
+            const quizData = [
+                { question: "My mother ______ (work) in a hospital. It's her job.", answer: "works", options: ["work", "works", "worked", "will work"], explanation: "Rotina/fato (trabalho dela) e sujeito 'My mother' (she) pede '-s' no verbo no Simple Present." },
+                { question: "I ______ (visit) my grandparents last weekend.", answer: "visited", options: ["visit", "visits", "visited", "will visit"], explanation: "'Last weekend' indica uma ação concluída no passado, então usamos o Simple Past (verbo regular)." },
+                { question: "Look at those dark clouds! I think it ______ (rain) soon.", answer: "will rain", options: ["rain", "rains", "rained", "will rain"], explanation: "Previsão sobre o futuro ('I think', 'soon') usa Simple Future com 'will'." },
+                { question: "She ______ (not / go) to school yesterday because she was sick.", answer: "didn't go", options: ["don't go", "doesn't go", "didn't go", "won't go"], explanation: "Simple Past negativo usa 'didn't' + verbo base ('go'). 'Yesterday' indica passado." },
+                { question: "We ______ (study) English every Monday.", answer: "study", options: ["study", "studies", "studied", "will study"], explanation: "Rotina ('every Monday') no Simple Present. Sujeito 'We' não leva '-s'." },
+                { question: "What ______ you ______ (do) tomorrow evening?", answer: "will / do", options: ["do / do", "did / do", "will / do", "are / doing"], explanation: "'Tomorrow evening' indica futuro. Pergunta no Simple Future com 'will': Will + sujeito + verbo base." },
+                { question: "He ______ (buy) a new car two days ago. (buy - irregular verb)", answer: "bought", options: ["buyed", "buys", "bought", "will buy"], explanation: "'Two days ago' indica passado. 'Buy' é um verbo irregular, seu passado é 'bought'." },
+                { question: "They ______ (not / travel) next month because they don't have money.", answer: "won't travel", options: ["don't travel", "doesn't travel", "didn't travel", "won't travel"], explanation: "Futuro ('next month') negativo usa 'won't' (will not) + verbo base." },
+                { question: "______ your father ______ (like) coffee? (General preference)", answer: "Does / like", options: ["Do / like", "Does / like", "Did / like", "Will / like"], explanation: "Pergunta sobre preferência geral (Simple Present). Sujeito 'your father' (he) usa 'Does'." },
+                { question: "The children ______ (play) in the park when it started to rain. (Focus on the 'play' part for this question)", answer: "played", options: ["play", "plays", "played", "will play"], explanation: "A frase indica uma ação no passado. 'Played' é o passado simples de 'play'." }
+            ];
+            
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let shuffledQuizData = [];
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            function createAccordion() {
+                accordionContainer.innerHTML = '';
+                learnData.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-stone-200 rounded-lg';
+                    div.innerHTML = `
+                        <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-4 border-t border-stone-200 text-slate-700 prose max-w-none content-text">
+                                ${item.content}
+                            </div>
+                        </div>
+                    `;
+                    accordionContainer.appendChild(div);
+                });
+
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const icon = button.querySelector('span:last-child');
+                        const isOpen = button.classList.toggle('open');
+                        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                        if (isOpen) {
+                            document.querySelectorAll('.accordion-button.open').forEach(openButton => {
+                                if (openButton !== button) {
+                                    openButton.classList.remove('open');
+                                    openButton.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                quizContainer.classList.remove('hidden');
+                scoreContainer.classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextQuestionBtn.classList.add('hidden');
+
+                const questionData = shuffledQuizData[currentQuestionIndex];
+                questionProgress.textContent = `Questão ${currentQuestionIndex + 1} de ${shuffledQuizData.length}`;
+                questionText.innerHTML = questionData.question.replace(/\(.*\)/g, '<span class="term-highlight">______</span>'); // More generic blank
+                
+                optionsContainer.innerHTML = '';
+                let currentOptions = [...questionData.options];
+                
+                if (!currentOptions.find(opt => opt === questionData.answer )) {
+                    const randomIndex = Math.floor(Math.random() * currentOptions.length);
+                    currentOptions[randomIndex] = questionData.answer; 
+                }
+                currentOptions = shuffleArray(currentOptions);
+
+
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option; 
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = optionsContainer.querySelectorAll('button');
+                let isCorrect = selectedOption === correctAnswer;
+
+                if (isCorrect) {
+                    score++;
+                    feedbackText.textContent = '🎉 Correto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    feedbackText.textContent = '🤔 Incorreto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                feedbackExplanation.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                feedbackContainer.classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.innerHTML === correctAnswer) { 
+                        button.classList.add('correct-answer');
+                    } else if (button.innerHTML === selectedOption && !isCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                nextQuestionBtn.classList.remove('hidden');
+            }
+            
+            function showScore() {
+                quizContainer.classList.add('hidden');
+                scoreContainer.classList.remove('hidden');
+                scoreTextElement.textContent = `Você acertou ${score} de ${shuffledQuizData.length} questões!`;
+                const percentage = (shuffledQuizData.length > 0) ? (score / shuffledQuizData.length) * 100 : 0;
+                scoreBar.style.width = `${percentage}%`;
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < shuffledQuizData.length) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+            
+            restartQuizBtn.addEventListener('click', startQuiz);
+
+            createAccordion();
+            switchView('learn');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biomassa e Fontes de Combustíveis - 8º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1; /* Sky-700 */
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 2000px; /* Increased max-height for potentially longer content */
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important; /* Emerald-500 */
+            color: white !important;
+            border-color: #059669 !important; /* Emerald-600 */
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important; /* Red-500 */
+            color: white !important;
+            border-color: #dc2626 !important; /* Red-600 */
+        }
+        .content-text { /* General text styling for readability */
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .term-highlight {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f3f4f6; /* gray-100 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue accent (Consistent with previous apps) -->
+    <!-- Application Structure Plan: Two-section SPA. 'Aprender' section uses an accordion for step-by-step explanations of biomass and fuel sources concepts relevant to 8th grade (definitions, renewable/non-renewable, types of biomass, fossil fuels, advantages/disadvantages). 'Praticar' section is an interactive quiz with immediate feedback and score tracking. This structure separates learning from application, aiding comprehension and retention. Navigation is via two main buttons. -->
+    <!-- Visualization & Content Choices: Report Info: Simplified biomass and fuel sources concepts and examples for 8th grade -> Goal: Inform/Organize -> Viz/Presentation: Accordion in 'Aprender'. Interaction: Expand/collapse. Justification: Breaks down information into digestible steps suitable for the age group. Report Info: Age-appropriate biomass and fuel sources problems & solutions -> Goal: Test knowledge/Compare -> Viz/Presentation: Interactive quiz in 'Praticar'. Interaction: Clickable answers, feedback, score. Justification: Active learning, immediate reinforcement. Library/Method: Vanilla JS & Tailwind CSS. Content presented as styled text. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+                    ⬅ Voltar para o Início
+                </a>
+            </div>
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Biomassa e Fontes de Combustíveis - 8º Ano</h1>
+            <p class="text-slate-600 mt-2">Descubra de onde vem a energia que usamos!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">De Onde Vem Nossa Energia?</h2>
+                    <p class="mb-6 content-text">Você já parou para pensar de onde vem a energia que usamos para acender as luzes, mover os carros ou cozinhar os alimentos? Existem várias fontes de combustíveis, e hoje vamos aprender sobre a <strong>biomassa</strong> e outras formas de obter energia.</p>
+                    
+                    <div id="accordion-container" class="space-y-3">
+                    </div>
+
+                    <div class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-800">💡 Fique Ligado!</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700 content-text">
+                            <li><strong class="font-semibold">Renovável vs. Não Renovável:</strong> Fontes renováveis se refazem na natureza (como plantas), já as não renováveis demoram milhões de anos (como petróleo).</li>
+                            <li><strong class="font-semibold">Biomassa é Matéria Orgânica:</strong> Tudo que vem de plantas e animais pode ser biomassa.</li>
+                            <li><strong class="font-semibold">Combustíveis Fósseis:</strong> Carvão, petróleo e gás natural são formados de restos de seres vivos de milhões de anos atrás.</li>
+                            <li><strong class="font-semibold">Energia Limpa?</strong> Algumas fontes são mais limpas que outras, poluindo menos o ar.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                 <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste Seus Conhecimentos!</h2>
+                    <p class="mb-6 content-text">Agora é hora de ver o que você aprendeu sobre biomassa e as fontes de combustíveis. Resolva as questões e mostre que você está por dentro!</p>
+
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl content-text"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        </div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            const accordionContainer = document.getElementById('accordion-container');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const questionProgress = document.getElementById('question-progress');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreTextElement = document.getElementById('score-text');
+            const scoreBar = document.getElementById('score-bar');
+
+            const learnData = [
+                {
+                    title: '1. O que são Fontes de Combustíveis?',
+                    content: 'Fontes de combustíveis são materiais que podemos usar para produzir energia. Essa energia pode ser usada para gerar calor (como num fogão a lenha), eletricidade (nas usinas) ou movimento (nos carros).<br><br>Existem muitos tipos de combustíveis, e eles podem vir de diferentes lugares!'
+                },
+                {
+                    title: '2. Renováveis vs. Não Renováveis',
+                    content: 'As fontes de combustíveis podem ser divididas em dois grandes grupos:<br><br><strong>a) Fontes Renováveis:</strong> São aquelas que se refazem na natureza em um tempo relativamente curto ou que não se esgotam com o uso. Elas são consideradas mais "amigas" do meio ambiente.<br><em>Exemplos: Energia solar (Sol), energia eólica (vento), energia hidrelétrica (água dos rios), e a <strong>biomassa</strong>.</em><br><br><strong>b) Fontes Não Renováveis:</strong> São aquelas que demoram milhões de anos para se formar na natureza e, por isso, podem acabar se usarmos demais. Muitas vezes, sua queima polui o ar.<br><em>Exemplos: <strong>Combustíveis fósseis</strong> como petróleo, carvão mineral e gás natural.</em>'
+                },
+                {
+                    title: '3. O que é Biomassa?',
+                    content: 'Biomassa é toda <strong>matéria orgânica</strong> (de origem vegetal ou animal) que pode ser usada para produzir energia. É uma fonte de energia renovável, porque as plantas crescem de novo e os animais se reproduzem.<br><br><strong>Exemplos de biomassa:</strong><br><ul><li><strong>Madeira e lenha:</strong> Usadas em fogões e lareiras.</li><li><strong>Bagaço de cana-de-açúcar:</strong> Sobra da produção de açúcar e álcool, queimado para gerar energia nas usinas.</li><li><strong>Restos de colheitas:</strong> Palha de milho, casca de arroz.</li><li><strong>Esterco de animais:</strong> Pode ser transformado em biogás.</li><li><strong>Lixo orgânico:</strong> Restos de comida que podem gerar biogás em aterros.</li></ul>'
+                },
+                {
+                    title: '4. Como a Biomassa vira Energia?',
+                    content: 'A biomassa pode ser transformada em energia de várias formas:<br><br><ul><li><strong>Queima Direta:</strong> A forma mais antiga! Queimar lenha, bagaço ou pellets de madeira para gerar calor (para cozinhar, aquecer) ou vapor, que pode mover turbinas e gerar eletricidade.</li><li><strong>Biogás:</strong> Quando a matéria orgânica (esterco, lixo) se decompõe sem oxigênio (em biodigestores), ela produz um gás chamado biogás, que é rico em metano e pode ser queimado como o gás de cozinha.</li><li><strong>Biocombustíveis Líquidos:</strong> A biomassa pode ser transformada em combustíveis líquidos, como:<br>    - <em>Etanol:</em> Álcool produzido principalmente da fermentação da cana-de-açúcar ou milho, usado em carros.<br>    - <em>Biodiesel:</em> Produzido a partir de óleos vegetais (soja, mamona, dendê) ou gorduras animais, usado em motores a diesel.</li></ul>'
+                },
+                {
+                    title: '5. Vantagens e Desvantagens da Biomassa',
+                    content: 'Usar biomassa como fonte de energia tem seus prós e contras:<br><br><strong>Vantagens:</strong><br><ul><li>É uma fonte <strong>renovável</strong>.</li><li>Pode ajudar a <strong>reduzir o lixo</strong>, aproveitando resíduos agrícolas e urbanos.</li><li>Se as plantas usadas forem replantadas, a queima da biomassa pode ser considerada "carbono neutro" (o CO₂ liberado na queima é o mesmo que a planta absorveu para crescer).</li><li>Pode gerar empregos no campo.</li></ul><br><strong>Desvantagens:</strong><br><ul><li>Precisa de <strong>grandes áreas de terra</strong> para plantar a biomassa, o que pode competir com a produção de alimentos ou causar desmatamento se não for bem planejado.</li><li>A queima pode liberar <strong>poluentes no ar</strong> se não for feita de forma eficiente.</li><li>O transporte da biomassa (que é volumosa) até as usinas pode ser caro.</li><li>Tem menor "densidade energética" que combustíveis fósseis (precisa de mais biomassa para gerar a mesma quantidade de energia que uma pequena quantidade de petróleo, por exemplo).</li></ul>'
+                },
+                {
+                    title: '6. E os Combustíveis Fósseis?',
+                    content: 'Os combustíveis fósseis (carvão mineral, petróleo e gás natural) são as fontes de energia mais usadas no mundo hoje, mas são <strong>não renováveis</strong> e causam muitos problemas ambientais.<br><br><ul><li><strong>Formação:</strong> Originam-se da decomposição de restos de plantas e animais que viveram há milhões de anos, soterrados sob pressão e calor.</li><li><strong>Problemas:</strong> Sua queima libera grandes quantidades de gases do efeito estufa (como o CO₂), que contribuem para o aquecimento global. Também podem causar poluição do ar e da água.</li></ul>Por isso, é importante buscar alternativas mais limpas e renováveis, como a biomassa e outras fontes como solar e eólica.'
+                }
+            ];
+
+            const quizData = [
+                { question: "O que é biomassa?", answer: "Matéria orgânica usada para gerar energia", options: ["Um tipo de rocha", "Matéria orgânica usada para gerar energia", "Um mineral raro", "Água de rios"], explanation: "Biomassa é toda matéria de origem vegetal ou animal que pode ser convertida em energia." },
+                { question: "A madeira usada como lenha é um exemplo de fonte de energia:", answer: "Renovável", options: ["Não renovável", "Fóssil", "Renovável", "Nuclear"], explanation: "A madeira vem de árvores, que podem ser replantadas, tornando-a uma fonte renovável." },
+                { question: "Qual destes é um exemplo de combustível fóssil?", answer: "Petróleo", options: ["Etanol", "Biogás", "Petróleo", "Lenha"], explanation: "Petróleo, carvão mineral e gás natural são combustíveis fósseis, formados ao longo de milhões de anos." },
+                { question: "Uma vantagem de usar biomassa como energia é que ela:", answer: "É uma fonte renovável", options: ["Não polui nada", "É uma fonte renovável", "É encontrada em qualquer lugar facilmente", "É mais potente que o petróleo"], explanation: "Ser renovável é uma das principais vantagens da biomassa, pois suas fontes podem se regenerar." },
+                { question: "O gás produzido pela decomposição de lixo orgânico ou esterco é chamado de:", answer: "Biogás", options: ["Gás natural", "Biogás", "Gás de cozinha (GLP)", "Hidrogênio"], explanation: "O biogás é rico em metano e é produzido pela decomposição anaeróbica (sem oxigênio) de matéria orgânica." },
+                { question: "Qual das seguintes fontes de energia NÃO é renovável?", answer: "Carvão Mineral", options: ["Energia Solar", "Energia Eólica (vento)", "Carvão Mineral", "Biomassa (bagaço de cana)"], explanation: "Carvão mineral é um combustível fóssil, que leva milhões de anos para se formar e, portanto, não é renovável em escala humana." },
+                { question: "O etanol, usado em carros, é um biocombustível geralmente produzido a partir de:", answer: "Cana-de-açúcar ou milho", options: ["Petróleo", "Carvão", "Cana-de-açúcar ou milho", "Gás natural"], explanation: "O etanol é produzido pela fermentação de açúcares presentes em plantas como cana-de-açúcar e milho." },
+                { question: "Qual é uma desvantagem do uso da biomassa para energia?", answer: "Pode precisar de grandes áreas de plantio", options: ["É uma fonte não renovável", "Pode precisar de grandes áreas de plantio", "Não produz CO₂ quando queimada", "É muito difícil de transportar"], explanation: "A necessidade de grandes áreas para cultivo é uma das desvantagens, podendo competir com a produção de alimentos." },
+                { question: "A queima de combustíveis fósseis é uma das principais causas do(a):", answer: "Aumento do efeito estufa", options: ["Diminuição da temperatura da Terra", "Limpeza do ar", "Aumento do efeito estufa", "Produção de oxigênio"], explanation: "A queima de combustíveis fósseis libera gases como o CO₂, que intensificam o efeito estufa e contribuem para o aquecimento global." },
+                { question: "Transformar restos de comida e esterco em gás para cozinhar é um exemplo de aproveitamento de:", answer: "Biomassa para produzir biogás", options: ["Energia solar", "Energia eólica", "Biomassa para produzir biogás", "Energia geotérmica"], explanation: "Essa transformação utiliza a decomposição da biomassa para gerar biogás, um combustível útil." }
+            ];
+            
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let shuffledQuizData = [];
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            function createAccordion() {
+                accordionContainer.innerHTML = '';
+                learnData.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-stone-200 rounded-lg';
+                    div.innerHTML = `
+                        <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-4 border-t border-stone-200 text-slate-700 prose max-w-none content-text">
+                                ${item.content}
+                            </div>
+                        </div>
+                    `;
+                    accordionContainer.appendChild(div);
+                });
+
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const icon = button.querySelector('span:last-child');
+                        const isOpen = button.classList.toggle('open');
+                        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                        if (isOpen) {
+                            document.querySelectorAll('.accordion-button.open').forEach(openButton => {
+                                if (openButton !== button) {
+                                    openButton.classList.remove('open');
+                                    openButton.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                quizContainer.classList.remove('hidden');
+                scoreContainer.classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextQuestionBtn.classList.add('hidden');
+
+                const questionData = shuffledQuizData[currentQuestionIndex];
+                questionProgress.textContent = `Questão ${currentQuestionIndex + 1} de ${shuffledQuizData.length}`;
+                questionText.innerHTML = questionData.question;
+                
+                optionsContainer.innerHTML = '';
+                let currentOptions = [...questionData.options];
+                
+                if (!currentOptions.find(opt => opt === questionData.answer )) {
+                    const randomIndex = Math.floor(Math.random() * currentOptions.length);
+                    currentOptions[randomIndex] = questionData.answer; 
+                }
+                currentOptions = shuffleArray(currentOptions);
+
+
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option; 
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = optionsContainer.querySelectorAll('button');
+                let isCorrect = selectedOption === correctAnswer;
+
+                if (isCorrect) {
+                    score++;
+                    feedbackText.textContent = '🎉 Correto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    feedbackText.textContent = '🤔 Incorreto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                feedbackExplanation.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                feedbackContainer.classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.innerHTML === correctAnswer) { 
+                        button.classList.add('correct-answer');
+                    } else if (button.innerHTML === selectedOption && !isCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                nextQuestionBtn.classList.remove('hidden');
+            }
+            
+            function showScore() {
+                quizContainer.classList.add('hidden');
+                scoreContainer.classList.remove('hidden');
+                scoreTextElement.textContent = `Você acertou ${score} de ${shuffledQuizData.length} questões!`;
+                const percentage = (shuffledQuizData.length > 0) ? (score / shuffledQuizData.length) * 100 : 0;
+                scoreBar.style.width = `${percentage}%`;
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < shuffledQuizData.length) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+            
+            restartQuizBtn.addEventListener('click', startQuiz);
+
+            createAccordion();
+            switchView('learn');
+        });
+    </script>
+</body>
+</html>

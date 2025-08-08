@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reino das Plantas - 7º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1;
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 1000px;
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important;
+            color: white !important;
+            border-color: #059669 !important;
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important;
+            color: white !important;
+            border-color: #dc2626 !important;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-green-800">Reino das Plantas - 7º Ano</h1>
+            <p class="text-slate-600 mt-2">Aprenda sobre as plantas e teste seus conhecimentos!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-green-700">O que é o Reino Plantae?</h2>
+                    <p class="mb-6">O Reino Plantae reúne todos os seres vivos que são plantas. Elas são essenciais para a vida na Terra, pois produzem oxigênio, alimento e ajudam a manter o equilíbrio do planeta.</p>
+                    <div id="accordion-container" class="space-y-3">
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>1. Características Gerais das Plantas</span>
+                                <span class="transform transition-transform duration-300 text-green-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <ul class="list-disc list-inside">
+                                        <li>Seres vivos eucariontes, multicelulares e autotróficos (fazem fotossíntese).</li>
+                                        <li>Possuem parede celular de celulose.</li>
+                                        <li>Armazenam energia em forma de amido.</li>
+                                        <li>São fundamentais para a produção de oxigênio e alimento.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>2. Grupos de Plantas</span>
+                                <span class="transform transition-transform duration-300 text-green-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <ul class="list-disc list-inside">
+                                        <li><strong>Briófitas:</strong> Pequenas, sem vasos condutores (ex: musgos).</li>
+                                        <li><strong>Pteridófitas:</strong> Possuem vasos, mas não têm sementes (ex: samambaias).</li>
+                                        <li><strong>Gimnospermas:</strong> Têm sementes, mas não têm frutos (ex: pinheiros).</li>
+                                        <li><strong>Angiospermas:</strong> Têm flores, frutos e sementes (ex: feijão, maçã, rosas).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>3. Fotossíntese</span>
+                                <span class="transform transition-transform duration-300 text-green-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <p>Processo pelo qual as plantas produzem seu próprio alimento usando luz solar, água e gás carbônico, liberando oxigênio.</p>
+                                    <p class="mt-2"><strong>Equação simplificada:</strong> <br> <span class="font-mono bg-stone-100 px-2 py-1 rounded">CO₂ + H₂O + luz → C₆H₁₂O₆ + O₂</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>4. Partes da Planta</span>
+                                <span class="transform transition-transform duration-300 text-green-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <ul class="list-disc list-inside">
+                                        <li><strong>Raiz:</strong> Fixa a planta e absorve água e sais minerais.</li>
+                                        <li><strong>Caule:</strong> Sustenta a planta e transporta seiva.</li>
+                                        <li><strong>Folha:</strong> Realiza fotossíntese e trocas gasosas.</li>
+                                        <li><strong>Flor:</strong> Responsável pela reprodução.</li>
+                                        <li><strong>Fruto:</strong> Protege as sementes.</li>
+                                        <li><strong>Semente:</strong> Origina uma nova planta.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>5. Importância das Plantas</span>
+                                <span class="transform transition-transform duration-300 text-green-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <ul class="list-disc list-inside">
+                                        <li>Produzem oxigênio e alimento.</li>
+                                        <li>São base das cadeias alimentares.</li>
+                                        <li>Fornecem matéria-prima (madeira, fibras, remédios).</li>
+                                        <li>Regulam o clima e protegem o solo.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-green-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Resolva as questões sobre o Reino das Plantas. Se errar, a questão volta para o final da fila!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-green-700 text-white font-semibold rounded-lg shadow-md hover:bg-green-800 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-green-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-green-700 text-white font-semibold rounded-lg shadow-md hover:bg-green-800 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="flex justify-center mt-10 mb-6">
+        <button onclick="printQuizQuestions()" class="px-8 py-3 bg-pink-700 text-white text-lg font-semibold rounded-lg shadow hover:bg-pink-800 transition-colors flex items-center gap-2">
+            🖨️ Imprimir questões em PDF
+        </button>
+    </div>
+    <script>
+        function printQuizQuestions() {
+            const quizData = [
+                { question: "Qual é a principal característica das plantas?", options: ["São autotróficas e fazem fotossíntese", "São unicelulares", "Vivem apenas na água", "Não possuem parede celular"] },
+                { question: "O que é fotossíntese?", options: ["Processo de produção de alimento usando luz", "Respiração das plantas", "Absorção de água pelas raízes", "Transporte de seiva"] },
+                { question: "Qual grupo de plantas não possui vasos condutores?", options: ["Briófitas", "Pteridófitas", "Gimnospermas", "Angiospermas"] },
+                { question: "Exemplo de briófita:", options: ["Musgo", "Samambaia", "Pinheiro", "Rosa"] },
+                { question: "Qual grupo de plantas possui sementes, mas não frutos?", options: ["Gimnospermas", "Angiospermas", "Briófitas", "Pteridófitas"] },
+                { question: "Qual grupo de plantas possui flores e frutos?", options: ["Angiospermas", "Gimnospermas", "Briófitas", "Pteridófitas"] },
+                { question: "A função principal da raiz é:", options: ["Absorver água e sais minerais", "Realizar fotossíntese", "Produzir frutos", "Transportar seiva"] },
+                { question: "A parte da planta responsável pela fotossíntese é:", options: ["Folha", "Raiz", "Caule", "Flor"] },
+                { question: "O que protege a semente nas angiospermas?", options: ["Fruto", "Flor", "Raiz", "Caule"] },
+                { question: "O que diferencia as gimnospermas das angiospermas?", options: ["Gimnospermas não têm frutos", "Angiospermas não têm sementes", "Gimnospermas fazem fotossíntese", "Angiospermas não têm flores"] },
+                { question: "Qual é a função do caule?", options: ["Sustentar a planta e transportar seiva", "Produzir sementes", "Absorver água", "Realizar fotossíntese"] },
+                { question: "A energia produzida na fotossíntese é armazenada na forma de:", options: ["Amido", "Celulose", "Proteína", "Água"] },
+                { question: "Qual é a principal importância das plantas para os seres vivos?", options: ["Produzem oxigênio e alimento", "Produzem gás carbônico", "Absorvem poluentes", "Produzem calor"] },
+                { question: "O que são plantas vasculares?", options: ["Possuem vasos condutores de seiva", "Vivem apenas na água", "Não têm sementes", "São sempre pequenas"] },
+                { question: "Qual dessas NÃO é uma função da flor?", options: ["Absorver água", "Reprodução", "Atrair polinizadores", "Produzir sementes"] },
+                { question: "O que é seiva?", options: ["Líquido que transporta nutrientes e água na planta", "Parte da raiz", "Tipo de folha", "Pigmento verde"] },
+                { question: "O que é clorofila?", options: ["Pigmento verde responsável pela fotossíntese", "Tipo de raiz", "Hormônio vegetal", "Parte da flor"] },
+                { question: "Qual dessas plantas é uma pteridófita?", options: ["Samambaia", "Musgo", "Pinheiro", "Girassol"] },
+                { question: "As plantas são base de qual cadeia alimentar?", options: ["Cadeia alimentar dos produtores", "Cadeia dos consumidores", "Cadeia dos decompositores", "Cadeia dos carnívoros"] },
+                { question: "Qual dessas alternativas é uma função ecológica das plantas?", options: ["Proteger o solo contra erosão", "Produzir gás carbônico", "Causar desmatamento", "Aumentar a poluição"] }
+            ];
+            let html = `<h2 style="text-align:center;font-family:sans-serif;">Questões sobre o Reino das Plantas</h2><ol style="font-size:16px;font-family:sans-serif;">`;
+            quizData.forEach((q, i) => {
+                html += `<li style="margin-bottom:18px;"><strong>${i+1}.</strong> ${q.question}<br>`;
+                html += `<ul style="list-style-type: lower-alpha; margin-left:20px;">`;
+                q.options.forEach(opt => {
+                    html += `<li>${opt}</li>`;
+                });
+                html += `</ul></li>`;
+            });
+            html += `</ol>`;
+            const win = window.open('', '', 'width=800,height=900');
+            win.document.write(`
+                <html>
+                <head>
+                    <title>Questões sobre o Reino das Plantas</title>
+                </head>
+                <body>${html}</body>
+                </html>
+            `);
+            win.document.close();
+            win.print();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const icon = button.querySelector('span:last-child');
+                    const isOpen = button.classList.toggle('open');
+                    icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                });
+            });
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            // 20 questões sobre o Reino das Plantas
+            const quizData = [
+                { question: "Qual é a principal característica das plantas?", answer: "São autotróficas e fazem fotossíntese", options: ["São autotróficas e fazem fotossíntese", "São unicelulares", "Vivem apenas na água", "Não possuem parede celular"], explanation: "Plantas produzem seu próprio alimento por fotossíntese." },
+                { question: "O que é fotossíntese?", answer: "Processo de produção de alimento usando luz", options: ["Processo de produção de alimento usando luz", "Respiração das plantas", "Absorção de água pelas raízes", "Transporte de seiva"], explanation: "Fotossíntese é a produção de alimento usando luz solar." },
+                { question: "Qual grupo de plantas não possui vasos condutores?", answer: "Briófitas", options: ["Briófitas", "Pteridófitas", "Gimnospermas", "Angiospermas"], explanation: "Briófitas não têm vasos condutores." },
+                { question: "Exemplo de briófita:", answer: "Musgo", options: ["Musgo", "Samambaia", "Pinheiro", "Rosa"], explanation: "Musgo é uma briófita." },
+                { question: "Qual grupo de plantas possui sementes, mas não frutos?", answer: "Gimnospermas", options: ["Gimnospermas", "Angiospermas", "Briófitas", "Pteridófitas"], explanation: "Gimnospermas têm sementes expostas, sem frutos." },
+                { question: "Qual grupo de plantas possui flores e frutos?", answer: "Angiospermas", options: ["Angiospermas", "Gimnospermas", "Briófitas", "Pteridófitas"], explanation: "Angiospermas têm flores e frutos." },
+                { question: "A função principal da raiz é:", answer: "Absorver água e sais minerais", options: ["Absorver água e sais minerais", "Realizar fotossíntese", "Produzir frutos", "Transportar seiva"], explanation: "Raiz absorve água e sais minerais do solo." },
+                { question: "A parte da planta responsável pela fotossíntese é:", answer: "Folha", options: ["Folha", "Raiz", "Caule", "Flor"], explanation: "A folha realiza a fotossíntese." },
+                { question: "O que protege a semente nas angiospermas?", answer: "Fruto", options: ["Fruto", "Flor", "Raiz", "Caule"], explanation: "O fruto protege a semente." },
+                { question: "O que diferencia as gimnospermas das angiospermas?", answer: "Gimnospermas não têm frutos", options: ["Gimnospermas não têm frutos", "Angiospermas não têm sementes", "Gimnospermas fazem fotossíntese", "Angiospermas não têm flores"], explanation: "Gimnospermas não produzem frutos." },
+                { question: "Qual é a função do caule?", answer: "Sustentar a planta e transportar seiva", options: ["Sustentar a planta e transportar seiva", "Produzir sementes", "Absorver água", "Realizar fotossíntese"], explanation: "Caule sustenta e transporta seiva." },
+                { question: "A energia produzida na fotossíntese é armazenada na forma de:", answer: "Amido", options: ["Amido", "Celulose", "Proteína", "Água"], explanation: "Plantas armazenam energia em forma de amido." },
+                { question: "Qual é a principal importância das plantas para os seres vivos?", answer: "Produzem oxigênio e alimento", options: ["Produzem oxigênio e alimento", "Produzem gás carbônico", "Absorvem poluentes", "Produzem calor"], explanation: "Plantas produzem oxigênio e alimento." },
+                { question: "O que são plantas vasculares?", answer: "Possuem vasos condutores de seiva", options: ["Possuem vasos condutores de seiva", "Vivem apenas na água", "Não têm sementes", "São sempre pequenas"], explanation: "Plantas vasculares têm vasos condutores." },
+                { question: "Qual dessas NÃO é uma função da flor?", answer: "Absorver água", options: ["Absorver água", "Reprodução", "Atrair polinizadores", "Produzir sementes"], explanation: "Flor não absorve água." },
+                { question: "O que é seiva?", answer: "Líquido que transporta nutrientes e água na planta", options: ["Líquido que transporta nutrientes e água na planta", "Parte da raiz", "Tipo de folha", "Pigmento verde"], explanation: "Seiva transporta nutrientes e água." },
+                { question: "O que é clorofila?", answer: "Pigmento verde responsável pela fotossíntese", options: ["Pigmento verde responsável pela fotossíntese", "Tipo de raiz", "Hormônio vegetal", "Parte da flor"], explanation: "Clorofila é o pigmento da fotossíntese." },
+                { question: "Qual dessas plantas é uma pteridófita?", answer: "Samambaia", options: ["Samambaia", "Musgo", "Pinheiro", "Girassol"], explanation: "Samambaia é uma pteridófita." },
+                { question: "As plantas são base de qual cadeia alimentar?", answer: "Cadeia alimentar dos produtores", options: ["Cadeia alimentar dos produtores", "Cadeia dos consumidores", "Cadeia dos decompositores", "Cadeia dos carnívoros"], explanation: "Plantas são produtoras." },
+                { question: "Qual dessas alternativas é uma função ecológica das plantas?", answer: "Proteger o solo contra erosão", options: ["Proteger o solo contra erosão", "Produzir gás carbônico", "Causar desmatamento", "Aumentar a poluição"], explanation: "Plantas protegem o solo contra erosão." }
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+            switchView('learn');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orações Coordenadas para o 8º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1; /* Sky-700 */
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 4000px; /* Increased max-height for potentially longer content */
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important; /* Emerald-500 */
+            color: white !important;
+            border-color: #059669 !important; /* Emerald-600 */
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important; /* Red-500 */
+            color: white !important;
+            border-color: #dc2626 !important; /* Red-600 */
+        }
+        .content-text { /* General text styling for readability */
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .term-highlight {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f3f4f6; /* gray-100 */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        .example-sentence {
+            font-style: italic;
+            color: #075985; /* sky-800 for example sentences */
+            margin-left: 1rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+         .quiz-question-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            white-space: pre-wrap; /* To respect newlines in the question text */
+        }
+        .quiz-option {
+            text-align: left;
+            padding-left: 1rem;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue accent (Consistent with previous apps) -->
+    <!-- Application Structure Plan: Two-section SPA. 'Aprender' section uses an accordion for step-by-step explanations of coordinated clauses (asyndetic, syndetic types). 'Praticar' section is an interactive quiz with immediate feedback and score tracking, using a "retry on error" logic. This structure separates learning from application, aiding comprehension and retention. Navigation is via two main buttons. -->
+    <!-- Visualization & Content Choices: Report Info: Simplified grammar concepts about coordinated clauses for 8th grade -> Goal: Inform/Organize -> Viz/Presentation: Accordion in 'Aprender'. Interaction: Expand/collapse. Justification: Breaks down grammatical information into digestible steps. Report Info: Age-appropriate grammar problems & solutions -> Goal: Test knowledge/Compare -> Viz/Presentation: Interactive quiz in 'Praticar'. Interaction: Clickable answers, feedback, retry on error. Justification: Active learning, mastery-based reinforcement. Library/Method: Vanilla JS & Tailwind CSS. Content presented as styled text. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-100 text-slate-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Português - 8º Ano: Orações Coordenadas</h1>
+            <p class="text-slate-600 mt-2">Aprenda a classificar orações e a entender como elas se conectam!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Entendendo as Orações Coordenadas</h2>
+                    <p class="mb-6 content-text">Quando juntamos orações que são independentes, ou seja, que fazem sentido sozinhas, estamos criando um período composto por coordenação. Vamos aprender a classificar essas orações!</p>
+                    
+                    <div id="accordion-container" class="space-y-3">
+                    </div>
+
+                    <div class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-800">💡 Fique Ligado!</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700 content-text">
+                            <li><strong>Independência:</strong> As orações coordenadas são sintaticamente independentes. Uma não precisa da outra para fazer sentido.</li>
+                            <li><strong>Assindética = SEM conjunção:</strong> A palavra "síndeto" significa conjunção. O "a" no início é negação. Logo, assindética = sem conjunção, ligada por vírgula.</li>
+                            <li><strong>Sindética = COM conjunção:</strong> É a oração que é introduzida por uma conjunção (e, mas, ou, pois, logo...).</li>
+                            <li><strong>A Conjunção Manda:</strong> O tipo da conjunção é que dá o nome para a oração sindética (aditiva, adversativa, etc.).</li>
+                            <li><strong>Cuidado com o "pois":</strong> <span class="term-highlight">Pois</span> antes do verbo = explicativa. <span class="term-highlight">Pois</span> depois do verbo = conclusiva.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                 <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Hora de Praticar para a Prova!</h2>
+                    <p class="mb-6 content-text">Classifique a segunda oração em cada período. Se errar, não se preocupe, a pergunta voltará para você tentar de novo. O quiz só termina quando você acertar todas!</p>
+
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div id="question-area" class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <!-- Question text will be injected here -->
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                            <!-- Options will be injected here -->
+                        </div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            const accordionContainer = document.getElementById('accordion-container');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const questionProgress = document.getElementById('question-progress');
+            const questionArea = document.getElementById('question-area'); 
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreTextElement = document.getElementById('score-text');
+            const scoreBar = document.getElementById('score-bar');
+
+            const learnData = [
+                {
+                    title: '1. O que são Orações Coordenadas?',
+                    content: 'Orações coordenadas são orações que, em um mesmo período, são <strong>independentes uma da outra</strong>. Ou seja, se você separá-las, cada uma terá sentido completo. Elas se ligam para formar uma ideia mais ampla, mas não dependem uma da outra para existir.<br><br><em>Exemplo: <span class="term-highlight">"Eu estudei muito, por isso passei na prova."</span></em><br>Temos duas orações: "Eu estudei muito" (faz sentido sozinha) e "por isso passei na prova" (ligada à primeira, dando uma ideia de conclusão).'
+                },
+                {
+                    title: '2. Oração Coordenada Assindética',
+                    content: 'É a oração coordenada que <strong>NÃO</strong> é introduzida por uma conjunção (um conectivo). Elas são separadas apenas por uma <strong>pausa</strong>, que na escrita é representada por uma <strong>vírgula</strong>.<br><br>A palavra "assindética" vem do grego: "a" (negação) + "síndeto" (conjunção) = sem conjunção.<br><br><em>Exemplo: <span class="example-sentence">"Cheguei em casa, tomei banho, jantei, fui dormir."</span></em><br>Neste caso, "tomei banho", "jantei" e "fui dormir" são orações coordenadas assindéticas, pois estão ligadas à primeira apenas por vírgulas.'
+                },
+                {
+                    title: '3. Oração Coordenada Sindética - Aditiva',
+                    content: 'É a oração coordenada que é introduzida por uma conjunção que expressa a ideia de <strong>soma, adição, acréscimo</strong>.<br><br><strong>Principais conjunções:</strong> <span class="term-highlight">e</span>, <span class="term-highlight">nem</span>, <span class="term-highlight">mas também</span>, <span class="term-highlight">como também</span>.<br><br><em>Exemplo: <span class="example-sentence">"Ela não só estudou para a prova, <strong>mas também</strong> fez todos os exercícios."</span></em>'
+                },
+                {
+                    title: '4. Oração Coordenada Sindética - Adversativa',
+                    content: 'É a oração coordenada que é introduzida por uma conjunção que expressa a ideia de <strong>oposição, contraste, ressalva, quebra de expectativa</strong>.<br><br><strong>Principais conjunções:</strong> <span class="term-highlight">mas</span>, <span class="term-highlight">porém</span>, <span class="term-highlight">contudo</span>, <span class="term-highlight">todavia</span>, <span class="term-highlight">entretanto</span>, <span class="term-highlight">no entanto</span>.<br><br><em>Exemplo: <span class="example-sentence">"Eu queria ir à praia, <strong>mas</strong> começou a chover."</span></em>'
+                },
+                {
+                    title: '5. Oração Coordenada Sindética - Alternativa',
+                    content: 'É a oração coordenada que é introduzida por uma conjunção que expressa a ideia de <strong>alternância, escolha, opção, exclusão</strong>.<br><br><strong>Principais conjunções:</strong> <span class="term-highlight">ou</span>, <span class="term-highlight">ou... ou</span>, <span class="term-highlight">ora... ora</span>, <span class="term-highlight">já... já</span>, <span class="term-highlight">quer... quer</span>.<br><br><em>Exemplo: <span class="example-sentence">"<strong>Ou</strong> você estuda para a prova, <strong>ou</strong> vai tirar nota baixa."</span></em>'
+                },
+                 {
+                    title: '6. Oração Coordenada Sindética - Conclusiva',
+                    content: 'É a oração coordenada que é introduzida por uma conjunção que expressa a ideia de <strong>conclusão, consequência, resultado lógico</strong> em relação à oração anterior.<br><br><strong>Principais conjunções:</strong> <span class="term-highlight">logo</span>, <span class="term-highlight">portanto</span>, <span class="term-highlight">por isso</span>, <span class="term-highlight">assim</span>, <span class="term-highlight">pois</span> (depois do verbo).<br><br><em>Exemplo: <span class="example-sentence">"O time treinou o ano todo, <strong>portanto</strong> merece ser campeão."</span></em>'
+                },
+                 {
+                    title: '7. Oração Coordenada Sindética - Explicativa',
+                    content: 'É a oração coordenada que é introduzida por uma conjunção que expressa a ideia de <strong>explicação, justificativa, motivo ou razão</strong> em relação a algo dito na oração anterior. Geralmente, a primeira oração expressa uma ordem, suposição ou constatação.<br><br><strong>Principais conjunções:</strong> <span class="term-highlight">que</span>, <span class="term-highlight">porque</span>, <span class="term-highlight">pois</span> (antes do verbo).<br><br><em>Exemplo: <span class="example-sentence">"Abra a janela, <strong>que</strong> o calor está insuportável."</span> (Estou explicando o motivo do meu pedido).</em>'
+                }
+            ];
+
+            const quizData = [
+                { question: "Em 'Vim, vi, venci', a oração 'venci' é classificada como:", answer: "Oração Coordenada Assindética", options: ["Oração Coordenada Assindética", "Oração Coordenada Sindética Aditiva", "Oração Coordenada Sindética Conclusiva", "Oração Principal"], explanation: "As orações estão separadas apenas por vírgulas, sem o uso de conjunções. Portanto, são assindéticas." },
+                { question: "Na frase 'Ele não fez a tarefa nem estudou para a prova', a segunda oração é:", answer: "Sindética Aditiva", options: ["Sindética Aditiva", "Sindética Adversativa", "Sindética Alternativa", "Sindética Explicativa"], explanation: "A conjunção 'nem' expressa uma ideia de adição a uma negação anterior (não fez a tarefa E também não estudou)." },
+                { question: "Em 'Gostaria de ter ido à festa, mas estava doente', a segunda oração classifica-se como:", answer: "Sindética Adversativa", options: ["Sindética Conclusiva", "Sindética Aditiva", "Sindética Adversativa", "Sindética Explicativa"], explanation: "A conjunção 'mas' introduz uma ideia de oposição ou contraste à primeira oração." },
+                { question: "Na frase 'Ora chove, ora faz sol', a segunda oração ('ora faz sol') é:", answer: "Sindética Alternativa", options: ["Sindética Aditiva", "Sindética Alternativa", "Sindética Conclusiva", "Assindética"], explanation: "A construção 'ora... ora' indica alternância entre duas situações." },
+                { question: "Em 'Estudei bastante, logo devo passar na prova', a segunda oração é:", answer: "Sindética Conclusiva", options: ["Sindética Explicativa", "Sindética Adversativa", "Sindética Alternativa", "Sindética Conclusiva"], explanation: "A conjunção 'logo' introduz uma conclusão lógica baseada na primeira oração." },
+                { question: "Em 'Feche a porta, porque está ventando muito', a segunda oração é:", answer: "Sindética Explicativa", options: ["Sindética Conclusiva", "Sindética Aditiva", "Sindética Explicativa", "Sindética Adversativa"], explanation: "A conjunção 'porque' está explicando o motivo da ordem dada na primeira oração." },
+                { question: "Em 'Ele trabalha durante o dia e estuda à noite', a segunda oração é:", answer: "Sindética Aditiva", options: ["Sindética Aditiva", "Sindética Adversativa", "Sindética Alternativa", "Sindética Explicativa"], explanation: "A conjunção 'e' está somando duas ações que a pessoa realiza." },
+                { question: "Na frase 'A situação é grave, devemos, pois, tomar uma atitude', a oração 'devemos, pois, tomar uma atitude' é:", answer: "Sindética Conclusiva", options: ["Sindética Conclusiva", "Sindética Explicativa", "Sindética Adversativa", "Sindética Aditiva"], explanation: "A conjunção 'pois' está depois do verbo, indicando uma conclusão." },
+                { question: "Em 'Não corra, que o chão está molhado', a segunda oração é classificada como:", answer: "Sindética Explicativa", options: ["Sindética Alternativa", "Sindética Conclusiva", "Sindética Adversativa", "Sindética Explicativa"], explanation: "A conjunção 'que' (com sentido de 'porque') explica o motivo do pedido para não correr." },
+                { question: "Na frase 'Ele é muito inteligente, contudo não se esforça', a segunda oração é:", answer: "Sindética Adversativa", options: ["Sindética Aditiva", "Sindética Adversativa", "Sindética Conclusiva", "Sindética Explicativa"], explanation: "A conjunção 'contudo' apresenta uma ideia de contraste com a inteligência dele." },
+                { question: "Em 'Ou você me ajuda, ou farei tudo sozinho', a segunda oração é:", answer: "Sindética Alternativa", options: ["Sindética Conclusiva", "Sindética Alternativa", "Sindética Aditiva", "Sindética Adversativa"], explanation: "A construção 'Ou... ou' apresenta duas opções que se excluem." },
+                { question: "Na frase 'Penso, logo existo', a segunda oração é:", answer: "Sindética Conclusiva", options: ["Sindética Aditiva", "Sindética Explicativa", "Sindética Conclusiva", "Sindética Adversativa"], explanation: "'Logo' é uma conjunção conclusiva, indicando que a existência é uma consequência do pensamento." },
+                { question: "Em 'Ele não só canta, como também dança muito bem', a segunda oração é:", answer: "Sindética Aditiva", options: ["Sindética Aditiva", "Sindética Alternativa", "Sindética Adversativa", "Sindética Conclusiva"], explanation: "A estrutura 'não só... como também' indica adição de informações." },
+                { question: "Na frase 'Estava tudo quieto, porém eu sentia uma presença estranha', a segunda oração é:", answer: "Sindética Adversativa", options: ["Sindética Adversativa", "Sindética Explicativa", "Sindética Conclusiva", "Sindética Alternativa"], explanation: "'Porém' introduz uma ideia que se opõe à quietude mencionada anteriormente." },
+                { question: "Em 'Não desista, pois a vitória está próxima', a segunda oração é:", answer: "Sindética Explicativa", options: ["Sindética Conclusiva", "Sindética Explicativa", "Sindética Aditiva", "Sindética Adversativa"], explanation: "O 'pois' vem antes do verbo e explica o motivo para não desistir. Funciona como um incentivo ou justificativa." }
+            ];
+            
+            let lastAnswerWasCorrect = false;
+            let score = 0;
+            let shuffledQuizData = [];
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            function createAccordion() {
+                accordionContainer.innerHTML = '';
+                learnData.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-stone-200 rounded-lg';
+                    div.innerHTML = `
+                        <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-4 border-t border-stone-200 text-slate-700 prose max-w-none content-text">
+                                ${item.content}
+                            </div>
+                        </div>
+                    `;
+                    accordionContainer.appendChild(div);
+                });
+
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const icon = button.querySelector('span:last-child');
+                        const isOpen = button.classList.toggle('open');
+                        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                        if (isOpen) {
+                            document.querySelectorAll('.accordion-button.open').forEach(openButton => {
+                                if (openButton !== button) {
+                                    openButton.classList.remove('open');
+                                    openButton.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                quizContainer.classList.remove('hidden');
+                scoreContainer.classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextQuestionBtn.classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                questionProgress.textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                
+                questionArea.innerHTML = `<p class="quiz-question-text">${questionData.question}</p>`;
+
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]); 
+
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option; 
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = optionsContainer.querySelectorAll('button');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    feedbackText.textContent = '🎉 Correto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    feedbackText.textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                feedbackExplanation.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                feedbackContainer.classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.innerHTML === correctAnswer) { 
+                        button.classList.add('correct-answer');
+                    } else if (button.innerHTML === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                nextQuestionBtn.classList.remove('hidden');
+            }
+            
+            function showScore() {
+                quizContainer.classList.add('hidden');
+                scoreContainer.classList.remove('hidden');
+                scoreTextElement.textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                scoreBar.style.width = `100%`;
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+            
+            restartQuizBtn.addEventListener('click', startQuiz);
+
+            createAccordion();
+            switchView('learn');
+        });
+    </script>
+</body>
+</html>

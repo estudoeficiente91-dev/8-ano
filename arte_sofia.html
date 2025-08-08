@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte 7º Ano - O Corpo como Instrumento Musical: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open + .accordion-content { max-height: 1000px; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Arte 7º Ano: O Corpo como Instrumento Musical</h1>
+            <p class="text-slate-600 mt-2">Descubra como o corpo pode produzir sons e ritmos!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">O Corpo como Instrumento Musical</h2>
+                    <p class="mb-4">O corpo humano pode ser usado para criar música de diversas formas. Sons produzidos com o corpo são chamados de <strong>sons corporais</strong> e fazem parte de muitas culturas e manifestações artísticas.</p>
+                    <div id="accordion-container" class="space-y-3">
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>O que são sons corporais?</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    Sons corporais são todos os sons que conseguimos produzir usando apenas o corpo, como bater palmas, estalar os dedos, bater os pés, assobiar, bater no peito, estalar a língua, entre outros.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Exemplos de sons corporais</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <ul class="list-disc pl-5">
+                                        <li>Palmas</li>
+                                        <li>Estalos de dedos</li>
+                                        <li>Bater os pés no chão</li>
+                                        <li>Assobios</li>
+                                        <li>Bater no peito ou nas pernas</li>
+                                        <li>Estalar a língua</li>
+                                        <li>Batidas com a boca (beatbox)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>O corpo e o ritmo</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    O corpo pode marcar o ritmo de uma música, ajudando a manter o tempo e a pulsação. Muitas danças e músicas populares usam sons corporais para criar batidas e acompanhar canções.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>O corpo como instrumento nas culturas</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    Em várias culturas, o corpo é usado como instrumento musical, como no samba de roda, capoeira, danças africanas, flamenco (palmas e sapateado) e até no hip hop (beatbox).
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>Vantagens de usar o corpo como instrumento</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    <ul class="list-disc pl-5">
+                                        <li>Não precisa de instrumentos externos</li>
+                                        <li>É acessível a todos</li>
+                                        <li>Estimula a criatividade e a expressão corporal</li>
+                                        <li>Ajuda no desenvolvimento do ritmo e coordenação motora</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>O corpo e a improvisação musical</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    Usar o corpo permite criar sons e ritmos de forma espontânea, improvisando e inventando novas formas de fazer música.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-stone-200 rounded-lg">
+                            <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                                <span>O corpo e a expressão artística</span>
+                                <span class="transform transition-transform duration-300 text-sky-600">&#9662;</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="p-4 border-t border-stone-200 text-slate-700">
+                                    Sons corporais são usados em apresentações teatrais, danças e músicas para expressar emoções, contar histórias e criar efeitos sonoros.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as questões sobre o corpo como instrumento musical. Se errar, a questão volta para o final da fila!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Accordion
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const icon = button.querySelector('span:last-child');
+                    const isOpen = button.classList.toggle('open');
+                    icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                });
+            });
+
+            // Tabs
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz();
+            });
+
+            // Quiz
+            const quizData = [
+                {
+                    question: "O que são sons corporais?",
+                    answer: "Sons produzidos usando o próprio corpo",
+                    options: [
+                        "Sons produzidos usando o próprio corpo",
+                        "Sons feitos apenas com instrumentos musicais",
+                        "Sons eletrônicos",
+                        "Sons de animais"
+                    ],
+                    explanation: "Sons corporais são todos os sons que conseguimos produzir usando apenas o corpo."
+                },
+                {
+                    question: "Qual das opções NÃO é um exemplo de som corporal?",
+                    answer: "Tocar violão",
+                    options: [
+                        "Bater palmas",
+                        "Estalar os dedos",
+                        "Tocar violão",
+                        "Bater os pés"
+                    ],
+                    explanation: "Tocar violão usa um instrumento externo, não apenas o corpo."
+                },
+                {
+                    question: "O que é beatbox?",
+                    answer: "Fazer sons musicais com a boca",
+                    options: [
+                        "Tocar bateria",
+                        "Fazer sons musicais com a boca",
+                        "Cantar ópera",
+                        "Dançar hip hop"
+                    ],
+                    explanation: "Beatbox é a arte de criar sons e ritmos musicais usando apenas a boca."
+                },
+                {
+                    question: "Por que o corpo é considerado um instrumento musical acessível?",
+                    answer: "Porque todos podem usar o próprio corpo para fazer sons",
+                    options: [
+                        "Porque é caro",
+                        "Porque precisa de energia elétrica",
+                        "Porque todos podem usar o próprio corpo para fazer sons",
+                        "Porque só músicos profissionais conseguem"
+                    ],
+                    explanation: "O corpo é acessível porque qualquer pessoa pode produzir sons corporais."
+                },
+                {
+                    question: "Qual dessas culturas utiliza sons corporais em suas manifestações?",
+                    answer: "Capoeira",
+                    options: [
+                        "Capoeira",
+                        "Orquestra sinfônica",
+                        "Ópera italiana",
+                        "Música eletrônica"
+                    ],
+                    explanation: "A capoeira utiliza palmas, batidas de pés e sons vocais como parte da música."
+                },
+                {
+                    question: "O que é ritmo?",
+                    answer: "Organização dos sons no tempo",
+                    options: [
+                        "Som alto",
+                        "Organização dos sons no tempo",
+                        "Som grave",
+                        "Som agudo"
+                    ],
+                    explanation: "Ritmo é a organização dos sons e silêncios ao longo do tempo."
+                },
+                {
+                    question: "Qual é uma vantagem de usar sons corporais na música?",
+                    answer: "Estimula a criatividade e expressão corporal",
+                    options: [
+                        "Dificulta a aprendizagem",
+                        "Estimula a criatividade e expressão corporal",
+                        "Exige instrumentos caros",
+                        "Só pode ser feito em estúdio"
+                    ],
+                    explanation: "Usar o corpo estimula a criatividade e a expressão artística."
+                },
+                {
+                    question: "O que significa improvisar com o corpo?",
+                    answer: "Criar sons e ritmos espontaneamente",
+                    options: [
+                        "Ler uma partitura",
+                        "Criar sons e ritmos espontaneamente",
+                        "Usar apenas instrumentos de corda",
+                        "Fazer silêncio"
+                    ],
+                    explanation: "Improvisar é inventar sons e ritmos na hora, sem planejamento."
+                },
+                {
+                    question: "Assobiar é um exemplo de:",
+                    answer: "Som corporal",
+                    options: [
+                        "Som corporal",
+                        "Som eletrônico",
+                        "Som de instrumento de sopro",
+                        "Som de instrumento de corda"
+                    ],
+                    explanation: "Assobiar é produzir som usando apenas o corpo."
+                },
+                {
+                    question: "Bater palmas pode ajudar em uma apresentação musical porque:",
+                    answer: "Marca o ritmo e incentiva a participação",
+                    options: [
+                        "Marca o ritmo e incentiva a participação",
+                        "Atrapalha os músicos",
+                        "É proibido em shows",
+                        "Só serve para chamar atenção"
+                    ],
+                    explanation: "Bater palmas ajuda a marcar o ritmo e envolver o público."
+                },
+                {
+                    question: "O que é expressão corporal?",
+                    answer: "Usar o corpo para comunicar ideias e emoções",
+                    options: [
+                        "Usar o corpo para comunicar ideias e emoções",
+                        "Ficar parado durante a música",
+                        "Tocar piano",
+                        "Fazer silêncio"
+                    ],
+                    explanation: "Expressão corporal é comunicar-se usando movimentos e gestos."
+                },
+                {
+                    question: "Qual dessas opções é um benefício de praticar sons corporais?",
+                    answer: "Melhora a coordenação motora",
+                    options: [
+                        "Melhora a coordenação motora",
+                        "Diminui a criatividade",
+                        "Dificulta o aprendizado musical",
+                        "Exige instrumentos caros"
+                    ],
+                    explanation: "Praticar sons corporais desenvolve a coordenação e o ritmo."
+                },
+                {
+                    question: "O corpo pode ser usado para criar música em:",
+                    answer: "Qualquer lugar",
+                    options: [
+                        "Apenas em teatros",
+                        "Apenas em estúdios",
+                        "Qualquer lugar",
+                        "Somente em escolas de música"
+                    ],
+                    explanation: "O corpo está sempre disponível, então pode ser usado em qualquer lugar."
+                },
+                {
+                    question: "O que é necessário para fazer música corporal?",
+                    answer: "Criatividade e o próprio corpo",
+                    options: [
+                        "Criatividade e o próprio corpo",
+                        "Instrumentos caros",
+                        "Computador",
+                        "Microfone profissional"
+                    ],
+                    explanation: "Basta criatividade e o corpo para criar sons e ritmos."
+                },
+                {
+                    question: "Batidas com o pé no chão são exemplos de:",
+                    answer: "Sons corporais de percussão",
+                    options: [
+                        "Sons corporais de percussão",
+                        "Sons eletrônicos",
+                        "Sons de corda",
+                        "Sons de sopro"
+                    ],
+                    explanation: "Batidas com o pé são sons de percussão feitos com o corpo."
+                }
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = shuffleArray([...quizData]);
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

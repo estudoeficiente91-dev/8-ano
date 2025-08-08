@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História 8º Ano - Era Napoleônica: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">História 8º Ano: Era Napoleônica</h1>
+            <p class="text-slate-600 mt-2">Entenda os principais fatos, conceitos e consequências do governo de Napoleão Bonaparte!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Resumo dos Tópicos</h2>
+                    <ul class="list-disc pl-5 space-y-2 text-left">
+                        <li><strong>Ascensão de Napoleão:</strong> Chegou ao poder após o golpe do 18 Brumário (1799), instaurando o Consulado e depois o Império.</li>
+                        <li><strong>Golpe de Estado:</strong> Tomada do poder de forma rápida e ilegal, encerrando o Diretório.</li>
+                        <li><strong>Bloqueio Continental:</strong> Proibição do comércio europeu com a Inglaterra para enfraquecer os ingleses. Muitos países burlaram o bloqueio.</li>
+                        <li><strong>Código Civil Napoleônico:</strong> Conjunto de leis que garantiu igualdade civil, direito à propriedade e laicidade do Estado.</li>
+                        <li><strong>Invasão da Rússia:</strong> Napoleão invadiu a Rússia em 1812 porque o czar rompeu o Bloqueio Continental. O fracasso enfraqueceu o império.</li>
+                        <li><strong>Instituições Burguesas:</strong> Consolidação da propriedade privada, igualdade civil e centralização do poder.</li>
+                        <li><strong>Medidas de Governo:</strong> Código Civil, centralização administrativa, criação do franco, incentivo à indústria, aproximação com a Igreja e política expansionista.</li>
+                        <li><strong>Campo Econômico:</strong> Criação do franco para estabilizar a economia.</li>
+                        <li><strong>Campo do Direito:</strong> Reorganização da administração pública, cargos por mérito.</li>
+                        <li><strong>Reaproximação com a Igreja:</strong> Concordata de 1801 restaurou parte da influência da Igreja, sob controle do Estado.</li>
+                        <li><strong>Política Expansionista:</strong> Guerras e conquistas para ampliar o território francês.</li>
+                        <li><strong>Consequências da Invasão à Rússia:</strong> Destruição do exército francês e início do fim do governo de Napoleão.</li>
+                        <li><strong>Independência na América Espanhola:</strong> A invasão da Espanha enfraqueceu o controle espanhol, favorecendo movimentos de independência.</li>
+                        <li><strong>Nacionalismo e Imperialismo:</strong> O domínio francês estimulou o nacionalismo nos povos dominados e o imperialismo europeu.</li>
+                        <li><strong>Espaço Rural e Plantation:</strong> No campo, predominava o sistema plantation (monocultura, grandes propriedades, trabalho escravo e exportação) nas colônias.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Responda as questões sobre a Era Napoleônica. Se errar, a questão volta para o final da fila!</p>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div class="flex justify-end mb-4">
+        <button onclick="printQuizQuestions()" class="px-6 py-2 bg-sky-700 text-white font-semibold rounded-lg shadow hover:bg-sky-800 transition-colors">
+            🖨️ Imprimir Questões
+        </button>
+    </div>
+    <script>
+        function printQuizQuestions() {
+            const quizData = [
+                { question: "1. Qual evento marcou a ascensão de Napoleão ao poder na França?", options: ["Golpe do 18 Brumário", "Revolução Industrial", "Queda da Bastilha", "Bloqueio Continental"] },
+                { question: "2. O que foi o Golpe do 18 Brumário?", options: ["Um golpe de Estado que levou Napoleão ao poder", "A invasão da Rússia", "A criação do Código Civil", "A assinatura da Concordata"] },
+                { question: "3. O que é um golpe de Estado?", options: ["Tomada do poder de forma rápida e ilegal", "Reforma econômica", "Acordo de paz", "Mudança de moeda"] },
+                { question: "4. Qual era o objetivo do Bloqueio Continental?", options: ["Enfraquecer a economia inglesa", "Expandir o território francês", "Aproximar-se da Igreja", "Criar o franco"] },
+                { question: "5. O que era o Bloqueio Continental?", options: ["Proibição de comércio com a Inglaterra", "Abertura dos portos franceses", "Invasão da Espanha", "Fim da escravidão"] },
+                { question: "6. Por que o Bloqueio Continental não funcionou como Napoleão esperava?", options: ["Muitos países burlaram o bloqueio", "A Inglaterra aceitou o bloqueio", "A França ficou mais rica", "A Rússia apoiou o bloqueio"] },
+                { question: "7. O Código Civil Napoleônico estabeleceu:", options: ["Igualdade perante a lei e direito à propriedade", "Fim da moeda franco", "A volta da monarquia", "Abolição da Igreja Católica"] },
+                { question: "8. Quais são características do Código Civil Napoleônico?", options: ["Igualdade civil, propriedade privada, laicidade do Estado", "Fim da propriedade privada", "Restabelecimento dos privilégios da nobreza", "Domínio da Igreja"] },
+                { question: "9. Por que Napoleão invadiu a Rússia em 1812?", options: ["Porque a Rússia rompeu o Bloqueio Continental", "Para conquistar Moscou", "Para fugir da Inglaterra", "Para criar o franco"] },
+                { question: "10. Qual foi a principal consequência da invasão da Rússia para Napoleão?", options: ["Destruição do exército francês", "Vitória total", "Conquista de Moscou", "Aliança com a Inglaterra"] },
+                { question: "11. O que foi consolidado durante o período napoleônico na França?", options: ["Instituições burguesas", "Privilégios da nobreza", "Monarquia absoluta", "Feudalismo"] },
+                { question: "12. Quais instituições foram fortalecidas durante o governo de Napoleão?", options: ["Burguesia, propriedade privada, igualdade civil", "Nobreza, Igreja, feudalismo", "Monarquia absoluta, servidão", "Colônias americanas"] },
+                { question: "13. Qual destas NÃO foi uma medida do governo de Napoleão?", options: ["Fim do Banco da França", "Criação do Código Civil", "Centralização do poder", "Incentivo à indústria"] },
+                { question: "14. O franco foi:", options: ["Moeda criada por Napoleão", "Um imposto", "Uma lei", "Um tratado de paz"] },
+                { question: "15. Qual foi o impacto da criação do franco?", options: ["Estabilizou a economia francesa", "Aumentou a inflação", "Enfraqueceu o comércio", "Criou desemprego"] },
+                { question: "16. No campo do direito, Napoleão:", options: ["Criou o Código Civil e reorganizou a administração", "Aboliu a propriedade privada", "Restaurou a monarquia", "Enfraqueceu o Estado"] },
+                { question: "17. Como Napoleão reorganizou a administração pública?", options: ["Centralizou o poder e criou cargos por mérito", "Deu poder aos nobres", "Privatizou a administração", "Aumentou o poder da Igreja"] },
+                { question: "18. O que foi a Concordata de 1801?", options: ["Acordo entre Napoleão e a Igreja Católica", "Tratado de paz com a Inglaterra", "Bloqueio Continental", "Código Civil"] },
+                { question: "19. Qual foi o resultado da Concordata de 1801?", options: ["Reaproximação com a Igreja, mas controle do Estado", "Domínio total da Igreja", "Fim da religião", "Aumento do poder papal"] },
+                { question: "20. A política expansionista de Napoleão buscava:", options: ["Ampliar o território francês", "Reduzir o exército", "Aproximar-se da Inglaterra", "Abolir a moeda"] },
+                { question: "21. Como era a política expansionista de Napoleão?", options: ["Guerras e conquistas na Europa", "Acordos de paz", "Isolamento da França", "Expansão para a Ásia"] },
+                { question: "22. Como a política expansionista francesa influenciou a América espanhola?", options: ["Enfraqueceu o controle espanhol e favoreceu a independência", "Aumentou o domínio espanhol", "Trouxe a monarquia para a América", "Criou o franco nas colônias"] },
+                { question: "23. O domínio de territórios estrangeiros por Napoleão estimulou:", options: ["O nacionalismo nos povos dominados", "A volta do feudalismo", "A submissão total à França", "A abolição da propriedade privada"] },
+                { question: "24. O que é nacionalismo?", options: ["Sentimento de pertencimento e defesa da própria nação", "Domínio de outros povos", "Apoio ao imperialismo", "Abolição das fronteiras"] },
+                { question: "25. O que é imperialismo?", options: ["Domínio de territórios estrangeiros", "Independência nacional", "Fim das guerras", "Apoio à democracia"] },
+                { question: "26. Qual foi a relação entre o nacionalismo e o imperialismo na era napoleônica?", options: ["O domínio francês estimulou o nacionalismo nos povos dominados", "Aumentou a submissão dos povos", "Reduziu conflitos", "Fortaleceu a Igreja"] },
+                { question: "27. Quais foram as consequências da derrota de Napoleão na Rússia?", options: ["Enfraquecimento do governo e fim do império", "Expansão do império", "Vitória sobre a Inglaterra", "Aumento do poder militar"] },
+                { question: "28. O que caracteriza o espaço rural americano nos EUA e Canadá?", options: ["Grandes propriedades e agricultura mecanizada", "Pequenas propriedades e agricultura familiar", "Predomínio de agricultura orgânica", "Ausência de exportação agrícola"] },
+                { question: "29. O que é plantation?", options: ["Monocultura exportadora em grandes propriedades", "Pequenas propriedades familiares", "Agricultura orgânica", "Produção para subsistência"] },
+                { question: "30. Quais são as principais características do sistema plantation?", options: ["Monocultura, grandes propriedades, trabalho escravo e exportação", "Diversidade de culturas, pequenas propriedades, agricultura familiar", "Produção orgânica e sustentável", "Produção apenas para o mercado interno"] }
+            ];
+            let html = `<h2 style="text-align:center;font-family:sans-serif;">Questões sobre a Era Napoleônica</h2><ol style="font-size:16px;font-family:sans-serif;">`;
+            quizData.forEach((q, i) => {
+                html += `<li style="margin-bottom:18px;"><strong>${i+1}.</strong> ${q.question}<br>`;
+                html += `<ul style="list-style-type: lower-alpha; margin-left:20px;">`;
+                q.options.forEach(opt => {
+                    html += `<li>${opt}</li>`;
+                });
+                html += `</ul></li>`;
+            });
+            html += `</ol>`;
+            const win = window.open('', '', 'width=800,height=900');
+            win.document.write(`
+                <html>
+                <head>
+                    <title>Questões sobre a Era Napoleônica</title>
+                </head>
+                <body>${html}</body>
+                </html>
+            `);
+            win.document.close();
+            win.print();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz();
+            });
+
+            const quizData = [
+                { question: "1. Qual evento marcou a ascensão de Napoleão ao poder na França?", answer: "Golpe do 18 Brumário", options: ["Golpe do 18 Brumário", "Revolução Industrial", "Queda da Bastilha", "Bloqueio Continental"], explanation: "O Golpe do 18 Brumário, em 1799, levou Napoleão ao poder na França." },
+                { question: "2. O que foi o Golpe do 18 Brumário?", answer: "Um golpe de Estado que levou Napoleão ao poder", options: ["Um golpe de Estado que levou Napoleão ao poder", "A invasão da Rússia", "A criação do Código Civil", "A assinatura da Concordata"], explanation: "O Golpe do 18 Brumário foi um golpe de Estado que encerrou o Diretório." },
+                { question: "3. O que é um golpe de Estado?", answer: "Tomada do poder de forma rápida e ilegal", options: ["Tomada do poder de forma rápida e ilegal", "Reforma econômica", "Acordo de paz", "Mudança de moeda"], explanation: "Golpe de Estado é a tomada do poder de forma não democrática." },
+                { question: "4. Qual era o objetivo do Bloqueio Continental?", answer: "Enfraquecer a economia inglesa", options: ["Enfraquecer a economia inglesa", "Expandir o território francês", "Aproximar-se da Igreja", "Criar o franco"], explanation: "O objetivo era prejudicar a economia da Inglaterra." },
+                { question: "5. O que era o Bloqueio Continental?", answer: "Proibição de comércio com a Inglaterra", options: ["Proibição de comércio com a Inglaterra", "Abertura dos portos franceses", "Invasão da Espanha", "Fim da escravidão"], explanation: "O Bloqueio Continental proibia o comércio europeu com a Inglaterra." },
+                { question: "6. Por que o Bloqueio Continental não funcionou como Napoleão esperava?", answer: "Muitos países burlaram o bloqueio", options: ["Muitos países burlaram o bloqueio", "A Inglaterra aceitou o bloqueio", "A França ficou mais rica", "A Rússia apoiou o bloqueio"], explanation: "Muitos países europeus continuaram negociando com a Inglaterra." },
+                { question: "7. O Código Civil Napoleônico estabeleceu:", answer: "Igualdade perante a lei e direito à propriedade", options: ["Igualdade perante a lei e direito à propriedade", "Fim da moeda franco", "A volta da monarquia", "Abolição da Igreja Católica"], explanation: "O Código Civil garantiu igualdade e propriedade privada." },
+                { question: "8. Quais são características do Código Civil Napoleônico?", answer: "Igualdade civil, propriedade privada, laicidade do Estado", options: ["Igualdade civil, propriedade privada, laicidade do Estado", "Fim da propriedade privada", "Restabelecimento dos privilégios da nobreza", "Domínio da Igreja"], explanation: "O Código Civil trouxe igualdade civil, laicidade e direito à propriedade." },
+                { question: "9. Por que Napoleão invadiu a Rússia em 1812?", answer: "Porque a Rússia rompeu o Bloqueio Continental", options: ["Porque a Rússia rompeu o Bloqueio Continental", "Para conquistar Moscou", "Para fugir da Inglaterra", "Para criar o franco"], explanation: "A Rússia voltou a negociar com a Inglaterra, descumprindo o bloqueio." },
+                { question: "10. Qual foi a principal consequência da invasão da Rússia para Napoleão?", answer: "Destruição do exército francês", options: ["Destruição do exército francês", "Vitória total", "Conquista de Moscou", "Aliança com a Inglaterra"], explanation: "A invasão da Rússia foi um desastre para Napoleão." },
+                { question: "11. O que foi consolidado durante o período napoleônico na França?", answer: "Instituições burguesas", options: ["Instituições burguesas", "Privilégios da nobreza", "Monarquia absoluta", "Feudalismo"], explanation: "Napoleão consolidou as conquistas da burguesia." },
+                { question: "12. Quais instituições foram fortalecidas durante o governo de Napoleão?", answer: "Burguesia, propriedade privada, igualdade civil", options: ["Burguesia, propriedade privada, igualdade civil", "Nobreza, Igreja, feudalismo", "Monarquia absoluta, servidão", "Colônias americanas"], explanation: "A burguesia e seus interesses foram fortalecidos." },
+                { question: "13. Qual destas NÃO foi uma medida do governo de Napoleão?", answer: "Fim do Banco da França", options: ["Fim do Banco da França", "Criação do Código Civil", "Centralização do poder", "Incentivo à indústria"], explanation: "Napoleão criou, não extinguiu, o Banco da França." },
+                { question: "14. O franco foi:", answer: "Moeda criada por Napoleão", options: ["Moeda criada por Napoleão", "Um imposto", "Uma lei", "Um tratado de paz"], explanation: "O franco foi a moeda nacional criada por Napoleão." },
+                { question: "15. Qual foi o impacto da criação do franco?", answer: "Estabilizou a economia francesa", options: ["Estabilizou a economia francesa", "Aumentou a inflação", "Enfraqueceu o comércio", "Criou desemprego"], explanation: "O franco trouxe estabilidade econômica à França." },
+                { question: "16. No campo do direito, Napoleão:", answer: "Criou o Código Civil e reorganizou a administração", options: ["Criou o Código Civil e reorganizou a administração", "Aboliu a propriedade privada", "Restaurou a monarquia", "Enfraqueceu o Estado"], explanation: "Napoleão modernizou o direito e a administração pública." },
+                { question: "17. Como Napoleão reorganizou a administração pública?", answer: "Centralizou o poder e criou cargos por mérito", options: ["Centralizou o poder e criou cargos por mérito", "Deu poder aos nobres", "Privatizou a administração", "Aumentou o poder da Igreja"], explanation: "A administração foi centralizada e baseada no mérito." },
+                { question: "18. O que foi a Concordata de 1801?", answer: "Acordo entre Napoleão e a Igreja Católica", options: ["Acordo entre Napoleão e a Igreja Católica", "Tratado de paz com a Inglaterra", "Bloqueio Continental", "Código Civil"], explanation: "A Concordata restaurou parte da influência da Igreja na França." },
+                { question: "19. Qual foi o resultado da Concordata de 1801?", answer: "Reaproximação com a Igreja, mas controle do Estado", options: ["Reaproximação com a Igreja, mas controle do Estado", "Domínio total da Igreja", "Fim da religião", "Aumento do poder papal"], explanation: "A Igreja voltou a atuar, mas sob controle do Estado." },
+                { question: "20. A política expansionista de Napoleão buscava:", answer: "Ampliar o território francês", options: ["Ampliar o território francês", "Reduzir o exército", "Aproximar-se da Inglaterra", "Abolir a moeda"], explanation: "Napoleão queria expandir o domínio francês na Europa." },
+                { question: "21. Como era a política expansionista de Napoleão?", answer: "Guerras e conquistas na Europa", options: ["Guerras e conquistas na Europa", "Acordos de paz", "Isolamento da França", "Expansão para a Ásia"], explanation: "Napoleão expandiu o império por meio de guerras." },
+                { question: "22. Como a política expansionista francesa influenciou a América espanhola?", answer: "Enfraqueceu o controle espanhol e favoreceu a independência", options: ["Enfraqueceu o controle espanhol e favoreceu a independência", "Aumentou o domínio espanhol", "Trouxe a monarquia para a América", "Criou o franco nas colônias"], explanation: "A invasão da Espanha facilitou movimentos de independência." },
+                { question: "23. O domínio de territórios estrangeiros por Napoleão estimulou:", answer: "O nacionalismo nos povos dominados", options: ["O nacionalismo nos povos dominados", "A volta do feudalismo", "A submissão total à França", "A abolição da propriedade privada"], explanation: "O domínio francês estimulou o nacionalismo e lutas por independência." },
+                { question: "24. O que é nacionalismo?", answer: "Sentimento de pertencimento e defesa da própria nação", options: ["Sentimento de pertencimento e defesa da própria nação", "Domínio de outros povos", "Apoio ao imperialismo", "Abolição das fronteiras"], explanation: "Nacionalismo é o sentimento de orgulho e defesa do próprio país." },
+                { question: "25. O que é imperialismo?", answer: "Domínio de territórios estrangeiros", options: ["Domínio de territórios estrangeiros", "Independência nacional", "Fim das guerras", "Apoio à democracia"], explanation: "Imperialismo é a política de dominação de outros territórios." },
+                { question: "26. Qual foi a relação entre o nacionalismo e o imperialismo na era napoleônica?", answer: "O domínio francês estimulou o nacionalismo nos povos dominados", options: ["O domínio francês estimulou o nacionalismo nos povos dominados", "Aumentou a submissão dos povos", "Reduziu conflitos", "Fortaleceu a Igreja"], explanation: "O imperialismo francês gerou reações nacionalistas." },
+                { question: "27. Quais foram as consequências da derrota de Napoleão na Rússia?", answer: "Enfraquecimento do governo e fim do império", options: ["Enfraquecimento do governo e fim do império", "Expansão do império", "Vitória sobre a Inglaterra", "Aumento do poder militar"], explanation: "A derrota na Rússia enfraqueceu Napoleão e levou ao seu fim." },
+                { question: "28. O que caracteriza o espaço rural americano nos EUA e Canadá?", answer: "Grandes propriedades e agricultura mecanizada", options: ["Grandes propriedades e agricultura mecanizada", "Pequenas propriedades e agricultura familiar", "Predomínio de agricultura orgânica", "Ausência de exportação agrícola"], explanation: "Nos EUA e Canadá predominam grandes propriedades e agricultura moderna." },
+                { question: "29. O que é plantation?", answer: "Monocultura exportadora em grandes propriedades", options: ["Monocultura exportadora em grandes propriedades", "Pequenas propriedades familiares", "Agricultura orgânica", "Produção para subsistência"], explanation: "Plantation é típico da colonização, com monocultura, exportação e grandes propriedades." },
+                { question: "30. Quais são as principais características do sistema plantation?", answer: "Monocultura, grandes propriedades, trabalho escravo e exportação", options: ["Monocultura, grandes propriedades, trabalho escravo e exportação", "Diversidade de culturas, pequenas propriedades, agricultura familiar", "Produção orgânica e sustentável", "Produção apenas para o mercado interno"], explanation: "Plantation: monocultura, grandes propriedades, trabalho escravo e exportação." }
+            ];
+
+            let score = 0;
+            let shuffledQuizData = [];
+            let lastAnswerWasCorrect = false;
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function startQuiz() {
+                score = 0;
+                shuffledQuizData = [...quizData]; // Ordem fixa, enumerada
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.getElementById('score-container').classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+
+                const questionData = shuffledQuizData[0];
+                document.getElementById('question-progress').textContent = `Questões restantes: ${shuffledQuizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                let currentOptions = shuffleArray([...questionData.options]);
+                currentOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                lastAnswerWasCorrect = selectedOption === correctAnswer;
+
+                if (lastAnswerWasCorrect) {
+                    score++;
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Esta pergunta aparecerá novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !lastAnswerWasCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                document.getElementById('next-question-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (lastAnswerWasCorrect) {
+                    shuffledQuizData.shift();
+                } else {
+                    const failedQuestion = shuffledQuizData.shift();
+                    shuffledQuizData.push(failedQuestion);
+                }
+
+                if (shuffledQuizData.length > 0) {
+                    showQuestion();
+                } else {
+                    showScore();
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você respondeu todas as questões corretamente!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', startQuiz);
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
