@@ -96,6 +96,11 @@
                     <li>Na frase “O aluno se dedicou”, qual a voz verbal?</li>
                     <li>Explique o uso da partícula “se” em “Precisa-se de professores”.</li>
                 </ol>
+                <div class="flex justify-center mt-8">
+                    <button onclick="printQuestoes()" class="px-8 py-3 bg-pink-700 text-white text-lg font-semibold rounded-lg shadow hover:bg-pink-800 transition-colors flex items-center gap-2">
+                        🖨️ Imprimir Questões
+                    </button>
+                </div>
             </section>
         </main>
     </div>
@@ -104,6 +109,49 @@
         const btnPractice = document.getElementById('btn-practice');
         const learnSection = document.getElementById('learn-section');
         const practiceSection = document.getElementById('practice-section');
+        function printQuestoes() {
+            const questoes = [
+                "Leia o texto e responda: Qual a ideia principal?",
+                "O que o autor quis dizer com a expressão ‘tempo voa’?",
+                "Identifique o sujeito da frase: ‘Vendem-se casas.’",
+                "Na frase ‘Precisa-se de ajuda’, o ‘se’ é índice de indeterminação ou partícula apassivadora?",
+                "Transforme a frase ‘O aluno resolveu o problema’ para a voz passiva.",
+                "Qual é o sujeito da frase: ‘Diz-se que o filme é bom’?",
+                "Dê um exemplo de adjetivo derivado do substantivo ‘neve’.",
+                "Na frase ‘A lição foi feita pelo estudante’, o sujeito é agente ou paciente?",
+                "Explique o significado da frase: ‘O livro foi lido por todos.’",
+                "Identifique a voz verbal: ‘O cachorro se escondeu.’",
+                "O ‘se’ em ‘Aluga-se apartamento’ indica o quê?",
+                "Crie uma frase com sujeito indeterminado.",
+                "Dê um exemplo de voz reflexiva.",
+                "Qual o sujeito em ‘Fala-se muito sobre o assunto’?",
+                "Transforme ‘O médico atendeu o paciente’ para a voz passiva.",
+                "O que significa ‘sujeito paciente’?",
+                "Dê um exemplo de adjetivo derivado do verbo ‘cantar’.",
+                "Na frase ‘Construiu-se uma ponte’, qual o tipo de sujeito?",
+                "Identifique o sujeito: ‘Choveu muito ontem.’",
+                "O ‘se’ em ‘Vive-se bem aqui’ é índice de indeterminação ou partícula apassivadora?",
+                "Crie uma frase com voz ativa.",
+                "Crie uma frase com voz passiva.",
+                "Dê um exemplo de adjetivo derivado do substantivo ‘sol’.",
+                "Explique a diferença entre sujeito agente e paciente.",
+                "Identifique o sujeito: ‘A comida foi preparada.’",
+                "O ‘se’ em ‘Comemora-se o aniversário’ indica o quê?",
+                "Transforme ‘Os alunos fizeram a prova’ para a voz passiva.",
+                "Dê um exemplo de adjetivo derivado do verbo ‘brilhar’.",
+                "Na frase ‘O aluno se dedicou’, qual a voz verbal?",
+                "Explique o uso da partícula ‘se’ em ‘Precisa-se de professores’."
+            ];
+            let html = `<h2 style='text-align:center;font-family:sans-serif;'>Questões de Gramática - 8º Ano</h2><ol style='font-size:16px;font-family:sans-serif;'>`;
+            questoes.forEach(q => {
+                html += `<li>${q}</li>`;
+            });
+            html += `</ol>`;
+            const win = window.open('', '', 'width=800,height=900');
+            win.document.write(`<html><head><title>Imprimir Questões</title></head><body>${html}</body></html>`);
+            win.document.close();
+            win.print();
+        }
         btnLearn.addEventListener('click', () => {
             btnLearn.classList.add('active');
             btnPractice.classList.remove('active');
