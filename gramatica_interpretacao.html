@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gramática 8º Ano: Interpretação, Sujeito, Partícula SE, Vozes Verbais e Adjetivos Derivados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open + .accordion-content { max-height: 1000px; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Gramática 8º Ano</h1>
+            <p class="text-slate-600 mt-2">Interpretação de texto, Sujeito, Partícula SE, Vozes Verbais, Adjetivos Derivados</p>
+        </header>
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+        <main>
+            <section id="learn-section">
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Interpretação de Texto</h2>
+                    <p class="text-slate-700">Compreender, analisar e extrair informações de um texto, identificando ideias principais, inferências e intenções do autor.</p>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Sujeito Agente e Paciente</h2>
+                    <p class="text-slate-700"><b>Agente:</b> pratica a ação do verbo. <br><b>Paciente:</b> recebe a ação do verbo.</p>
+                    <p class="text-slate-700 mt-2">Exemplo agente: "O aluno escreveu a redação."<br>Exemplo paciente: "A redação foi escrita pelo aluno."</p>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Partícula SE</h2>
+                    <p class="text-slate-700"><b>Índice de indeterminação do sujeito:</b> O "se" indica que o sujeito não é identificado.<br>Exemplo: "Precisa-se de voluntários."</p>
+                    <p class="text-slate-700 mt-2"><b>Partícula apassivadora:</b> O "se" transforma o verbo em voz passiva.<br>Exemplo: "Vendem-se livros."</p>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Sujeito Indeterminado e Paciente</h2>
+                    <p class="text-slate-700"><b>Indeterminado:</b> Não se sabe ou não se quer dizer quem pratica a ação.<br>Exemplo: "Diz-se que vai chover."</p>
+                    <p class="text-slate-700 mt-2"><b>Paciente:</b> Recebe a ação, geralmente aparece na voz passiva.<br>Exemplo: "A casa foi construída."</p>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Vozes Verbais</h2>
+                    <p class="text-slate-700"><b>Voz ativa:</b> Sujeito pratica a ação.<br><b>Voz passiva:</b> Sujeito recebe a ação.<br><b>Voz reflexiva:</b> Sujeito pratica e recebe a ação.</p>
+                    <p class="text-slate-700 mt-2">Exemplo ativa: "O professor explicou a matéria."<br>Exemplo passiva: "A matéria foi explicada pelo professor."<br>Exemplo reflexiva: "O aluno se machucou."</p>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Adjetivos Derivados</h2>
+                    <p class="text-slate-700">Formados a partir de outras palavras, geralmente substantivos ou verbos.<br>Exemplo: "amoroso" (de amor), "chuvoso" (de chuva), "falante" (de falar).</p>
+                </div>
+            </section>
+            <section id="practice-section" class="hidden">
+                <h2 class="text-2xl font-bold text-sky-700 mb-4">Questões para Praticar</h2>
+                <ol class="list-decimal pl-6 space-y-2 text-slate-700">
+                    <li>Leia o texto e responda: Qual a ideia principal?</li>
+                    <li>O que o autor quis dizer com a expressão “tempo voa”?</li>
+                    <li>Identifique o sujeito da frase: “Vendem-se casas.”</li>
+                    <li>Na frase “Precisa-se de ajuda”, o “se” é índice de indeterminação ou partícula apassivadora?</li>
+                    <li>Transforme a frase “O aluno resolveu o problema” para a voz passiva.</li>
+                    <li>Qual é o sujeito da frase: “Diz-se que o filme é bom”?</li>
+                    <li>Dê um exemplo de adjetivo derivado do substantivo “neve”.</li>
+                    <li>Na frase “A lição foi feita pelo estudante”, o sujeito é agente ou paciente?</li>
+                    <li>Explique o significado da frase: “O livro foi lido por todos.”</li>
+                    <li>Identifique a voz verbal: “O cachorro se escondeu.”</li>
+                    <li>O “se” em “Aluga-se apartamento” indica o quê?</li>
+                    <li>Crie uma frase com sujeito indeterminado.</li>
+                    <li>Dê um exemplo de voz reflexiva.</li>
+                    <li>Qual o sujeito em “Fala-se muito sobre o assunto”?</li>
+                    <li>Transforme “O médico atendeu o paciente” para a voz passiva.</li>
+                    <li>O que significa “sujeito paciente”?</li>
+                    <li>Dê um exemplo de adjetivo derivado do verbo “cantar”.</li>
+                    <li>Na frase “Construiu-se uma ponte”, qual o tipo de sujeito?</li>
+                    <li>Identifique o sujeito: “Choveu muito ontem.”</li>
+                    <li>O “se” em “Vive-se bem aqui” é índice de indeterminação ou partícula apassivadora?</li>
+                    <li>Crie uma frase com voz ativa.</li>
+                    <li>Crie uma frase com voz passiva.</li>
+                    <li>Dê um exemplo de adjetivo derivado do substantivo “sol”.</li>
+                    <li>Explique a diferença entre sujeito agente e paciente.</li>
+                    <li>Identifique o sujeito: “A comida foi preparada.”</li>
+                    <li>O “se” em “Comemora-se o aniversário” indica o quê?</li>
+                    <li>Transforme “Os alunos fizeram a prova” para a voz passiva.</li>
+                    <li>Dê um exemplo de adjetivo derivado do verbo “brilhar”.</li>
+                    <li>Na frase “O aluno se dedicou”, qual a voz verbal?</li>
+                    <li>Explique o uso da partícula “se” em “Precisa-se de professores”.</li>
+                </ol>
+            </section>
+        </main>
+    </div>
+    <script>
+        const btnLearn = document.getElementById('btn-learn');
+        const btnPractice = document.getElementById('btn-practice');
+        const learnSection = document.getElementById('learn-section');
+        const practiceSection = document.getElementById('practice-section');
+        btnLearn.addEventListener('click', () => {
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+        });
+        btnPractice.addEventListener('click', () => {
+            btnPractice.classList.add('active');
+            btnLearn.classList.remove('active');
+            practiceSection.classList.remove('hidden');
+            learnSection.classList.add('hidden');
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
