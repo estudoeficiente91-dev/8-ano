@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regra de 3 Simples e Composta - 8º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .accordion-button.open + .accordion-content { max-height: 1000px; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Regra de 3 Simples e Composta - 8º Ano</h1>
+            <p class="text-slate-600 mt-2">Aprenda como resolver problemas usando regra de 3 simples e composta, com exemplos e exercícios interativos!</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+            <button id="btn-print" class="py-2 px-6 bg-pink-700 text-white font-semibold rounded-md shadow hover:bg-pink-800 transition-colors">🖨️ Imprimir Questões</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-sky-700 mb-2">O que é Regra de 3 Simples?</h2>
+                    <p class="mb-4">A regra de 3 simples é utilizada para resolver problemas que envolvem duas grandezas diretamente ou inversamente proporcionais. Exemplo: Se 4 lápis custam R$8, quanto custam 7 lápis?</p>
+                    <div class="bg-white rounded-lg shadow p-4 mb-4">
+                        <strong>Exemplo:</strong><br>
+                        4 lápis — R$8<br>
+                        7 lápis — x<br>
+                        <span class="block mt-2">Montando a proporção: <br>4/7 = 8/x &rarr; x = (7 × 8) / 4 = R$14</span>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-sky-700 mb-2">O que é Regra de 3 Composta?</h2>
+                    <p class="mb-4">A regra de 3 composta é usada quando há mais de duas grandezas envolvidas. Exemplo: Se 3 máquinas produzem 600 peças em 4 horas, quantas peças 5 máquinas produzem em 6 horas?</p>
+                    <div class="bg-white rounded-lg shadow p-4 mb-4">
+                        <strong>Exemplo:</strong><br>
+                        Máquinas | Peças | Horas<br>
+                        3        | 600   | 4<br>
+                        5        | x     | 6<br>
+                        <span class="block mt-2">Montando a proporção:<br>
+                        x = (5 × 6 × 600) / (3 × 4) = 1500 peças</span>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-sky-700 mb-2">Dicas para Resolver</h2>
+                    <ul class="list-disc ml-6">
+                        <li>Identifique se as grandezas são diretamente ou inversamente proporcionais.</li>
+                        <li>Monte a tabela e organize os dados.</li>
+                        <li>Monte a proporção e resolva a equação.</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="practice-section" class="hidden">
+                <h2 class="text-xl font-bold text-sky-700 mb-4">Pratique!</h2>
+                <div id="question-nav" class="flex flex-wrap gap-2 justify-center mb-6"></div>
+                <div id="quiz-container"></div>
+                <div class="flex justify-between mt-6">
+                    <button id="prev-question-btn" class="px-4 py-2 bg-stone-300 text-slate-700 rounded shadow hover:bg-stone-400">Anterior</button>
+                    <button id="next-question-btn" class="px-4 py-2 bg-sky-700 text-white rounded shadow hover:bg-sky-800">Próxima</button>
+                </div>
+                <div id="score-section" class="mt-6 text-center hidden"></div>
+                <div class="flex justify-center mt-4">
+                    <button id="restart-quiz-btn" class="px-6 py-2 bg-pink-700 text-white font-semibold rounded-lg shadow hover:bg-pink-800 transition-colors hidden">Tentar Novamente</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        const quizData = [
+            { question: "Se 5 cadernos custam R$25, quanto custam 8 cadernos?", options: ["R$35", "R$40", "R$45", "R$50"], answer: "R$40", explanation: "Regra de 3 simples: 5/8 = 25/x → x = (8×25)/5 = R$40." },
+            { question: "Se 4 pessoas levam 6 dias para pintar uma casa, quantos dias 8 pessoas levariam?", options: ["3 dias", "6 dias", "9 dias", "12 dias"], answer: "3 dias", explanation: "Regra de 3 simples inversa: Mais pessoas, menos tempo. 4/8 = x/6 → x = (4×6)/8 = 3 dias." },
+            { question: "Se 2 máquinas produzem 400 peças em 5 horas, quantas peças 3 máquinas produzem em 5 horas?", options: ["400", "600", "800", "1000"], answer: "600", explanation: "Regra de 3 simples: 2/3 = 400/x → x = (3×400)/2 = 600." },
+            { question: "Se 3 máquinas produzem 600 peças em 4 horas, quantas peças 5 máquinas produzem em 6 horas?", options: ["900", "1200", "1500", "1800"], answer: "1500", explanation: "Regra de 3 composta: x = (5×6×600)/(3×4) = 1500." },
+            { question: "Se 6 operários constroem um muro em 10 dias, quantos dias 3 operários levariam?", options: ["5 dias", "10 dias", "15 dias", "20 dias"], answer: "20 dias", explanation: "Regra de 3 simples inversa: Menos operários, mais tempo. 6/3 = 10/x → x = (6×10)/3 = 20 dias." },
+            { question: "Se 4 carros transportam 800 kg em 2 viagens, quantos kg 6 carros transportam em 3 viagens?", options: ["1200 kg", "1800 kg", "2400 kg", "3600 kg"], answer: "1800 kg", explanation: "Regra de 3 composta: x = (6×3×800)/(4×2) = 1800 kg." },
+            { question: "Se 7 metros de tecido custam R$56, quanto custam 10 metros?", options: ["R$70", "R$80", "R$90", "R$100"], answer: "R$80", explanation: "Regra de 3 simples: 7/10 = 56/x → x = (10×56)/7 = R$80." },
+            { question: "Se 5 pessoas consomem 20 litros de água em 2 dias, quantos litros 8 pessoas consomem em 3 dias?", options: ["48 litros", "60 litros", "80 litros", "96 litros"], answer: "48 litros", explanation: "Regra de 3 composta: x = (8×3×20)/(5×2) = 48 litros." },
+            { question: "Se 3 professores corrigem 90 provas em 6 horas, quantas provas 5 professores corrigem em 4 horas?", options: ["100", "120", "150", "180"], answer: "100", explanation: "Regra de 3 composta: x = (5×4×90)/(3×6) = 100." },
+            { question: "Se 2 caminhões transportam 500 kg em 5 viagens, quantos kg 4 caminhões transportam em 10 viagens?", options: ["1000 kg", "2000 kg", "2500 kg", "4000 kg"], answer: "2000 kg", explanation: "Regra de 3 composta: x = (4×10×500)/(2×5) = 2000 kg." },
+            { question: "Se 8 metros de fio custam R$32, quanto custam 5 metros?", options: ["R$20", "R$25", "R$30", "R$35"], answer: "R$20", explanation: "Regra de 3 simples: 8/5 = 32/x → x = (5×32)/8 = R$20." },
+            { question: "Se 10 alunos consomem 50 pães em 5 dias, quantos pães 8 alunos consomem em 4 dias?", options: ["32", "40", "48", "50"], answer: "32", explanation: "Regra de 3 composta: x = (8×4×50)/(10×5) = 32." },
+            { question: "Se 3 torneiras enchem um tanque em 12 horas, quantas horas 6 torneiras levariam?", options: ["6 horas", "12 horas", "18 horas", "24 horas"], answer: "6 horas", explanation: "Regra de 3 simples inversa: Mais torneiras, menos tempo. 3/6 = 12/x → x = (3×12)/6 = 6 horas." },
+            { question: "Se 4 caixas pesam 36 kg, quanto pesam 7 caixas?", options: ["54 kg", "63 kg", "72 kg", "84 kg"], answer: "63 kg", explanation: "Regra de 3 simples: 4/7 = 36/x → x = (7×36)/4 = 63 kg." },
+            { question: "Se 2 funcionários fazem 80 peças em 8 horas, quantas peças 5 funcionários fazem em 4 horas?", options: ["100", "120", "160", "200"], answer: "100", explanation: "Regra de 3 composta: x = (5×4×80)/(2×8) = 100." },
+            { question: "Se 6 metros de tecido custam R$42, quanto custam 9 metros?", options: ["R$54", "R$63", "R$72", "R$84"], answer: "R$63", explanation: "Regra de 3 simples: 6/9 = 42/x → x = (9×42)/6 = R$63." },
+            { question: "Se 5 operários constroem uma parede em 15 dias, quantos dias 3 operários levariam?", options: ["9 dias", "15 dias", "21 dias", "25 dias"], answer: "25 dias", explanation: "Regra de 3 simples inversa: Menos operários, mais tempo. 5/3 = 15/x → x = (5×15)/3 = 25 dias." },
+            { question: "Se 3 carros transportam 900 kg em 2 viagens, quantos kg 6 carros transportam em 4 viagens?", options: ["1800 kg", "2400 kg", "2700 kg", "3600 kg"], answer: "3600 kg", explanation: "Regra de 3 composta: x = (6×4×900)/(3×2) = 3600 kg." },
+            { question: "Se 7 metros de fio custam R$21, quanto custam 12 metros?", options: ["R$30", "R$36", "R$42", "R$48"], answer: "R$36", explanation: "Regra de 3 simples: 7/12 = 21/x → x = (12×21)/7 = R$36." },
+            { question: "Se 4 pessoas consomem 16 litros de água em 2 dias, quantos litros 6 pessoas consomem em 3 dias?", options: ["36 litros", "40 litros", "48 litros", "54 litros"], answer: "36 litros", explanation: "Regra de 3 composta: x = (6×3×16)/(4×2) = 36 litros." }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let lastAnswerWasCorrect = false;
+
+        function switchView(view) {
+            document.getElementById('learn-section').classList.toggle('hidden', view !== 'learn');
+            document.getElementById('practice-section').classList.toggle('hidden', view !== 'practice');
+        }
+
+        document.getElementById('btn-learn').addEventListener('click', () => {
+            switchView('learn');
+        });
+        document.getElementById('btn-practice').addEventListener('click', () => {
+            switchView('practice');
+            showQuestionNav();
+            showQuestion(currentQuestionIndex);
+        });
+
+        function showQuestionNav() {
+            const nav = document.getElementById('question-nav');
+            nav.innerHTML = '';
+            quizData.forEach((_, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'qnav-btn px-3 py-1 rounded border font-semibold bg-white hover:bg-sky-100 transition-colors';
+                btn.textContent = i + 1;
+                if (i === currentQuestionIndex) btn.classList.add('bg-sky-700', 'text-white');
+                btn.onclick = () => {
+                    currentQuestionIndex = i;
+                    showQuestionNav();
+                    showQuestion(i);
+                };
+                nav.appendChild(btn);
+            });
+        }
+
+        function showQuestion(idx) {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            const q = quizData[idx];
+            const questionElem = document.createElement('div');
+            questionElem.className = 'mb-4';
+            questionElem.innerHTML = `<div class="font-semibold mb-2">${q.question}</div>`;
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option px-4 py-2 m-1 border rounded shadow bg-white hover:bg-stone-200';
+                btn.textContent = opt;
+                btn.onclick = () => selectAnswer(btn, q.answer, q.explanation);
+                container.appendChild(btn);
+            });
+            container.appendChild(questionElem);
+        }
+
+        function selectAnswer(selectedBtn, correctAnswer, explanation) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === correctAnswer) {
+                    btn.classList.add('correct-answer');
+                } else if (btn === selectedBtn) {
+                    btn.classList.add('wrong-answer');
+                }
+            });
+            lastAnswerWasCorrect = selectedBtn.textContent === correctAnswer;
+            if (lastAnswerWasCorrect) score++;
+            const container = document.getElementById('quiz-container');
+            const exp = document.createElement('div');
+            exp.className = 'mt-2 text-sm text-slate-700';
+            exp.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+            container.appendChild(exp);
+        }
+
+        document.getElementById('next-question-btn').addEventListener('click', () => {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                showQuestionNav();
+                showQuestion(currentQuestionIndex);
+            } else {
+                showScore();
+            }
+        });
+        document.getElementById('prev-question-btn').addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestionNav();
+                showQuestion(currentQuestionIndex);
+            }
+        });
+
+        function showScore() {
+            document.getElementById('quiz-container').innerHTML = '';
+            const scoreSection = document.getElementById('score-section');
+            scoreSection.innerHTML = `<div class="text-2xl font-bold text-sky-700">Você acertou ${score} de ${quizData.length} questões!</div>`;
+            scoreSection.classList.remove('hidden');
+            document.getElementById('restart-quiz-btn').classList.remove('hidden');
+        }
+
+        document.getElementById('restart-quiz-btn').addEventListener('click', () => {
+            score = 0;
+            currentQuestionIndex = 0;
+            showQuestionNav();
+            showQuestion(currentQuestionIndex);
+            document.getElementById('score-section').classList.add('hidden');
+            document.getElementById('restart-quiz-btn').classList.add('hidden');
+        });
+
+        document.getElementById('btn-print').addEventListener('click', () => {
+            let html = `<h2 style='text-align:center;font-family:sans-serif;'>Questões de Regra de 3</h2><ol style='font-size:16px;font-family:sans-serif;'>`;
+            quizData.forEach((q, i) => {
+                html += `<li style='margin-bottom:18px;'><strong>Questão ${i+1}:</strong> ${q.question}<br><em>Opções:</em> ${q.options.join(', ')}</li>`;
+            });
+            html += `</ol>`;
+            const win = window.open('', '', 'width=800,height=900');
+            win.document.write(`<html><head><title>Imprimir Questões</title></head><body>${html}</body></html>`);
+            win.document.close();
+            win.print();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchView('learn');
+        });
+    </script>
+</body>
+</html>

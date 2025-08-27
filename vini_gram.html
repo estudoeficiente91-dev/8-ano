@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gramática 8º Ano - Sufixos, Mal x Mau, Transitividade, Vozes Verbais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+        .qnav-btn { min-width: 2.5rem; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Gramática 8º Ano</h1>
+            <p class="text-slate-600 mt-2">Sufixos aumentativos e diminutivos, Mal x Mau, Transitividade Verbal, Vozes Verbais</p>
+        </header>
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Sufixos aumentativos e diminutivos</h2>
+                    <ul class="list-disc pl-6 mb-2">
+                        <li><b>Sufixo aumentativo</b>: Indica aumento de tamanho ou intensidade. Exemplos: casarão, mulheraça, papelão.</li>
+                        <li><b>Sufixo diminutivo</b>: Indica diminuição de tamanho ou carinho. Exemplos: casinha, livrinho, papelzinho.</li>
+                        <li>Os sufixos mais comuns são: <b>-ão, -zão, -aço</b> (aumentativo) e <b>-inho, -zinho</b> (diminutivo).</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Mal e Mau</h2>
+                    <ul class="list-disc pl-6 mb-2">
+                        <li><b>Mal</b>: Oposto de bem. Usado como advérbio ou substantivo. Ex: Ele está mal. / O mal venceu.</li>
+                        <li><b>Mau</b>: Oposto de bom. Usado como adjetivo. Ex: Ele é mau aluno. / O cachorro é mau.</li>
+                        <li>Dica: Troque por "bem" ou "bom". Se "bem" encaixa, use "mal". Se "bom" encaixa, use "mau".</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Transitividade Verbal</h2>
+                    <ul class="list-disc pl-6 mb-2">
+                        <li><b>Verbo transitivo direto</b>: Exige complemento sem preposição. Ex: Comprei um livro.</li>
+                        <li><b>Verbo transitivo indireto</b>: Exige complemento com preposição. Ex: Gosto de música.</li>
+                        <li><b>Verbo transitivo direto e indireto</b>: Exige dois complementos, um com e outro sem preposição. Ex: Entreguei o presente ao amigo.</li>
+                        <li><b>Verbo intransitivo</b>: Não exige complemento. Ex: O bebê dormiu.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow mb-8">
+                    <h2 class="text-2xl font-bold text-sky-700 mb-4">Vozes Verbais</h2>
+                    <ul class="list-disc pl-6 mb-2">
+                        <li><b>Voz ativa</b>: O sujeito pratica a ação. Ex: O aluno escreveu a redação.</li>
+                        <li><b>Voz passiva</b>: O sujeito sofre a ação. Ex: A redação foi escrita pelo aluno.</li>
+                        <li><b>Voz reflexiva</b>: O sujeito pratica e recebe a ação. Ex: O menino se machucou.</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex flex-wrap justify-center gap-2 mb-4" id="question-nav"></div>
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus conhecimentos!</h2>
+                    <p class="mb-6">Clique nos botões para navegar pelas questões. Só poderá finalizar quando acertar todas!</p>
+                    <button onclick="printQuizQuestions()" class="mb-4 px-6 py-2 bg-sky-700 text-white font-semibold rounded-lg shadow hover:bg-sky-800 transition-colors">🖨️ Imprimir Questões</button>
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+
+            btnLearn.addEventListener('click', () => {
+                learnSection.classList.remove('hidden');
+                practiceSection.classList.add('hidden');
+                btnLearn.classList.add('active');
+                btnPractice.classList.remove('active');
+            });
+            btnPractice.addEventListener('click', () => {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnLearn.classList.remove('active');
+                btnPractice.classList.add('active');
+                startQuiz(0);
+            });
+
+            // 30 questões sobre os conteúdos
+            const quizData = [
+                {question: "1. Qual sufixo é aumentativo?", answer: "-ão", options: ["-inho", "-ão", "-zinho", "-ete"], explanation: "O sufixo '-ão' indica aumento."},
+                {question: "2. Qual sufixo é diminutivo?", answer: "-inho", options: ["-ão", "-inho", "-aço", "-zão"], explanation: "O sufixo '-inho' indica diminuição."},
+                {question: "3. Qual palavra está no aumentativo?", answer: "casarão", options: ["casinha", "casarão", "casa", "casinha"], explanation: "'Casarão' é aumentativo de 'casa'."},
+                {question: "4. Qual palavra está no diminutivo?", answer: "livrinho", options: ["livro", "livrinho", "livraço", "livrão"], explanation: "'Livrinho' é diminutivo de 'livro'."},
+                {question: "5. O sufixo '-zinho' é usado para:", answer: "diminutivo", options: ["aumentativo", "diminutivo", "verbo", "adjetivo"], explanation: "'-zinho' é diminutivo."},
+                {question: "6. Mal é o oposto de:", answer: "bem", options: ["bom", "bem", "mau", "ruim"], explanation: "Mal = bem; Mau = bom."},
+                {question: "7. Mau é o oposto de:", answer: "bom", options: ["bem", "bom", "mal", "ruim"], explanation: "Mau = bom."},
+                {question: "8. Complete: Ele está ___ hoje.", answer: "mal", options: ["mal", "mau"], explanation: "Mal (oposto de bem)."},
+                {question: "9. Complete: Ele é um aluno ___.", answer: "mau", options: ["mal", "mau"], explanation: "Mau (oposto de bom)."},
+                {question: "10. Troque por bom/bem: O cachorro é ___.", answer: "mau", options: ["mal", "mau"], explanation: "O cachorro é bom/mau."},
+                {question: "11. O verbo 'comprar' é:", answer: "transitivo direto", options: ["intransitivo", "transitivo direto", "transitivo indireto", "de ligação"], explanation: "'Comprar' exige complemento sem preposição."},
+                {question: "12. O verbo 'gostar' é:", answer: "transitivo indireto", options: ["intransitivo", "transitivo direto", "transitivo indireto", "de ligação"], explanation: "'Gostar' exige complemento com preposição."},
+                {question: "13. O verbo 'dormir' é:", answer: "intransitivo", options: ["intransitivo", "transitivo direto", "transitivo indireto", "de ligação"], explanation: "'Dormir' não exige complemento."},
+                {question: "14. O verbo 'entregar' pode ser:", answer: "transitivo direto e indireto", options: ["intransitivo", "transitivo direto", "transitivo indireto", "transitivo direto e indireto"], explanation: "'Entregar' pode exigir dois complementos."},
+                {question: "15. Qual frase tem verbo transitivo direto?", answer: "Comprei um livro.", options: ["Comprei um livro.", "Gosto de música.", "O bebê dormiu.", "Entreguei ao amigo."], explanation: "'Comprei um livro' tem verbo transitivo direto."},
+                {question: "16. Qual frase tem verbo transitivo indireto?", answer: "Gosto de música.", options: ["Comprei um livro.", "Gosto de música.", "O bebê dormiu.", "Entreguei o presente."], explanation: "'Gosto de música' tem verbo transitivo indireto."},
+                {question: "17. Qual frase tem verbo intransitivo?", answer: "O bebê dormiu.", options: ["Comprei um livro.", "Gosto de música.", "O bebê dormiu.", "Entreguei o presente."], explanation: "'O bebê dormiu' tem verbo intransitivo."},
+                {question: "18. Qual frase tem verbo de ligação?", answer: "Ela está feliz.", options: ["Ela está feliz.", "Comprei um livro.", "Gosto de música.", "O bebê dormiu."], explanation: "'Está' é verbo de ligação."},
+                {question: "19. Voz ativa: O aluno escreveu a redação. O sujeito:", answer: "pratica a ação", options: ["pratica a ação", "sofre a ação", "recebe a ação", "é indeterminado"], explanation: "Na voz ativa, o sujeito pratica a ação."},
+                {question: "20. Voz passiva: A redação foi escrita pelo aluno. O sujeito:", answer: "sofre a ação", options: ["pratica a ação", "sofre a ação", "recebe a ação", "é indeterminado"], explanation: "Na voz passiva, o sujeito sofre a ação."},
+                {question: "21. Voz reflexiva: O menino se machucou. O sujeito:", answer: "pratica e recebe a ação", options: ["pratica a ação", "sofre a ação", "pratica e recebe a ação", "é indeterminado"], explanation: "Na voz reflexiva, o sujeito pratica e recebe a ação."},
+                {question: "22. Qual frase está na voz passiva?", answer: "A redação foi escrita pelo aluno.", options: ["O aluno escreveu a redação.", "A redação foi escrita pelo aluno.", "O menino se machucou.", "Gosto de música."], explanation: "'A redação foi escrita pelo aluno' está na voz passiva."},
+                {question: "23. Qual frase está na voz ativa?", answer: "O aluno escreveu a redação.", options: ["O aluno escreveu a redação.", "A redação foi escrita pelo aluno.", "O menino se machucou.", "Gosto de música."], explanation: "'O aluno escreveu a redação' está na voz ativa."},
+                {question: "24. Qual frase está na voz reflexiva?", answer: "O menino se machucou.", options: ["O aluno escreveu a redação.", "A redação foi escrita pelo aluno.", "O menino se machucou.", "Gosto de música."], explanation: "'O menino se machucou' está na voz reflexiva."},
+                {question: "25. O sufixo '-aço' é:", answer: "aumentativo", options: ["aumentativo", "diminutivo", "verbo", "adjetivo"], explanation: "'-aço' é aumentativo."},
+                {question: "26. Complete: Ele está ___ preparado para a prova.", answer: "mal", options: ["mal", "mau"], explanation: "Mal (oposto de bem)."},
+                {question: "27. Complete: O aluno é ___ exemplo para os colegas.", answer: "mau", options: ["mal", "mau"], explanation: "Mau (oposto de bom)."},
+                {question: "28. O verbo 'assistir' (no sentido de ver) é:", answer: "transitivo indireto", options: ["transitivo direto", "transitivo indireto", "intransitivo", "de ligação"], explanation: "'Assistir' (ver) exige preposição: assistir a algo."},
+                {question: "29. O verbo 'chegar' é:", answer: "intransitivo", options: ["transitivo direto", "transitivo indireto", "intransitivo", "de ligação"], explanation: "'Chegar' não exige complemento."},
+                {question: "30. Qual frase está correta?", answer: "Ele está mal.", options: ["Ele está mau.", "Ele está mal."], explanation: "Mal (oposto de bem)."}
+            ];
+
+            let questionStatus = Array(quizData.length).fill(null); // null, 'correct', 'wrong'
+            let currentQuestionIndex = 0;
+
+            function startQuiz(index = 0) {
+                currentQuestionIndex = index;
+                showQuestion(index);
+                renderQuestionButtons();
+                document.getElementById('score-container').classList.add('hidden');
+                document.getElementById('quiz-container').classList.remove('hidden');
+            }
+
+            function showQuestion(index) {
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('next-question-btn').classList.add('hidden');
+                const questionData = quizData[index];
+                document.getElementById('question-progress').textContent = `Questão ${index + 1} de ${quizData.length}`;
+                document.getElementById('question-text').innerHTML = questionData.question;
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                questionData.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, questionData.answer, questionData.explanation, index));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation, index) {
+                const buttons = document.querySelectorAll('.quiz-option');
+                if (selectedOption === correctAnswer) {
+                    questionStatus[index] = 'correct';
+                    document.getElementById('feedback-text').textContent = '🎉 Correto!';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    questionStatus[index] = 'wrong';
+                    document.getElementById('feedback-text').textContent = '🤔 Incorreto! Tente novamente.';
+                    document.getElementById('feedback-container').className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+                document.getElementById('feedback-explanation').innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                document.getElementById('feedback-container').classList.remove('hidden');
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && selectedOption !== correctAnswer) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+                document.getElementById('next-question-btn').classList.remove('hidden');
+                renderQuestionButtons();
+            }
+
+            document.getElementById('next-question-btn').addEventListener('click', () => {
+                if (currentQuestionIndex < quizData.length - 1) {
+                    currentQuestionIndex++;
+                    showQuestion(currentQuestionIndex);
+                } else {
+                    if (questionStatus.every(s => s === 'correct')) {
+                        showScore();
+                    } else {
+                        alert('Você precisa acertar todas as questões para finalizar!');
+                        // Vai para a primeira errada
+                        const firstWrong = questionStatus.findIndex(s => s !== 'correct');
+                        if (firstWrong !== -1) {
+                            currentQuestionIndex = firstWrong;
+                            showQuestion(currentQuestionIndex);
+                        }
+                    }
+                }
+            });
+
+            function showScore() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('score-container').classList.remove('hidden');
+                document.getElementById('score-text').textContent = `Parabéns! Você acertou todas as questões!`;
+                document.getElementById('score-bar').style.width = `100%`;
+            }
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', () => {
+                questionStatus = Array(quizData.length).fill(null);
+                startQuiz(0);
+            });
+
+            function renderQuestionButtons() {
+                let btns = '';
+                for (let i = 0; i < quizData.length; i++) {
+                    let color = 'bg-stone-200 text-slate-700';
+                    if (questionStatus[i] === 'correct') color = 'bg-emerald-500 text-white border-emerald-700';
+                    if (questionStatus[i] === 'wrong') color = 'bg-red-500 text-white border-red-700';
+                    btns += `<button class="qnav-btn px-3 py-1 m-1 rounded border font-bold ${color}" onclick="goToQuestion(${i})">${i + 1}</button>`;
+                }
+                let navDiv = document.getElementById('question-nav');
+                navDiv.innerHTML = btns;
+            }
+            window.goToQuestion = function(idx) {
+                currentQuestionIndex = idx;
+                showQuestion(idx);
+            };
+
+            window.printQuizQuestions = function() {
+                let html = `<h2 style='text-align:center;font-family:sans-serif;'>Questões de Gramática 8º Ano</h2><ol style='font-size:16px;font-family:sans-serif;'>`;
+                quizData.forEach((q, i) => {
+                    html += `<li style='margin-bottom:18px;'><strong>${i+1}.</strong> ${q.question}<ul style='list-style-type: lower-alpha; margin-left:20px;'>`;
+                    q.options.forEach(opt => {
+                        html += `<li>${opt}</li>`;
+                    });
+                    html += `</ul></li>`;
+                });
+                html += `</ol>`;
+                const win = window.open('', '', 'width=800,height=900');
+                win.document.write(`<html><head><title>Questões de Gramática 8º Ano</title></head><body>${html}</body></html>`);
+                win.document.close();
+                win.print();
+            };
+
+            // Inicia na aba "Aprender"
+            learnSection.classList.remove('hidden');
+            practiceSection.classList.add('hidden');
+            btnLearn.classList.add('active');
+            btnPractice.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

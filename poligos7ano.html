@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polígonos e Circunferência - 7º Ano: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-button.active { background-color: #0369a1; color: white; }
+        .flashcard-img { max-width: 180px; max-height: 120px; margin: 0 auto 1rem; border-radius: 0.5rem; box-shadow: 0 2px 8px #0002; }
+        .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+        .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+            ⬅ Voltar para o Início
+        </a>
+    </div>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Polígonos e Circunferência - 7º Ano</h1>
+            <p class="text-slate-600 mt-2">Aprenda sobre polígonos e circunferência com exemplos visuais e pratique com flashcards interativos!</p>
+        </header>
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm gap-2">
+            <button id="btn-learn" class="tab-button active px-4 py-2 rounded font-semibold text-sky-800 hover:bg-sky-100">Aprender</button>
+            <button id="btn-practice" class="tab-button px-4 py-2 rounded font-semibold text-sky-800 hover:bg-sky-100">Praticar</button>
+        </nav>
+        <main>
+            <section id="learn-section">
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">O que são Polígonos?</h2>
+                    <img src="https://static.todamateria.com.br/upload/po/li/poligonosimples.jpg" alt="Exemplo de polígonos" class="flashcard-img">
+                    <p class="mb-4">Polígonos são figuras geométricas planas formadas por segmentos de reta que se encontram apenas nos extremos, formando lados e vértices. Exemplos: triângulo, quadrado, pentágono, hexágono, etc.</p>
+                    <ul class="list-disc ml-6 mb-4">
+                        <li><b>Triângulo</b>: 3 lados</li>
+                        <li><b>Quadrado</b>: 4 lados</li>
+                        <li><b>Pentágono</b>: 5 lados</li>
+                        <li><b>Hexágono</b>: 6 lados</li>
+                        <li><b>Heptágono</b>: 7 lados</li>
+                        <li><b>Octógono</b>: 8 lados</li>
+                    </ul>
+                    <img src="https://static.todamateria.com.br/upload/ta/be/tabeladospoligonos-cke.jpg" alt="Polígonos diversos" class="flashcard-img">
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h2 class="text-xl font-bold mb-3 text-sky-700">Convexo e Não Convexo</h2>
+                    <img src="https://static.todamateria.com.br/upload/po/li/poligonoconvexo1.gif" alt="Convexo e não convexo" class="flashcard-img">
+                    <p class="mb-2"><b>Polígono convexo</b>: todos os ângulos internos são menores que 180° e nenhum segmento entre dois pontos internos sai para fora da figura.</p>
+                    <p class="mb-2"><b>Polígono não convexo</b>: possui pelo menos um ângulo interno maior que 180°, ou algum segmento entre dois pontos internos passa fora da figura.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h2 class="text-xl font-bold mb-3 text-sky-700">Vértice, Diagonais e Lados</h2>
+                    <img src="https://static.todamateria.com.br/upload/po/li/poligonoelementos.jpg" alt="Vértice, diagonal e lado" class="flashcard-img">
+                    <ul class="list-disc ml-6 mb-4">
+                        <li><b>Vértice</b>: ponto de encontro de dois lados</li>
+                        <li><b>Lado</b>: segmento de reta que forma o polígono</li>
+                        <li><b>Diagonal</b>: segmento que liga dois vértices não consecutivos</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h2 class="text-xl font-bold mb-3 text-sky-700">Ângulos Internos e Externos</h2>
+                    <img src="https://images.educamaisbrasil.com.br/content/banco_de_imagens/guia-de-estudo/D/elementos-poligonos-matematica.jpg" alt="Ângulos internos e externos" class="flashcard-img">
+                    <p class="mb-2"><b>Ângulo interno</b>: formado dentro do polígono, entre dois lados consecutivos.</p>
+                    <p class="mb-2"><b>Ângulo externo</b>: formado fora do polígono, prolongando um dos lados.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h2 class="text-xl font-bold mb-3 text-sky-700">Polígonos Regulares</h2>
+                    <img src="https://s1.static.brasilescola.uol.com.br/be/2020/08/poligonos-regulares.jpg" alt="Polígonos regulares" class="flashcard-img">
+                    <p class="mb-2">Polígonos regulares têm todos os lados e ângulos internos iguais. Exemplos: quadrado, triângulo equilátero, pentágono regular.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">O que é Circunferência?</h2>
+                    <img src="https://clickestudante.com/wp-content/uploads/2018/12/7DC0E.gif" alt="Circunferência" class="flashcard-img">
+                    <p class="mb-4">Circunferência é uma linha curva, fechada e plana, onde todos os pontos estão à mesma distância de um ponto central chamado centro. Não é um polígono, pois não possui lados retos.</p>
+                    <ul class="list-disc ml-6 mb-4">
+                        <li><b>Raio</b>: distância do centro até qualquer ponto da circunferência</li>
+                        <li><b>Diâmetro</b>: segmento que passa pelo centro e liga dois pontos da circunferência</li>
+                        <li><b>Centro</b>: ponto central da circunferência</li>
+                    </ul>
+                    <img src="https://static.todamateria.com.br/upload/ci/rc/circunferencia-raio-diametro-cke.jpg" alt="Raio e diâmetro" class="flashcard-img">
+                </div>
+            </section>
+            <section id="practice-section" class="hidden">
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Flashcards: Pratique!</h2>
+                    <div id="flashcard-container" class="flex flex-col items-center"></div>
+                    <div class="flex justify-center gap-4 mt-6">
+                        <button id="btn-next" class="px-6 py-2 bg-sky-700 text-white font-semibold rounded-lg shadow hover:bg-sky-800 transition-colors">Próxima</button>
+                        <button id="btn-restart" class="px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">Reiniciar</button>
+                    </div>
+                    <div class="flex justify-end mt-6">
+                        <button onclick="printFlashcards()" class="px-6 py-2 bg-pink-700 text-white font-semibold rounded-lg shadow hover:bg-pink-800 transition-colors">Imprimir Flashcards</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        // Dados dos flashcards (questões)
+        const flashcards = [
+            {
+                question: "Qual o nome do polígono com 3 lados?",
+          /**     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Equilateral-triangle.svg/200px-Equilateral-triangle.svg.png", **/
+                options: ["Triângulo", "Quadrado", "Pentágono"],
+                answer: "Triângulo"
+            },
+            {
+                question: "Qual o nome do polígono com 4 lados iguais?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Square_-_black_simple.svg/200px-Square_-_black_simple.svg.png",
+                options: ["Quadrado", "Retângulo", "Hexágono"],
+                answer: "Quadrado"
+            },
+            {
+                question: "Qual dessas figuras NÃO é um polígono?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Circle_-_black_simple.svg/200px-Circle_-_black_simple.svg.png",
+                options: ["Circunferência", "Pentágono", "Hexágono"],
+                answer: "Circunferência"
+            },
+            {
+                question: "Qual o nome do polígono com 5 lados?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Regular_pentagon.svg/200px-Regular_pentagon.svg.png",
+                options: ["Pentágono", "Hexágono", "Heptágono"],
+                answer: "Pentágono"
+            },
+            {
+                question: "Qual o nome do segmento que liga o centro à borda da circunferência?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Circle_-_black_simple.svg/200px-Circle_-_black_simple.svg.png",
+                options: ["Raio", "Diâmetro", "Lado"],
+                answer: "Raio"
+            },
+            {
+                question: "Qual o nome do polígono com 6 lados?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Regular_hexagon.svg/200px-Regular_hexagon.svg.png",
+                options: ["Hexágono", "Heptágono", "Octógono"],
+                answer: "Hexágono"
+            },
+            {
+                question: "Qual o nome do segmento que passa pelo centro e liga dois pontos da circunferência?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Circle_-_black_simple.svg/200px-Circle_-_black_simple.svg.png",
+                options: ["Diâmetro", "Raio", "Lado"],
+                answer: "Diâmetro"
+            },
+            {
+                question: "Qual o nome do polígono com 8 lados?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Regular_octagon.svg/200px-Regular_octagon.svg.png",
+                options: ["Octógono", "Hexágono", "Heptágono"],
+                answer: "Octógono"
+            },
+            {
+                question: "Qual o nome do ponto central da circunferência?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Circle_-_black_simple.svg/200px-Circle_-_black_simple.svg.png",
+                options: ["Centro", "Raio", "Diâmetro"],
+                answer: "Centro"
+            },
+            {
+                question: "Qual dessas figuras é formada por lados retos?",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Square_-_black_simple.svg/200px-Square_-_black_simple.svg.png",
+                options: ["Quadrado", "Circunferência", "Círculo"],
+                answer: "Quadrado"
+            }
+        ];
+
+        let flashcardQueue = [...flashcards];
+        let currentIndex = 0;
+        let acertos = 0;
+        let erros = 0;
+
+        function showFlashcard() {
+            const container = document.getElementById('flashcard-container');
+            container.innerHTML = '';
+            if (flashcardQueue.length === 0) {
+                container.innerHTML = `<div class='text-center text-xl font-bold text-green-700'>Parabéns! Você concluiu todos os flashcards.<br>Acertos: ${acertos} | Erros: ${erros}</div>`;
+                document.getElementById('btn-next').disabled = true;
+                return;
+            }
+            const card = flashcardQueue[currentIndex];
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'w-full max-w-md bg-stone-50 rounded-lg shadow p-6 flex flex-col items-center';
+            cardDiv.innerHTML = `
+                <img src="${card.img}" alt="Imagem da questão" class="flashcard-img">
+                <div class="text-lg font-semibold mb-4 text-sky-800">${card.question}</div>
+                <div class="flex flex-col gap-2 w-full">
+                    ${card.options.map(opt => `<button class="option-btn px-4 py-2 rounded border border-sky-300 bg-white font-medium text-sky-700 hover:bg-sky-100 transition-colors">${opt}</button>`).join('')}
+                </div>
+            `;
+            container.appendChild(cardDiv);
+            Array.from(cardDiv.getElementsByClassName('option-btn')).forEach(btn => {
+                btn.onclick = () => selectOption(btn, card.answer);
+            });
+            document.getElementById('btn-next').disabled = true;
+        }
+
+        function selectOption(btn, correct) {
+            const selected = btn.textContent;
+            if (selected === correct) {
+                btn.classList.add('correct-answer');
+                acertos++;
+                setTimeout(() => {
+                    flashcardQueue.splice(currentIndex, 1);
+                    if (currentIndex >= flashcardQueue.length) currentIndex = 0;
+                    showFlashcard();
+                }, 800);
+            } else {
+                btn.classList.add('wrong-answer');
+                erros++;
+                setTimeout(() => {
+                    const card = flashcardQueue.splice(currentIndex, 1)[0];
+                    flashcardQueue.push(card);
+                    if (currentIndex >= flashcardQueue.length) currentIndex = 0;
+                    showFlashcard();
+                }, 800);
+            }
+            Array.from(btn.parentNode.children).forEach(b => b.disabled = true);
+            document.getElementById('btn-next').disabled = false;
+        }
+
+        document.getElementById('btn-next').onclick = () => {
+            if (flashcardQueue.length > 0) {
+                currentIndex = (currentIndex + 1) % flashcardQueue.length;
+                showFlashcard();
+            }
+        };
+        document.getElementById('btn-restart').onclick = () => {
+            flashcardQueue = [...flashcards];
+            currentIndex = 0;
+            acertos = 0;
+            erros = 0;
+            showFlashcard();
+            document.getElementById('btn-next').disabled = true;
+        };
+
+        function printFlashcards() {
+            let html = `<h2 style='text-align:center;font-family:sans-serif;'>Flashcards de Polígonos e Circunferência</h2><ol style='font-size:16px;font-family:sans-serif;'>`;
+            flashcards.forEach((q, i) => {
+                html += `<li style='margin-bottom:1.5em;'><img src='${q.img}' style='max-width:120px;display:block;margin-bottom:0.5em;'><b>Questão ${i+1}:</b> ${q.question}<br><b>Opções:</b> ${q.options.join(', ')}</li>`;
+            });
+            html += `</ol>`;
+            const win = window.open('', '', 'width=800,height=900');
+            win.document.write(`<html><head><title>Imprimir Flashcards</title></head><body>${html}</body></html>`);
+            win.document.close();
+            win.print();
+        }
+
+        // Alternância entre seções
+        document.getElementById('btn-learn').onclick = () => {
+            document.getElementById('learn-section').classList.remove('hidden');
+            document.getElementById('practice-section').classList.add('hidden');
+            document.getElementById('btn-learn').classList.add('active');
+            document.getElementById('btn-practice').classList.remove('active');
+        };
+        document.getElementById('btn-practice').onclick = () => {
+            document.getElementById('learn-section').classList.add('hidden');
+            document.getElementById('practice-section').classList.remove('hidden');
+            document.getElementById('btn-learn').classList.remove('active');
+            document.getElementById('btn-practice').classList.add('active');
+            showFlashcard();
+        };
+        // Inicia na seção "Aprender"
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('learn-section').classList.remove('hidden');
+            document.getElementById('practice-section').classList.add('hidden');
+            document.getElementById('btn-learn').classList.add('active');
+            document.getElementById('btn-practice').classList.remove('active');
+        });
+    </script>
+</body>
+</html>
