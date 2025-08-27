@@ -20,45 +20,182 @@
     <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
         <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
             ⬅ Voltar para o Início
-        </a>
-    </div>
-    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
-        <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Gramática 8º Ano</h1>
-            <p class="text-slate-600 mt-2">Interpretação de texto, Sujeito, Partícula SE, Vozes Verbais, Adjetivos Derivados</p>
-        </header>
-        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
-            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
-            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
-        </nav>
-        <main>
-            <section id="learn-section">
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Interpretação de Texto</h2>
-                    <p class="text-slate-700">Compreender, analisar e extrair informações de um texto, identificando ideias principais, inferências e intenções do autor.</p>
-                </div>
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Sujeito Agente e Paciente</h2>
-                    <p class="text-slate-700"><b>Agente:</b> pratica a ação do verbo. <br><b>Paciente:</b> recebe a ação do verbo.</p>
-                    <p class="text-slate-700 mt-2">Exemplo agente: "O aluno escreveu a redação."<br>Exemplo paciente: "A redação foi escrita pelo aluno."</p>
-                </div>
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Partícula SE</h2>
-                    <p class="text-slate-700"><b>Índice de indeterminação do sujeito:</b> O "se" indica que o sujeito não é identificado.<br>Exemplo: "Precisa-se de voluntários."</p>
-                    <p class="text-slate-700 mt-2"><b>Partícula apassivadora:</b> O "se" transforma o verbo em voz passiva.<br>Exemplo: "Vendem-se livros."</p>
-                </div>
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Sujeito Indeterminado e Paciente</h2>
-                    <p class="text-slate-700"><b>Indeterminado:</b> Não se sabe ou não se quer dizer quem pratica a ação.<br>Exemplo: "Diz-se que vai chover."</p>
-                    <p class="text-slate-700 mt-2"><b>Paciente:</b> Recebe a ação, geralmente aparece na voz passiva.<br>Exemplo: "A casa foi construída."</p>
-                </div>
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Vozes Verbais</h2>
-                    <p class="text-slate-700"><b>Voz ativa:</b> Sujeito pratica a ação.<br><b>Voz passiva:</b> Sujeito recebe a ação.<br><b>Voz reflexiva:</b> Sujeito pratica e recebe a ação.</p>
-                    <p class="text-slate-700 mt-2">Exemplo ativa: "O professor explicou a matéria."<br>Exemplo passiva: "A matéria foi explicada pelo professor."<br>Exemplo reflexiva: "O aluno se machucou."</p>
-                </div>
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-sky-700 mb-2">Adjetivos Derivados</h2>
+
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Gramática 8º Ano: Interpretação, Sujeito, SE, Vozes Verbais, Adjetivos</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+                body { font-family: 'Inter', sans-serif; }
+                .tab-button.active { background-color: #0369a1; color: white; }
+                .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+                .accordion-button.open + .accordion-content { max-height: 1000px; }
+                .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
+                .correct-answer { background-color: #10b981 !important; color: white !important; border-color: #059669 !important; }
+                .wrong-answer { background-color: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+            </style>
+        </head>
+        <body class="bg-stone-100 text-slate-800">
+            <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
+                    ⬅ Voltar para o Início
+                </a>
+            </div>
+            <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+                <header class="text-center mb-8">
+                    <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Gramática 8º Ano</h1>
+                    <p class="text-slate-600 mt-2">Interpretação de texto, Sujeito, Partícula SE, Vozes Verbais, Adjetivos Derivados</p>
+                </header>
+                <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+                    <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+                    <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+                </nav>
+                <main>
+                    <section id="learn-section">
+                        <div class="mb-6">
+                            <h2 class="text-xl font-semibold text-sky-700 mb-2">Interpretação de Texto</h2>
+                            <p class="text-slate-700">Compreender, analisar e extrair informações de um texto, identificando ideias principais, inferências e intenções do autor.</p>
+                        </div>
+                        <div class="mb-6">
+                            <h2 class="text-xl font-semibold text-sky-700 mb-2">Sujeito Agente e Paciente</h2>
+                            <p class="text-slate-700"><b>Agente:</b> pratica a ação do verbo. <br><b>Paciente:</b> recebe a ação do verbo.</p>
+                            <p class="text-slate-700 mt-2">Exemplo agente: "O aluno escreveu a redação."<br>Exemplo paciente: "A redação foi escrita pelo aluno."</p>
+                        </div>
+                        <div class="mb-6">
+                            <h2 class="text-xl font-semibold text-sky-700 mb-2">Partícula SE</h2>
+                            <p class="text-slate-700"><b>Índice de indeterminação do sujeito:</b> O "se" indica que o sujeito não é identificado.<br>Exemplo: "Precisa-se de voluntários."</p>
+                            <p class="text-slate-700 mt-2"><b>Partícula apassivadora:</b> O "se" transforma o verbo em voz passiva.<br>Exemplo: "Vendem-se livros."</p>
+                        </div>
+                        <div class="mb-6">
+                            <h2 class="text-xl font-semibold text-sky-700 mb-2">Sujeito Indeterminado e Paciente</h2>
+                            <p class="text-slate-700"><b>Indeterminado:</b> Não se sabe ou não se quer dizer quem pratica a ação.<br>Exemplo: "Diz-se que vai chover."</p>
+                            <p class="text-slate-700 mt-2"><b>Paciente:</b> Recebe a ação, geralmente aparece na voz passiva.<br>Exemplo: "A casa foi construída."</p>
+                        </div>
+                        <div class="mb-6">
+                            <h2 class="text-xl font-semibold text-sky-700 mb-2">Vozes Verbais</h2>
+                            <p class="text-slate-700"><b>Voz ativa:</b> Sujeito pratica a ação.<br><b>Voz passiva:</b> Sujeito recebe a ação.<br><b>Voz reflexiva:</b> Sujeito pratica e recebe a ação.</p>
+                            <p class="text-slate-700 mt-2">Exemplo ativa: "O professor explicou a matéria."<br>Exemplo passiva: "A matéria foi explicada pelo professor."<br>Exemplo reflexiva: "O aluno se machucou."</p>
+                        </div>
+                        <div class="mb-6">
+                            <h2 class="text-xl font-semibold text-sky-700 mb-2">Adjetivos Derivados</h2>
+                            <p class="text-slate-700">Formados a partir de outras palavras, geralmente substantivos ou verbos.<br>Exemplo: "amoroso" (de amor), "chuvoso" (de chuva), "falante" (de falar).</p>
+                        </div>
+                    </section>
+                    <section id="practice-section" class="hidden">
+                        <h2 class="text-2xl font-bold text-sky-700 mb-4">Questões para Praticar</h2>
+                        <ol class="list-decimal pl-6 space-y-2 text-slate-700">
+                            <li>Leia o texto e responda: Qual a ideia principal?</li>
+                            <li>O que o autor quis dizer com a expressão “tempo voa”?</li>
+                            <li>Identifique o sujeito da frase: “Vendem-se casas.”</li>
+                            <li>Na frase “Precisa-se de ajuda”, o “se” é índice de indeterminação ou partícula apassivadora?</li>
+                            <li>Transforme a frase “O aluno resolveu o problema” para a voz passiva.</li>
+                            <li>Qual é o sujeito da frase: “Diz-se que o filme é bom”?</li>
+                            <li>Dê um exemplo de adjetivo derivado do substantivo “neve”.</li>
+                            <li>Na frase “A lição foi feita pelo estudante”, o sujeito é agente ou paciente?</li>
+                            <li>Explique o significado da frase: “O livro foi lido por todos.”</li>
+                            <li>Identifique a voz verbal: “O cachorro se escondeu.”</li>
+                            <li>O “se” em “Aluga-se apartamento” indica o quê?</li>
+                            <li>Crie uma frase com sujeito indeterminado.</li>
+                            <li>Dê um exemplo de voz reflexiva.</li>
+                            <li>Qual o sujeito em “Fala-se muito sobre o assunto”?</li>
+                            <li>Transforme “O médico atendeu o paciente” para a voz passiva.</li>
+                            <li>O que significa “sujeito paciente”?</li>
+                            <li>Dê um exemplo de adjetivo derivado do verbo “cantar”.</li>
+                            <li>Na frase “Construiu-se uma ponte”, qual o tipo de sujeito?</li>
+                            <li>Identifique o sujeito: “Choveu muito ontem.”</li>
+                            <li>O “se” em “Vive-se bem aqui” é índice de indeterminação ou partícula apassivadora?</li>
+                            <li>Crie uma frase com voz ativa.</li>
+                            <li>Crie uma frase com voz passiva.</li>
+                            <li>Dê um exemplo de adjetivo derivado do substantivo “sol”.</li>
+                            <li>Explique a diferença entre sujeito agente e paciente.</li>
+                            <li>Identifique o sujeito: “A comida foi preparada.”</li>
+                            <li>O “se” em “Comemora-se o aniversário” indica o quê?</li>
+                            <li>Transforme “Os alunos fizeram a prova” para a voz passiva.</li>
+                            <li>Dê um exemplo de adjetivo derivado do verbo “brilhar”.</li>
+                            <li>Na frase “O aluno se dedicou”, qual a voz verbal?</li>
+                            <li>Explique o uso da partícula “se” em “Precisa-se de professores”.</li>
+                        </ol>
+                        <div class="flex justify-center mt-8">
+                            <button onclick="printQuestoes()" class="px-8 py-3 bg-pink-700 text-white text-lg font-semibold rounded-lg shadow hover:bg-pink-800 transition-colors flex items-center gap-2">
+                                🖨️ Imprimir Questões
+                            </button>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <script>
+                const btnLearn = document.getElementById('btn-learn');
+                const btnPractice = document.getElementById('btn-practice');
+                const learnSection = document.getElementById('learn-section');
+                const practiceSection = document.getElementById('practice-section');
+                btnLearn.addEventListener('click', () => {
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                });
+                btnPractice.addEventListener('click', () => {
+                    btnPractice.classList.add('active');
+                    btnLearn.classList.remove('active');
+                    practiceSection.classList.remove('hidden');
+                    learnSection.classList.add('hidden');
+                });
+                document.addEventListener('DOMContentLoaded', () => {
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                });
+                function printQuestoes() {
+                    const questoes = [
+                        "Leia o texto e responda: Qual a ideia principal?",
+                        "O que o autor quis dizer com a expressão ‘tempo voa’?",
+                        "Identifique o sujeito da frase: ‘Vendem-se casas.’",
+                        "Na frase ‘Precisa-se de ajuda’, o ‘se’ é índice de indeterminação ou partícula apassivadora?",
+                        "Transforme a frase ‘O aluno resolveu o problema’ para a voz passiva.",
+                        "Qual é o sujeito da frase: ‘Diz-se que o filme é bom’?",
+                        "Dê um exemplo de adjetivo derivado do substantivo ‘neve’.",
+                        "Na frase ‘A lição foi feita pelo estudante’, o sujeito é agente ou paciente?",
+                        "Explique o significado da frase: ‘O livro foi lido por todos.’",
+                        "Identifique a voz verbal: ‘O cachorro se escondeu.’",
+                        "O ‘se’ em ‘Aluga-se apartamento’ indica o quê?",
+                        "Crie uma frase com sujeito indeterminado.",
+                        "Dê um exemplo de voz reflexiva.",
+                        "Qual o sujeito em ‘Fala-se muito sobre o assunto’?",
+                        "Transforme ‘O médico atendeu o paciente’ para a voz passiva.",
+                        "O que significa ‘sujeito paciente’?",
+                        "Dê um exemplo de adjetivo derivado do verbo ‘cantar’.",
+                        "Na frase ‘Construiu-se uma ponte’, qual o tipo de sujeito?",
+                        "Identifique o sujeito: ‘Choveu muito ontem.’",
+                        "O ‘se’ em ‘Vive-se bem aqui’ é índice de indeterminação ou partícula apassivadora?",
+                        "Crie uma frase com voz ativa.",
+                        "Crie uma frase com voz passiva.",
+                        "Dê um exemplo de adjetivo derivado do substantivo ‘sol’.",
+                        "Explique a diferença entre sujeito agente e paciente.",
+                        "Identifique o sujeito: ‘A comida foi preparada.’",
+                        "O ‘se’ em ‘Comemora-se o aniversário’ indica o quê?",
+                        "Transforme ‘Os alunos fizeram a prova’ para a voz passiva.",
+                        "Dê um exemplo de adjetivo derivado do verbo ‘brilhar’.",
+                        "Na frase ‘O aluno se dedicou’, qual a voz verbal?",
+                        "Explique o uso da partícula ‘se’ em ‘Precisa-se de professores’."
+                    ];
+                    let html = `<h2 style='text-align:center;font-family:sans-serif;'>Questões de Gramática - 8º Ano</h2><ol style='font-size:16px;font-family:sans-serif;'>`;
+                    questoes.forEach(q => {
+                        html += `<li>${q}</li>`;
+                    });
+                    html += `</ol>`;
+                    const win = window.open('', '', 'width=800,height=900');
+                    win.document.write(`<html><head><title>Imprimir Questões</title></head><body>${html}</body></html>`);
+                    win.document.close();
+                    win.print();
+                }
+            </script>
+        </body>
+        </html>
                     <p class="text-slate-700">Formados a partir de outras palavras, geralmente substantivos ou verbos.<br>Exemplo: "amoroso" (de amor), "chuvoso" (de chuva), "falante" (de falar).</p>
                 </div>
             </section>
@@ -105,12 +242,114 @@
         </main>
     </div>
     <script>
-        const btnLearn = document.getElementById('btn-learn');
-        const btnPractice = document.getElementById('btn-practice');
-        const learnSection = document.getElementById('learn-section');
-        const practiceSection = document.getElementById('practice-section');
-        function printQuestoes() {
-            const questoes = [
+        // Quiz de múltipla escolha estilo SPA
+        const quizData = [
+            { question: "O que é interpretação de texto?", options: ["Apenas ler o texto rapidamente.", "Compreender o sentido e as intenções do autor.", "Decorar todas as palavras do texto.", "Ignorar as perguntas sobre o texto."], answer: 1 },
+            { question: "Qual alternativa apresenta um sujeito agente?", options: ["O bolo foi comido pela menina.", "A porta foi aberta pelo vento.", "O aluno resolveu o exercício.", "Foi feita uma festa."], answer: 2 },
+            { question: "A partícula 'SE' pode indicar:", options: ["Sujeito determinado.", "Índice de indeterminação do sujeito ou partícula apassivadora.", "Verbo no infinitivo.", "Objeto direto."], answer: 1 },
+            { question: "Em 'Vende-se casa', o 'se' é:", options: ["Índice de indeterminação do sujeito.", "Partícula apassivadora.", "Objeto direto.", "Sujeito agente."], answer: 1 },
+            { question: "Qual frase tem sujeito indeterminado?", options: ["Fizeram a lição de casa.", "A professora explicou a matéria.", "O aluno respondeu à pergunta.", "O cachorro latiu."], answer: 0 },
+            { question: "Voz passiva ocorre em:", options: ["O menino quebrou o vaso.", "O vaso foi quebrado pelo menino.", "O menino estuda.", "O menino brinca."], answer: 1 },
+            { question: "Adjetivo derivado de 'pedra':", options: ["Pedroso.", "Pedrento.", "Pedrário.", "Pedrino."], answer: 0 },
+            { question: "O sujeito paciente é aquele que:", options: ["Pratica a ação.", "Recebe a ação.", "É indeterminado.", "É oculto."], answer: 1 },
+            { question: "Em 'Construiu-se uma ponte', o sujeito é:", options: ["Indeterminado.", "Paciente.", "Agente.", "Simples."], answer: 1 },
+            { question: "Qual alternativa apresenta voz ativa?", options: ["O livro foi lido pelo aluno.", "O aluno leu o livro.", "O livro será lido.", "Foi lido o livro."], answer: 1 },
+            { question: "O que é sujeito oculto?", options: ["Aquele que está explícito na frase.", "Aquele que não aparece, mas pode ser identificado pelo contexto.", "Aquele que é indeterminado.", "Aquele que pratica a ação."], answer: 1 },
+            { question: "Em 'Choveu muito ontem', o sujeito é:", options: ["Simples.", "Composto.", "Indeterminado.", "Inexistente."], answer: 3 },
+            { question: "Qual alternativa apresenta sujeito composto?", options: ["Maria e João viajaram.", "O aluno estuda.", "Foi feita uma festa.", "Choveu muito."], answer: 0 },
+            { question: "A voz reflexiva ocorre quando:", options: ["O sujeito pratica e recebe a ação.", "O sujeito apenas pratica a ação.", "O sujeito apenas recebe a ação.", "Não há ação."], answer: 0 },
+            { question: "Em 'Ele se feriu', o 'se' indica:", options: ["Voz passiva.", "Voz reflexiva.", "Índice de indeterminação.", "Objeto direto."], answer: 1 },
+            { question: "Adjetivo derivado de 'flor':", options: ["Florido.", "Floroso.", "Florário.", "Florino."], answer: 0 },
+            { question: "Em 'Precisa-se de funcionários', o sujeito é:", options: ["Simples.", "Composto.", "Indeterminado.", "Paciente."], answer: 2 },
+            { question: "O sujeito agente é aquele que:", options: ["Recebe a ação.", "Pratica a ação.", "É indeterminado.", "É oculto."], answer: 1 },
+            { question: "Em 'A casa foi construída', o sujeito é:", options: ["Agente.", "Paciente.", "Indeterminado.", "Composto."], answer: 1 },
+            { question: "Qual alternativa apresenta partícula apassivadora?", options: ["Vende-se carros.", "Ele se machucou.", "Choveu muito.", "O aluno estudou."], answer: 0 },
+            { question: "Adjetivo derivado de 'leite':", options: ["Leitoso.", "Leitino.", "Leitário.", "Leitento."], answer: 0 },
+            { question: "Em 'A porta foi aberta', a voz é:", options: ["Ativa.", "Passiva.", "Reflexiva.", "Indeterminada."], answer: 1 },
+            { question: "O sujeito inexistente ocorre em:", options: ["O aluno estudou.", "Fizeram a lição.", "Choveu ontem.", "Maria e João viajaram."], answer: 2 },
+            { question: "Em 'Diz-se que vai chover', o 'se' é:", options: ["Partícula apassivadora.", "Índice de indeterminação do sujeito.", "Objeto direto.", "Sujeito agente."], answer: 1 },
+            { question: "Adjetivo derivado de 'sol':", options: ["Solar.", "Solino.", "Solário.", "Solento."], answer: 0 },
+            { question: "Em 'O aluno foi elogiado', o sujeito é:", options: ["Agente.", "Paciente.", "Indeterminado.", "Composto."], answer: 1 },
+            { question: "Qual alternativa apresenta sujeito simples?", options: ["O aluno estudou.", "Maria e João viajaram.", "Fizeram a lição.", "Choveu muito."], answer: 0 },
+            { question: "A voz ativa ocorre quando:", options: ["O sujeito recebe a ação.", "O sujeito pratica a ação.", "O sujeito é indeterminado.", "Não há ação."], answer: 1 },
+            { question: "Adjetivo derivado de 'chuva':", options: ["Chuvoso.", "Chuvário.", "Chuvino.", "Chuvento."], answer: 0 },
+            { question: "Em 'O aluno se destacou', o 'se' indica:", options: ["Voz reflexiva.", "Voz passiva.", "Índice de indeterminação.", "Objeto direto."], answer: 0 },
+            { question: "Em 'Foi feita uma festa', o sujeito é:", options: ["Agente.", "Paciente.", "Indeterminado.", "Composto."], answer: 1 }
+        ];
+
+        let queue = [...quizData];
+        let current = 0;
+        let acertos = 0;
+        let erros = 0;
+
+        function showQuestion(idx) {
+            const q = queue[idx];
+            document.getElementById('quiz-question').innerHTML = `<span class='font-semibold'>${q.question}</span>`;
+            const opts = q.options.map((opt, i) => `<button class='quiz-option px-4 py-2 rounded-lg border mt-3 w-full text-left font-medium' onclick='selectOption(this,${i},${q.answer})'>${String.fromCharCode(65+i)}) ${opt}</button>`).join('');
+            document.getElementById('quiz-options').innerHTML = opts;
+            updateNav();
+        }
+
+        function selectOption(btn, idx, answer) {
+            if(idx === answer) {
+                btn.classList.add('correct-answer');
+                acertos++;
+                setTimeout(() => {
+                    nextQuestion();
+                }, 700);
+            } else {
+                btn.classList.add('wrong-answer');
+                erros++;
+                // Move questão para o final da fila
+                queue.push(queue.splice(current,1)[0]);
+                setTimeout(() => {
+                    nextQuestion();
+                }, 700);
+            }
+            // Desabilita todos os botões
+            document.querySelectorAll('.quiz-option').forEach(b => b.disabled = true);
+        }
+
+        function nextQuestion() {
+            if(current < queue.length-1) {
+                current++;
+                showQuestion(current);
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz-question').innerHTML = `<span class='font-bold text-xl'>Fim do Quiz!</span><br><span class='text-green-700'>Acertos: ${acertos}</span> <span class='text-red-700'>Erros: ${erros}</span>`;
+            document.getElementById('quiz-options').innerHTML = `<button onclick='restartQuiz()' class='px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold mt-6'>Refazer Quiz</button>`;
+            document.getElementById('quiz-nav').innerHTML = '';
+        }
+
+        function restartQuiz() {
+            queue = [...quizData];
+            current = 0;
+            acertos = 0;
+            erros = 0;
+            showQuestion(current);
+        }
+
+        function updateNav() {
+            let nav = '';
+            for(let i=0;i<queue.length;i++) {
+                nav += `<button class='qnav-btn px-3 py-1 mx-1 rounded border' onclick='goToQuestion(${i})' style='${i===current?'background:#0369a1;color:#fff':''}'>${i+1}</button>`;
+            }
+            document.getElementById('quiz-nav').innerHTML = nav;
+        }
+
+        function goToQuestion(idx) {
+            current = idx;
+            showQuestion(current);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showQuestion(current);
+        });
+    </script>
                 "Leia o texto e responda: Qual a ideia principal?",
                 "O que o autor quis dizer com a expressão ‘tempo voa’?",
                 "Identifique o sujeito da frase: ‘Vendem-se casas.’",
