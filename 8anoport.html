@@ -7,155 +7,286 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .tab-button.active { background-color: #0369a1; color: white; }
-        .qnav-btn { min-width: 2.5rem; background-color: #222; color: #eee; border-color: #444; transition: background 0.2s, color 0.2s; }
-        .qnav-btn:hover { background-color: #333; color: #fff; }
-        .qnav-btn.correct { background-color: #10b981 !important; color: #fff !important; border-color: #059669 !important; }
-        .qnav-btn.wrong { background-color: #ef4444 !important; color: #fff !important; border-color: #dc2626 !important; }
-        .quiz-option { border: 2px solid #0369a1; }
-        .quiz-option:hover:not(:disabled) { background-color: #e0f2fe; }
-        .quiz-option:disabled { cursor: not-allowed; opacity: 0.7; }
-        .correct-answer { background-color: #10b981 !important; color: #fff !important; border-color: #059669 !important; }
-        .wrong-answer { background-color: #ef4444 !important; color: #fff !important; border-color: #dc2626 !important; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-button.active {
+            background-color: #0369a1;
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-button.open + .accordion-content {
+            max-height: 500px;
+        }
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .correct-answer {
+            background-color: #10b981 !important;
+            color: white !important;
+            border-color: #059669 !important;
+        }
+        .wrong-answer {
+            background-color: #ef4444 !important;
+            color: white !important;
+            border-color: #dc2626 !important;
+        }
     </style>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue accent -->
+    <!-- Structure: Aprender (acordeão) + Praticar (quiz interativo) -->
 </head>
 <body class="bg-stone-100 text-slate-800">
-    <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
-        <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">
-            ⬅ Voltar para o Início
-        </a>
-    </div>
+
     <div class="container mx-auto max-w-4xl p-4 sm:p-8">
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Gramática 8º Ano</h1>
-            <p class="text-slate-600 mt-2">Interpretação de texto, Sujeito agente/paciente, Partícula SE, Vozes verbais, Adjetivos derivados</p>
+            <p class="text-slate-600 mt-2">Interpretação de texto, Sujeito agente/paciente, Partícula SE, Vozes verbais e Adjetivos derivados</p>
+            <div class="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                <a href="index.html" class="inline-block px-6 py-2 bg-stone-400 text-white font-semibold rounded-lg shadow hover:bg-stone-500 transition-colors">⬅ Voltar para o Início</a>
+            </div>
         </header>
-        <section class="mb-10">
-            <h2 class="text-2xl font-semibold mb-4 text-sky-700">Resumo dos Conteúdos</h2>
-            <ul class="list-disc pl-6 space-y-2 text-lg">
-                <li><b>Interpretação de texto:</b> Compreender o sentido, ideias principais, intenções do autor e inferências.</li>
-                <li><b>Sujeito agente:</b> Pratica a ação do verbo. <b>Sujeito paciente:</b> Recebe a ação.</li>
-                <li><b>Partícula SE:</b> Pode ser índice de indeterminação do sujeito ("Precisa-se de ajuda") ou partícula apassivadora ("Vende-se casa").</li>
-                <li><b>Sujeito indeterminado:</b> Não se sabe quem pratica a ação ("Fizeram a lição").</li>
-                <li><b>Vozes verbais:</b> Ativa (sujeito pratica), passiva (sujeito recebe), reflexiva (pratica e recebe).</li>
-                <li><b>Adjetivos derivados:</b> Formados a partir de substantivos (ex: "florido" de "flor").</li>
-            </ul>
-        </section>
-        <section class="mb-10">
-            <h2 class="text-2xl font-semibold mb-4 text-sky-700">Quiz: Pratique seus conhecimentos</h2>
-            <div id="quiz-nav" class="flex flex-wrap gap-1 mb-4 justify-center"></div>
-            <div id="quiz-question" class="text-lg font-semibold mb-4"></div>
-            <div id="quiz-options" class="flex flex-col gap-2"></div>
-        </section>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
+        </nav>
+
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">Estude os Conceitos</h2>
+                    <p class="mb-6">Clique nos tópicos para expandir e ver exemplos e dicas práticas.</p>
+                    <div id="accordion-container" class="space-y-3"></div>
+                    <div class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-800">💡 Dicas rápidas</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                            <li><strong>Interpretação:</strong> identifique ideia principal, conectivos e inferências.</li>
+                            <li><strong>Sujeito:</strong> pergunte "quem?" para encontrar o sujeito da ação.</li>
+                            <li><strong>Partícula SE:</strong> teste se pode transformar a frase para a passiva analítica.</li>
+                            <li><strong>Adjetivos derivados:</strong> observe sufixos comuns (-oso, -al, -eiro, -ento).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="practice-section" class="hidden">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Pratique com Questões</h2>
+                    <p class="mb-6">Responda cada questão e receba feedback imediato com explicação.</p>
+
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl italic"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Exercício Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500" style="width:0%"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
+
     <script>
-        // 30 questões de múltipla escolha
-        const quizData = [
-            { question: "O que é interpretação de texto?", options: ["Apenas ler o texto rapidamente.", "Compreender o sentido e as intenções do autor.", "Decorar todas as palavras do texto.", "Ignorar as perguntas sobre o texto."], answer: 1 },
-            { question: "Qual alternativa apresenta um sujeito agente?", options: ["O bolo foi comido pela menina.", "A porta foi aberta pelo vento.", "O aluno resolveu o exercício.", "Foi feita uma festa."], answer: 2 },
-            { question: "A partícula 'SE' pode indicar:", options: ["Sujeito determinado.", "Índice de indeterminação do sujeito ou partícula apassivadora.", "Verbo no infinitivo.", "Objeto direto."], answer: 1 },
-            { question: "Em 'Vende-se casa', o 'se' é:", options: ["Índice de indeterminação do sujeito.", "Partícula apassivadora.", "Objeto direto.", "Sujeito agente."], answer: 1 },
-            { question: "Qual frase tem sujeito indeterminado?", options: ["Fizeram a lição de casa.", "A professora explicou a matéria.", "O aluno respondeu à pergunta.", "O cachorro latiu."], answer: 0 },
-            { question: "Voz passiva ocorre em:", options: ["O menino quebrou o vaso.", "O vaso foi quebrado pelo menino.", "O menino estuda.", "O menino brinca."], answer: 1 },
-            { question: "Adjetivo derivado de 'pedra':", options: ["Pedroso.", "Pedrento.", "Pedrário.", "Pedrino."], answer: 0 },
-            { question: "O sujeito paciente é aquele que:", options: ["Pratica a ação.", "Recebe a ação.", "É indeterminado.", "É oculto."], answer: 1 },
-            { question: "Em 'Construiu-se uma ponte', o sujeito é:", options: ["Indeterminado.", "Paciente.", "Agente.", "Simples."], answer: 1 },
-            { question: "Qual alternativa apresenta voz ativa?", options: ["O livro foi lido pelo aluno.", "O aluno leu o livro.", "O livro será lido.", "Foi lido o livro."], answer: 1 },
-            { question: "O que é sujeito oculto?", options: ["Aquele que está explícito na frase.", "Aquele que não aparece, mas pode ser identificado pelo contexto.", "Aquele que é indeterminado.", "Aquele que pratica a ação."], answer: 1 },
-            { question: "Em 'Choveu muito ontem', o sujeito é:", options: ["Simples.", "Composto.", "Indeterminado.", "Inexistente."], answer: 3 },
-            { question: "Qual alternativa apresenta sujeito composto?", options: ["Maria e João viajaram.", "O aluno estuda.", "Foi feita uma festa.", "Choveu muito."], answer: 0 },
-            { question: "A voz reflexiva ocorre quando:", options: ["O sujeito pratica e recebe a ação.", "O sujeito apenas pratica a ação.", "O sujeito apenas recebe a ação.", "Não há ação."], answer: 0 },
-            { question: "Em 'Ele se feriu', o 'se' indica:", options: ["Voz passiva.", "Voz reflexiva.", "Índice de indeterminação.", "Objeto direto."], answer: 1 },
-            { question: "Adjetivo derivado de 'flor':", options: ["Florido.", "Floroso.", "Florário.", "Florino."], answer: 0 },
-            { question: "Em 'Precisa-se de funcionários', o sujeito é:", options: ["Simples.", "Composto.", "Indeterminado.", "Paciente."], answer: 2 },
-            { question: "O sujeito agente é aquele que:", options: ["Recebe a ação.", "Pratica a ação.", "É indeterminado.", "É oculto."], answer: 1 },
-            { question: "Em 'A casa foi construída', o sujeito é:", options: ["Agente.", "Paciente.", "Indeterminado.", "Composto."], answer: 1 },
-            { question: "Qual alternativa apresenta partícula apassivadora?", options: ["Vende-se carros.", "Ele se machucou.", "Choveu muito.", "O aluno estudou."], answer: 0 },
-            { question: "Adjetivo derivado de 'leite':", options: ["Leitoso.", "Leitino.", "Leitário.", "Leitento."], answer: 0 },
-            { question: "Em 'A porta foi aberta', a voz é:", options: ["Ativa.", "Passiva.", "Reflexiva.", "Indeterminada."], answer: 1 },
-            { question: "O sujeito inexistente ocorre em:", options: ["O aluno estudou.", "Fizeram a lição.", "Choveu ontem.", "Maria e João viajaram."], answer: 2 },
-            { question: "Em 'Diz-se que vai chover', o 'se' é:", options: ["Partícula apassivadora.", "Índice de indeterminação do sujeito.", "Objeto direto.", "Sujeito agente."], answer: 1 },
-            { question: "Adjetivo derivado de 'sol':", options: ["Solar.", "Solino.", "Solário.", "Solento."], answer: 0 },
-            { question: "Em 'O aluno foi elogiado', o sujeito é:", options: ["Agente.", "Paciente.", "Indeterminado.", "Composto."], answer: 1 },
-            { question: "Qual alternativa apresenta sujeito simples?", options: ["O aluno estudou.", "Maria e João viajaram.", "Fizeram a lição.", "Choveu muito."], answer: 0 },
-            { question: "A voz ativa ocorre quando:", options: ["O sujeito recebe a ação.", "O sujeito pratica a ação.", "O sujeito é indeterminado.", "Não há ação."], answer: 1 },
-            { question: "Adjetivo derivado de 'chuva':", options: ["Chuvoso.", "Chuvário.", "Chuvino.", "Chuvento."], answer: 0 },
-            { question: "Em 'O aluno se destacou', o 'se' indica:", options: ["Voz reflexiva.", "Voz passiva.", "Índice de indeterminação.", "Objeto direto."], answer: 0 },
-            { question: "Em 'Foi feita uma festa', o sujeito é:", options: ["Agente.", "Paciente.", "Indeterminado.", "Composto."], answer: 1 }
-        ];
-
-        let queue = [...quizData];
-        let current = 0;
-        let acertos = 0;
-        let erros = 0;
-
-        function showQuestion(idx) {
-            const q = queue[idx];
-            document.getElementById('quiz-question').innerHTML = `<span class='font-semibold'>${q.question}</span>`;
-            const opts = q.options.map((opt, i) => `<button class='quiz-option px-4 py-2 rounded-lg border mt-3 w-full text-left font-medium' onclick='selectOption(this,${i},${q.answer})'>${String.fromCharCode(65+i)}) ${opt}</button>`).join('');
-            document.getElementById('quiz-options').innerHTML = opts;
-            updateNav();
-        }
-
-        function selectOption(btn, idx, answer) {
-            if(idx === answer) {
-                btn.classList.add('correct-answer');
-                acertos++;
-                setTimeout(() => {
-                    nextQuestion();
-                }, 700);
-            } else {
-                btn.classList.add('wrong-answer');
-                erros++;
-                // Move questão para o final da fila
-                queue.push(queue.splice(current,1)[0]);
-                setTimeout(() => {
-                    nextQuestion();
-                }, 700);
-            }
-            // Desabilita todos os botões
-            document.querySelectorAll('.quiz-option').forEach(b => b.disabled = true);
-        }
-
-        function nextQuestion() {
-            if(current < queue.length-1) {
-                current++;
-                showQuestion(current);
-            } else {
-                showScore();
-            }
-        }
-
-        function showScore() {
-            document.getElementById('quiz-question').innerHTML = `<span class='font-bold text-xl'>Fim do Quiz!</span><br><span class='text-green-700'>Acertos: ${acertos}</span> <span class='text-red-700'>Erros: ${erros}</span>`;
-            document.getElementById('quiz-options').innerHTML = `<button onclick='restartQuiz()' class='px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold mt-6'>Refazer Quiz</button>`;
-            document.getElementById('quiz-nav').innerHTML = '';
-        }
-
-        function restartQuiz() {
-            queue = [...quizData];
-            current = 0;
-            acertos = 0;
-            erros = 0;
-            showQuestion(current);
-        }
-
-        function updateNav() {
-            let nav = '';
-            for(let i=0;i<queue.length;i++) {
-                nav += `<button class='qnav-btn px-3 py-1 mx-1 rounded border' onclick='goToQuestion(${i})' style='${i===current?'background:#0369a1;color:#fff':''}'>${i+1}</button>`;
-            }
-            document.getElementById('quiz-nav').innerHTML = nav;
-        }
-
-        function goToQuestion(idx) {
-            current = idx;
-            showQuestion(current);
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            showQuestion(current);
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+
+            const accordionContainer = document.getElementById('accordion-container');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const questionProgress = document.getElementById('question-progress');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreText = document.getElementById('score-text');
+            const scoreBar = document.getElementById('score-bar');
+
+            const learnData = [
+                { title: 'Interpretação de Texto', content: 'Compreender o sentido do texto, identificar a ideia principal e as informações implícitas. Observe conectivos, intenções do autor e relações causa/efeito.' },
+                { title: 'Sujeito: agente e paciente', content: 'Sujeito agente pratica a ação; sujeito paciente recebe a ação. Ex.: "O aluno (agente) resolveu o exercício." / "O exercício (paciente) foi resolvido pelo aluno."' },
+                { title: 'Partícula SE', content: 'Funções do "se": índice de indeterminação ("Precisa-se de ajuda") e partícula apassivadora ("Vendem-se livros"). Teste transformando para a passiva analítica.' },
+                { title: 'Sujeito Indeterminado e Sujeito Inexistente', content: 'Sujeito indeterminado: não se identifica o agente ("Dizem que..."). Sujeito inexistente: verbos como "chover" não admitem sujeito ("Choveu").' },
+                { title: 'Vozes Verbais', content: 'Voz ativa: sujeito pratica a ação. Voz passiva: sujeito recebe a ação. Voz reflexiva: sujeito pratica e recebe (uso de pronomes reflexivos). Voz recíproca: ação mútua entre sujeitos.' },
+                { title: 'Adjetivos Derivados', content: 'Adjetivos formados a partir de substantivos por sufixos (ex.: "flor" → "florido", "leite" → "leitoso"). Identifique sufixos comuns.' }
+            ];
+
+            // 30 questões múltipla escolha (question, options[], answerIndex, explanation)
+            const quizData = [
+                { question: 'O que é interpretação de texto?', options: ['Apenas ler rapidamente', 'Compreender sentido e intenções do autor', 'Decorar o texto', 'Ignorar o contexto'], answer: 1, explanation: 'Interpretar é compreender sentido, intenções e inferências.' },
+                { question: 'Qual frase apresenta sujeito agente?', options: ['O bolo foi comido pela menina.', 'A porta foi aberta pelo vento.', 'O aluno resolveu o exercício.', 'Foi feita uma festa.'], answer: 2, explanation: '"O aluno" pratica a ação: sujeito agente.' },
+                { question: 'Em "Vende-se casa", o "se" é:', options: ['Índice de indeterminação', 'Partícula apassivadora', 'Pronome oblíquo', 'Núcleo do sujeito'], answer: 1, explanation: 'Aqui "se" torna a construção passiva sintética (apassivadora).' },
+                { question: 'Qual frase tem sujeito indeterminado?', options: ['Fizeram a lição de casa.', 'A professora explicou a matéria.', 'O aluno respondeu à pergunta.', 'O cachorro latiu.'], answer: 0, explanation: 'Em "Fizeram a lição", não se identifica quem fez a lição.' },
+                { question: 'Voz passiva analítica é formada por:', options: ['Verbo auxiliar + particípio', 'Verbo no infinitivo', 'Pronome reflexivo', 'Verbo intransitivo'], answer: 0, explanation: 'Ex.: "foi realizada" (verbo auxiliar + particípio).' },
+                { question: 'Sujeito paciente é aquele que:', options: ['Pratica a ação', 'Recebe a ação', 'É indeterminado', 'É inexistente'], answer: 1, explanation: 'Recebe ou sofre a ação verbal.' },
+                { question: 'Adjetivo derivado de "flor" é:', options: ['Florido', 'Florante', 'Flórico', 'Floráceo'], answer: 0, explanation: '"Florido" é derivado por sufixação.' },
+                { question: 'Em "Construiu-se uma ponte", o sujeito é:', options: ['Indeterminado', 'Paciente', 'Agente', 'Explícito'], answer: 0, explanation: 'Construir-se indica indeterminação do sujeito.' },
+                { question: 'Qual alternativa apresenta voz ativa?', options: ['O livro foi lido pelo aluno.', 'O aluno leu o livro.', 'O livro será lido.', 'Foi lido o livro.'], answer: 1, explanation: 'Sujeito pratica a ação na voz ativa.' },
+                { question: 'Sujeito oculto é aquele que:', options: ['Está explícito na frase', 'Não aparece, mas é identificado pelo contexto', 'É indeterminado', 'É inexistente'], answer: 1, explanation: 'Sujeito omitido mas recuperável pelo contexto (ex.: "Fui ao mercado").' },
+                { question: 'Em "Diz-se que vai chover", o "se" é:', options: ['Partícula apassivadora', 'Índice de indeterminação', 'Pronome apassivador reflexivo', 'Núcleo do predicado'], answer: 1, explanation: 'Aqui "se" indica indeterminação do sujeito.' },
+                { question: 'Voz reflexiva ocorre quando:', options: ['Sujeito pratica a ação sobre outro', 'Sujeito pratica a ação sobre si mesmo', 'Sujeito recebe a ação apenas', 'Não há sujeito'], answer: 1, explanation: 'Ex.: "Ela se penteou".' },
+                { question: 'Voz recíproca indica:', options: ['Ação mútua entre sujeitos', 'Ação sobre si mesmo', 'Passividade do sujeito', 'Ação inexistente'], answer: 0, explanation: 'Ex.: "Eles se cumprimentaram".' },
+                { question: 'Adjetivo derivado de "leite" é:', options: ['Leitoso', 'Leitante', 'Leitino', 'Leitável'], answer: 0, explanation: '"Leitoso" é o adjetivo formado a partir de "leite".' },
+                { question: 'Qual é a estrutura da voz passiva sintética?', options: ['Verbo + se + sujeito paciente', 'Sujeito agente + verbo', 'Verbo no infinitivo + complemento', 'Particípio + auxiliar'], answer: 0, explanation: 'Ex.: "Vendem-se casas".' },
+                { question: 'Em "A carta foi escrita por Maria", o sujeito é:', options: ['Agente', 'Paciente', 'Indeterminado', 'Oculto'], answer: 1, explanation: '"A carta" recebeu a ação: sujeito paciente.' },
+                { question: 'Interpretação: ao identificar a ideia principal, você deve:', options: ['Focar somente em palavras isoladas', 'Buscar a mensagem central do texto', 'Ignorar o título', 'Decorar frases'], answer: 1, explanation: 'Ideia principal = mensagem central do texto.' },
+                { question: 'Sujeito composto aparece em:', options: ['Maria estuda.', 'Maria e João viajaram.', 'Choveu ontem.', 'Havia crianças no parque.'], answer: 1, explanation: 'Dois núcleos no sujeito: Maria e João.' },
+                { question: 'Em "Vendem-se livros usados", podemos transformar para:', options: ['Livros usados vendem.', 'Livros usados são vendidos.', 'Vendem livros usados.', 'Livros foram vender.'], answer: 1, explanation: 'Passiva analítica: "Livros usados são vendidos".' },
+                { question: 'Sujeito inexistente é típico de verbos como:', options: ['Amar, ver', 'Chover, trovejar', 'Fazer, criar', 'Comer, beber'], answer: 1, explanation: 'Verbos meteorológicos não admitem sujeito.' },
+                { question: 'Qual sufixo forma adjetivos a partir de substantivos?', options: ['-mente', '-ção', '-oso', '-ar'], answer: 2, explanation: 'Ex.: "flor" → "floroso" (-oso).' },
+                { question: 'Em "Foi escrita uma carta", a voz é:', options: ['Ativa', 'Passiva analítica', 'Passiva sintética', 'Reflexiva'], answer: 1, explanation: 'Passiva analítica: verbo auxiliar + particípio.' },
+                { question: 'Ao interpretar um texto, identificar conectivos ajuda a:', options: ['Decorar o texto', 'Entender relações lógicas (causa, consequência, contraste)', 'Ignorar as inferências', 'Alterar o sentido do texto'], answer: 1, explanation: 'Conectivos marcam relações entre ideias.' },
+                { question: 'Em "Os alunos se ajudaram", há:', options: ['Voz ativa', 'Voz passiva', 'Voz reflexiva', 'Voz recíproca'], answer: 3, explanation: 'A ação de ajudar foi mútua entre os alunos.' },
+                { question: 'A transformação ativa → passiva exige que o verbo seja:', options: ['Intransitivo', 'Transitivo direto', 'Verbo auxiliar', 'Pronominal'], answer: 1, explanation: 'Só verbos transitivos diretos podem formar passiva analítica.' },
+                { question: 'Em "Precisa-se de ajuda", a construção indica:', options: ['Sujeito determinado', 'Índice de indeterminação', 'Voz reflexiva', 'Sujeito paciente'], answer: 1, explanation: 'Forma impessoal com indeterminação do sujeito.' },
+                { question: 'Adjetivo derivado de "sol" é:', options: ['Solar', 'Solento', 'Soloso', 'Solino'], answer: 0, explanation: '"Solar" é o adjetivo relacionado a "sol".' },
+                { question: 'Sujeito agente em "O artista pintou o quadro" é:', options: ['O artista', 'O quadro', 'Pintou', 'Nenhum'], answer: 0, explanation: '"O artista" pratica a ação.' },
+                { question: 'Quando o "se" é apassivador, a frase geralmente pode ser convertida em:', options: ['Ativa impessoal', 'Passiva analítica', 'Reflexiva', 'Verbo no gerúndio'], answer: 1, explanation: 'Ex.: "Vendem-se livros" → "Livros são vendidos".' },
+                { question: 'Em interpretação, informação implícita é aquela que:', options: ['Está escrita literalmente', 'É sugerida, não dita diretamente', 'É irrelevante', 'Sempre falsa'], answer: 1, explanation: 'Implica inferir a partir do contexto.' },
+                { question: 'Adjetivo derivado de "chuva" é:', options: ['Chuvoso', 'Chuval', 'Chuvário', 'Chuvante'], answer: 0, explanation: '"Chuvoso" indica relação com chuva.' }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
+                } else {
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
+                }
+            }
+
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+
+            function createAccordion() {
+                accordionContainer.innerHTML = '';
+                learnData.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-stone-200 rounded-lg';
+                    div.innerHTML = `
+                        <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300">&#9662;</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-4 border-t border-stone-200 text-slate-700">
+                                <p>${item.content}</p>
+                            </div>
+                        </div>
+                    `;
+                    accordionContainer.appendChild(div);
+                });
+
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const icon = button.querySelector('span:last-child');
+                        const isOpen = button.classList.toggle('open');
+                        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                    });
+                });
+            }
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                quizContainer.classList.remove('hidden');
+                scoreContainer.classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextQuestionBtn.classList.add('hidden');
+
+                const q = quizData[currentQuestionIndex];
+                questionProgress.textContent = `Questão ${currentQuestionIndex + 1} de ${quizData.length}`;
+                questionText.textContent = `${currentQuestionIndex + 1}. ${q.question}`;
+
+                optionsContainer.innerHTML = '';
+                q.options.forEach((opt, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors';
+                    btn.textContent = String.fromCharCode(65 + i) + ') ' + opt;
+                    btn.addEventListener('click', () => selectAnswer(i, q.answer, q.explanation));
+                    optionsContainer.appendChild(btn);
+                });
+            }
+
+            function selectAnswer(selectedIdx, correctIdx, explanation) {
+                const buttons = optionsContainer.querySelectorAll('button');
+                const isCorrect = selectedIdx === correctIdx;
+                if (isCorrect) score++;
+
+                if (isCorrect) {
+                    feedbackText.textContent = '✅ Correto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
+                } else {
+                    feedbackText.textContent = '❌ Incorreto';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
+                }
+                feedbackExplanation.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                feedbackContainer.classList.remove('hidden');
+
+                buttons.forEach((b, i) => {
+                    b.disabled = true;
+                    if (i === correctIdx) b.classList.add('correct-answer');
+                    if (i === selectedIdx && !isCorrect) b.classList.add('wrong-answer');
+                });
+
+                nextQuestionBtn.classList.remove('hidden');
+            }
+
+            function showScore() {
+                quizContainer.classList.add('hidden');
+                scoreContainer.classList.remove('hidden');
+                scoreText.textContent = `Você acertou ${score} de ${quizData.length} questões.`;
+                const percentage = Math.round((score / quizData.length) * 100);
+                scoreBar.style.width = percentage + '%';
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) showQuestion(); else showScore();
+            });
+
+            restartQuizBtn.addEventListener('click', startQuiz);
+
+            createAccordion();
         });
     </script>
 </body>
