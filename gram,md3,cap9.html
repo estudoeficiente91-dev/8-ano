@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Prova de Gramática – 8º Ano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root{
+            --bg:#071023; --card:#0b1624; --accent:#3b82f6; --muted:#97a6bf; --text:#e6eef8; --success:#34d399; --danger:#ef4444; --border:rgba(255,255,255,0.12); --muted-2: rgba(230,238,248,0.85);
+        }
+        html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
+        .container{max-width:980px;margin:28px auto;padding:18px}
+        .page-header{ padding:1.25rem; border-radius:12px; background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent); box-shadow: 0 8px 24px rgba(2,6,23,0.6); }
+        .card{ background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 6px 20px rgba(2,6,23,0.6); padding:18px }
+        .btn-primary{ background: linear-gradient(90deg,var(--accent), #3b82f6); color: #061226; padding: .5rem 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 6px 18px rgba(59,130,246,0.12); cursor: pointer; }
+        .btn-ghost{ background: transparent; color: var(--muted-2); padding: .45rem .9rem; border-radius: 10px; border: 1px solid var(--border); cursor:pointer; }
+        .option-btn{ display:block; width:100%; text-align:left; padding:.75rem 1rem; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid var(--border); color:var(--muted-2); cursor:pointer; transition: transform 150ms ease, background 150ms ease; }
+        .option-btn:hover:not(:disabled){ background: rgba(255,255,255,0.035); transform: translateY(-1px); }
+        .option-btn.correct{ background: var(--success) !important; color: #062e1f !important; border-color: rgba(4,120,87,0.18) !important; }
+        .option-btn.wrong{ background: var(--danger) !important; color: #fff !important; border-color: rgba(185,28,28,0.18) !important; }
+        .option-btn:disabled { cursor: not-allowed; }
+        #question-buttons{ display:flex; flex-wrap:wrap; gap:8px; }
+        #question-buttons button{ background: transparent; color: var(--muted-2); border:1px solid var(--border); padding:.45rem .6rem; border-radius:8px; cursor:pointer; }
+        #question-buttons button.current-question { background-color: rgba(59, 130, 246, 0.2); border-color: var(--accent); }
+        #question-buttons button.correct-status { background-color: var(--success); color: #062e1f; border-color: var(--success); }
+        #question-buttons button.wrong-status { background-color: var(--danger); color: white; border-color: var(--danger); }
+        .feedback-correct{ background: rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.22); color: #bbf7d0; padding:12px; border-radius:8px }
+        .feedback-wrong{ background: rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.22); color: #ffdede; padding:12px; border-radius:8px }
+        .celebrate{ animation: pop 480ms cubic-bezier(.2,.9,.3,1); box-shadow: 0 12px 36px rgba(96,165,250,0.18), 0 0 28px rgba(16,185,129,0.12); }
+        @keyframes pop{ 0%{ transform: scale(1); } 50%{ transform: scale(1.08); } 100%{ transform: scale(1); } }
+        .confetti{ position: fixed; z-index: 9999; pointer-events: none; font-size: 18px; opacity: 1; transform-origin: center; }
+        @keyframes confetti-fall { 0%{ transform: translateY(-10vh) rotate(0deg); opacity:1 } 100%{ transform: translateY(100vh) rotate(540deg); opacity:0 } }
+        .theme-light{ --bg: #f8fafc; --card: #ffffff; --muted: #475569; --text: #0f1724; --accent: #0284c7; --success: #047857; --danger: #b91c1c; --border: rgba(15,23,42,0.1); --muted-2: rgba(15,23,36,0.85); }
+        .topic-section { margin-bottom: 2.5rem; border-left: 3px solid var(--accent); padding-left: 1.5rem; }
+        .topic-title { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+        .sub-topic-title { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .topic-section p, .topic-section ul { font-size: 1rem; color: var(--muted-2); line-height: 1.7; text-align: justify; }
+        .topic-section ul { list-style-position: inside; list-style-type: disc; margin-top: 0.5rem; padding-left: 1rem;}
+        .highlight { background-color: rgba(59, 130, 246, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600; color: var(--accent); }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <header class="page-header">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">Prova de Gramática — 8º Ano</h1>
+                    <p class="text-sm text-slate-400">Guia de estudos completo sobre Funções da Linguagem, Períodos e Orações.</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="btn-ghost">Tema</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="mt-6">
+            <div class="card">
+                <nav class="mb-4">
+                    <button id="btn-learn" class="btn-primary">Aprender</button>
+                    <button id="btn-practice" class="btn-ghost ml-2">Praticar</button>
+                </nav>
+
+                <section id="learn-section">
+                    <div class="space-y-8">
+                        
+                        <div class="topic-section">
+                            <h2 class="topic-title">Funções da Linguagem</h2>
+                            <p>As Funções da Linguagem são as diferentes intenções, finalidades ou propósitos que temos ao nos comunicarmos. Cada vez que falamos ou escrevemos, uma função se destaca, dependendo do nosso foco. São seis no total:</p>
+                            <ul>
+                                <li><strong>Função Referencial (ou Denotativa):</strong> O foco é a <span class="highlight">informação</span>, o assunto, o contexto. O objetivo é informar de maneira clara e objetiva, como em notícias de jornal, artigos científicos e livros didáticos. Ex: "A temperatura em Fortaleza hoje é de 30°C."</li>
+                                <li><strong>Função Emotiva (ou Expressiva):</strong> O foco está no <span class="highlight">emissor</span> (quem fala), em seus sentimentos, emoções e opiniões. É subjetiva e usa a 1ª pessoa (eu). Comum em diários, cartas de amor, poemas líricos. Ex: "Eu me sinto tão feliz com sua presença!"</li>
+                                <li><strong>Função Apelativa (ou Conativa):</strong> O foco está no <span class="highlight">receptor</span> (com quem se fala). O objetivo é convencer, dar uma ordem ou influenciar o comportamento do outro. Usa verbos no imperativo (faça, compre) e vocativos. Típica de propagandas e discursos. Ex: "Compre já e aproveite a promoção!"</li>
+                                <li><strong>Função Poética:</strong> O foco está na <span class="highlight">mensagem</span> e na forma como ela é construída. Preocupa-se com a beleza, a sonoridade das palavras, as rimas e as figuras de linguagem. É a função principal da poesia, mas aparece em letras de música e textos criativos. Ex: "Água mole em pedra dura, tanto bate até que fura."</li>
+                                <li><strong>Função Fática:</strong> O foco está no <span class="highlight">canal</span> de comunicação. O objetivo é testar, iniciar, manter ou encerrar o contato. São expressões que usamos para verificar se a comunicação está funcionando. Ex: "Alô?", "Entendeu?", "Certo?", "Então, né...".</li>
+                                <li><strong>Função Metalinguística:</strong> O foco está no <span class="highlight">código</span>, ou seja, na própria linguagem. É a linguagem explicando a si mesma. Um dicionário, uma aula de gramática ou um poema que fala sobre o ato de escrever são exemplos. Ex: "A palavra 'casa' é um substantivo."</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="topic-section">
+                             <h2 class="topic-title">Período Simples e Composto</h2>
+                             <p>Para entender isso, precisamos saber o que é uma <span class="highlight">oração</span>: é todo enunciado que se organiza em torno de um verbo. Cada verbo (ou locução verbal) forma uma oração.</p>
+                             <ul>
+                                <li><strong>Período Simples:</strong> É aquele formado por <span class="highlight">uma única oração</span>. Por isso, ele também é chamado de oração absoluta. Ex: "Os alunos do 8º ano <span class="highlight">estudaram</span> muito para a prova." (Apenas um verbo).</li>
+                                <li><strong>Período Composto:</strong> É aquele formado por <span class="highlight">duas ou mais orações</span>. Elas podem estar ligadas de duas maneiras: por coordenação ou por subordinação. Ex: "Eu <span class="highlight">estudei</span> e <span class="highlight">aprendi</span> a matéria." (Dois verbos = duas orações).</li>
+                             </ul>
+                        </div>
+
+                        <div class="topic-section">
+                            <h2 class="topic-title">Coordenação e Subordinação</h2>
+                            <p>Esta é a forma como as orações se relacionam dentro de um período composto.</p>
+                             <h3 class="sub-topic-title">Orações Coordenadas</h3>
+                            <p>São orações <span class="highlight">independentes</span>, ou seja, uma não depende sintaticamente da outra para fazer sentido. Elas são como vizinhas que moram no mesmo "período", mas cada uma tem sua própria estrutura completa. São ligadas por conectivos chamados <span class="highlight">conjunções coordenativas</span>.</p>
+                            <ul>
+                                <li><strong>Aditivas:</strong> Expressam ideia de soma, adição. Conjunções: <span class="highlight">e, nem, mas também</span>. Ex: "Ela não <span class="highlight">veio</span> à festa <span class="highlight">nem</span> <span class="highlight">deu</span> satisfação."</li>
+                                <li><strong>Adversativas:</strong> Expressam ideia de oposição, contraste. Conjunções: <span class="highlight">mas, porém, contudo, todavia</span>. Ex: "Eu <span class="highlight">estudei</span> muito, <span class="highlight">mas</span> não <span class="highlight">fui</span> bem na prova."</li>
+                                <li><strong>Alternativas:</strong> Expressam ideia de alternância, escolha. Conjunções: <span class="highlight">ou...ou, ora...ora, quer...quer</span>. Ex: "<span class="highlight">Ora</span> ele <span class="highlight">estuda</span>, <span class="highlight">ora</span> ele <span class="highlight">joga</span> videogame."</li>
+                                <li><strong>Conclusivas:</strong> Expressam ideia de conclusão. Conjunções: <span class="highlight">logo, portanto, por isso, assim</span>. Ex: "<span class="highlight">Penso</span>, <span class="highlight">logo</span> <span class="highlight">existo</span>."</li>
+                                <li><strong>Explicativas:</strong> Expressam uma explicação ou justificativa. Conjunções: <span class="highlight">que, porque, pois (antes do verbo)</span>. Ex: "<span class="highlight">Feche</span> a janela, <span class="highlight">pois</span> <span class="highlight">está</span> chovendo."</li>
+                            </ul>
+
+                            <h3 class="sub-topic-title">Orações Subordinadas</h3>
+                            <p>São orações <span class="highlight">dependentes</span>. Uma oração (a subordinada) funciona como um termo sintático (sujeito, objeto, adjunto, etc.) da outra (a oração principal). Sozinha, a oração subordinada não tem sentido completo.</p>
+                             <p>Ex: "<span class="highlight">Espero</span> <span class="highlight">que você venha</span>."<br>A primeira oração ("Espero") é a principal. A segunda ("que você venha") é a subordinada, pois ela completa o sentido do verbo "esperar". Quem espera, espera ALGO. Esse "algo" é a segunda oração. Sozinha, "que você venha" não faz sentido.</p>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                <section id="practice-section" class="hidden">
+                    <div class="mb-4 flex justify-end">
+                        <button id="order-toggle-btn" class="btn-ghost text-xs">Ordem Aleatória</button>
+                    </div>
+                    <div id="question-buttons" class="mb-4"></div>
+                    <div id="quiz-container">
+                        </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const root = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const btnLearn = document.getElementById('btn-learn');
+        const btnPractice = document.getElementById('btn-practice');
+        const learnSection = document.getElementById('learn-section');
+        const practiceSection = document.getElementById('practice-section');
+        const questionButtons = document.getElementById('question-buttons');
+        const quizContainer = document.getElementById('quiz-container');
+        const orderToggleBtn = document.getElementById('order-toggle-btn');
+
+        if(!btnLearn || !btnPractice || !learnSection || !practiceSection || !questionButtons || !quizContainer || !orderToggleBtn){
+            console.error('Elementos DOM não encontrados.');
+            return;
+        }
+
+        (function(){
+            const t = localStorage.getItem('cmf-grammar-theme') || 'dark';
+            if(t === 'light') root.classList.add('theme-light');
+            themeToggle.addEventListener('click', () => {
+                root.classList.toggle('theme-light');
+                localStorage.setItem('cmf-grammar-theme', root.classList.contains('theme-light') ? 'light' : 'dark');
+            });
+        })();
+        
+        const quizData = [
+            // Funções da Linguagem
+            { topic: 'Funções da Linguagem', q: '1) Em "Não perca esta oportunidade! Ligue agora!", qual função da linguagem predomina?', options: ['Emotiva', 'Apelativa', 'Referencial', 'Poética'], answer: 'Apelativa', explanation: 'O uso de verbos no imperativo ("não perca", "ligue") visa convencer o leitor a tomar uma ação.'},
+            { topic: 'Funções da Linguagem', q: '2) A previsão do tempo em um telejornal é um exemplo claro de qual função?', options: ['Fática', 'Metalinguística', 'Referencial', 'Poética'], answer: 'Referencial', explanation: 'O objetivo principal é informar sobre um fato (o tempo) de maneira objetiva.'},
+            { topic: 'Funções da Linguagem', q: '3) A frase "Que saudade que eu sinto da minha terra!" tem como função principal a:', options: ['Emotiva', 'Apelativa', 'Fática', 'Referencial'], answer: 'Emotiva', explanation: 'O foco está na expressão do sentimento (saudade) do emissor (eu).'},
+            { topic: 'Funções da Linguagem', q: '4) Quando um professor de português explica o que é um verbo, ele está usando a função:', options: ['Poética', 'Metalinguística', 'Apelativa', 'Fática'], answer: 'Metalinguística', explanation: 'Ele está usando a linguagem (código) para explicar a própria linguagem (verbo).'},
+            { topic: 'Funções da Linguagem', q: '5) Em um poema cheio de rimas e metáforas, a função predominante é a:', options: ['Referencial', 'Emotiva', 'Poética', 'Metalinguística'], answer: 'Poética', explanation: 'A preocupação principal é com a forma e a beleza da mensagem, não apenas com seu conteúdo.'},
+            { topic: 'Funções da Linguagem', q: '6) A expressão "Alô, está me ouvindo?" cumpre qual função da linguagem?', options: ['Fática', 'Apelativa', 'Emotiva', 'Referencial'], answer: 'Fática', explanation: 'A intenção é testar se o canal de comunicação está funcionando corretamente.'},
+            { topic: 'Funções da Linguagem', q: '7) Qual função da linguagem é predominante em uma receita de bolo?', options: ['Emotiva', 'Apelativa', 'Poética', 'Fática'], answer: 'Apelativa', explanation: 'Embora informe (referencial), a principal função é instruir e guiar o receptor, usando verbos no imperativo (misture, asse).'},
+            { topic: 'Funções da Linguagem', q: '8) Um dicionário é um livro onde a função _________ é total.', options: ['Referencial', 'Poética', 'Metalinguística', 'Emotiva'], answer: 'Metalinguística', explanation: 'Ele usa palavras para definir e explicar o significado de outras palavras.'},
+            { topic: 'Funções da Linguagem', q: '9) A frase "O amor é fogo que arde sem se ver" de Camões é um exemplo de função:', options: ['Referencial', 'Poética', 'Fática', 'Apelativa'], answer: 'Poética', explanation: 'A construção da mensagem, com uma metáfora e sonoridade, é o foco principal.'},
+            { topic: 'Funções da Linguagem', q: '10) "Vote no candidato X!" é um exemplo claro da função:', options: ['Emotiva', 'Referencial', 'Apelativa', 'Metalinguística'], answer: 'Apelativa', explanation: 'O objetivo é persuadir o eleitor a realizar uma ação específica (votar).'},
+            { topic: 'Funções da Linguagem', q: '11) Um bilhete que diz "Estou com dor de cabeça, volto mais tarde" tem qual função predominante?', options: ['Referencial', 'Emotiva', 'Fática', 'Poética'], answer: 'Referencial', explanation: 'A principal intenção é informar sobre um fato (a dor de cabeça e a volta tardia).'},
+            { topic: 'Funções da Linguagem', q: '12) Em conversas informais, expressões como "Né?", "Entende?" e "Hmm..." são marcas da função:', options: ['Apelativa', 'Fática', 'Emotiva', 'Poética'], answer: 'Fática', explanation: 'São usadas para manter o contato e garantir que a comunicação continue fluindo.'},
+            { topic: 'Funções da Linguagem', q: '13) Qual função se concentra no emissor e na expressão de seus sentimentos?', options: ['Apelativa', 'Referencial', 'Emotiva', 'Metalinguística'], answer: 'Emotiva', explanation: 'É a função da subjetividade, focada no "eu".'},
+
+            // Período Simples e Composto
+            { topic: 'Período Simples e Composto', q: '14) A frase "O sol ilumina a cidade e aquece os dias" é um:', options: ['Período simples', 'Período composto', 'Uma única oração', 'Frase nominal'], answer: 'Período composto', explanation: 'Possui dois verbos ("ilumina" e "aquece"), logo, duas orações.'},
+            { topic: 'Período Simples e Composto', q: '15) Qual das alternativas abaixo contém um período simples?', options: ['Eu quero que você venha.', 'Cheguei, vi e venci.', 'Preciso de sua ajuda.', 'Estudei, mas não passei.'], answer: 'Preciso de sua ajuda.', explanation: 'Esta frase possui apenas um verbo ("preciso").'},
+            { topic: 'Período Simples e Composto', q: '16) "O professor pediu silêncio." Esta frase é classificada como:', options: ['Período composto por coordenação', 'Período composto por subordinação', 'Período simples', 'Frase sem verbo'], answer: 'Período simples', explanation: 'Contém apenas uma oração, pois há apenas o verbo "pediu".'},
+            { topic: 'Período Simples e Composto', q: '17) O que define uma oração?', options: ['A presença de um sujeito', 'A presença de um verbo ou locução verbal', 'A presença de pontuação', 'Um conjunto de palavras com sentido completo'], answer: 'A presença de um verbo ou locução verbal', explanation: 'A estrutura da oração se organiza sempre em torno de um verbo.'},
+            { topic: 'Período Simples e Composto', q: '18) Quantas orações há no período "Quando o despertador tocou, eu levantei e fui tomar banho"?', options: ['Uma', 'Duas', 'Três', 'Quatro'], answer: 'Três', explanation: 'Os verbos são: "tocou", "levantei" e "fui tomar" (locução verbal), formando três orações.'},
+            
+            // Coordenação e Subordinação
+            { topic: 'Coordenação e Subordinação', q: '19) No período "Estudei para a prova, mas esqueci o conteúdo", a segunda oração é:', options: ['Coordenada aditiva', 'Coordenada adversativa', 'Subordinada adverbial', 'Coordenada explicativa'], answer: 'Coordenada adversativa', explanation: 'A conjunção "mas" introduz uma ideia de contraste ou oposição à primeira oração.'},
+            { topic: 'Coordenação e Subordinação', q: '20) "É necessário que todos colaborem." A segunda oração é:', options: ['Coordenada', 'Subordinada', 'Principal', 'Assindética'], answer: 'Subordinada', explanation: 'A oração "que todos colaborem" depende da primeira para fazer sentido, completando a ideia de "é necessário".'},
+            { topic: 'Coordenação e Subordinação', q: '21) Qual período é composto por coordenação?', options: ['Desejo que você seja feliz.', 'Ele falou que viria.', 'Penso, logo existo.', 'O livro que li é ótimo.'], answer: 'Penso, logo existo.', explanation: 'A conjunção "logo" conecta duas orações independentes com uma ideia de conclusão.'},
+            { topic: 'Coordenação e Subordinação', q: '22) "Não compareceu à reunião nem justificou a falta." A segunda oração é coordenada:', options: ['Aditiva', 'Adversativa', 'Alternativa', 'Conclusiva'], answer: 'Aditiva', explanation: 'A conjunção "nem" (equivalente a "e não") adiciona uma informação à primeira oração.'},
+            { topic: 'Coordenação e Subordinação', q: '23) A principal característica das orações coordenadas é que elas são:', options: ['Sintaticamente dependentes', 'Sintaticamente independentes', 'Sempre iniciadas por pronome relativo', 'Sempre sem conjunção'], answer: 'Sintaticamente independentes', explanation: 'Uma oração coordenada tem sua própria estrutura sintática e não funciona como termo de outra.'},
+            { topic: 'Coordenação e Subordinação', q: '24) Em "Ora estuda, ora trabalha", temos orações coordenadas:', options: ['Aditivas', 'Adversativas', 'Alternativas', 'Explicativas'], answer: 'Alternativas', explanation: 'As conjunções "ora...ora" expressam uma ideia de alternância entre as ações.'},
+            { topic: 'Coordenação e Subordinação', q: '25) "Choveu, porque o chão está molhado." A segunda oração é coordenada:', options: ['Conclusiva', 'Adversativa', 'Aditiva', 'Explicativa'], answer: 'Explicativa', explanation: 'A segunda oração justifica ou explica o motivo da afirmação feita na primeira.'},
+            { topic: 'Coordenação e Subordinação', q: '26) Qual a classificação da oração destacada em "O homem **que trabalha** vence na vida"?', options: ['Coordenada aditiva', 'Subordinada substantiva', 'Subordinada adjetiva', 'Coordenada adversativa'], answer: 'Subordinada adjetiva', explanation: 'A oração "que trabalha" funciona como um adjetivo, caracterizando o "homem".'},
+            { topic: 'Coordenação e Subordinação', q: '27) Em "A situação é grave, portanto devemos agir", a segunda oração é:', options: ['Coordenada conclusiva', 'Coordenada explicativa', 'Subordinada adverbial consecutiva', 'Coordenada adversativa'], answer: 'Coordenada conclusiva', explanation: 'A conjunção "portanto" introduz uma conclusão lógica baseada na primeira oração.'},
+            { topic: 'Coordenação e Subordinação', q: '28) A oração subordinada funciona como um ________ da oração principal.', options: ['verbo principal', 'termo sintático (sujeito, objeto, etc.)', 'período independente', 'sinônimo'], answer: 'termo sintático (sujeito, objeto, etc.)', explanation: 'A essência da subordinação é que uma oração inteira desempenha o papel de uma função sintática na outra.'},
+            { topic: 'Coordenação e Subordinação', q: '29) "Quer você queira, quer não, teremos que ir." As orações são coordenadas:', options: ['Adversativas', 'Aditivas', 'Alternativas', 'Conclusivas'], answer: 'Alternativas', explanation: 'As conjunções "quer...quer" indicam uma escolha ou alternância.'},
+            { topic: 'Coordenação e Subordinação', q: '30) Em "Fico feliz quando você me visita", a segunda oração é:', options: ['Coordenada', 'Subordinada', 'Absoluta', 'Principal'], answer: 'Subordinada', explanation: 'Ela indica a circunstância de tempo em que a primeira oração acontece, sendo dependente dela.'},
+            
+            // Revisão Geral
+            { topic: 'Revisão Geral', q: '31) A manchete "Inflação sobe 0,5% em agosto, diz instituto" utiliza predominantemente a função:', options: ['Emotiva', 'Apelativa', 'Referencial', 'Poética'], answer: 'Referencial', explanation: 'O objetivo é informar um dado econômico de forma direta e objetiva.'},
+            { topic: 'Revisão Geral', q: '32) Qual período abaixo é composto por subordinação?', options: ['O dia está lindo, mas ficarei em casa.', 'Eu não sei se ele virá.', 'Leia o livro e faça o resumo.', 'Venha logo, pois está tarde.'], answer: 'Eu não sei se ele virá.', explanation: 'A oração "se ele virá" completa o sentido do verbo "sei", funcionando como seu objeto direto.'},
+            { topic: 'Revisão Geral', q: '33) A frase "Que dia horrível!" é um exemplo de função:', options: ['Fática', 'Apelativa', 'Emotiva', 'Metalinguística'], answer: 'Emotiva', explanation: 'O foco está na expressão do sentimento negativo do emissor sobre o dia.'},
+            { topic: 'Revisão Geral', q: '34) "Os atletas treinaram muito; logo, venceram o campeonato." A segunda oração é:', options: ['Coordenada conclusiva', 'Coordenada explicativa', 'Coordenada adversativa', 'Subordinada adverbial final'], answer: 'Coordenada conclusiva', explanation: '"Logo" introduz a consequência ou conclusão do esforço mencionado na primeira oração.'},
+            { topic: 'Revisão Geral', q: '35) O que é um período simples?', options: ['Uma frase curta', 'Uma frase com um único verbo', 'Uma frase sem sujeito', 'Uma frase com duas orações'], answer: 'Uma frase com um único verbo', explanation: 'Período simples é aquele constituído por apenas uma oração (e, portanto, um verbo ou locução verbal).'},
+            { topic: 'Revisão Geral', q: '36) Em "Ele é um bom aluno, porém conversa muito", a conjunção "porém" pode ser substituída sem alterar o sentido por:', options: ['portanto', 'e', 'pois', 'contudo'], answer: 'contudo', explanation: '"Contudo" é uma conjunção adversativa, assim como "porém", expressando contraste.'},
+            { topic: 'Revisão Geral', q: '37) "Fale baixo, que o bebê está dormindo." A conjunção "que" classifica a segunda oração como:', options: ['Subordinada adjetiva', 'Coordenada explicativa', 'Coordenada aditiva', 'Subordinada substantiva'], answer: 'Coordenada explicativa', explanation: 'A segunda oração apresenta a justificativa para o pedido feito na primeira.'},
+            { topic: 'Revisão Geral', q: '38) Qual o único período composto abaixo?', options: ['Que silêncio!', 'Os jogadores entraram em campo confiantes.', 'Preciso de mais tempo para terminar a tarefa.', 'O sinal tocou e os alunos saíram.'], answer: 'O sinal tocou e os alunos saíram.', explanation: 'É o único com dois verbos ("tocou" e "saíram"), formando duas orações.'},
+            { topic: 'Revisão Geral', q: '39) "Quando a chuva passar, eu sairei." A primeira oração é:', options: ['Principal', 'Coordenada', 'Subordinada', 'Absoluta'], answer: 'Subordinada', explanation: 'Ela estabelece uma condição de tempo para a ocorrência da oração principal ("eu sairei").'},
+            { topic: 'Revisão Geral', q: '40) Uma propaganda de xampu que diz "Cabelos 10x mais fortes. Compre agora!" usa, respectivamente, as funções:', options: ['Referencial e Apelativa', 'Poética e Fática', 'Emotiva e Referencial', 'Apelativa e Metalinguística'], answer: 'Referencial e Apelativa', explanation: 'Primeiro informa uma característica do produto (referencial) e depois comanda uma ação (apelativa).'}
+        ];
+
+        let questionOrder = quizData.map((_,i)=>i);
+        let currentIndex = 0;
+        let questionStatus = Array(quizData.length).fill(null);
+        let quizStarted = false;
+        let isRandomOrder = true; 
+
+        orderToggleBtn.addEventListener('click', () => {
+            isRandomOrder = !isRandomOrder; 
+            orderToggleBtn.textContent = isRandomOrder ? 'Ordem Aleatória' : 'Ordem Crescente';
+            startQuiz();
+        });
+
+        function switchView(view){
+            if(view==='learn'){
+                practiceSection.classList.add('hidden');
+                learnSection.classList.remove('hidden');
+                btnLearn.classList.replace('btn-ghost', 'btn-primary');
+                btnPractice.classList.replace('btn-primary', 'btn-ghost');
+            } else {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnPractice.classList.replace('btn-ghost', 'btn-primary');
+                btnLearn.classList.replace('btn-primary', 'btn-ghost');
+                if (!quizStarted) {
+                    startQuiz();
+                    quizStarted = true;
+                }
+            }
+        }
+
+        btnLearn.addEventListener('click', () => switchView('learn'));
+        btnPractice.addEventListener('click', () => switchView('practice'));
+
+        function renderQuestionButtons(){
+            questionButtons.innerHTML='';
+            quizData.forEach((_,originalIndex)=>{
+                const b = document.createElement('button');
+                b.textContent = (originalIndex + 1);
+                b.setAttribute('data-original-index', String(originalIndex));
+                b.title = `Ir para a questão ${originalIndex+1}`;
+                b.onclick = ()=>{
+                    const pos = questionOrder.indexOf(originalIndex);
+                    if(pos >= 0){ currentIndex = pos; showQuestion(); }
+                };
+                if(questionStatus[originalIndex]==='correct') b.classList.add('correct-status');
+                if(questionStatus[originalIndex]==='wrong') b.classList.add('wrong-status');
+                
+                if (quizStarted) {
+                    const currentQuestionOriginalIndex = questionOrder[currentIndex];
+                    if(originalIndex === currentQuestionOriginalIndex) {
+                        b.classList.add('current-question');
+                    }
+                }
+                
+                questionButtons.appendChild(b);
+            });
+        }
+
+        const questionTopic = document.createElement('p');
+        questionTopic.className='text-sm font-semibold text-[var(--accent)] mb-2';
+        const questionText = document.createElement('p');
+        questionText.className='text-xl mt-2';
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className='mt-4 grid gap-3';
+        const feedbackContainer = document.createElement('div');
+        const nextBtn = document.createElement('button');
+        nextBtn.className='btn-primary mt-4'; nextBtn.textContent='Próxima';
+        const redoBtn = document.createElement('button');
+        redoBtn.className='btn-ghost mt-4 ml-3'; redoBtn.textContent='Refazer';
+
+        quizContainer.appendChild(questionTopic);
+        quizContainer.appendChild(questionText);
+        quizContainer.appendChild(optionsContainer);
+        quizContainer.appendChild(feedbackContainer);
+        quizContainer.appendChild(nextBtn);
+        quizContainer.appendChild(redoBtn);
+
+        function startQuiz(){
+            if (isRandomOrder) {
+                shuffleArray(questionOrder);
+            } else {
+                questionOrder = quizData.map((_, i) => i);
+            }
+            currentIndex = 0;
+            questionStatus.fill(null);
+            showQuestion();
+        }
+
+        function showQuestion(){
+            if (currentIndex >= questionOrder.length) {
+                showFinalResults();
+                return;
+            }
+        
+            const qIdx = questionOrder[currentIndex];
+            const qObj = quizData[qIdx];
+            
+            questionTopic.textContent = qObj.topic;
+            questionText.innerHTML = `${qIdx + 1}) ${qObj.q.replace(/^[\s\d\)\(\.\:\-–—_]+/,'').trim()}`;
+            
+            optionsContainer.innerHTML='';
+            feedbackContainer.innerHTML='';
+            redoBtn.classList.add('hidden');
+            nextBtn.disabled = true;
+
+            qObj.options.forEach(opt =>{
+                const b = document.createElement('button');
+                b.className='option-btn'; b.textContent=opt;
+                b.onclick = ()=> selectAnswer(b,opt,qObj.answer,qObj.explanation,qIdx);
+                optionsContainer.appendChild(b);
+            });
+
+            renderQuestionButtons();
+        }
+        
+        function showFinalResults() {
+            const correctCount = questionStatus.filter(s => s === 'correct').length;
+            const total = quizData.length;
+            questionTopic.textContent = '';
+            questionText.innerHTML = `🎉 Fim do Quiz! 🎉`;
+            optionsContainer.innerHTML = `<p class="text-center text-lg">Você acertou ${correctCount} de ${total} questões.</p>`;
+            feedbackContainer.innerHTML = '';
+            nextBtn.textContent = 'Recomeçar Quiz';
+            nextBtn.disabled = false;
+            nextBtn.onclick = () => {
+                quizStarted = false;
+                startQuiz(); 
+                quizStarted = true;
+            };
+            redoBtn.classList.add('hidden');
+        }
+
+        function selectAnswer(btn,opt,correct,explanation,qIdx){
+            Array.from(optionsContainer.children).forEach(b=>b.disabled=true);
+            nextBtn.disabled = false;
+
+            if(opt===correct){
+                btn.classList.add('celebrate','correct');
+                createConfetti();
+                questionStatus[qIdx]='correct';
+                feedbackContainer.className='feedback-correct mt-4';
+                feedbackContainer.textContent = 'Correto! ' + (explanation || '');
+            } else {
+                btn.classList.add('wrong');
+                questionStatus[qIdx]='wrong';
+                feedbackContainer.className='feedback-wrong mt-4';
+                feedbackContainer.innerHTML = `<strong>Errado.</strong> Resposta correta: <strong>${correct}</strong>.`;
+                if(explanation) feedbackContainer.innerHTML += `<div class="mt-2 text-sm">${explanation}</div>`;
+                
+                Array.from(optionsContainer.children).forEach(b=>{
+                    if(b.textContent === correct) b.classList.add('correct');
+                });
+                redoBtn.classList.remove('hidden');
+            }
+            renderQuestionButtons();
+        }
+
+        nextBtn.addEventListener('click', ()=>{
+            if(currentIndex < questionOrder.length-1){ 
+                currentIndex++; 
+                showQuestion(); 
+            } else { 
+                currentIndex++;
+                showFinalResults();
+            }
+        });
+
+        redoBtn.addEventListener('click', ()=>{
+            const currentQuestionIndex = questionOrder[currentIndex];
+            questionStatus[currentQuestionIndex] = null;
+            showQuestion();
+        });
+
+        function shuffleArray(a){
+            for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+        }
+
+        function createConfetti(){
+            const colors = ['#f59e0b','#ef4444','#10b981','#3b82f6','#8b5cf6'];
+            for(let i=0;i<12;i++){
+                const el = document.createElement('div');
+                el.className='confetti';
+                el.style.left = (30 + Math.random()*40) + '%';
+                el.style.top = (10 + Math.random()*10) + 'vh';
+                el.style.color = colors[Math.floor(Math.random()*colors.length)];
+                el.textContent = '🎉';
+                el.style.transform = `rotate(${Math.random()*360}deg)`;
+                el.style.animation = `confetti-fall ${1.2 + Math.random()*1}s linear forwards`;
+                document.body.appendChild(el);
+                setTimeout(()=> el.remove(), 2200);
+            }
+        }
+        
+        switchView('learn');
+    });
+    </script>
+</body>
+</html>
