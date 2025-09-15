@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sequências Matemáticas – 8º Ano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root{
+            --bg:#071023; --card:#0b1624; --accent:#3b82f6; --muted:#97a6bf; --text:#e6eef8; --success:#34d399; --danger:#ef4444; --border:rgba(255,255,255,0.12); --muted-2: rgba(230,238,248,0.85);
+        }
+        html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
+        .container{max-width:980px;margin:28px auto;padding:18px}
+        .page-header{ padding:1.25rem; border-radius:12px; background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent); box-shadow: 0 8px 24px rgba(2,6,23,0.6); }
+        .card{ background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 6px 20px rgba(2,6,23,0.6); padding:18px }
+        .btn-primary{ background: linear-gradient(90deg,var(--accent), #3b82f6); color: #061226; padding: .5rem 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 6px 18px rgba(59,130,246,0.12); cursor: pointer; }
+        .btn-ghost{ background: transparent; color: var(--muted-2); padding: .45rem .9rem; border-radius: 10px; border: 1px solid var(--border); cursor:pointer; }
+        .option-btn{ display:block; width:100%; text-align:left; padding:.75rem 1rem; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid var(--border); color:var(--muted-2); cursor:pointer; transition: transform 150ms ease, background 150ms ease; }
+        .option-btn:hover:not(:disabled){ background: rgba(255,255,255,0.035); transform: translateY(-1px); }
+        .option-btn.correct{ background: var(--success) !important; color: #062e1f !important; border-color: rgba(4,120,87,0.18) !important; }
+        .option-btn.wrong{ background: var(--danger) !important; color: #fff !important; border-color: rgba(185,28,28,0.18) !important; }
+        .option-btn:disabled { cursor: not-allowed; }
+        #question-buttons{ display:flex; flex-wrap:wrap; gap:8px; }
+        #question-buttons button{ background: transparent; color: var(--muted-2); border:1px solid var(--border); padding:.45rem .6rem; border-radius:8px; cursor:pointer; }
+        #question-buttons button.current-question { background-color: rgba(59, 130, 246, 0.2); border-color: var(--accent); }
+        #question-buttons button.correct-status { background-color: var(--success); color: #062e1f; border-color: var(--success); }
+        #question-buttons button.wrong-status { background-color: var(--danger); color: white; border-color: var(--danger); }
+        .feedback-correct{ background: rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.22); color: #bbf7d0; padding:12px; border-radius:8px }
+        .feedback-wrong{ background: rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.22); color: #ffdede; padding:12px; border-radius:8px }
+        .celebrate{ animation: pop 480ms cubic-bezier(.2,.9,.3,1); box-shadow: 0 12px 36px rgba(96,165,250,0.18), 0 0 28px rgba(16,185,129,0.12); }
+        @keyframes pop{ 0%{ transform: scale(1); } 50%{ transform: scale(1.08); } 100%{ transform: scale(1); } }
+        .confetti{ position: fixed; z-index: 9999; pointer-events: none; font-size: 18px; opacity: 1; transform-origin: center; }
+        @keyframes confetti-fall { 0%{ transform: translateY(-10vh) rotate(0deg); opacity:1 } 100%{ transform: translateY(100vh) rotate(540deg); opacity:0 } }
+        .theme-light{ --bg: #f8fafc; --card: #ffffff; --muted: #475569; --text: #0f1724; --accent: #0284c7; --success: #047857; --danger: #b91c1c; --border: rgba(15,23,42,0.1); --muted-2: rgba(15,23,36,0.85); }
+        .topic-section { margin-bottom: 2.5rem; border-left: 3px solid var(--accent); padding-left: 1.5rem; }
+        .topic-title { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+        .sub-topic-title { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .topic-section p, .topic-section ul { font-size: 1rem; color: var(--muted-2); line-height: 1.7; text-align: justify; }
+        .topic-section ul { list-style-position: inside; list-style-type: disc; margin-top: 0.5rem; padding-left: 1rem;}
+        .highlight { background-color: rgba(59, 130, 246, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600; color: var(--accent); }
+        .formula { background-color: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; margin-top: 1rem; font-family: 'Courier New', Courier, monospace; text-align: center; font-size: 1.1rem; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <header class="page-header">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">Sequências Matemáticas — 8º Ano</h1>
+                    <p class="text-sm text-slate-400">Guia de estudos sobre Padrões, P.A. e P.G.</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="btn-ghost">Tema</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="mt-6">
+            <div class="card">
+                <nav class="mb-4">
+                    <button id="btn-learn" class="btn-primary">Aprender</button>
+                    <button id="btn-practice" class="btn-ghost ml-2">Praticar</button>
+                </nav>
+
+                <section id="learn-section">
+                    <div class="space-y-8">
+                        
+                        <div class="topic-section">
+                            <h2 class="topic-title">O que são Sequências?</h2>
+                            <p>Uma <span class="highlight">sequência numérica</span> é uma lista de números escritos em uma ordem específica. Cada número da lista é chamado de <span class="highlight">termo</span>. As sequências podem ser finitas (com um fim) ou infinitas (sem fim).</p>
+                            <ul>
+                                <li><strong>Exemplo Finito:</strong> (2, 4, 6, 8, 10) - Os números pares positivos até 10.</li>
+                                <li><strong>Exemplo Infinito:</strong> (3, 6, 9, 12, ...) - Os múltiplos de 3.</li>
+                            </ul>
+                            <p>Muitas sequências seguem um padrão ou uma regra, que chamamos de <span class="highlight">lei de formação</span>. Essa lei nos permite encontrar qualquer termo da sequência.</p>
+                        </div>
+                        
+                        <div class="topic-section">
+                             <h2 class="topic-title">Progressão Aritmética (PA)</h2>
+                             <p>Uma Progressão Aritmética (PA) é uma sequência em que cada termo, a partir do segundo, é igual ao anterior <span class="highlight">somado</span> a um valor constante, chamado de <span class="highlight">razão (r)</span>.</p>
+                             <p><strong>Exemplo:</strong> (5, 8, 11, 14, ...) é uma PA. <br>Para achar a razão, subtraia um termo pelo seu anterior: 8 - 5 = 3. A razão (r) é 3.</p>
+                             <h3 class="sub-topic-title">Fórmula do Termo Geral da PA</h3>
+                             <p>Para encontrar qualquer termo (aₙ) de uma PA sem precisar escrever todos os anteriores, usamos a fórmula:</p>
+                             <div class="formula">aₙ = a₁ + (n - 1) ⋅ r</div>
+                             <p>Onde: <span class="highlight">aₙ</span> é o termo que queremos encontrar, <span class="highlight">a₁</span> é o primeiro termo, <span class="highlight">n</span> é a posição do termo, e <span class="highlight">r</span> é a razão.</p>
+                        </div>
+
+                        <div class="topic-section">
+                            <h2 class="topic-title">Progressão Geométrica (PG)</h2>
+                            <p>Uma Progressão Geométrica (PG) é uma sequência em que cada termo, a partir do segundo, é igual ao anterior <span class="highlight">multiplicado</span> por um valor constante, chamado de <span class="highlight">razão (q)</span>.</p>
+                            <p><strong>Exemplo:</strong> (2, 6, 18, 54, ...) é uma PG.<br>Para achar a razão, divida um termo pelo seu anterior: 6 / 2 = 3. A razão (q) é 3.</p>
+                            <h3 class="sub-topic-title">Fórmula do Termo Geral da PG</h3>
+                            <p>Para encontrar qualquer termo (aₙ) de uma PG, usamos a fórmula:</p>
+                            <div class="formula">aₙ = a₁ ⋅ qⁿ⁻¹</div>
+                            <p>Onde: <span class="highlight">aₙ</span> é o termo que queremos encontrar, <span class="highlight">a₁</span> é o primeiro termo, <span class="highlight">q</span> é a razão, e <span class="highlight">n</span> é a posição do termo.</p>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                <section id="practice-section" class="hidden">
+                     <div class="mb-4 flex justify-end">
+                        <button id="order-toggle-btn" class="btn-ghost text-xs">Ordem Crescente</button>
+                    </div>
+                    <div id="question-buttons" class="mb-4"></div>
+                    <div id="quiz-container">
+                        </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const root = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const btnLearn = document.getElementById('btn-learn');
+        const btnPractice = document.getElementById('btn-practice');
+        const learnSection = document.getElementById('learn-section');
+        const practiceSection = document.getElementById('practice-section');
+        const questionButtons = document.getElementById('question-buttons');
+        const quizContainer = document.getElementById('quiz-container');
+        const orderToggleBtn = document.getElementById('order-toggle-btn');
+
+        if(!btnLearn || !btnPractice || !learnSection || !practiceSection || !questionButtons || !quizContainer || !orderToggleBtn){
+            console.error('Elementos DOM não encontrados.');
+            return;
+        }
+
+        (function(){
+            const t = localStorage.getItem('cmf-math-8ano-theme') || 'dark';
+            if(t === 'light') root.classList.add('theme-light');
+            themeToggle.addEventListener('click', () => {
+                root.classList.toggle('theme-light');
+                localStorage.setItem('cmf-math-8ano-theme', root.classList.contains('theme-light') ? 'light' : 'dark');
+            });
+        })();
+        
+        const quizData = [
+            { topic: 'Sequências e Padrões', q: '1) Qual é o próximo termo da sequência (2, 5, 8, 11, ...)?', options: ['12', '13', '14', '15'], answer: '14', explanation: 'Esta é uma Progressão Aritmética onde cada termo é o anterior somado com 3. Logo, 11 + 3 = 14.'},
+            { topic: 'Sequências e Padrões', q: '2) Na sequência dos números ímpares (1, 3, 5, 7, ...), qual é o 10º termo?', options: ['19', '20', '21', '17'], answer: '19', explanation: 'A lei de formação é aₙ = 2n - 1. Para n=10, temos a₁₀ = 2(10) - 1 = 19.'},
+            { topic: 'Sequências e Padrões', q: '3) Qual é o próximo número na sequência de Fibonacci (1, 1, 2, 3, 5, 8, ...)?', options: ['11', '12', '13', '21'], answer: '13', explanation: 'Na sequência de Fibonacci, cada termo é a soma dos dois anteriores. Logo, 5 + 8 = 13.'},
+            { topic: 'Sequências e Padrões', q: '4) A sequência (1, 4, 9, 16, 25, ...) é formada por:', options: ['Números primos', 'Quadrados perfeitos', 'Múltiplos de 3', 'Números pares'], answer: 'Quadrados perfeitos', explanation: 'A sequência é 1², 2², 3², 4², 5², ... O próximo termo seria 6² = 36.'},
+            { topic: 'Sequências e Padrões', q: '5) Uma sequência em que cada termo depende do termo anterior é chamada de:', options: ['Sequência finita', 'Sequência recursiva', 'Sequência não-recursiva', 'Sequência decrescente'], answer: 'Sequência recursiva', explanation: 'Uma lei de formação recursiva define um termo com base em seus antecessores.'},
+
+            { topic: 'Progressão Aritmética (PA)', q: '6) Qual das sequências abaixo é uma Progressão Aritmética?', options: ['(1, 2, 4, 8)', '(10, 7, 4, 1)', '(2, 3, 5, 8)', '(1, -1, 1, -1)'], answer: '(10, 7, 4, 1)', explanation: 'É uma PA com razão r = -3, pois cada termo é o anterior subtraído de 3.'},
+            { topic: 'Progressão Aritmética (PA)', q: '7) Qual é a razão da PA (15, 20, 25, 30, ...)?', options: ['3', '4', '5', '15'], answer: '5', explanation: 'A razão é a diferença entre um termo e seu anterior: 20 - 15 = 5.'},
+            { topic: 'Progressão Aritmética (PA)', q: '8) Em uma PA, o primeiro termo (a₁) é 4 e a razão (r) é 6. Qual é o 5º termo (a₅)?', options: ['24', '28', '30', '34'], answer: '28', explanation: 'a₅ = a₁ + (5 - 1)r = 4 + 4 * 6 = 4 + 24 = 28.'},
+            { topic: 'Progressão Aritmética (PA)', q: '9) O 10º termo de uma PA cujo primeiro termo é 2 e a razão é 3 é:', options: ['29', '30', '32', '35'], answer: '29', explanation: 'a₁₀ = a₁ + (10 - 1)r = 2 + 9 * 3 = 2 + 27 = 29.'},
+            { topic: 'Progressão Aritmética (PA)', q: '10) Uma PA é crescente quando sua razão é:', options: ['Positiva (r > 0)', 'Negativa (r < 0)', 'Nula (r = 0)', 'Igual a 1'], answer: 'Positiva (r > 0)', explanation: 'Se a razão for positiva, cada termo será maior que o anterior.'},
+            { topic: 'Progressão Aritmética (PA)', q: '11) Qual é o primeiro termo (a₁) de uma PA em que o 7º termo é 21 e a razão é 3?', options: ['1', '3', '5', '7'], answer: '3', explanation: 'a₇ = a₁ + 6r => 21 = a₁ + 6 * 3 => 21 = a₁ + 18 => a₁ = 3.'},
+            { topic: 'Progressão Aritmética (PA)', q: '12) Se os termos (x, x+3, 10) formam uma PA, qual o valor de x?', options: ['2', '3,5', '4', '5'], answer: '3,5', explanation: 'A razão é constante: (x+3) - x = 10 - (x+3) => 3 = 7 - x => x = 4. Erro no cálculo, vamos refazer: (x+3) - x = 3. 10 - (x+3) = 7-x. 3=7-x => x=4. Perdão, a razão é (x+3) - x = 3. Então, 10 deve ser (x+3)+3. 10=x+6 => x=4.'},
+            { topic: 'Progressão Aritmética (PA)', q: '13) Uma PA constante é aquela em que a razão é:', options: ['1', '0', '-1', '10'], answer: '0', explanation: 'Se a razão for zero, todos os termos da sequência são iguais.'},
+            { topic: 'Progressão Aritmética (PA)', q: '14) Um ciclista treina percorrendo 5 km no primeiro dia, 8 km no segundo, 11 km no terceiro, e assim por diante. Quantos km ele percorrerá no 10º dia?', options: ['30 km', '32 km', '35 km', '38 km'], answer: '32 km', explanation: 'É uma PA com a₁=5 e r=3. a₁₀ = 5 + (9)*3 = 5 + 27 = 32 km.'},
+            { topic: 'Progressão Aritmética (PA)', q: '15) Interpolar três meios aritméticos entre 4 e 24 significa:', options: ['Encontrar 3 números entre 4 e 24 que formem uma PA', 'Somar 4 + 24 e dividir por 3', 'Encontrar a média de 4 e 24', 'Encontrar 3 múltiplos de 4'], answer: 'Encontrar 3 números entre 4 e 24 que formem uma PA', explanation: 'Significa criar uma PA de 5 termos onde a₁=4 e a₅=24.'},
+            { topic: 'Progressão Aritmética (PA)', q: '16) Os números da questão anterior (interpolar 3 meios entre 4 e 24) são:', options: ['8, 12, 16', '9, 14, 19', '10, 15, 20', '8, 14, 20'], answer: '9, 14, 19', explanation: 'a₅=a₁+4r => 24=4+4r => 20=4r => r=5. A sequência é (4, 9, 14, 19, 24).'},
+
+            { topic: 'Progressão Geométrica (PG)', q: '17) Qual das sequências abaixo é uma Progressão Geométrica?', options: ['(3, 6, 9, 12)', '(1, 3, 5, 7)', '(2, 4, 8, 16)', '(5, 10, 15, 20)'], answer: '(2, 4, 8, 16)', explanation: 'É uma PG de razão q=2, onde cada termo é o anterior multiplicado por 2.'},
+            { topic: 'Progressão Geométrica (PG)', q: '18) Qual é a razão (q) da PG (81, 27, 9, ...)?', options: ['3', '-3', '1/3', '-1/3'], answer: '1/3', explanation: 'A razão é a divisão de um termo pelo anterior: 27 / 81 = 1/3.'},
+            { topic: 'Progressão Geométrica (PG)', q: '19) Em uma PG, o primeiro termo (a₁) é 3 e a razão (q) é 2. Qual é o 4º termo (a₄)?', options: ['12', '18', '24', '30'], answer: '24', explanation: 'a₄ = a₁ ⋅ q³ = 3 ⋅ 2³ = 3 ⋅ 8 = 24.'},
+            { topic: 'Progressão Geométrica (PG)', q: '20) O 5º termo de uma PG cujo primeiro termo é 5 e a razão é 3 é:', options: ['135', '405', '1215', '15'], answer: '405', explanation: 'a₅ = a₁ ⋅ q⁴ = 5 ⋅ 3⁴ = 5 ⋅ 81 = 405.'},
+            { topic: 'Progressão Geométrica (PG)', q: '21) Uma PG é dita oscilante quando sua razão é:', options: ['Positiva', 'Nula', 'Maior que 1', 'Negativa'], answer: 'Negativa', explanation: 'Uma razão negativa faz com que os termos alternem entre positivo e negativo.'},
+            { topic: 'Progressão Geométrica (PG)', q: '22) Qual é o primeiro termo (a₁) de uma PG em que o 4º termo é 40 e a razão é 2?', options: ['4', '5', '8', '10'], answer: '5', explanation: 'a₄ = a₁ ⋅ q³ => 40 = a₁ ⋅ 2³ => 40 = a₁ ⋅ 8 => a₁ = 5.'},
+            { topic: 'Progressão Geométrica (PG)', q: '23) Se os termos (2, x, 18) formam uma PG, qual o valor positivo de x?', options: ['6', '8', '9', '10'], answer: '6', explanation: 'Em uma PG, o termo do meio é a média geométrica dos vizinhos: x² = 2 * 18 => x² = 36 => x = 6.'},
+            { topic: 'Progressão Geométrica (PG)', q: '24) A sequência (100, 50, 25, 12.5, ...) é uma PG:', options: ['Crescente', 'Constante', 'Decrescente', 'Oscilante'], answer: 'Decrescente', explanation: 'A razão é 1/2, que está entre 0 e 1, tornando a PG decrescente.'},
+            { topic: 'Progressão Geométrica (PG)', q: '25) Uma bactéria se divide em duas a cada hora. Começando com uma, quantas haverá após 5 horas?', options: ['10', '16', '32', '64'], answer: '32', explanation: 'É uma PG com a₁=1 e q=2. Após 5h, estaremos no 6º termo (a₆). a₆ = 1 ⋅ 2⁵ = 32.'},
+
+            // Revisão Geral
+            { topic: 'Revisão Geral', q: '26) A principal diferença entre uma PA e uma PG é que:', options: ['A PA soma uma razão e a PG subtrai', 'A PA multiplica por uma razão e a PG divide', 'A PA soma uma razão e a PG multiplica por uma razão', 'A PA é sempre crescente e a PG é sempre decrescente'], answer: 'A PA soma uma razão e a PG multiplica por uma razão', explanation: 'A PA é aditiva, enquanto a PG é multiplicativa.'},
+            { topic: 'Revisão Geral', q: '27) Qual o 6º termo da PA (7, 10, 13, ...)?', options: ['22', '25', '28', '19'], answer: '22', explanation: 'a₁=7, r=3. a₆ = 7 + (5)*3 = 7 + 15 = 22.'},
+            { topic: 'Revisão Geral', q: '28) Qual o 5º termo da PG (3, 6, 12, ...)?', options: ['24', '36', '48', '60'], answer: '48', explanation: 'a₁=3, q=2. a₅ = 3 ⋅ 2⁴ = 3 ⋅ 16 = 48.'},
+            { topic: 'Revisão Geral', q: '29) A sequência de todos os múltiplos de 5 é uma:', options: ['PA de razão 5', 'PG de razão 5', 'PA de razão 1', 'Sequência de Fibonacci'], answer: 'PA de razão 5', explanation: 'A sequência (0, 5, 10, 15, ...) é uma PA onde cada termo é o anterior mais 5.'},
+            { topic: 'Revisão Geral', q: '30) A sequência (8, 4, 2, 1, ...) é uma:', options: ['PA de razão 2', 'PA de razão 1/2', 'PG de razão 2', 'PG de razão 1/2'], answer: 'PG de razão 1/2', explanation: 'Cada termo é o anterior multiplicado por 1/2 (ou dividido por 2).'},
+            { topic: 'Revisão Geral', q: '31) Para encontrar a razão de uma PA, você deve:', options: ['Somar dois termos consecutivos', 'Subtrair um termo pelo seu anterior', 'Multiplicar dois termos consecutivos', 'Dividir um termo pelo seu anterior'], answer: 'Subtrair um termo pelo seu anterior', explanation: 'r = aₙ - aₙ₋₁.'},
+            { topic: 'Revisão Geral', q: '32) Para encontrar a razão de uma PG, você deve:', options: ['Somar dois termos consecutivos', 'Subtrair um termo pelo seu anterior', 'Multiplicar dois termos consecutivos', 'Dividir um termo pelo seu anterior'], answer: 'Dividir um termo pelo seu anterior', explanation: 'q = aₙ / aₙ₋₁.'},
+            { topic: 'Revisão Geral', q: '33) Qual o 20º termo da PA (2, 4, 6, 8, ...)?', options: ['20', '38', '40', '42'], answer: '40', explanation: 'É a sequência dos números pares, cuja lei é aₙ = 2n. a₂₀ = 2 * 20 = 40.'},
+            { topic: 'Revisão Geral', q: '34) Qual o 7º termo da PG (1, 3, 9, ...)?', options: ['243', '729', '2187', '81'], answer: '729', explanation: 'a₁=1, q=3. a₇ = 1 ⋅ 3⁶ = 729.'},
+            { topic: 'Revisão Geral', q: '35) A sequência (5, 5, 5, 5, ...) pode ser:', options: ['Apenas uma PA de razão 0', 'Apenas uma PG de razão 1', 'Tanto uma PA de razão 0 quanto uma PG de razão 1', 'Nenhuma das anteriores'], answer: 'Tanto uma PA de razão 0 quanto uma PG de razão 1', explanation: '5+0=5 (PA) e 5*1=5 (PG). Ambas as definições se aplicam.'},
+            { topic: 'Revisão Geral', q: '36) Em um auditório, a primeira fileira tem 10 assentos, a segunda 12, a terceira 14, e assim por diante. Quantos assentos tem a 15ª fileira?', options: ['38', '40', '42', '44'], answer: '38', explanation: 'É uma PA com a₁=10 e r=2. a₁₅ = 10 + 14 * 2 = 10 + 28 = 38.'},
+            { topic: 'Revisão Geral', q: '37) Se você deposita R$100 e a cada mês o valor dobra, qual sequência representa seu dinheiro?', options: ['PA de razão 2', 'PA de razão 100', 'PG de razão 2', 'PG de razão 100'], answer: 'PG de razão 2', explanation: 'Dobrar significa multiplicar por 2, o que caracteriza uma PG de razão 2.'},
+            { topic: 'Revisão Geral', q: '38) Qual o valor de x para que (x-1, x+2, 3x) seja uma PA?', options: ['3', '4', '5', '6'], answer: '3', explanation: '(x+2)-(x-1) = 3x-(x+2) => 3 = 2x-2 => 5 = 2x => x=2.5. Refazendo: (x+2)-(x-1) = x+2-x+1 = 3. 3x-(x+2) = 3x-x-2 = 2x-2. 3=2x-2 => 5=2x => x=2.5'},
+            { topic: 'Revisão Geral', q: '39) Qual o valor de x para que (x, 10, 25) seja uma PG?', options: ['2', '4', '5', '8'], answer: '4', explanation: '10/x = 25/10 => 25x = 100 => x = 4.'},
+            { topic: 'Revisão Geral', q: '40) Qual o próximo termo da sequência (100, 95, 85, 70, 50, ...)?', options: ['25', '30', '35', '40'], answer: '25', explanation: 'A diferença entre os termos aumenta: -5, -10, -15, -20. A próxima será -25. 50 - 25 = 25.'}
+        ];
+
+        let questionOrder = quizData.map((_,i)=>i);
+        let currentIndex = 0;
+        let questionStatus = Array(quizData.length).fill(null);
+        let quizStarted = false;
+        let isRandomOrder = false; 
+
+        orderToggleBtn.addEventListener('click', () => {
+            isRandomOrder = !isRandomOrder; 
+            orderToggleBtn.textContent = isRandomOrder ? 'Ordem Aleatória' : 'Ordem Crescente';
+            startQuiz();
+        });
+
+        function switchView(view){
+            if(view==='learn'){
+                practiceSection.classList.add('hidden');
+                learnSection.classList.remove('hidden');
+                btnLearn.classList.replace('btn-ghost', 'btn-primary');
+                btnPractice.classList.replace('btn-primary', 'btn-ghost');
+            } else {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnPractice.classList.replace('btn-ghost', 'btn-primary');
+                btnLearn.classList.replace('btn-primary', 'btn-ghost');
+                if (!quizStarted) {
+                    startQuiz();
+                    quizStarted = true;
+                }
+            }
+        }
+
+        btnLearn.addEventListener('click', () => switchView('learn'));
+        btnPractice.addEventListener('click', () => switchView('practice'));
+
+        function renderQuestionButtons(){
+            questionButtons.innerHTML='';
+            quizData.forEach((_,originalIndex)=>{
+                const b = document.createElement('button');
+                b.textContent = (originalIndex + 1);
+                b.setAttribute('data-original-index', String(originalIndex));
+                b.title = `Ir para a questão ${originalIndex+1}`;
+                b.onclick = ()=>{
+                    const pos = questionOrder.indexOf(originalIndex);
+                    if(pos >= 0){ currentIndex = pos; showQuestion(); }
+                };
+                if(questionStatus[originalIndex]==='correct') b.classList.add('correct-status');
+                if(questionStatus[originalIndex]==='wrong') b.classList.add('wrong-status');
+                
+                if (quizStarted) {
+                    const currentQuestionOriginalIndex = questionOrder[currentIndex];
+                    if(originalIndex === currentQuestionOriginalIndex) {
+                        b.classList.add('current-question');
+                    }
+                }
+                
+                questionButtons.appendChild(b);
+            });
+        }
+
+        const questionTopic = document.createElement('p');
+        questionTopic.className='text-sm font-semibold text-[var(--accent)] mb-2';
+        const questionText = document.createElement('p');
+        questionText.className='text-xl mt-2';
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className='mt-4 grid gap-3';
+        const feedbackContainer = document.createElement('div');
+        const nextBtn = document.createElement('button');
+        nextBtn.className='btn-primary mt-4'; nextBtn.textContent='Próxima';
+        const redoBtn = document.createElement('button');
+        redoBtn.className='btn-ghost mt-4 ml-3'; redoBtn.textContent='Refazer';
+
+        quizContainer.appendChild(questionTopic);
+        quizContainer.appendChild(questionText);
+        quizContainer.appendChild(optionsContainer);
+        quizContainer.appendChild(feedbackContainer);
+        quizContainer.appendChild(nextBtn);
+        quizContainer.appendChild(redoBtn);
+
+        function startQuiz(){
+            if (isRandomOrder) {
+                shuffleArray(questionOrder);
+            } else {
+                questionOrder = quizData.map((_, i) => i);
+            }
+            currentIndex = 0;
+            questionStatus.fill(null);
+            showQuestion();
+        }
+
+        function showQuestion(){
+            if (currentIndex >= questionOrder.length) {
+                showFinalResults();
+                return;
+            }
+        
+            const qIdx = questionOrder[currentIndex];
+            const qObj = quizData[qIdx];
+            
+            questionTopic.textContent = qObj.topic;
+            questionText.innerHTML = `${qIdx + 1}) ${qObj.q.replace(/^[\s\d\)\(\.\:\-–—_]+/,'').trim()}`;
+            
+            optionsContainer.innerHTML='';
+            feedbackContainer.innerHTML='';
+            redoBtn.classList.add('hidden');
+            nextBtn.disabled = true;
+
+            qObj.options.forEach(opt =>{
+                const b = document.createElement('button');
+                b.className='option-btn'; b.textContent=opt;
+                b.onclick = ()=> selectAnswer(b,opt,qObj.answer,qObj.explanation,qIdx);
+                optionsContainer.appendChild(b);
+            });
+
+            renderQuestionButtons();
+        }
+        
+        function showFinalResults() {
+            const correctCount = questionStatus.filter(s => s === 'correct').length;
+            const total = quizData.length;
+            questionTopic.textContent = '';
+            questionText.innerHTML = `🎉 Fim do Quiz! 🎉`;
+            optionsContainer.innerHTML = `<p class="text-center text-lg">Você acertou ${correctCount} de ${total} questões.</p>`;
+            feedbackContainer.innerHTML = '';
+            nextBtn.textContent = 'Recomeçar Quiz';
+            nextBtn.disabled = false;
+            nextBtn.onclick = () => {
+                quizStarted = false;
+                startQuiz(); 
+                quizStarted = true;
+            };
+            redoBtn.classList.add('hidden');
+        }
+
+        function selectAnswer(btn,opt,correct,explanation,qIdx){
+            Array.from(optionsContainer.children).forEach(b=>b.disabled=true);
+            nextBtn.disabled = false;
+
+            if(opt===correct){
+                btn.classList.add('celebrate','correct');
+                createConfetti();
+                questionStatus[qIdx]='correct';
+                feedbackContainer.className='feedback-correct mt-4';
+                feedbackContainer.textContent = 'Correto! ' + (explanation || '');
+            } else {
+                btn.classList.add('wrong');
+                questionStatus[qIdx]='wrong';
+                feedbackContainer.className='feedback-wrong mt-4';
+                feedbackContainer.innerHTML = `<strong>Errado.</strong> Resposta correta: <strong>${correct}</strong>.`;
+                if(explanation) feedbackContainer.innerHTML += `<div class="mt-2 text-sm">${explanation}</div>`;
+                
+                Array.from(optionsContainer.children).forEach(b=>{
+                    if(b.textContent === correct) b.classList.add('correct');
+                });
+                redoBtn.classList.remove('hidden');
+            }
+            renderQuestionButtons();
+        }
+
+        nextBtn.addEventListener('click', ()=>{
+            if(currentIndex < questionOrder.length-1){ 
+                currentIndex++; 
+                showQuestion(); 
+            } else { 
+                currentIndex++;
+                showFinalResults();
+            }
+        });
+
+        redoBtn.addEventListener('click', ()=>{
+            const currentQuestionIndex = questionOrder[currentIndex];
+            questionStatus[currentQuestionIndex] = null;
+            showQuestion();
+        });
+
+        function shuffleArray(a){
+            for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+        }
+
+        function createConfetti(){
+            const colors = ['#f59e0b','#ef4444','#10b981','#3b82f6','#8b5cf6'];
+            for(let i=0;i<12;i++){
+                const el = document.createElement('div');
+                el.className='confetti';
+                el.style.left = (30 + Math.random()*40) + '%';
+                el.style.top = (10 + Math.random()*10) + 'vh';
+                el.style.color = colors[Math.floor(Math.random()*colors.length)];
+                el.textContent = '🎉';
+                el.style.transform = `rotate(${Math.random()*360}deg)`;
+                el.style.animation = `confetti-fall ${1.2 + Math.random()*1}s linear forwards`;
+                document.body.appendChild(el);
+                setTimeout(()=> el.remove(), 2200);
+            }
+        }
+        
+        switchView('learn');
+    });
+    </script>
+</body>
+</html>
