@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reino Animalia – 8º Ano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root{
+            --bg:#071023; --card:#0b1624; --accent:#3b82f6; --muted:#97a6bf; --text:#e6eef8; --success:#34d399; --danger:#ef4444; --border:rgba(255,255,255,0.12); --muted-2: rgba(230,238,248,0.85);
+        }
+        html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
+        .container{max-width:980px;margin:28px auto;padding:18px}
+        .page-header{ padding:1.25rem; border-radius:12px; background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent); box-shadow: 0 8px 24px rgba(2,6,23,0.6); }
+        .card{ background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 6px 20px rgba(2,6,23,0.6); padding:18px }
+        .btn-primary{ background: linear-gradient(90deg,var(--accent), #3b82f6); color: #061226; padding: .5rem 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 6px 18px rgba(59,130,246,0.12); cursor: pointer; }
+        .btn-ghost{ background: transparent; color: var(--muted-2); padding: .45rem .9rem; border-radius: 10px; border: 1px solid var(--border); cursor:pointer; }
+        .option-btn{ display:block; width:100%; text-align:left; padding:.75rem 1rem; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid var(--border); color:var(--muted-2); cursor:pointer; transition: transform 150ms ease, background 150ms ease; }
+        .option-btn:hover:not(:disabled){ background: rgba(255,255,255,0.035); transform: translateY(-1px); }
+        .option-btn.correct{ background: var(--success) !important; color: #062e1f !important; border-color: rgba(4,120,87,0.18) !important; }
+        .option-btn.wrong{ background: var(--danger) !important; color: #fff !important; border-color: rgba(185,28,28,0.18) !important; }
+        .option-btn:disabled { cursor: not-allowed; }
+        #question-buttons{ display:flex; flex-wrap:wrap; gap:8px; }
+        #question-buttons button{ background: transparent; color: var(--muted-2); border:1px solid var(--border); padding:.45rem .6rem; border-radius:8px; cursor:pointer; }
+        #question-buttons button.current-question { background-color: rgba(59, 130, 246, 0.2); border-color: var(--accent); }
+        #question-buttons button.correct-status { background-color: var(--success); color: #062e1f; border-color: var(--success); }
+        #question-buttons button.wrong-status { background-color: var(--danger); color: white; border-color: var(--danger); }
+        .feedback-correct{ background: rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.22); color: #bbf7d0; padding:12px; border-radius:8px }
+        .feedback-wrong{ background: rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.22); color: #ffdede; padding:12px; border-radius:8px }
+        .celebrate{ animation: pop 480ms cubic-bezier(.2,.9,.3,1); box-shadow: 0 12px 36px rgba(96,165,250,0.18), 0 0 28px rgba(16,185,129,0.12); }
+        @keyframes pop{ 0%{ transform: scale(1); } 50%{ transform: scale(1.08); } 100%{ transform: scale(1); } }
+        .confetti{ position: fixed; z-index: 9999; pointer-events: none; font-size: 18px; opacity: 1; transform-origin: center; }
+        @keyframes confetti-fall { 0%{ transform: translateY(-10vh) rotate(0deg); opacity:1 } 100%{ transform: translateY(100vh) rotate(540deg); opacity:0 } }
+        .theme-light{ --bg: #f8fafc; --card: #ffffff; --muted: #475569; --text: #0f1724; --accent: #0284c7; --success: #047857; --danger: #b91c1c; --border: rgba(15,23,42,0.1); --muted-2: rgba(15,23,36,0.85); }
+        .topic-section { margin-bottom: 2.5rem; border-left: 3px solid var(--accent); padding-left: 1.5rem; }
+        .topic-title { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+        .sub-topic-title { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .topic-section p, .topic-section ul { font-size: 1rem; color: var(--muted-2); line-height: 1.7; text-align: justify; }
+        .topic-section ul { list-style-position: inside; list-style-type: disc; margin-top: 0.5rem; padding-left: 1rem;}
+        .highlight { background-color: rgba(59, 130, 246, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600; color: var(--accent); }
+        .difficulty-badge { padding: 0.1rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .difficulty-facil { background-color: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
+        .difficulty-medio { background-color: rgba(250, 204, 21, 0.2); color: #facc15; }
+        .difficulty-dificil { background-color: rgba(248, 113, 113, 0.2); color: #f87171; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <header class="page-header">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">Ciências — 8º Ano</h1>
+                    <p class="text-sm text-slate-400">Guia de estudos completo sobre o Reino Animalia.</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="btn-ghost">Tema</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="mt-6">
+            <div class="card">
+                <nav class="mb-4">
+                    <button id="btn-learn" class="btn-primary">Aprender</button>
+                    <button id="btn-practice" class="btn-ghost ml-2">Praticar</button>
+                </nav>
+
+                <section id="learn-section">
+                    <div class="space-y-8">
+                        
+                        <div class="topic-section">
+                            <h2 class="topic-title">Reino Animalia</h2>
+                            <p>O Reino Animalia, ou Reino dos Animais, é um dos mais diversos do planeta. Todos os animais compartilham três características principais: são <span class="highlight">eucariontes</span> (suas células têm núcleo organizado), <span class="highlight">multicelulares</span> (formados por muitas células) e <span class="highlight">heterótrofos</span> (não produzem seu próprio alimento, precisando consumir outros seres vivos).</p>
+                            <p>Este reino é dividido em grandes grupos chamados <span class="highlight">filos</span>. Vamos conhecer os principais:</p>
+
+                            <h3 class="sub-topic-title">Invertebrados</h3>
+                            <ul>
+                                <li><strong>Poríferos:</strong> São as esponjas-do-mar. Animais muito simples, aquáticos e sésseis (vivem fixos). Seus corpos são cheios de poros, por onde filtram a água para obter alimento.</li>
+                                <li><strong>Cnidários:</strong> Inclui águas-vivas, corais e anêmonas. Possuem células urticantes chamadas <span class="highlight">cnidócitos</span>, usadas para defesa e captura de presas.</li>
+                                <li><strong>Platelmintos:</strong> Vermes de corpo achatado, como as planárias e a solitária (tênia).</li>
+                                <li><strong>Nematelmintos:</strong> Vermes de corpo cilíndrico e alongado, como a lombriga.</li>
+                                <li><strong>Moluscos:</strong> Animais de corpo mole, muitos com uma concha protetora. Inclui caracóis, ostras, lulas e polvos.</li>
+                                <li><strong>Anelídeos:</strong> Possuem o corpo formado por anéis (segmentos). Minhocas e sanguessugas são exemplos.</li>
+                                <li><strong>Artrópodes:</strong> O maior filo de todos. A principal característica é o <span class="highlight">exoesqueleto</span> (uma "casca" externa) e as patas articuladas. Se dividem em: Insetos (baratas, borboletas), Aracnídeos (aranhas, escorpiões), Crustáceos (caranguejos, camarões), Quilópodes (lacraias) e Diplópodes (piolhos-de-cobra).</li>
+                                <li><strong>Equinodermos:</strong> Animais marinhos com espinhos na pele. Ex: estrela-do-mar e ouriço-do-mar.</li>
+                            </ul>
+
+                            <h3 class="sub-topic-title">Cordados (Vertebrados)</h3>
+                            <p>O filo dos Cordados inclui os animais com notocorda, uma estrutura de sustentação que, na maioria, evolui para a <span class="highlight">coluna vertebral</span>. São os vertebrados:</p>
+                             <ul>
+                                <li><strong>Peixes:</strong> Aquáticos, respiram por brânquias e têm o corpo coberto por escamas.</li>
+                                <li><strong>Anfíbios:</strong> Vivem parte da vida na água (fase larval) e parte na terra (fase adulta). Têm a pele úmida e lisa. Ex: sapos, rãs.</li>
+                                <li><strong>Répteis:</strong> Possuem o corpo coberto por escamas ou placas, respiração pulmonar e botam ovos com casca. Ex: tartarugas, jacarés, cobras.</li>
+                                <li><strong>Aves:</strong> Têm o corpo coberto de penas, ossos ocos (pneumáticos), bico e são adaptadas ao voo.</li>
+                                <li><strong>Mamíferos:</strong> Possuem pelos no corpo e glândulas mamárias para amamentar os filhotes. Nós, seres humanos, pertencemos a esta classe.</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                <section id="practice-section" class="hidden">
+                     <div class="mb-4 flex justify-end">
+                        <button id="order-toggle-btn" class="btn-ghost text-xs">Ordem Crescente</button>
+                    </div>
+                    <div id="question-buttons" class="mb-4"></div>
+                    <div id="quiz-container">
+                        </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const root = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const btnLearn = document.getElementById('btn-learn');
+        const btnPractice = document.getElementById('btn-practice');
+        const learnSection = document.getElementById('learn-section');
+        const practiceSection = document.getElementById('practice-section');
+        const questionButtons = document.getElementById('question-buttons');
+        const quizContainer = document.getElementById('quiz-container');
+        const orderToggleBtn = document.getElementById('order-toggle-btn');
+
+        if(!btnLearn || !btnPractice || !learnSection || !practiceSection || !questionButtons || !quizContainer || !orderToggleBtn){
+            console.error('Elementos DOM não encontrados.');
+            return;
+        }
+
+        (function(){
+            const t = localStorage.getItem('cmf-science-8ano-theme') || 'dark';
+            if(t === 'light') root.classList.add('theme-light');
+            themeToggle.addEventListener('click', () => {
+                root.classList.toggle('theme-light');
+                localStorage.setItem('cmf-science-8ano-theme', root.classList.contains('theme-light') ? 'light' : 'dark');
+            });
+        })();
+        
+        const quizData = [
+            { topic: 'Características Gerais', difficulty: 'Fácil', q: '1) Qual das seguintes características NÃO pertence a todos os animais?', options: ['São multicelulares', 'São heterótrofos', 'Produzem seu próprio alimento', 'São eucariontes'], answer: 'Produzem seu próprio alimento', explanation: 'A produção do próprio alimento (autotrofia) é característica de plantas e algas. Animais são heterótrofos.'},
+            { topic: 'Características Gerais', difficulty: 'Fácil', q: '2) Seres eucariontes são aqueles cujas células possuem:', options: ['Parede celular', 'Apenas material genético disperso', 'Núcleo organizado', 'Cloroplastos'], answer: 'Núcleo organizado', explanation: 'A presença de um núcleo delimitado por uma membrana (carioteca) é a principal característica das células eucariontes.'},
+            
+            // Invertebrados
+            { topic: 'Poríferos', difficulty: 'Fácil', q: '3) As esponjas-do-mar, animais sésseis e filtradores, pertencem a qual filo?', options: ['Cnidaria', 'Porifera', 'Mollusca', 'Annelida'], answer: 'Porifera', explanation: 'O nome Porifera vem dos inúmeros poros que esses animais possuem no corpo para filtrar a água.'},
+            { topic: 'Cnidários', difficulty: 'Médio', q: '4) As células urticantes usadas por águas-vivas para defesa e captura de presas são chamadas de:', options: ['Poros', 'Cnidócitos', 'Células-flama', 'Espículas'], answer: 'Cnidócitos', explanation: 'Os cnidócitos são a característica mais marcante do filo Cnidaria.'},
+            { topic: 'Platelmintos', difficulty: 'Fácil', q: '5) A tênia, conhecida como "solitária", é um verme parasita de corpo achatado. A qual filo ela pertence?', options: ['Nematelmintos', 'Platelmintos', 'Anelídeos', 'Moluscos'], answer: 'Platelmintos', explanation: '"Platy" significa chato, e "helminthes" significa verme. São os vermes achatados.'},
+            { topic: 'Nematelmintos', difficulty: 'Fácil', q: '6) A lombriga é um verme de corpo cilíndrico, não segmentado, que causa a ascaridíase. Ela pertence ao filo:', options: ['Platelmintos', 'Anelídeos', 'Nematelmintos', 'Equinodermos'], answer: 'Nematelmintos', explanation: '"Nema" significa fio ou cilindro. São os vermes de corpo cilíndrico.'},
+            { topic: 'Moluscos', difficulty: 'Fácil', q: '7) Polvos, lulas, ostras e caracóis são exemplos de animais do filo:', options: ['Mollusca', 'Arthropoda', 'Annelida', 'Cnidaria'], answer: 'Mollusca', explanation: 'Todos eles possuem corpo mole, característica que dá nome ao filo (Mollusca).'},
+            { topic: 'Anelídeos', difficulty: 'Fácil', q: '8) As minhocas são muito importantes para o solo e possuem o corpo dividido em anéis. Elas são do filo:', options: ['Nematelmintos', 'Moluscos', 'Anelídeos', 'Platelmintos'], answer: 'Anelídeos', explanation: 'A principal característica dos anelídeos é o corpo segmentado em anéis.'},
+            { topic: 'Artrópodes', difficulty: 'Fácil', q: '9) O exoesqueleto de quitina e as patas articuladas são características marcantes de qual filo?', options: ['Moluscos', 'Equinodermos', 'Cordados', 'Artrópodes'], answer: 'Artrópodes', explanation: '"Arthro" significa articulação e "podos" significa pés/patas. É o maior filo animal.'},
+            { topic: 'Artrópodes', difficulty: 'Médio', q: '10) Aranhas e escorpiões, que possuem 4 pares de patas e não têm antenas, pertencem à classe dos:', options: ['Insetos', 'Crustáceos', 'Aracnídeos', 'Quilópodes'], answer: 'Aracnídeos', explanation: 'A ausência de antenas e a presença de 8 patas são características dos aracnídeos.'},
+            { topic: 'Artrópodes', difficulty: 'Médio', q: '11) Um animal com 3 pares de patas, um par de antenas e o corpo dividido em cabeça, tórax e abdome é um(a):', options: ['Crustáceo', 'Aracnídeo', 'Inseto', 'Miriápode'], answer: 'Inseto', explanation: 'Essa é a descrição clássica da estrutura corporal de um inseto.'},
+            { topic: 'Artrópodes', difficulty: 'Médio', q: '12) Camarões e caranguejos são artrópodes que vivem principalmente em ambiente aquático e respiram por brânquias. Eles são da classe dos:', options: ['Insetos', 'Crustáceos', 'Aracnídeos', 'Diplópodes'], answer: 'Crustáceos', explanation: 'A maioria dos crustáceos é aquática e possui dois pares de antenas.'},
+            { topic: 'Equinodermos', difficulty: 'Fácil', q: '13) Estrelas-do-mar e ouriços-do-mar são animais exclusivamente marinhos com espinhos na pele. Pertencem ao filo:', options: ['Porifera', 'Mollusca', 'Cnidaria', 'Echinodermata'], answer: 'Echinodermata', explanation: '"Echino" significa espinho e "derma" significa pele.'},
+
+            // Vertebrados
+            { topic: 'Cordados - Vertebrados', difficulty: 'Fácil', q: '14) Qual é a estrutura de sustentação que caracteriza o filo dos Cordados e que evolui para a coluna vertebral na maioria deles?', options: ['Exoesqueleto', 'Notocorda', 'Concha', 'Crânio'], answer: 'Notocorda', explanation: 'A notocorda é um bastão flexível presente em todos os cordados, pelo menos na fase embrionária.'},
+            { topic: 'Peixes', difficulty: 'Fácil', q: '15) A respiração através de brânquias e o corpo coberto por escamas são características de qual grupo de vertebrados?', options: ['Anfíbios', 'Répteis', 'Peixes', 'Mamíferos'], answer: 'Peixes', explanation: 'Essas são adaptações clássicas ao modo de vida aquático.'},
+            { topic: 'Anfíbios', difficulty: 'Médio', q: '16) Sapos e rãs passam por uma metamorfose, tendo uma fase larval aquática (girino) e uma fase adulta terrestre. Por isso, são classificados como:', options: ['Répteis', 'Anfíbios', 'Peixes', 'Aves'], answer: 'Anfíbios', explanation: '"Anfi" significa duas e "bio" significa vida, referindo-se a essa "vida dupla" na água e na terra.'},
+            { topic: 'Répteis', difficulty: 'Médio', q: '17) A conquista definitiva do ambiente terrestre pelos vertebrados foi possível com o surgimento do ovo com casca, uma característica de qual grupo?', options: ['Anfíbios', 'Peixes', 'Répteis', 'Mamíferos'], answer: 'Répteis', explanation: 'O ovo com casca protege o embrião da dessecação, permitindo a reprodução fora da água.'},
+            { topic: 'Aves', difficulty: 'Fácil', q: '18) Corpo coberto de penas, ossos pneumáticos (ocos) e bico são adaptações para o voo presentes nas:', options: ['Aves', 'Répteis', 'Anfíbios', 'Mamíferos'], answer: 'Aves', explanation: 'Todas essas características contribuem para diminuir o peso e facilitar o voo.'},
+            { topic: 'Mamíferos', difficulty: 'Fácil', q: '19) A presença de pelos e glândulas mamárias para amamentar os filhotes são características exclusivas dos:', options: ['Répteis', 'Aves', 'Mamíferos', 'Anfíbios'], answer: 'Mamíferos', explanation: 'A amamentação é a característica que dá nome à classe dos mamíferos.'},
+            
+            // Revisão Geral
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '20) Qual dos grupos de invertebrados abaixo é o mais próximo evolutivamente dos cordados?', options: ['Artrópodes', 'Moluscos', 'Equinodermos', 'Anelídeos'], answer: 'Equinodermos', explanation: 'Apesar das aparências, estudos embrionários mostram que equinodermos e cordados compartilham um ancestral comum mais recente.'},
+            { topic: 'Revisão Geral', difficulty: 'Fácil', q: '21) Qual é o único filo animal cujos membros são sésseis na fase adulta?', options: ['Cnidários', 'Poríferos', 'Moluscos', 'Platelmintos'], answer: 'Poríferos', explanation: 'As esponjas vivem fixas a um substrato durante toda a sua vida adulta.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '22) A segmentação do corpo (metameria) é uma característica marcante em qual filo?', options: ['Platelmintos', 'Nematelmintos', 'Anelídeos', 'Moluscos'], answer: 'Anelídeos', explanation: 'O corpo das minhocas, por exemplo, é visivelmente formado pela repetição de segmentos ou anéis.'},
+            { topic: 'Revisão Geral', difficulty: 'Difícil', q: '23) Um animal que não possui tecidos verdadeiros e se alimenta por filtração é um:', options: ['Cnidário', 'Porífero', 'Platelminto', 'Equinodermo'], answer: 'Porífero', explanation: 'As esponjas são os únicos animais que não possuem tecidos e órgãos definidos.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '24) Qual característica permitiu aos artrópodes um grande sucesso evolutivo e a conquista de diversos ambientes?', options: ['Corpo mole', 'Ausência de patas', 'Exoesqueleto resistente e patas articuladas', 'Respiração por brânquias'], answer: 'Exoesqueleto resistente e patas articuladas', explanation: 'O exoesqueleto protege contra predadores e a desidratação, enquanto as patas articuladas permitem uma locomoção eficiente.'},
+            { topic: 'Revisão Geral', difficulty: 'Fácil', q: '25) A transição da respiração branquial para a pulmonar durante a vida é observada em:', options: ['Répteis', 'Aves', 'Anfíbios', 'Peixes'], answer: 'Anfíbios', explanation: 'O girino tem respiração branquial, e o sapo adulto tem respiração pulmonar e cutânea.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '26) Tartarugas e cobras pertencem à mesma classe. Qual?', options: ['Anfíbios', 'Répteis', 'Aves', 'Peixes'], answer: 'Répteis', explanation: 'Ambos são répteis, caracterizados pelo corpo com escamas ou placas e ovos com casca.'},
+            { topic: 'Revisão Geral', difficulty: 'Fácil', q: '27) Um ser humano, um cão e uma baleia pertencem à mesma classe. Qual?', options: ['Aves', 'Peixes', 'Répteis', 'Mamíferos'], answer: 'Mamíferos', explanation: 'Todos possuem pelos (mesmo que vestigiais, como nas baleias) e glândulas mamárias.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '28) A principal diferença entre insetos e aracnídeos é:', options: ['O número de patas e a presença de antenas', 'O tipo de alimentação', 'O habitat em que vivem', 'A presença de exoesqueleto'], answer: 'O número de patas e a presença de antenas', explanation: 'Insetos têm 6 patas e antenas; aracnídeos têm 8 patas e não possuem antenas.'},
+            { topic: 'Revisão Geral', difficulty: 'Difícil', q: '29) Qual dos animais abaixo é um molusco sem concha externa evidente?', options: ['Caracol', 'Ostra', 'Polvo', 'Marisco'], answer: 'Polvo', explanation: 'Polvos e lulas são moluscos cefalópodes que possuem uma concha interna reduzida ou ausente.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '30) Animais de sangue frio (pecilotérmicos) que dependem da temperatura externa para se aquecer são principalmente:', options: ['Aves e mamíferos', 'Répteis e anfíbios', 'Apenas aves', 'Apenas mamíferos'], answer: 'Répteis e anfíbios', explanation: 'Diferente de aves e mamíferos (endotérmicos), eles não produzem calor internamente para manter a temperatura corporal constante.'},
+            { topic: 'Revisão Geral', difficulty: 'Fácil', q: '31) Qual o animal que NÃO pertence ao grupo dos artrópodes?', options: ['Formiga', 'Caranguejo', 'Minhoca', 'Escorpião'], answer: 'Minhoca', explanation: 'A minhoca é um anelídeo, pois seu corpo é formado por anéis.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '32) A capacidade de voo evoluiu de forma independente em quais grupos de vertebrados?', options: ['Peixes, anfíbios e répteis', 'Répteis (pterossauros), aves e mamíferos (morcegos)', 'Apenas em aves', 'Anfíbios e aves'], answer: 'Répteis (pterossauros), aves e mamíferos (morcegos)', explanation: 'O voo surgiu separadamente em diferentes linhagens ao longo da evolução dos vertebrados.'},
+            { topic: 'Revisão Geral', difficulty: 'Fácil', q: '33) Qual desses animais NÃO é um mamífero?', options: ['Morcego', 'Baleia', 'Pinguim', 'Ornitorrinco'], answer: 'Pinguim', explanation: 'O pinguim é uma ave, apesar de não voar. O ornitorrinco é um mamífero que bota ovos.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '34) Corais, que formam grandes recifes, são colônias de animais do filo:', options: ['Porifera', 'Cnidaria', 'Mollusca', 'Echinodermata'], answer: 'Cnidaria', explanation: 'Os recifes de coral são formados por milhares de pequenos pólipos de cnidários.'},
+            { topic: 'Revisão Geral', difficulty: 'Difícil', q: '35) O que a minhoca e a sanguessuga têm em comum?', options: ['São parasitas', 'Possuem corpo achatado', 'Pertencem ao filo Annelida', 'Vivem apenas em água doce'], answer: 'Pertencem ao filo Annelida', explanation: 'Ambos possuem o corpo segmentado em anéis, característica principal do filo.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '36) O ser humano pertence à ordem dos Primatas, classe dos Mamíferos e filo dos:', options: ['Artrópodes', 'Cordados', 'Anelídeos', 'Equinodermos'], answer: 'Cordados', explanation: 'Como possuímos coluna vertebral (originada da notocorda), somos classificados como cordados.'},
+            { topic: 'Revisão Geral', difficulty: 'Fácil', q: '37) Qual animal abaixo é um invertebrado?', options: ['Sapo', 'Cobra', 'Tubarão', 'Lula'], answer: 'Lula', explanation: 'A lula é um molusco, portanto, não possui coluna vertebral.'},
+            { topic: 'Revisão Geral', difficulty: 'Médio', q: '38) A característica de ter o corpo dividido em cabeça, tórax e abdome é exclusiva de qual grupo?', options: ['Aracnídeos', 'Crustáceos', 'Insetos', 'Todos os artrópodes'], answer: 'Insetos', explanation: 'Essa divisão corporal é a marca registrada da classe Insecta.'},
+            { topic: 'Revisão Geral', difficulty: 'Difícil', q: '39) Qual filo animal é o primeiro na escala evolutiva a apresentar um sistema digestório completo (com boca e ânus)?', options: ['Poríferos', 'Cnidários', 'Platelmintos', 'Nematelmintos'], answer: 'Nematelmintos', explanation: 'Os nematelmintos foram os pioneiros a desenvolver um tubo digestório completo, o que foi um grande avanço evolutivo.'},
+            { topic: 'Revisão Geral', difficulty: 'Fácil', q: '40) Qual das alternativas contém apenas répteis?', options: ['Sapo, tartaruga, rã', 'Cobra, lagarto, jacaré', 'Salamandra, cobra, lagarto', 'Jacaré, pinguim, tartaruga'], answer: 'Cobra, lagarto, jacaré', explanation: 'Sapo, rã e salamandra são anfíbios. Pinguim é uma ave.'}
+        ];
+
+        let questionOrder = quizData.map((_,i)=>i);
+        let currentIndex = 0;
+        let questionStatus = Array(quizData.length).fill(null);
+        let quizStarted = false;
+        let isRandomOrder = false; 
+
+        orderToggleBtn.addEventListener('click', () => {
+            isRandomOrder = !isRandomOrder; 
+            orderToggleBtn.textContent = isRandomOrder ? 'Ordem Aleatória' : 'Ordem Crescente';
+            startQuiz();
+        });
+
+        function switchView(view){
+            if(view==='learn'){
+                practiceSection.classList.add('hidden');
+                learnSection.classList.remove('hidden');
+                btnLearn.classList.replace('btn-ghost', 'btn-primary');
+                btnPractice.classList.replace('btn-primary', 'btn-ghost');
+            } else {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnPractice.classList.replace('btn-ghost', 'btn-primary');
+                btnLearn.classList.replace('btn-primary', 'btn-ghost');
+                if (!quizStarted) {
+                    startQuiz();
+                    quizStarted = true;
+                }
+            }
+        }
+
+        btnLearn.addEventListener('click', () => switchView('learn'));
+        btnPractice.addEventListener('click', () => switchView('practice'));
+
+        function renderQuestionButtons(){
+            questionButtons.innerHTML='';
+            quizData.forEach((_,originalIndex)=>{
+                const b = document.createElement('button');
+                b.textContent = (originalIndex + 1);
+                b.setAttribute('data-original-index', String(originalIndex));
+                b.title = `Ir para a questão ${originalIndex+1}`;
+                b.onclick = ()=>{
+                    const pos = questionOrder.indexOf(originalIndex);
+                    if(pos >= 0){ currentIndex = pos; showQuestion(); }
+                };
+                if(questionStatus[originalIndex]==='correct') b.classList.add('correct-status');
+                if(questionStatus[originalIndex]==='wrong') b.classList.add('wrong-status');
+                
+                if (quizStarted) {
+                    const currentQuestionOriginalIndex = questionOrder[currentIndex];
+                    if(originalIndex === currentQuestionOriginalIndex) {
+                        b.classList.add('current-question');
+                    }
+                }
+                
+                questionButtons.appendChild(b);
+            });
+        }
+
+        const questionInfoContainer = document.createElement('div');
+        questionInfoContainer.className = 'flex justify-between items-center mb-2';
+        const questionTopic = document.createElement('p');
+        questionTopic.className='text-sm font-semibold text-[var(--accent)]';
+        const questionDifficulty = document.createElement('span');
+        
+        const questionText = document.createElement('p');
+        questionText.className='text-xl mt-2';
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className='mt-4 grid gap-3';
+        const feedbackContainer = document.createElement('div');
+        const nextBtn = document.createElement('button');
+        nextBtn.className='btn-primary mt-4'; nextBtn.textContent='Próxima';
+        const redoBtn = document.createElement('button');
+        redoBtn.className='btn-ghost mt-4 ml-3'; redoBtn.textContent='Refazer';
+
+        questionInfoContainer.appendChild(questionTopic);
+        questionInfoContainer.appendChild(questionDifficulty);
+        quizContainer.appendChild(questionInfoContainer);
+        quizContainer.appendChild(questionText);
+        quizContainer.appendChild(optionsContainer);
+        quizContainer.appendChild(feedbackContainer);
+        quizContainer.appendChild(nextBtn);
+        quizContainer.appendChild(redoBtn);
+
+        function startQuiz(){
+            if (isRandomOrder) {
+                shuffleArray(questionOrder);
+            } else {
+                questionOrder = quizData.map((_, i) => i);
+            }
+            currentIndex = 0;
+            questionStatus.fill(null);
+            showQuestion();
+        }
+
+        function showQuestion(){
+            if (currentIndex >= questionOrder.length) {
+                showFinalResults();
+                return;
+            }
+        
+            const qIdx = questionOrder[currentIndex];
+            const qObj = quizData[qIdx];
+            
+            questionTopic.textContent = qObj.topic;
+            questionDifficulty.textContent = qObj.difficulty;
+            questionDifficulty.className = `difficulty-badge difficulty-${qObj.difficulty.toLowerCase()}`;
+            
+            questionText.innerHTML = `${qIdx + 1}) ${qObj.q.replace(/^[\s\d\)\(\.\:\-–—_]+/,'').trim()}`;
+            
+            optionsContainer.innerHTML='';
+            feedbackContainer.innerHTML='';
+            redoBtn.classList.add('hidden');
+            nextBtn.disabled = true;
+
+            qObj.options.forEach(opt =>{
+                const b = document.createElement('button');
+                b.className='option-btn'; b.textContent=opt;
+                b.onclick = ()=> selectAnswer(b,opt,qObj.answer,qObj.explanation,qIdx);
+                optionsContainer.appendChild(b);
+            });
+
+            renderQuestionButtons();
+        }
+        
+        function showFinalResults() {
+            const correctCount = questionStatus.filter(s => s === 'correct').length;
+            const total = quizData.length;
+            questionInfoContainer.classList.add('hidden');
+            questionText.innerHTML = `🎉 Fim do Quiz! 🎉`;
+            optionsContainer.innerHTML = `<p class="text-center text-lg">Você acertou ${correctCount} de ${total} questões.</p>`;
+            feedbackContainer.innerHTML = '';
+            nextBtn.textContent = 'Recomeçar Quiz';
+            nextBtn.disabled = false;
+            nextBtn.onclick = () => {
+                questionInfoContainer.classList.remove('hidden');
+                quizStarted = false;
+                startQuiz(); 
+                quizStarted = true;
+            };
+            redoBtn.classList.add('hidden');
+        }
+
+        function selectAnswer(btn,opt,correct,explanation,qIdx){
+            Array.from(optionsContainer.children).forEach(b=>b.disabled=true);
+            nextBtn.disabled = false;
+
+            if(opt===correct){
+                btn.classList.add('celebrate','correct');
+                createConfetti();
+                questionStatus[qIdx]='correct';
+                feedbackContainer.className='feedback-correct mt-4';
+                feedbackContainer.textContent = 'Correto! ' + (explanation || '');
+            } else {
+                btn.classList.add('wrong');
+                questionStatus[qIdx]='wrong';
+                feedbackContainer.className='feedback-wrong mt-4';
+                feedbackContainer.innerHTML = `<strong>Errado.</strong> Resposta correta: <strong>${correct}</strong>.`;
+                if(explanation) feedbackContainer.innerHTML += `<div class="mt-2 text-sm">${explanation}</div>`;
+                
+                Array.from(optionsContainer.children).forEach(b=>{
+                    if(b.textContent === correct) b.classList.add('correct');
+                });
+                redoBtn.classList.remove('hidden');
+            }
+            renderQuestionButtons();
+        }
+
+        nextBtn.addEventListener('click', ()=>{
+            if(currentIndex < questionOrder.length-1){ 
+                currentIndex++; 
+                showQuestion(); 
+            } else { 
+                currentIndex++;
+                showFinalResults();
+            }
+        });
+
+        redoBtn.addEventListener('click', ()=>{
+            const currentQuestionIndex = questionOrder[currentIndex];
+            questionStatus[currentQuestionIndex] = null;
+            showQuestion();
+        });
+
+        function shuffleArray(a){
+            for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+        }
+
+        function createConfetti(){
+            const colors = ['#f59e0b','#ef4444','#10b981','#3b82f6','#8b5cf6'];
+            for(let i=0;i<12;i++){
+                const el = document.createElement('div');
+                el.className='confetti';
+                el.style.left = (30 + Math.random()*40) + '%';
+                el.style.top = (10 + Math.random()*10) + 'vh';
+                el.style.color = colors[Math.floor(Math.random()*colors.length)];
+                el.textContent = '🎉';
+                el.style.transform = `rotate(${Math.random()*360}deg)`;
+                el.style.animation = `confetti-fall ${1.2 + Math.random()*1}s linear forwards`;
+                document.body.appendChild(el);
+                setTimeout(()=> el.remove(), 2200);
+            }
+        }
+        
+        switchView('learn');
+    });
+    </script>
+</body>
+</html>
