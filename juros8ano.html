@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Juros Simples e Compostos – 9º Ano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root{
+            --bg:#071023; --card:#0b1624; --accent:#3b82f6; --muted:#97a6bf; --text:#e6eef8; --success:#34d399; --danger:#ef4444; --border:rgba(255,255,255,0.12); --muted-2: rgba(230,238,248,0.85);
+        }
+        html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
+        .container{max-width:980px;margin:28px auto;padding:18px}
+        .page-header{ padding:1.25rem; border-radius:12px; background: linear-gradient(180deg, rgba(59,130,246,0.06), transparent); box-shadow: 0 8px 24px rgba(2,6,23,0.6); }
+        .card{ background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 6px 20px rgba(2,6,23,0.6); padding:18px }
+        .btn-primary{ background: linear-gradient(90deg,var(--accent), #3b82f6); color: #061226; padding: .5rem 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 6px 18px rgba(59,130,246,0.12); cursor: pointer; }
+        .btn-ghost{ background: transparent; color: var(--muted-2); padding: .45rem .9rem; border-radius: 10px; border: 1px solid var(--border); cursor:pointer; }
+        .option-btn{ display:block; width:100%; text-align:left; padding:.75rem 1rem; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid var(--border); color:var(--muted-2); cursor:pointer; transition: transform 150ms ease, background 150ms ease; }
+        .option-btn:hover:not(:disabled){ background: rgba(255,255,255,0.035); transform: translateY(-1px); }
+        .option-btn.correct{ background: var(--success) !important; color: #062e1f !important; border-color: rgba(4,120,87,0.18) !important; }
+        .option-btn.wrong{ background: var(--danger) !important; color: #fff !important; border-color: rgba(185,28,28,0.18) !important; }
+        .option-btn:disabled { cursor: not-allowed; }
+        #question-buttons{ display:flex; flex-wrap:wrap; gap:8px; }
+        #question-buttons button{ background: transparent; color: var(--muted-2); border:1px solid var(--border); padding:.45rem .6rem; border-radius:8px; cursor:pointer; }
+        #question-buttons button.current-question { background-color: rgba(59, 130, 246, 0.2); border-color: var(--accent); }
+        #question-buttons button.correct-status { background-color: var(--success); color: #062e1f; border-color: var(--success); }
+        #question-buttons button.wrong-status { background-color: var(--danger); color: white; border-color: var(--danger); }
+        .feedback-correct{ background: rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.22); color: #bbf7d0; padding:12px; border-radius:8px }
+        .feedback-wrong{ background: rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.22); color: #ffdede; padding:12px; border-radius:8px }
+        .celebrate{ animation: pop 480ms cubic-bezier(.2,.9,.3,1); box-shadow: 0 12px 36px rgba(96,165,250,0.18), 0 0 28px rgba(16,185,129,0.12); }
+        @keyframes pop{ 0%{ transform: scale(1); } 50%{ transform: scale(1.08); } 100%{ transform: scale(1); } }
+        .confetti{ position: fixed; z-index: 9999; pointer-events: none; font-size: 18px; opacity: 1; transform-origin: center; }
+        @keyframes confetti-fall { 0%{ transform: translateY(-10vh) rotate(0deg); opacity:1 } 100%{ transform: translateY(100vh) rotate(540deg); opacity:0 } }
+        .theme-light{ --bg: #f8fafc; --card: #ffffff; --muted: #475569; --text: #0f1724; --accent: #0284c7; --success: #047857; --danger: #b91c1c; --border: rgba(15,23,42,0.1); --muted-2: rgba(15,23,36,0.85); }
+        .topic-section { margin-bottom: 2.5rem; border-left: 3px solid var(--accent); padding-left: 1.5rem; }
+        .topic-title { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+        .sub-topic-title { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .topic-section p, .topic-section ul { font-size: 1rem; color: var(--muted-2); line-height: 1.7; text-align: justify; }
+        .topic-section ul { list-style-position: inside; list-style-type: disc; margin-top: 0.5rem; padding-left: 1rem;}
+        .highlight { background-color: rgba(59, 130, 246, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600; color: var(--accent); }
+        .formula { background-color: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; margin-top: 1rem; font-family: 'Courier New', Courier, monospace; text-align: center; font-size: 1.1rem; }
+        .difficulty-badge { padding: 0.1rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .difficulty-facil { background-color: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
+        .difficulty-medio { background-color: rgba(250, 204, 21, 0.2); color: #facc15; }
+        .difficulty-dificil { background-color: rgba(248, 113, 113, 0.2); color: #f87171; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <header class="page-header">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">Matemática — 9º Ano</h1>
+                    <p class="text-sm text-slate-400">Guia de estudos completo sobre Juros Simples e Compostos.</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="btn-ghost">Tema</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="mt-6">
+            <div class="card">
+                <nav class="mb-4">
+                    <button id="btn-learn" class="btn-primary">Aprender</button>
+                    <button id="btn-practice" class="btn-ghost ml-2">Praticar</button>
+                </nav>
+
+                <section id="learn-section">
+                    <div class="space-y-8">
+                        
+                        <div class="topic-section">
+                            <h2 class="topic-title">Juros Simples e Compostos</h2>
+                            <p>Juros é o valor pago (ou recebido) pelo uso de um dinheiro que não é seu. É como um "aluguel" do dinheiro. Para calcular, precisamos conhecer alguns conceitos:</p>
+                            <ul>
+                                <li><strong>Capital (C):</strong> O valor inicial do empréstimo ou investimento.</li>
+                                <li><strong>Taxa de Juros (i):</strong> A porcentagem cobrada em um período. <span class="highlight">Importante:</span> sempre converta a taxa para forma decimal para usar nas fórmulas (ex: 5% = 0,05).</li>
+                                <li><strong>Tempo (t):</strong> O período em que o dinheiro ficará aplicado ou emprestado. A taxa e o tempo devem estar na mesma unidade (ex: taxa ao mês e tempo em meses).</li>
+                                <li><strong>Juros (J):</strong> O valor do "aluguel" do dinheiro.</li>
+                                <li><strong>Montante (M):</strong> O valor final, ou seja, Capital + Juros (M = C + J).</li>
+                            </ul>
+
+                            <h3 class="sub-topic-title">Juros Simples</h3>
+                            <p>Nos juros simples, a taxa incide <span class="highlight">sempre sobre o capital inicial</span>. O valor dos juros é o mesmo em todos os períodos.</p>
+                             <p class="formula">J = C ⋅ i ⋅ t</p>
+                            <p><strong>Exemplo:</strong> Se você aplicar R$ 1.000,00 a uma taxa de juros simples de 2% ao mês, durante 3 meses:</p>
+                             <ul>
+                                <li>Juros no 1º mês: 1000 ⋅ 0,02 = R$ 20,00</li>
+                                 <li>Juros no 2º mês: 1000 ⋅ 0,02 = R$ 20,00</li>
+                                 <li>Juros no 3º mês: 1000 ⋅ 0,02 = R$ 20,00</li>
+                                 <li><strong>Juros Totais (J):</strong> 1000 ⋅ 0,02 ⋅ 3 = R$ 60,00</li>
+                                 <li><strong>Montante (M):</strong> 1000 + 60 = R$ 1.060,00</li>
+                             </ul>
+                        </div>
+                        
+                        <div class="topic-section">
+                            <h2 class="topic-title">Juros Compostos</h2>
+                            <p>Nos juros compostos, a taxa incide sobre o montante do período anterior. É o famoso <span class="highlight">"juros sobre juros"</span>. O valor dos juros cresce a cada período.</p>
+                            <p class="formula">M = C ⋅ (1 + i)ᵗ</p>
+                            <p><strong>Exemplo:</strong> Se você aplicar os mesmos R$ 1.000,00 a uma taxa de juros compostos de 2% ao mês, durante 3 meses:</p>
+                             <ul>
+                                 <li>Montante no 1º mês: 1000 ⋅ (1,02) = R$ 1.020,00 (Juros = R$ 20,00)</li>
+                                 <li>Montante no 2º mês: 1020 ⋅ (1,02) = R$ 1.040,40 (Juros = R$ 20,40)</li>
+                                 <li>Montante no 3º mês: 1040,40 ⋅ (1,02) = R$ 1.061,21 (Juros = R$ 20,81)</li>
+                                 <li><strong>Montante Final (M):</strong> 1000 ⋅ (1,02)³ ≈ R$ 1.061,21</li>
+                                 <li><strong>Juros Totais (J):</strong> 1061,21 - 1000 = R$ 61,21</li>
+                             </ul>
+                             <p>Note que o rendimento nos juros compostos foi maior. Por isso, ele é o regime usado pelo mercado financeiro em investimentos e financiamentos.</p>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                <section id="practice-section" class="hidden">
+                     <div class="mb-4 flex justify-end">
+                        <button id="order-toggle-btn" class="btn-ghost text-xs">Ordem Crescente</button>
+                    </div>
+                    <div id="question-buttons" class="mb-4"></div>
+                    <div id="quiz-container">
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const root = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const btnLearn = document.getElementById('btn-learn');
+        const btnPractice = document.getElementById('btn-practice');
+        const learnSection = document.getElementById('learn-section');
+        const practiceSection = document.getElementById('practice-section');
+        const questionButtons = document.getElementById('question-buttons');
+        const quizContainer = document.getElementById('quiz-container');
+        const orderToggleBtn = document.getElementById('order-toggle-btn');
+
+        if(!btnLearn || !btnPractice || !learnSection || !practiceSection || !questionButtons || !quizContainer || !orderToggleBtn){
+            console.error('Elementos DOM não encontrados.');
+            return;
+        }
+
+        (function(){
+            const t = localStorage.getItem('cmf-math-9ano-theme') || 'dark';
+            if(t === 'light') root.classList.add('theme-light');
+            themeToggle.addEventListener('click', () => {
+                root.classList.toggle('theme-light');
+                localStorage.setItem('cmf-math-9ano-theme', root.classList.contains('theme-light') ? 'light' : 'dark');
+            });
+        })();
+        
+        const quizData = [
+            { topic: 'Juros Simples', difficulty: 'Fácil', q: '1) Qual o juro simples produzido por um capital de R$ 2.000,00 aplicado a uma taxa de 3% ao mês durante 5 meses?', options: ['R$ 200,00', 'R$ 250,00', 'R$ 300,00', 'R$ 350,00'], answer: 'R$ 300,00', explanation: 'J = C * i * t => J = 2000 * 0,03 * 5 = 60 * 5 = 300.'},
+            { topic: 'Juros Simples', difficulty: 'Fácil', q: '2) Um capital de R$ 500,00 foi aplicado a juros simples com taxa de 10% ao ano. Qual será o montante após 2 anos?', options: ['R$ 100,00', 'R$ 550,00', 'R$ 600,00', 'R$ 610,00'], answer: 'R$ 600,00', explanation: 'J = 500 * 0,10 * 2 = 100. Montante M = C + J = 500 + 100 = 600.'},
+            { topic: 'Juros Simples', difficulty: 'Médio', q: '3) Por quanto tempo um capital de R$ 3.000,00 precisa ser aplicado a juros simples, com taxa de 2% ao mês, para render R$ 360,00 de juros?', options: ['5 meses', '6 meses', '7 meses', '8 meses'], answer: '6 meses', explanation: 'J = C * i * t => 360 = 3000 * 0,02 * t => 360 = 60 * t => t = 360 / 60 = 6 meses.'},
+            { topic: 'Juros Simples', difficulty: 'Médio', q: '4) Qual foi a taxa de juros simples mensal se um capital de R$ 1.500,00, aplicado por 10 meses, gerou um montante de R$ 1.800,00?', options: ['1%', '1,5%', '2%', '2,5%'], answer: '2%', explanation: 'O juro foi de R$ 1800 - R$ 1500 = R$ 300. J = C*i*t => 300 = 1500*i*10 => 300 = 15000*i => i = 300/15000 = 0,02, ou seja, 2%.'},
+            { topic: 'Juros Simples', difficulty: 'Difícil', q: '5) Qual capital, aplicado a juros simples de 5% ao mês, produz um montante de R$ 2.600,00 em 8 meses?', options: ['R$ 1.857,14', 'R$ 2.000,00', 'R$ 2.100,00', 'R$ 1.950,50'], answer: 'R$ 1.857,14', explanation: 'M = C * (1 + i*t) => 2600 = C * (1 + 0,05*8) => 2600 = C * (1 + 0,4) => 2600 = C * 1,4 => C ≈ 1857,14.'},
+            { topic: 'Juros Simples', difficulty: 'Fácil', q: '6) A principal característica do juro simples é que a taxa incide sempre sobre:', options: ['O montante anterior', 'O juro do mês anterior', 'O capital inicial', 'A metade do capital'], answer: 'O capital inicial', explanation: 'Nos juros simples, a base de cálculo é sempre o valor inicial, tornando o rendimento constante.'},
+            { topic: 'Juros Simples', difficulty: 'Médio', q: '7) Uma dívida de R$ 800,00 foi paga após 4 meses com juros simples de 5% a.m. Qual o valor total pago?', options: ['R$ 900,00', 'R$ 960,00', 'R$ 1.000,00', 'R$ 880,00'], answer: 'R$ 960,00', explanation: 'J = 800 * 0,05 * 4 = 160. M = 800 + 160 = 960.'},
+            { topic: 'Juros Simples', difficulty: 'Médio', q: '8) Se você aplica R$ 100,00 a juros simples de 1% ao mês, quanto terá de juros após 1 ano?', options: ['R$ 1,00', 'R$ 10,00', 'R$ 12,00', 'R$ 112,00'], answer: 'R$ 12,00', explanation: 'A taxa e o tempo devem estar na mesma unidade. 1 ano = 12 meses. J = 100 * 0,01 * 12 = 12.'},
+            
+            { topic: 'Juros Compostos', difficulty: 'Fácil', q: '9) O regime de "juros sobre juros" é característico de qual tipo de juro?', options: ['Juro simples', 'Juro exato', 'Juro composto', 'Juro nominal'], answer: 'Juro composto', explanation: 'Nos juros compostos, a taxa incide sobre o capital acrescido dos juros acumulados.'},
+            { topic: 'Juros Compostos', difficulty: 'Médio', q: '10) Qual o montante de um capital de R$ 500,00 aplicado a juros compostos de 10% ao mês, durante 2 meses?', options: ['R$ 600,00', 'R$ 605,00', 'R$ 610,00', 'R$ 615,50'], answer: 'R$ 605,00', explanation: 'M = C * (1+i)ᵗ => M = 500 * (1,10)² = 500 * 1,21 = 605.'},
+            { topic: 'Juros Compostos', difficulty: 'Médio', q: '11) Um valor de R$ 1.000,00 foi aplicado a juros compostos de 20% ao ano por 3 anos. Qual o montante final?', options: ['R$ 1.600,00', 'R$ 1.728,00', 'R$ 1.800,00', 'R$ 2.000,00'], answer: 'R$ 1.728,00', explanation: 'M = 1000 * (1,20)³ = 1000 * 1,728 = 1728.'},
+            { topic: 'Juros Compostos', difficulty: 'Difícil', q: '12) Que capital, aplicado a juros compostos de 5% ao mês, gera um montante de R$ 1.215,51 em 2 meses? (Use (1,05)² ≈ 1,1025)', options: ['R$ 1.000,00', 'R$ 1.050,00', 'R$ 1.100,00', 'R$ 1.150,00'], answer: 'R$ 1.100,00', explanation: 'M = C * (1+i)ᵗ => 1215,51 = C * (1,05)² => 1215,51 = C * 1,1025 => C ≈ 1102,50. A resposta mais próxima é 1100.'},
+            { topic: 'Juros Compostos', difficulty: 'Médio', q: '13) Um investimento de R$ 400,00 rendeu juros compostos de 10% no primeiro mês e 10% no segundo mês. Qual o valor total dos juros?', options: ['R$ 80,00', 'R$ 82,00', 'R$ 84,00', 'R$ 88,00'], answer: 'R$ 84,00', explanation: '1º mês: 400*1,1=440. 2º mês: 440*1,1=484. Juros totais = 484 - 400 = 84.'},
+            { topic: 'Juros Compostos', difficulty: 'Fácil', q: '14) Qual regime de juros é mais vantajoso para quem investe dinheiro?', options: ['Juros simples', 'Juros composto', 'Tanto faz', 'Nenhum dos dois'], answer: 'Juros composto', explanation: 'Como os juros rendem sobre os juros anteriores, o crescimento do dinheiro é exponencial e mais rápido.'},
+            { topic: 'Juros Compostos', difficulty: 'Difícil', q: '15) Após quanto tempo um capital de R$ 800,00, aplicado a juros compostos de 10% ao ano, se tornará R$ 968,00?', options: ['1 ano', '1,5 anos', '2 anos', '3 anos'], answer: '2 anos', explanation: '968 = 800 * (1,1)ᵗ => 968/800 = (1,1)ᵗ => 1,21 = (1,1)ᵗ. Como 1,1² = 1,21, então t = 2 anos.'},
+
+            { topic: 'Comparação', difficulty: 'Médio', q: '16) Se você aplicar R$ 100,00 por 2 meses a uma taxa de 10% ao mês, qual a diferença de rendimento entre juros compostos e simples?', options: ['R$ 0,00', 'R$ 1,00', 'R$ 2,00', 'R$ 10,00'], answer: 'R$ 1,00', explanation: 'Simples: J=100*0,1*2 = R$20. Composto: M=100*(1,1)²=121, J=R$21. A diferença é 21 - 20 = R$ 1,00.'},
+            { topic: 'Comparação', difficulty: 'Médio', q: '17) Para um período de apenas 1 mês, o rendimento de juros simples e compostos sobre um mesmo capital e taxa é:', options: ['Maior no simples', 'Maior no composto', 'Igual', 'Impossível determinar'], answer: 'Igual', explanation: 'A diferença entre os regimes só aparece a partir do segundo período de capitalização.'},
+            { topic: 'Comparação', difficulty: 'Fácil', q: '18) Em financiamentos de longo prazo, como a compra de uma casa, os bancos utilizam qual regime de juros?', options: ['Juros simples', 'Juros compostos', 'Taxa fixa', 'Sem juros'], answer: 'Juros compostos', explanation: 'É por isso que o valor final pago é muito maior que o valor do empréstimo inicial, pois os juros se acumulam rapidamente.'},
+            { topic: 'Comparação', difficulty: 'Médio', q: '19) O gráfico que representa o crescimento do montante em juros simples é uma ________, enquanto em juros compostos é uma ________.', options: ['curva, reta', 'reta, curva', 'parábola, reta', 'curva, parábola'], answer: 'reta, curva', explanation: 'O crescimento do juro simples é linear (uma reta), enquanto o do juro composto é exponencial (uma curva ascendente).'},
+            { topic: 'Comparação', difficulty: 'Difícil', q: '20) Um capital dobra de valor em 5 anos a juros simples. Se fosse aplicado a juros compostos com a mesma taxa, ele dobraria em:', options: ['Exatamente 5 anos', 'Mais de 5 anos', 'Menos de 5 anos', 'O dobro do tempo'], answer: 'Menos de 5 anos', explanation: 'Como o juro composto rende mais rápido, ele atingiria o dobro do capital em um tempo menor que o juro simples.'}
+        ];
+
+        let questionOrder = quizData.map((_,i)=>i);
+        let currentIndex = 0;
+        let questionStatus = Array(quizData.length).fill(null);
+        let quizStarted = false;
+        let isRandomOrder = false; 
+
+        // DOM Elements for the quiz
+        const questionInfoContainer = document.createElement('div');
+        questionInfoContainer.className = 'flex justify-between items-center mb-2';
+        const questionTopic = document.createElement('p');
+        questionTopic.className='text-sm font-semibold text-[var(--accent)]';
+        const questionDifficulty = document.createElement('span');
+        const questionText = document.createElement('p');
+        questionText.className='text-xl mt-2';
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className='mt-4 grid gap-3';
+        const feedbackContainer = document.createElement('div');
+        const nextBtn = document.createElement('button');
+        nextBtn.className='btn-primary mt-4 hidden';
+        nextBtn.textContent='Próxima';
+        const redoBtn = document.createElement('button');
+        redoBtn.className='btn-ghost mt-4 ml-3 hidden';
+        redoBtn.textContent='Refazer';
+
+        quizContainer.appendChild(questionInfoContainer);
+        quizContainer.appendChild(questionText);
+        quizContainer.appendChild(optionsContainer);
+        quizContainer.appendChild(feedbackContainer);
+        quizContainer.appendChild(nextBtn);
+        quizContainer.appendChild(redoBtn);
+        
+        orderToggleBtn.addEventListener('click', () => {
+            isRandomOrder = !isRandomOrder; 
+            orderToggleBtn.textContent = isRandomOrder ? 'Ordem Aleatória' : 'Ordem Crescente';
+            startQuiz();
+        });
+
+        function switchView(view){
+            if(view==='learn'){
+                practiceSection.classList.add('hidden');
+                learnSection.classList.remove('hidden');
+                btnLearn.classList.replace('btn-ghost', 'btn-primary');
+                btnPractice.classList.replace('btn-primary', 'btn-ghost');
+            } else {
+                learnSection.classList.add('hidden');
+                practiceSection.classList.remove('hidden');
+                btnPractice.classList.replace('btn-ghost', 'btn-primary');
+                btnLearn.classList.replace('btn-primary', 'btn-ghost');
+                if (!quizStarted) {
+                    startQuiz();
+                    quizStarted = true;
+                }
+            }
+        }
+
+        btnLearn.addEventListener('click', () => switchView('learn'));
+        btnPractice.addEventListener('click', () => switchView('practice'));
+
+        function renderQuestionButtons(){
+            questionButtons.innerHTML='';
+            quizData.forEach((_,originalIndex)=>{
+                const b = document.createElement('button');
+                b.textContent = (originalIndex + 1);
+                b.setAttribute('data-original-index', String(originalIndex));
+                b.title = `Ir para a questão ${originalIndex+1}`;
+                b.onclick = ()=>{
+                    const pos = questionOrder.indexOf(originalIndex);
+                    if(pos >= 0){ currentIndex = pos; showQuestion(); }
+                };
+                if(questionStatus[originalIndex]==='correct') b.classList.add('correct-status');
+                if(questionStatus[originalIndex]==='wrong') b.classList.add('wrong-status');
+                
+                if (quizStarted && currentIndex < quizData.length) {
+                    const currentQuestionOriginalIndex = questionOrder[currentIndex];
+                    if(originalIndex === currentQuestionOriginalIndex) {
+                        b.classList.add('current-question');
+                    }
+                }
+                
+                questionButtons.appendChild(b);
+            });
+        }
+        
+        function startQuiz(){
+            if (isRandomOrder) {
+                shuffleArray(questionOrder);
+            } else {
+                questionOrder = quizData.map((_, i) => i);
+            }
+            currentIndex = 0;
+            questionStatus.fill(null);
+            showQuestion();
+        }
+
+        function showQuestion(){
+            const finalResultsDiv = document.getElementById('final-results');
+            if (finalResultsDiv) finalResultsDiv.remove();
+            quizContainer.style.display = 'block';
+
+            if (currentIndex >= quizData.length) {
+                showFinalResults();
+                return;
+            }
+        
+            const qIdx = questionOrder[currentIndex];
+            const qObj = quizData[qIdx];
+            
+            questionInfoContainer.classList.remove('hidden');
+            questionTopic.textContent = qObj.topic;
+            questionDifficulty.textContent = qObj.difficulty;
+            questionDifficulty.className = `difficulty-badge difficulty-${qObj.difficulty.toLowerCase()}`;
+            
+            questionText.innerHTML = `${qIdx + 1}) ${qObj.q.replace(/^[\s\d\)\(\.\:\-–—_]+/,'').trim()}`;
+            
+            optionsContainer.innerHTML='';
+            feedbackContainer.innerHTML='';
+            redoBtn.classList.add('hidden');
+            nextBtn.classList.add('hidden'); 
+            
+            qObj.options.forEach(opt =>{
+                const b = document.createElement('button');
+                b.className='option-btn'; 
+                b.textContent=opt;
+                b.onclick = ()=> selectAnswer(b, opt, qObj.answer, qObj.explanation, qIdx);
+                optionsContainer.appendChild(b);
+            });
+
+            renderQuestionButtons();
+        }
+        
+        function showFinalResults() {
+            const correctCount = questionStatus.filter(s => s === 'correct').length;
+            const total = quizData.length;
+            
+            quizContainer.style.display = 'none';
+
+            let finalResultsDiv = document.createElement('div');
+            finalResultsDiv.id = 'final-results';
+            finalResultsDiv.className = 'text-center';
+            practiceSection.appendChild(finalResultsDiv);
+
+            finalResultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold">🎉 Fim do Quiz! 🎉</h2>
+                <p class="text-lg mt-4">Você acertou ${correctCount} de ${total} questões.</p>
+                <button id="restart-btn" class="btn-primary mt-6">Recomeçar Quiz</button>
+            `;
+            
+            document.getElementById('restart-btn').onclick = () => {
+                quizStarted = false;
+                startQuiz(); 
+                quizStarted = true;
+            };
+        }
+
+        function selectAnswer(btn,opt,correct,explanation,qIdx){
+            Array.from(optionsContainer.children).forEach(b=> {
+                b.disabled=true;
+                if(b.textContent === correct) {
+                    b.classList.add('correct');
+                }
+            });
+            nextBtn.classList.remove('hidden');
+
+            if(opt===correct){
+                btn.classList.add('celebrate');
+                createConfetti();
+                questionStatus[qIdx]='correct';
+                feedbackContainer.className='feedback-correct mt-4';
+                feedbackContainer.textContent = 'Correto! ' + (explanation || '');
+            } else {
+                btn.classList.add('wrong');
+                questionStatus[qIdx]='wrong';
+                feedbackContainer.className='feedback-wrong mt-4';
+                feedbackContainer.innerHTML = `<strong>Errado.</strong> ${explanation || ''}`;
+                redoBtn.classList.remove('hidden');
+            }
+            renderQuestionButtons();
+        }
+
+        nextBtn.addEventListener('click', ()=>{
+            if(currentIndex < questionOrder.length-1){ 
+                currentIndex++; 
+                showQuestion(); 
+            } else { 
+                currentIndex++;
+                showFinalResults();
+            }
+        });
+
+        redoBtn.addEventListener('click', ()=>{
+            const currentQuestionIndex = questionOrder[currentIndex];
+            questionStatus[currentQuestionIndex] = null;
+            showQuestion();
+        });
+
+        function shuffleArray(a){
+            for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+        }
+
+        function createConfetti(){
+            const colors = ['#f59e0b','#ef4444','#10b981','#3b82f6','#8b5cf6'];
+            for(let i=0;i<12;i++){
+                const el = document.createElement('div');
+                el.className='confetti';
+                el.style.left = (30 + Math.random()*40) + '%';
+                el.style.top = (10 + Math.random()*10) + 'vh';
+                el.style.color = colors[Math.floor(Math.random()*colors.length)];
+                el.textContent = '🎉';
+                el.style.transform = `rotate(${Math.random()*360}deg)`;
+                el.style.animation = `confetti-fall ${1.2 + Math.random()*1}s linear forwards`;
+                document.body.appendChild(el);
+                setTimeout(()=> el.remove(), 2200);
+            }
+        }
+        
+        switchView('learn');
+    });
+    </script>
+</body>
+</html>
