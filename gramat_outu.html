@@ -347,11 +347,26 @@
                     <div class="p-4 rounded-lg ${isCorrect ? 'bg-green-900' : 'bg-red-900'}">
                         <h4 class="font-bold text-lg mb-2">${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</h4>
                         <p class="text-sm">${explanation}</p>
+                        <button id="redo-question-btn" class="mt-4 py-2 px-4 bg-indigo-600 rounded-md font-semibold hover:bg-indigo-500 transition-colors">Tentar Novamente</button>
                     </div>`;
+                
+                // Adiciona o listener para o novo botão
+                document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
                 
                 updateQuestionNavButtons();
             }
             
+            function resetCurrentQuestion() {
+                // Limpa o feedback
+                feedbackContainer.innerHTML = '';
+                
+                // Re-abilita as opções e reseta os estilos
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                });
+            }
+
             function updateNavButtonsState() {
                 prevBtn.disabled = state.currentQuestionIndex === 0;
                 nextBtn.textContent = (state.currentQuestionIndex === questions.length - 1) ? "Finalizar" : "Próxima";
@@ -440,4 +455,5 @@
     </script>
 </body>
 </html>
+
 
