@@ -30,11 +30,11 @@
         .bg-error-dark { background-color: #991B1B; } /* Vermelho mais escuro */
         
         .mode-button.active {
-            background-color: #6D28D9; /* Cor principal de destaque */
+            background-color: #0891B2; /* Cor principal de destaque */
             color: white;
         }
         .nav-link.active {
-            background-color: #6D28D9; /* Cor principal de destaque */
+            background-color: #0891B2; /* Cor principal de destaque */
             color: white;
         }
 
@@ -378,12 +378,19 @@
 
             function checkAnswer(selectedIndex, correctIndex, explanation) {
                 const isCorrect = selectedIndex === correctIndex;
-                if (state.userAnswers[state.currentQuestionIndex] === null) { // Only score the first attempt
-                    state.userAnswers[state.currentQuestionIndex] = isCorrect;
+                const isFirstAttempt = state.userAnswers[state.currentQuestionIndex] === null;
+                const wasPreviouslyWrong = state.userAnswers[state.currentQuestionIndex] === false;
+
+                if (isFirstAttempt) {
+                    state.userAnswers[state.currentQuestionIndex] = isCorrect; // Set state on first try
                     if (isCorrect) {
                         state.score++;
                         confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
                     }
+                } else if (wasPreviouslyWrong && isCorrect) {
+                    // This is the user's request: was wrong, retried, now correct
+                    state.userAnswers[state.currentQuestionIndex] = true; // Update state to correct
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Fire confetti on correction
                 }
 
                 Array.from(optionsContainer.children).forEach((btn, i) => {
@@ -500,11 +507,18 @@
                 scoreMessage.textContent = `Você acertou ${state.score} de ${questions.length} questões. ${message}`;
             }
 
+            // --- INICIALIZAÇÃO ---
+            // Assegura que os botões de modo tenham a cor correta no início
+            btnLearn.classList.add('active'); // Começa no modo 'learn'
+            
             btnLearn.addEventListener('click', () => switchMode('learn'));
             btnPractice.addEventListener('click', () => switchMode('practice'));
             prevBtn.addEventListener('click', prevQuestion);
             nextBtn.addEventListener('click', nextQuestion);
             restartBtn.addEventListener('click', startPractice);
+
+            // Garante que o estado inicial (learn) esteja correto
+            switchMode('learn');
         });
     </script>
 </body>
