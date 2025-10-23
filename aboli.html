@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos: Fim da Monarquia (8º Ano)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Cores principais atualizadas */
+        .bg-dark-bg { background-color: #121212; } /* Fundo principal */
+        .bg-dark-surface { background-color: #1E1E1E; } /* Cartões e nav */
+        .text-dark-text { color: #E0E0E0; } /* Texto padrão */
+        .text-dark-light-text { color: #B0B0B0; } /* Texto secundário/p */
+
+        /* Nova paleta de destaque: Tons de Bronze/Dourado Envelhecido */
+        .accent-primary { background-color: #D97706; color: white; } /* Laranja escuro/Bronze (Orange 700) */
+        .hover\:accent-primary-dark { background-color: #C26402; } /* Laranja mais escuro (Orange 800) */
+        .accent-secondary { color: #FDBA74; } /* Laranja claro/Pêssego (Orange 300) */
+        .text-highlight { color: #FED7AA; } /* Laranja mais claro (Orange 200) para destaques */
+        .text-success { color: #34D399; } /* Esmeralda para sucesso */
+        .bg-success-dark { background-color: #065F46; } /* Esmeralda mais escuro */
+        .text-error { color: #EF4444; } /* Vermelho para erro */
+        .bg-error-dark { background-color: #991B1B; } /* Vermelho mais escuro */
+        
+        .mode-button.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+        .nav-link.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+
+        .prose-headings {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-strong {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+        .prose-th, .prose-td {
+            border: 1px solid #424242; /* Cinza mais escuro para bordas da tabela */
+            padding: 0.5em 1em;
+        }
+        .prose-th {
+            background-color: #2F2F2F; /* Fundo mais escuro para cabeçalho da tabela */
+            font-weight: 600;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-dark-text">
+
+    <div class="w-full max-w-7xl mx-auto">
+        <header class="text-center py-8 px-4">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Fim da Monarquia no Brasil</h1>
+            <p class="text-lg text-dark-light-text">Um guia sobre as leis abolicionistas, a crise do Império e a Proclamação da República (8º Ano).</p>
+        </header>
+        
+        <nav class="flex justify-center items-center bg-dark-surface rounded-lg p-2 mb-8 gap-2 flex-wrap max-w-md mx-auto">
+            <button id="btn-learn" class="mode-button accent-primary flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Aprender</button>
+            <button id="btn-practice" class="mode-button flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Praticar</button>
+        </nav>
+
+        <div id="learn-container">
+            <div class="flex flex-col lg:flex-row gap-8 p-4">
+                <!-- Navegação Lateral --><aside class="lg:w-1/4">
+                    <nav class="sticky top-4 bg-dark-surface rounded-lg p-4">
+                        <h3 class="text-xl font-bold text-white mb-4">Tópicos</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#leis_abolicionistas" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark active">Leis Abolicionistas</a></li>
+                            <li><a href="#pos_abolicao_imigracao" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Pós-Abolição e Imigração</a></li>
+                            <li><a href="#crise_monarquia" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Crise da Monarquia</a></li>
+                            <li><a href="#proclamacao_republica" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Proclamação da República</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Conteúdo Principal --><main class="lg:w-3/4 space-y-12">
+                    <section id="leis_abolicionistas" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">Leis Abolicionistas</h2>
+                            <p>O processo de abolição da escravidão no Brasil foi lento, gradual e resultado de muita pressão popular, dos próprios escravizados e da Inglaterra. As leis aprovadas muitas vezes mais protegiam os interesses dos proprietários do que garantiam a liberdade.</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Lei Eusébio de Queiroz (1850)</h3>
+                            <ul>
+                                <li><strong>O que fez:</strong> Proibiu definitivamente o <strong class="text-highlight">tráfico de escravos</strong> da África para o Brasil.</li>
+                                <li><strong>Contexto:</strong> Foi uma resposta à pressão da Inglaterra (Bill Aberdeen).</li>
+                                <li><strong>Consequência:</strong> O preço dos escravos dentro do Brasil aumentou muito, e o tráfico interno (entre províncias) se intensificou, especialmente do Nordeste para o Sudeste (cafezais).</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">Lei do Ventre Livre (1871)</h3>
+                            <ul>
+                                <li><strong>O que fez:</strong> Declarava <strong class="text-highlight">livres os filhos de mulheres escravizadas</strong> nascidos a partir daquela data.</li>
+                                <li><strong>A Contradição:</strong> A lei tinha uma "pegadinha". A criança ficava sob a tutela do proprietário de sua mãe. O proprietário tinha duas opções:
+                                    <ol>
+                                        <li>Libertar a criança aos 8 anos e receber uma indenização do governo.</li>
+                                        <li>Usar os "serviços" da criança até os 21 anos como forma de pagamento por tê-la criado.</li>
+                                    </ol>
+                                </li>
+                                <li><strong>Na prática:</strong> Quase todos os proprietários escolhiam a segunda opção. Por isso, a lei libertou muito pouca gente e ficou conhecida como a "lei para inglês ver".</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">Lei do Sexagenário (1885)</h3>
+                            <ul>
+                                <li><strong>O que fez:</strong> Declarava <strong class="text-highlight">livres os escravos com mais de 60 anos</strong>.</li>
+                                <li><strong>A Contradição:</strong> Essa lei foi considerada uma farsa pelo movimento abolicionista.
+                                    <ul>
+                                        <li>Pouquíssimos escravos chegavam aos 60 anos devido às péssimas condições de vida e trabalho.</li>
+                                        <li>A lei exigia que o escravo, para ser solto, <strong class="text-highlight">indenizasse seu proprietário</strong> trabalhando de graça por mais 3 anos (até os 63) ou pagando em dinheiro.</li>
+                                        <li>Na prática, era uma forma dos proprietários se livrarem de escravos idosos e improdutivos sem ter que sustentá-los.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Lei Áurea (1888)</h3>
+                            <ul>
+                                <li><strong>O que fez:</strong> Assinada pela Princesa Isabel em <strong class="text-highlight">13 de maio de 1888</strong>, declarou extinta a escravidão no Brasil.</li>
+                                <li><strong>Contexto:</strong> Foi o resultado de uma imensa pressão popular, fugas em massa de escravos, quilombos organizados e a ação de abolicionistas. A escravidão já estava desmoronando na prática.</li>
+                                <li><strong>A Contradição:</strong> A lei libertou, mas <strong class="text-highlight">não deu nenhuma condição</strong> para que os ex-escravos pudessem viver com dignidade.</li>
+                            </ul>
+                        </article>
+                    </section>
+                    
+                    <section id="pos_abolicao_imigracao" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">Pós-Abolição e Imigração</h2>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">As Condições dos Ex-Escravos</h3>
+                            <p>A Lei Áurea aboliu a escravidão, mas não resolveu a "Questão Social". Os libertos foram jogados na sociedade sem nenhum tipo de amparo, indenização, acesso à terra ou educação.</p>
+                            <ul>
+                                <li><strong>Sem Terra:</strong> O governo não fez nenhuma reforma agrária. As terras continuaram nas mãos dos grandes proprietários.</li>
+                                <li><strong>Sem Trabalho:</strong> Os proprietários de terra preferiram contratar <strong class="text-highlight">imigrantes europeus</strong>, deixando os negros libertos à margem do mercado de trabalho.</li>
+                                <li><strong>Marginalização:</strong> Sem terra e sem trabalho, a maioria dos ex-escravos foi forçada a viver em cortiços nas cidades, dando origem às primeiras favelas. Foram vítimas de racismo e exclusão social, uma situação cujas consequências são vistas até hoje.</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">A Imigração Europeia e o "Embranquecimento"</h3>
+                            <p>O governo brasileiro incentivou ativamente a vinda de imigrantes europeus (italianos, alemães, portugueses, etc.) a partir da metade do século XIX, com dois objetivos principais:</p>
+                            <ol>
+                                <li><strong>Substituir a Mão de Obra:</strong> Com o fim do tráfico (1850) e a iminência da abolição, os fazendeiros de café precisavam de novos trabalhadores.</li>
+                                <li><strong>Política de Embranquecomento:</strong> O governo e a elite brasileira da época eram influenciados por ideias racistas, como o <strong class="prose-strong">Darwinismo Social</strong>.</li>
+                            </ol>
+                            
+                            <h4 class="text-xl font-semibold mt-4">Darwinismo Social</h4>
+                            <p>Essa era uma teoria pseudocientífica que aplicava (de forma errada) as ideias de Charles Darwin sobre seleção natural às sociedades humanas. Acreditava-se que a <strong class="text-highlight">"raça branca" europeia era superior</strong> e que a miscigenação (mistura de raças) levava à "degeneração" do povo. O governo, então, incentivou a vinda de europeus para, literalmente, "branquear" a população brasileira, que era majoritariamente negra e parda.</p>
+                        </article>
+                    </section>
+
+                    <section id="crise_monarquia" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">A Crise da Monarquia</h2>
+                            <p>A Proclamação da República não foi um movimento popular. Ela foi um <strong class="text-highlight">Golpe de Estado</strong> aplicado por dois grupos principais que se sentiram abandonados e traídos pelo Imperador D. Pedro II: os Militares e a Burguesia Cafeeira.</p>
+
+                            <h3 class="text-2xl font-semibold mt-6">A Questão Militar</h3>
+                            <p>O Exército Brasileiro saiu muito fortalecido após a <strong class="prose-strong">Guerra do Paraguai (1864-1870)</strong>. Eles se viam como os "salvadores da pátria" e passaram a exigir maior participação política e reconhecimento. No entanto, o Imperador tratava o Exército com descaso.</p>
+                            <p>As causas do descontentamento militar eram:</p>
+                            <ul>
+                                <li><strong>Baixos Salários e Falta de Prestígio:</strong> Os militares recebiam pouco e se sentiam desvalorizados pela elite política (que eles chamavam de "casacas").</li>
+                                <li><strong>Desejo de Participação Política:</strong> Após a guerra, os militares queriam mais poder nas decisões do país, mas D. Pedro II os proibia de dar opiniões políticas na imprensa.</li>
+                                <li><strong>Influência do Positivismo e Republicanismo:</strong> Dentro das escolas militares, cresciam as ideias <strong class="text-highlight">Positivistas</strong> (do filósofo Auguste Comte), que defendiam a "Ordem e o Progresso" através de um governo forte e republicano. O lema da nossa bandeira vem daí.</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">A Questão Cafeeira (Burguesia)</h3>
+                            <p>A <strong class="prose-strong">burguesia cafeeira</strong> do Sudeste (especialmente de São Paulo) era a principal base de apoio econômico da Monarquia. Eles eram os grandes proprietários de terras e de escravos.</p>
+                            <ul>
+                                <li>O problema surgiu com a <strong class="text-highlight">Lei Áurea (1888)</strong>.</li>
+                                <li>Os cafeicultores não eram contra a abolição, mas exigiam que o governo os <strong class="text-highlight">indenizasse</strong> pela "perda" de seus escravos (que eles viam como propriedade).</li>
+                                <li>Quando a Princesa Isabel assinou a Lei Áurea sem prever nenhuma indenização, a burguesia cafeeira se sentiu traída.</li>
+                                <li>Eles abandonaram D. Pedro II e passaram a apoiar a causa Republicana, derrubando o último pilar de sustentação do Império.</li>
+                            </ul>
+                        </article>
+                    </section>
+                    
+                    <section id="proclamacao_republica" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">A Proclamação da República</h2>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">A Queda da Monarquia</h3>
+                            <p>Sem o apoio do Exército (descontente) e da Burguesia Cafeeira (furiosa pela abolição sem indenização), o governo de D. Pedro II estava isolado.</p>
+                            <p>Em <strong class="text-highlight">15 de novembro de 1889</strong>, militares liderados pelo <strong class="prose-strong">Marechal Deodoro da Fonseca</strong> marcharam no Rio de Janeiro e deram um golpe de estado, cercando o palácio imperial e depondo o Imperador. D. Pedro II e sua família foram forçados a ir para o exílio na Europa.</p>
+                            <p>O povo brasileiro assistiu a tudo de forma passiva. Um jornalista da época, Aristides Lobo, escreveu a famosa frase: "O povo assistiu àquilo bestializado, atônito, surpreso, sem conhecer o que significava."</p>
+
+                            <h3 class="text-2xl font-semibold mt-6">A "República da Espada" (1889-1894)</h3>
+                            <p>Os primeiros anos da República Brasileira foram governados pelos militares que deram o golpe. Por isso, esse período é conhecido como <strong class="text-highlight">"República da Espada"</strong>.</p>
+                            <ul>
+                                <li><strong>Governo Provisório:</strong> Marechal Deodoro da Fonseca (1889-1891).</li>
+                                <li><strong>Primeiro Presidente (eleito indiretamente):</strong> Marechal Deodoro da Fonseca (1891). Renunciou no mesmo ano após tentar fechar o Congresso.</li>
+                                <li><strong>Segundo Presidente:</strong> Marechal Floriano Peixoto (1891-1894), o "Marechal de Ferro".</li>
+                            </ul>
+                            <p>Somente em 1894 o poder passaria para os civis, iniciando a "República Oligárquica" ou "República do Café com Leite".</p>
+                        </article>
+                    </section>
+                </main>
+            </div>
+        </div>
+        
+        <!-- Seção Praticar --><section id="practice-section" class="hidden p-4">
+            <div id="quiz-container" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                <div id="question-header" class="mb-4 text-center">
+                    <p class="accent-secondary font-semibold" id="question-topic"></p>
+                </div>
+                <p id="question-text" class="text-xl text-center mb-6 min-h-[60px]"></p>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="feedback-container" class="mt-6 text-center"></div>
+
+                <!-- Navegação --><div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark disabled:bg-gray-600 disabled:cursor-not-allowed">Anterior</button>
+                    <span id="question-counter" class="font-semibold text-dark-text"></span>
+                    <button id="next-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark">Próxima</button>
+                </div>
+            </div>
+
+            <!-- Navegação de Questões --><div id="question-nav-container" class="hidden bg-dark-surface p-4 rounded-lg shadow-lg max-w-3xl mx-auto mt-4">
+                <div id="question-buttons-grid" class="flex flex-wrap justify-center gap-2">
+                    <!-- Buttons will be programmatically inserted here --></div>
+            </div>
+
+             <!-- Tela de Pontuação --><div id="score-screen" class="hidden text-center bg-dark-surface p-8 rounded-lg shadow-lg max-w-3xl mx-auto mt-8">
+                <h3 class="text-4xl font-bold text-white mb-4">Pontuação Final</h3>
+                <p id="final-score" class="text-6xl font-bold accent-secondary mb-2"></p>
+                <p id="score-message" class="text-lg text-dark-light-text mb-8"></p>
+                <button id="restart-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-500 transition-colors">Recomeçar</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- BANCO DE DADOS DAS QUESTÕES ---
+        const questions = [
+            // Leis Abolicionistas (8 questões)
+            { topic: "Leis Abolicionistas", question: "O que a Lei Eusébio de Queiroz (1850) determinou?", options: ["A liberdade dos filhos de escravos", "A proibição do tráfico de escravos da África", "A liberdade dos escravos com mais de 60 anos", "A abolição total da escravidão"], answer: 1, explanation: "A Lei Eusébio de Queiroz proibiu o tráfico de escravos da África para o Brasil, em resposta à pressão inglesa (Bill Aberdeen)." },
+            { topic: "Leis Abolicionistas", question: "Qual era a principal 'contradição' da Lei do Ventre Livre (1871)?", options: ["Libertava os escravos imediatamente", "Exigia que a mãe fosse liberta também", "O liberto tinha que trabalhar para o senhor até os 21 anos", "Só valia para escravos urbanos"], answer: 2, explanation: "A lei dava ao proprietário o direito de usar os 'serviços' do liberto até os 21 anos, como pagamento por sua criação, o que na prática não era liberdade." },
+            { topic: "Leis Abolicionistas", question: "A Lei do Sexagenário (1885) libertava escravos com mais de 60 anos, mas exigia que eles...", options: ["Pagassem uma multa ao governo", "Se mudassem para a África", "Trabalhassem de graça por mais 3 anos para indenizar o proprietário", "Se alistassem no exército"], answer: 2, explanation: "Essa lei foi muito criticada pois, além de poucos escravos chegarem a essa idade, eles ainda tinham que indenizar o proprietário trabalhando por mais 3 anos." },
+            { topic: "Leis Abolicionistas", question: "Por que a Lei do Sexagenário é considerada ineficaz pelo movimento abolicionista?", options: ["Porque foi assinada pela Princesa Isabel", "Porque libertou escravos muito jovens", "Porque beneficiava mais os proprietários do que os escravos", "Porque proibia o tráfico interno"], answer: 2, explanation: "Ela foi vista como uma forma dos proprietários se livrarem de escravos idosos e improdutivos, sem ter que sustentá-los, e ainda exigia indenização." },
+            { topic: "Leis Abolicionistas", question: "Quem assinou a Lei Áurea em 13 de maio de 1888?", options: ["D. Pedro II", "Marechal Deodoro da Fonseca", "Princesa Isabel", "Barão de Cotegipe"], answer: 2, explanation: "A Lei Áurea foi assinada pela Princesa Isabel, que era a regente do Brasil na época, enquanto seu pai D. Pedro II estava fora do país." },
+            { topic: "Leis Abolicionistas", question: "Qual foi a consequência imediata da Lei Eusébio de Queiroz (1850)?", options: ["O fim da escravidão no Brasil", "O aumento do preço dos escravos e do tráfico interno", "A Guerra do Paraguai", "A vinda de imigrantes alemães"], answer: 1, explanation: "Com o fim da importação de escravos da África, os escravos que já estavam no Brasil ficaram mais caros, e o tráfico entre as províncias aumentou." },
+            { topic: "Leis Abolicionistas", question: "As leis abolicionistas (Ventre Livre, Sexagenário) são vistas como 'graduais' porque:", options: ["Foram impostas pela Inglaterra", "Libertaram todos de uma vez", "Visavam adiar ao máximo a abolição total", "Foram propostas pelos escravos"], answer: 2, explanation: "Essas leis foram criadas pela elite escravocrata para tentar acalmar os ânimos e adiar o fim da escravidão o máximo possível, sem mudar a estrutura." },
+            { topic: "Leis Abolicionistas", question: "A Lei Áurea, apesar de extinguir a escravidão, é criticada por:", options: ["Ter sido assinada por uma mulher", "Não ter dado nenhuma condição de integração social aos libertos", "Ter indenizado os fazendeiros", "Ter sido muito curta"], answer: 1, explanation: "A crítica central é que a lei deu a liberdade legal, mas não deu terra, educação ou trabalho, jogando os ex-escravos na marginalidade." },
+            
+            // Pós-Abolição e Imigração (7 questões)
+            { topic: "Pós-Abolição", question: "Qual foi a condição da maioria dos ex-escravos após a Lei Áurea?", options: ["Receberam terras do governo", "Foram contratados com altos salários", "Foram marginalizados, sem terra e sem emprego", "Voltaram para a África"], answer: 2, explanation: "A maioria foi jogada na marginalidade, sem acesso à terra (que continuou com os grandes proprietários) e sem emprego, pois os fazendeiros preferiram imigrantes." },
+            { topic: "Imigração", question: "Por que os fazendeiros de café preferiram contratar imigrantes europeus após 1888?", options: ["Porque os imigrantes já falavam português", "Porque os ex-escravos se recusaram a trabalhar", "Por preconceito racial e pelas ideias de 'branqueamento'", "Porque os imigrantes eram mais baratos que os escravos"], answer: 2, explanation: "Havia um forte preconceito racial. Os imigrantes eram vistos como 'mais civilizados' e havia a política de 'embranquecer' a população." },
+            { topic: "Imigração", question: "Qual era o objetivo da política de 'embranquecimento' do governo brasileiro?", options: ["Pintar os prédios públicos de branco", "Trazer imigrantes europeus para 'melhorar a raça'", "Apenas substituir a mão de obra escrava", "Distribuir roupas brancas para a população"], answer: 1, explanation: "Era uma política racista, baseada no Darwinismo Social, que acreditava na superioridade da raça branca e buscava 'diluir' a população negra e parda." },
+            { topic: "Imigração", question: "A pseudociência que justificava o racismo e a política de 'embranquecimento' era chamada de:", options: ["Positivismo", "Geocentrismo", "Darwinismo Social", "Criacionismo"], answer: 2, explanation: "O Darwinismo Social aplicava de forma errônea a teoria da seleção natural às sociedades, criando uma hierarquia de 'raças' onde a branca era 'superior'." },
+            { topic: "Pós-Abolição", question: "A ausência de uma reforma agrária após a abolição contribuiu para:", options: ["A rápida industrialização do Brasil", "A concentração de terras e a pobreza da população negra", "A volta da monarquia", "O enriquecimento dos ex-escravos"], answer: 1, explanation: "Sem acesso à terra, os libertos não tiveram como garantir seu sustento e a estrutura de concentração de terras (latifúndio) se manteve." },
+            { topic: "Imigração", question: "Quais foram os principais grupos de imigrantes incentivados a vir para o Brasil no fim do séc. XIX?", options: ["Africanos e asiáticos", "Italianos, alemães e portugueses", "Indígenas de outras regiões", "Norte-americanos"], answer: 1, explanation: "O governo focou na imigração europeia, trazendo principalmente italianos (para o café), alemães (para o sul) e portugueses." },
+            { topic: "Pós-Abolição", question: "O surgimento das primeiras favelas no Brasil está ligado diretamente à:", options: ["Chegada dos imigrantes europeus", "Marginalização dos ex-escravos após a abolição", "Guerra do Paraguai", "Construção de Brasília"], answer: 1, explanation: "Sem moradia e sem emprego, a população negra liberta foi forçada a construir moradias precárias nos morros e periferias das cidades." },
+
+            // Crise da Monarquia (8 questões)
+            { topic: "Crise da Monarquia", question: "Quais foram os dois principais grupos que deixaram de apoiar D. Pedro II, causando a queda da Monarquia?", options: ["A Igreja e os escravos", "Os militares e a burguesia cafeeira", "Os imigrantes e os professores", "Portugal e Inglaterra"], answer: 1, explanation: "O Exército (Questão Militar) e os fazendeiros de café (Questão Cafeeira) eram os pilares do Império. Quando ambos se voltaram contra o Imperador, ele caiu." },
+            { topic: "Questão Militar", question: "Após qual guerra o Exército Brasileiro passou a exigir mais participação política?", options: ["Guerra da Cisplatina", "Guerra do Paraguai", "Guerra dos Farrapos", "Guerra de Canudos"], answer: 1, explanation: "A Guerra do Paraguai (1864-1870) fortaleceu o Exército, que se sentiu 'salvador da pátria' e passou a desejar mais poder político." },
+            { topic: "Questão Militar", question: "Quais eram as principais reclamações dos militares contra a Monarquia?", options: ["Altos salários e muito prestígio", "Obrigação de lutar na África", "Baixos salários, falta de prestígio e proibição de opinar politicamente", "Adoção do Positivismo pelo Imperador"], answer: 2, explanation: "Os militares se sentiam desvalorizados, com baixos salários, e eram proibidos por D. Pedro II de dar opiniões políticas na imprensa." },
+            { topic: "Questão Militar", question: "Qual corrente filosófica europeia influenciou fortemente o Exército Brasileiro, defendendo 'Ordem e Progresso'?", options: ["Socialismo", "Anarquismo", "Iluminismo", "Positivismo"], answer: 3, explanation: "O Positivismo, de Auguste Comte, era muito forte nas escolas militares e defendia um governo republicano forte e centralizado para modernizar o país." },
+            { topic: "Crise da Monarquia", question: "Por que a burguesia cafeeira (fazendeiros de café) ficou descontente com a Monarquia em 1888?", options: ["Porque a Lei Áurea não veio acompanhada de indenização", "Porque o preço do café caiu", "Porque D. Pedro II aumentou os impostos sobre o café", "Porque a Monarquia proibiu a imigração"], answer: 0, explanation: "Os cafeicultores se sentiram 'traídos' pela Lei Áurea, pois exigiam que o governo os indenizasse pela 'perda' de seus escravos, o que não aconteceu." },
+            { topic: "Crise da Monarquia", question: "Os fazendeiros de café que se voltaram contra o Imperador eram chamados de:", options: ["Republicanos históricos", "Abolicionistas", "Republicanos de 'última hora' (ou de 14 de maio)", "Positivistas"], answer: 2, explanation: "Eles só se tornaram republicanos em 14 de maio de 1888 (um dia após a Lei Áurea), por raiva de não terem sido indenizados. Não eram republicanos por ideal." },
+            { topic: "Questão Militar", question: "O lema 'Ordem e Progresso', presente na bandeira do Brasil, vem de qual filosofia?", options: ["Darwinismo Social", "Positivismo", "Marxismo", "Liberalismo"], answer: 1, explanation: "O lema é de origem Positivista, filosofia que influenciou os militares que fundaram a República." },
+            { topic: "Crise da Monarquia", question: "Qual pilar de sustentação D. Pedro II perdeu PRIMEIRO?", options: ["O apoio da Igreja (Questão Religiosa)", "O apoio dos militares (Questão Militar)", "O apoio dos cafeicultores (Questão Cafeeira)", "O apoio dos imigrantes"], answer: 0, explanation: "A 'Questão Religiosa' (prisão de bispos nos anos 1870) foi o primeiro grande desgaste, onde o Imperador perdeu o apoio da Igreja Católica." },
+
+            // Proclamação da República (7 questões)
+            { topic: "Proclamação da República", question: "Quando ocorreu a Proclamação da República no Brasil?", options: ["13 de maio de 1888", "15 de novembro de 1889", "7 de setembro de 1822", "21 de abril de 1792"], answer: 1, explanation: "A República foi proclamada em 15 de novembro de 1889, através de um golpe militar." },
+            { topic: "Proclamação da República", question: "Quem foi o militar que liderou o golpe e se tornou o primeiro presidente do Brasil?", options: ["Floriano Peixoto", "Benjamin Constant", "Princesa Isabel", "Marechal Deodoro da Fonseca"], answer: 3, explanation: "Marechal Deodoro da Fonseca, um militar de prestígio, foi convencido a liderar o golpe contra D. Pedro II e se tornou o Chefe do Governo Provisório." },
+            { topic: "Proclamação da República", question: "A famosa frase 'o povo assistiu àquilo bestializado' significa que:", options: ["O povo participou ativamente da proclamação", "O povo não entendeu o que estava acontecendo", "O povo lutou para defender D. Pedro II", "O povo comemorou com uma grande festa"], answer: 1, explanation: "Significa que a população do Rio de Janeiro (e do Brasil) não teve participação no golpe e assistiu à mudança de regime sem entender o que era." },
+            { topic: "Proclamação da República", question: "Os primeiros anos da República (1889-1894), governados por militares, são chamados de:", options: ["República do Café com Leite", "República da Espada", "Período Regencial", "Estado Novo"], answer: 1, explanation: "É chamada de 'República da Espada' porque seus dois primeiros presidentes foram Marechais do Exército." },
+            { topic: "Proclamação da República", question: "Quais foram os dois presidentes da 'República da Espada'?", options: ["D. Pedro II e Princesa Isabel", "Deodoro da Fonseca e Floriano Peixoto", "Prudente de Morais e Campos Sales", "Getúlio Vargas e Juscelino Kubitschek"], answer: 1, explanation: "Foram os marechais Deodoro da Fonseca (que renunciou) e seu vice, Floriano Peixoto (o 'Marechal de Ferro'), que assumiu." },
+            { topic: "Proclamação da República", question: "Qual foi o destino de D. Pedro II e sua família após o golpe?", options: ["Foram presos e executados", "Foram forçados ao exílio na Europa", "Continuaram morando no Brasil como cidadãos comuns", "Foram nomeados embaixadores"], answer: 1, explanation: "A família imperial foi banida do Brasil e embarcou para o exílio na Europa poucos dias após o golpe." },
+            { topic: "Proclamação da República", question: "O evento de 15 de novembro de 1889 foi, na prática, um(a):", options: ["Revolução popular", "Eleição democrática", "Acordo com D. Pedro II", "Golpe de Estado militar"], answer: 3, explanation: "Foi um Golpe de Estado, pois um grupo (militares) usou a força para derrubar o governo legítimo (Monarquia) e tomar o poder." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- LÓGICA DO MODO DE APRENDIZAGEM ---
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('#learn-container main section');
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; // Ajustado para 0.1
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => { observer.observe(section); });
+            
+            links.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // --- LÓGICA DO MODO DE PRÁTICA ---
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnContainer = document.getElementById('learn-container');
+            const practiceSection = document.getElementById('practice-section');
+            
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreScreen = document.getElementById('score-screen');
+            const questionTopic = document.getElementById('question-topic');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const questionCounter = document.getElementById('question-counter');
+            const finalScore = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+            const restartBtn = document.getElementById('restart-btn');
+            const questionNavContainer = document.getElementById('question-nav-container');
+
+            let state = {
+                currentMode: 'learn',
+                currentQuestionIndex: 0,
+                userAnswers: [],
+                score: 0,
+            };
+
+            function switchMode(mode) {
+                state.currentMode = mode;
+                btnLearn.classList.toggle('active', mode === 'learn');
+                btnPractice.classList.toggle('active', mode !== 'learn');
+                learnContainer.classList.toggle('hidden', mode !== 'learn');
+                practiceSection.classList.toggle('hidden', mode === 'learn');
+
+                if (mode === 'practice') {
+                    startPractice();
+                }
+            }
+
+            function startPractice() {
+                state.currentQuestionIndex = 0;
+                state.score = 0;
+                state.userAnswers = Array(questions.length).fill(null);
+                quizContainer.classList.remove('hidden');
+                scoreScreen.classList.add('hidden');
+                questionNavContainer.classList.remove('hidden');
+                renderQuestionNavigation();
+                renderQuestion(0);
+            }
+            
+            function renderQuestion(index) {
+                const question = questions[index];
+                questionTopic.textContent = question.topic;
+                questionText.textContent = question.question;
+                questionCounter.textContent = `${index + 1} / ${questions.length}`;
+
+                optionsContainer.innerHTML = '';
+                feedbackContainer.innerHTML = '';
+
+                question.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                    button.onclick = () => checkAnswer(i, question.answer, question.explanation);
+                    optionsContainer.appendChild(button);
+                });
+
+                updateNavButtonsState();
+                updateQuestionNavButtons();
+            }
+
+            function checkAnswer(selectedIndex, correctIndex, explanation) {
+                const isCorrect = selectedIndex === correctIndex;
+                const isFirstAttempt = state.userAnswers[state.currentQuestionIndex] === null;
+                const wasPreviouslyWrong = state.userAnswers[state.currentQuestionIndex] === false;
+
+                if (isFirstAttempt) {
+                    state.userAnswers[state.currentQuestionIndex] = isCorrect; // Set state on first try
+                    if (isCorrect) {
+                        state.score++;
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else if (wasPreviouslyWrong && isCorrect) {
+                    // This is the user's request: was wrong, retried, now correct
+                    state.userAnswers[state.currentQuestionIndex] = true; // Update state to correct
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Fire confetti on correction
+                }
+
+                Array.from(optionsContainer.children).forEach((btn, i) => {
+                    btn.disabled = true;
+                    if (i === correctIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (i === selectedIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-red-600', 'text-white');
+                    }
+                });
+
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 rounded-lg ${isCorrect ? 'bg-success-dark' : 'bg-error-dark'}">
+                        <h4 class="font-bold text-lg mb-2">${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</h4>
+                        <p class="text-sm">${explanation}</p>
+                        <button id="redo-question-btn" class="mt-4 py-2 px-4 accent-primary rounded-md font-semibold hover:accent-primary-dark transition-colors">Tentar Novamente</button>
+                    </div>`;
+                
+                // Adiciona o listener para o novo botão
+                document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
+                
+                updateQuestionNavButtons();
+            }
+            
+            function resetCurrentQuestion() {
+                // Limpa o feedback
+                feedbackContainer.innerHTML = '';
+                
+                // Re-abilita as opções e reseta os estilos
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                });
+            }
+
+            function updateNavButtonsState() {
+                prevBtn.disabled = state.currentQuestionIndex === 0;
+                nextBtn.textContent = (state.currentQuestionIndex === questions.length - 1) ? "Finalizar" : "Próxima";
+            }
+
+            function nextQuestion() {
+                if (state.currentQuestionIndex < questions.length - 1) {
+                    goToQuestion(state.currentQuestionIndex + 1);
+                } else {
+                    showFinalScore();
+                }
+            }
+
+            function prevQuestion() {
+                if (state.currentQuestionIndex > 0) {
+                   goToQuestion(state.currentQuestionIndex - 1);
+                }
+            }
+
+            function goToQuestion(index) {
+                if (index >= 0 && index < questions.length) {
+                    state.currentQuestionIndex = index;
+                    renderQuestion(index);
+                }
+            }
+
+            function renderQuestionNavigation() {
+                const grid = document.getElementById('question-buttons-grid');
+                grid.innerHTML = '';
+                for (let i = 0; i < questions.length; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i + 1;
+                    button.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+                    button.dataset.index = i;
+                    button.onclick = () => goToQuestion(i);
+                    grid.appendChild(button);
+                }
+            }
+            
+            function updateQuestionNavButtons() {
+                const buttons = document.querySelectorAll('#question-buttons-grid button');
+                buttons.forEach((btn, i) => {
+                    // Reset classes, keeping base styles
+                    btn.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+
+                    const answerState = state.userAnswers[i];
+                    
+                    if (answerState === true) {
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (answerState === false) {
+                        btn.classList.add('bg-red-600', 'text-white');
+                    } else {
+                        btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    }
+
+                    if (i === state.currentQuestionIndex) {
+                        btn.classList.add('ring-2', 'ring-offset-2', 'ring-offset-gray-800', 'ring-orange-500'); /* Alterado para ring-orange-500 */
+                        btn.classList.remove('hover:bg-gray-600');
+                    }
+                });
+            }
+            
+            function showFinalScore() {
+                quizContainer.classList.add('hidden');
+                scoreScreen.classList.remove('hidden');
+                questionNavContainer.classList.add('hidden');
+
+                const percentage = Math.round((state.score / questions.length) * 100);
+                finalScore.textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) message = "Excelente! Você dominou o assunto!";
+                else if (percentage >= 70) message = "Muito bom! Continue praticando para aperfeiçoar.";
+                else if (percentage >= 50) message = "Bom esforço! Reveja os tópicos que errou.";
+                else message = "Não desanime! Reveja a seção 'Aprender' e tente novamente.";
+                
+                scoreMessage.textContent = `Você acertou ${state.score} de ${questions.length} questões. ${message}`;
+            }
+
+            // --- INICIALIZAÇÃO ---
+            // Assegura que os botões de modo tenham a cor correta no início
+            btnLearn.classList.add('active'); // Começa no modo 'learn'
+            
+            btnLearn.addEventListener('click', () => switchMode('learn'));
+            btnPractice.addEventListener('click', () => switchMode('practice'));
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', startPractice);
+
+            // Garante que o estado inicial (learn) esteja correto
+            switchMode('learn');
+        });
+    </script>
+</body>
+</html>
