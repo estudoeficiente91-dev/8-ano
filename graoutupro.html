@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos: Gramática (8º Ano)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Cores principais atualizadas */
+        .bg-dark-bg { background-color: #121212; } /* Fundo principal */
+        .bg-dark-surface { background-color: #1E1E1E; } /* Cartões e nav */
+        .text-dark-text { color: #E0E0E0; } /* Texto padrão */
+        .text-dark-light-text { color: #B0B0B0; } /* Texto secundário/p */
+
+        /* paleta de destaque: Tons de Bronze/Dourado Envelhecido */
+        .accent-primary { background-color: #D97706; color: white; } /* Laranja escuro/Bronze (Orange 700) */
+        .hover\:accent-primary-dark { background-color: #C26402; } /* Laranja mais escuro (Orange 800) */
+        .accent-secondary { color: #FDBA74; } /* Laranja claro/Pêssego (Orange 300) */
+        .text-highlight { color: #FED7AA; } /* Laranja mais claro (Orange 200) para destaques */
+        .text-success { color: #34D399; } /* Esmeralda para sucesso */
+        .bg-success-dark { background-color: #065F46; } /* Esmeralda mais escuro */
+        .text-error { color: #EF4444; } /* Vermelho para erro */
+        .bg-error-dark { background-color: #991B1B; } /* Vermelho mais escuro */
+        
+        .mode-button.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+        .nav-link.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+
+        .prose-headings {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-strong {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+        .prose-th, .prose-td {
+            border: 1px solid #424242; /* Cinza mais escuro para bordas da tabela */
+            padding: 0.5em 1em;
+        }
+        .prose-th {
+            background-color: #2F2F2F; /* Fundo mais escuro para cabeçalho da tabela */
+            font-weight: 600;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-dark-text">
+
+    <div class="w-full max-w-7xl mx-auto">
+        <header class="text-center py-8 px-4">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Gramática (8º Ano)</h1>
+            <p class="text-lg text-dark-light-text">Um guia sobre Variação Linguística, Períodos Coordenados e Orações Subordinadas Substantivas.</p>
+        </header>
+        
+        <nav class="flex justify-center items-center bg-dark-surface rounded-lg p-2 mb-8 gap-2 flex-wrap max-w-md mx-auto">
+            <button id="btn-learn" class="mode-button accent-primary flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Aprender</button>
+            <button id="btn-practice" class="mode-button flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Praticar</button>
+        </nav>
+
+        <div id="learn-container">
+            <div class="flex flex-col lg:flex-row gap-8 p-4">
+                <!-- Navegação Lateral --><aside class="lg:w-1/4">
+                    <nav class="sticky top-4 bg-dark-surface rounded-lg p-4">
+                        <h3 class="text-xl font-bold text-white mb-4">Tópicos</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#variacao" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark active">1. Variação Linguística</a></li>
+                            <li><a href="#coordenadas" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">2. Períodos e Orações Coordenadas</a></li>
+                            <li><a href="#substantivas" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">3. Orações Subordinadas Substantivas</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Conteúdo Principal --><main class="lg:w-3/4 space-y-12">
+                    <section id="variacao" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">1. Variação Linguística</h2>
+                            <p>A <strong class="prose-strong">Variação Linguística</strong> é o movimento natural de mudança e adaptação que toda língua viva possui. A língua portuguesa não é falada da mesma forma em todos os lugares, por todas as pessoas, o tempo todo. Essas diferenças são as variações.</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Tipos de Variação Linguística</h3>
+                            
+                            <h4 class="text-xl font-semibold mt-4">Variação Histórica</h4>
+                            <p>É a mudança da língua <strong class="text-highlight">ao longo do tempo</strong>. Palavras que eram comuns antigamente hoje soam estranhas ou caíram em desuso.</p>
+                            <ul>
+                                <li>Exemplo: "Vossa Mercê" (antigo) → "Vossemecê" (intermediário) → "Você" (atual).</li>
+                                <li>Exemplo: "Pharmácia" (antigo) → "Farmácia" (atual).</li>
+                            </ul>
+
+                            <h4 class="text-xl font-semibold mt-4">Variação Regional (Geográfica)</h4>
+                            <p>É a diferença de sotaques, palavras e expressões entre <strong class="text-highlight">diferentes regiões</strong> onde a língua é falada.</p>
+                            <ul>
+                                <li>Exemplo: No Brasil, o que é "mandioca" em São Paulo pode ser "aipim" no Rio de Janeiro ou "macaxeira" no Nordeste.</li>
+                                <li>Exemplo: A pronúncia do "S" (chiado no Rio, sibilado em São Paulo) ou do "R".</li>
+                            </ul>
+                            
+                            <h4 class="text-xl font-semibold mt-4">Variação Social</h4>
+                            <p>É a diferença no modo de falar ligada aos <strong class="text-highlight">grupos sociais</strong>. Pode variar de acordo com a idade, profissão, classe social ou grupo cultural (gírias).</p>
+                            <ul>
+                                <li>Exemplo (Idade): Uma pessoa mais velha pode dizer "brotinho" (antigo), enquanto um jovem diz "crush" ou "top".</li>
+                                <li>Exemplo (Profissão): O "jargão" dos médicos ("paciente evoluiu para óbito") ou dos advogados ("autos conclusos").</li>
+                            </ul>
+                            
+                            <h4 class="text-xl font-semibold mt-4">Variação Estilística (Situacional)</h4>
+                            <p>É a mudança na forma de falar de acordo com a <strong class="text-highlight">situação ou o contexto</strong>. Nós não falamos da mesma forma com um juiz e com nossos amigos na praia.</p>
+                            <ul>
+                                <li><strong>Linguagem Formal (Norma Culta):</strong> Usada em situações sérias, documentos oficiais, entrevistas de emprego. (Ex: "Solicito a Vossa Senhoria...").</li>
+                                <li><strong>Linguagem Informal (Coloquial):</strong> Usada no dia a dia, com amigos e família. (Ex: "E aí, beleza? Passa o negócio aí pra mim.").</li>
+                            </ul>
+                        </article>
+                    </section>
+                    
+                    <section id="coordenadas" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">2. Períodos e Orações Coordenadas</h2>
+
+                            <h3 class="text-2xl font-semibold mt-6">Período Simples vs. Período Composto</h3>
+                            <ul>
+                                <li><strong>Período Simples:</strong> É formado por <strong class="text-highlight">apenas UMA oração</strong> (ou seja, apenas um verbo ou locução verbal).
+                                    <ul><li>Exemplo: "O sol <strong class="text-highlight">brilhou</strong> hoje."</li></ul>
+                                </li>
+                                <li><strong>Período Composto:</strong> É formado por <strong class="text-highlight">DUAS ou mais orações</strong> (dois ou mais verbos).
+                                    <ul><li>Exemplo: "Eu <strong class="text-highlight">cheguei</strong> em casa e <strong class="text-highlight">fui dormir</strong>." (Duas orações)</li></ul>
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Período Composto por Coordenação</h3>
+                            <p>A coordenação ocorre quando as orações são <strong class="prose-strong">independentes</strong>. Ou seja, uma oração não depende da outra para fazer sentido. Elas estão "lado a lado".</p>
+                            <p>Exemplo: "Eu estudei muito, <strong class="text-highlight">mas</strong> não passei na prova."</p>
+                            <p>(Oração 1: "Eu estudei muito" - faz sentido sozinha)<br>
+                               (Oração 2: "não passei na prova" - faz sentido sozinha)</p>
+                            <p>As orações coordenadas são ligadas (ou não) por <strong class="prose-strong">conjunções</strong>.</p>
+
+                            <h4 class="text-xl font-semibold mt-4">Tipos de Orações Coordenadas</h4>
+                            
+                            <h5 class="text-lg font-semibold mt-2">1. Assindética</h5>
+                            <p>Não possui conjunção, é separada por vírgula. (Ex: "Cheguei, vi, venci.")</p>
+
+                            <h5 class="text-lg font-semibold mt-2">2. Sindéticas (Possuem conjunção)</h5>
+                            <ul>
+                                <li><strong>Aditivas:</strong> Dão ideia de <strong class="text-highlight">soma</strong>. (Conjunções: e, nem, mas também...)
+                                    <ul><li>Ex: "Ela <strong class="text-highlight">e</strong>studou <strong class="text-highlight">e</strong> passou."</li></ul>
+                                </li>
+                                <li><strong>Adversativas:</strong> Dão ideia de <strong class="text-highlight">oposição, contraste</strong>. (Conjunções: mas, porém, contudo, todavia...)
+                                    <ul><li>Ex: "Ele correu, <strong class="text-highlight">mas</strong> perdeu o ônibus."</li></ul>
+                                </li>
+                                <li><strong>Alternativas:</strong> Dão ideia de <strong class="text-highlight">escolha, alternância</strong>. (Conjunções: ou, ou...ou, ora...ora...)
+                                    <ul><li>Ex: "<strong class="text-highlight">Ora</strong> chove, <strong class="text-highlight">ora</strong> faz sol."</li></ul>
+                                </li>
+                                <li><strong>Conclusivas:</strong> Dão ideia de <strong class="text-highlight">conclusão</strong>. (Conjunções: logo, portanto, por isso...)
+                                    <ul><li>Ex: "Pensei, <strong class="text-highlight">logo</strong> existi."</li></ul>
+                                </li>
+                                <li><strong>Explicativas:</strong> Dão ideia de <strong class="text-highlight">explicação, motivo</strong> (geralmente após um imperativo). (Conjunções: que, porque, pois...)
+                                    <ul><li>Ex: "Feche a porta, <strong class="text-highlight">pois</strong> está frio."</li></ul>
+                                </li>
+                            </ul>
+                        </article>
+                    </section>
+
+                    <section id="substantivas" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">3. Orações Subordinadas Substantivas</h2>
+
+                            <h3 class="text-2xl font-semibold mt-6">Período Composto por Subordinação</h3>
+                            <p>A subordinação ocorre quando uma oração <strong class="prose-strong">depende</strong> da outra para fazer sentido. Temos uma Oração Principal e uma Oração Subordinada (que funciona como um "pedaço" da principal).</p>
+
+                            <h3 class="text-2xl font-semibold mt-6">Oração Subordinada Substantiva</h3>
+                            <p>É a oração que exerce a função de um <strong class="prose-strong">Substantivo</strong> (Sujeito, Objeto Direto, Objeto Indireto, etc.) na frase.</p>
+                            <p><strong class="text-highlight">DICA:</strong> Você quase sempre pode substituir a oração substantiva inteira pela palavra <strong class="text-highlight">"ISSO"</strong>, "NISSO" ou "DISSO".</p>
+                            <p>Exemplo: "Eu quero <strong class="text-highlight">que você vença</strong>." → "Eu quero <strong class="text-highlight">ISSO</strong>."</p>
+
+                            <h4 class="text-xl font-semibold mt-4">Tipos de Orações Substantivas</h4>
+                            
+                            <h5 class="text-lg font-semibold mt-2">1. Subjetiva (Função de Sujeito)</h5>
+                            <p>A oração é o <strong class="text-highlight">sujeito</strong> do verbo da oração principal (que geralmente começa com "É bom...", "É necessário...", "Convém...").</p>
+                            <ul><li>Ex: "É necessário [<strong class="text-highlight">que você estude</strong>]." → "[<strong class="text-highlight">ISSO</strong>] é necessário."</li></ul>
+
+                            <h5 class="text-lg font-semibold mt-2">2. Objetiva Direta (Função de Objeto Direto)</h5>
+                            <p>A oração completa o sentido de um verbo <strong class="text-highlight">sem preposição</strong> (quem quer, quer algo).</p>
+                            <ul><li>Ex: "Eu quero [<strong class="text-highlight">que você vença</strong>]." → "Eu quero [<strong class="text-highlight">ISSO</strong>]."</li></ul>
+
+                            <h5 class="text-lg font-semibold mt-2">3. Objetiva Indireta (Função de Objeto Indireto)</h5>
+                            <p>A oração completa o sentido de um verbo <strong class="text-highlight">com preposição</strong> (quem precisa, precisa de algo).</p>
+                            <ul><li>Ex: "Eu preciso [<strong class="text-highlight">de que você vença</strong>]." → "Eu preciso [<strong class="text-highlight">DISSO</strong>]."</li></ul>
+
+                            <h5 class="text-lg font-semibold mt-2">4. Completiva Nominal (Função de Complemento Nominal)</h5>
+                            <p>Parece a Objetiva Indireta, mas completa um <strong class="text-highlight">NOME (substantivo)</strong> e não um verbo.</p>
+                            <ul><li>Ex: "Eu tenho necessidade [<strong class="text-highlight">de que você vença</strong>]." → "Eu tenho necessidade [<strong class="text-highlight">DISSO</strong>]." (Note que "necessidade" é um nome).</li></ul>
+
+                            <h5 class="text-lg font-semibold mt-2">5. Predicativa (Função de Predicativo)</h5>
+                            <p>Vem depois do <strong class="text-highlight">Verbo de Ligação</strong> (ser, estar, parecer...).</p>
+                            <ul><li>Ex: "Meu desejo é [<strong class="text-highlight">que você vença</strong>]." → "Meu desejo é [<strong class="text-highlight">ISSO</strong>]."</li></ul>
+
+                            <h5 class="text-lg font-semibold mt-2">6. Apositiva (Função de Aposto)</h5>
+                            <p>Explica um termo anterior, geralmente vindo após <strong class="text-highlight">dois pontos (:)</strong>.</p>
+                            <ul><li>Ex: "Eu só peço uma coisa: [<strong class="text-highlight">que você vença</strong>]."</li></ul>
+                        </article>
+                    </section>
+                </main>
+            </div>
+        </div>
+        
+        <!-- Seção Praticar --><section id="practice-section" class="hidden p-4">
+            <div id="quiz-container" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                <div id="question-header" class="mb-4 text-center">
+                    <p class="accent-secondary font-semibold" id="question-topic"></p>
+                </div>
+                <p id="question-text" class="text-xl text-center mb-6 min-h-[60px]"></p>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="feedback-container" class="mt-6 text-center"></div>
+
+                <!-- Navegação --><div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark disabled:bg-gray-600 disabled:cursor-not-allowed">Anterior</button>
+                    <span id="question-counter" class="font-semibold text-dark-text"></span>
+                    <button id="next-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark">Próxima</button>
+                </div>
+            </div>
+
+            <!-- Navegação de Questões --><div id="question-nav-container" class="hidden bg-dark-surface p-4 rounded-lg shadow-lg max-w-3xl mx-auto mt-4">
+                <div id="question-buttons-grid" class="flex flex-wrap justify-center gap-2">
+                    <!-- Buttons will be programmatically inserted here --></div>
+            </div>
+
+             <!-- Tela de Pontuação --><div id="score-screen" class="hidden text-center bg-dark-surface p-8 rounded-lg shadow-lg max-w-3xl mx-auto mt-8">
+                <h3 class="text-4xl font-bold text-white mb-4">Pontuação Final</h3>
+                <p id="final-score" class="text-6xl font-bold accent-secondary mb-2"></p>
+                <p id="score-message" class="text-lg text-dark-light-text mb-8"></p>
+                <button id="restart-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-500 transition-colors">Recomeçar</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- BANCO DE DADOS DAS QUESTÕES ---
+        const questions = [
+            // NÍVEL FÁCIL (10 Questões)
+            { topic: "Variação Linguística", difficulty: "Fácil", question: "O que é variação linguística?", options: ["Um erro de gramática", "O modo como a língua muda e se adapta", "Falar em outra língua", "O estudo de línguas mortas"], answer: 1, explanation: "Variação linguística é o processo natural de mudança da língua, que varia conforme a região, idade, situação, etc." },
+            { topic: "Variação Linguística", difficulty: "Fácil", question: "Chamar o mesmo alimento de 'aipim', 'mandioca' ou 'macaxeira' é um exemplo de:", options: ["Variação Histórica", "Variação Regional", "Variação Social", "Variação Estilística"], answer: 1, explanation: "Essa é uma variação Regional (Geográfica), pois as palavras mudam dependendo do local." },
+            { topic: "Variação Linguística", difficulty: "Fácil", question: "Usar gírias como 'tá ligado' ou 'ranço' é um exemplo de:", options: ["Variação Histórica", "Variação Regional", "Variação Social", "Norma Culta"], answer: 2, explanation: "Gírias são exemplos de Variação Social, geralmente ligadas a um grupo ou faixa etária específica." },
+            { topic: "Períodos e Orações", difficulty: "Fácil", question: "Quantos verbos (orações) tem um Período Simples?", options: ["Nenhum", "Apenas um", "Dois", "Três ou mais"], answer: 1, explanation: "Período Simples possui apenas UMA oração, ou seja, um verbo ou locução verbal." },
+            { topic: "Períodos e Orações", difficulty: "Fácil", question: "A frase 'Eu corri e pulei' é um:", options: ["Período Simples", "Período Composto", "Frase Nominal", "Sujeito Composto"], answer: 1, explanation: "É um Período Composto, pois tem dois verbos (corri, pulei)." },
+            { topic: "Orações Coordenadas", difficulty: "Fácil", question: "Orações Coordenadas são:", options: ["Independentes", "Dependentes", "Sempre com vírgula", "Sempre com 'que'"], answer: 0, explanation: "Orações Coordenadas são independentes, ou seja, fazem sentido sozinhas." },
+            { topic: "Orações Coordenadas", difficulty: "Fácil", question: "Qual a classificação da oração '... mas não gostei.' (em 'Eu vi o filme, mas não gostei')?", options: ["Aditiva", "Adversativa", "Alternativa", "Conclusiva"], answer: 1, explanation: "A conjunção 'mas' indica oposição, contraste. Portanto, é Adversativa." },
+            { topic: "Orações Coordenadas", difficulty: "Fácil", question: "Qual a classificação da oração '... e fui dormir.' (em 'Cheguei em casa e fui dormir')?", options: ["Aditiva", "Adversativa", "Explicativa", "Conclusiva"], answer: 0, explanation: "A conjunção 'e' indica soma, adição de ideias. Portanto, é Aditiva." },
+            { topic: "Subordinadas Substantivas", difficulty: "Fácil", question: "Orações Subordinadas são:", options: ["Independentes", "Dependentes", "Sempre sem verbo", "Sempre com 'mas'"], answer: 1, explanation: "Orações Subordinadas são dependentes, ou seja, precisam da Oração Principal para fazer sentido." },
+            { topic: "Subordinadas Substantivas", difficulty: "Fácil", question: "Qual palavra pode ser usada para testar se uma oração é Subordinada Substantiva?", options: ["MAS", "QUANDO", "ISSO", "POIS"], answer: 2, explanation: "A dica principal é trocar a oração inteira por 'ISSO', 'DISSO' ou 'NISSO'." },
+
+            // NÍVEL MÉDIO (12 Questões)
+            { topic: "Variação Linguística", difficulty: "Médio", question: "A mudança de 'Vossa Mercê' para 'Você' é um exemplo de variação:", options: ["Regional", "Social", "Estilística", "Histórica"], answer: 3, explanation: "É uma Variação Histórica, pois a palavra mudou ao longo do tempo." },
+            { topic: "Variação Linguística", difficulty: "Médio", question: "Falar 'Doutor, sinto uma dor aguda' (no médico) e 'Cara, tô morrendo de dor' (com amigo) é variação:", options: ["Histórica", "Regional", "Estilística (Situacional)", "Social"], answer: 2, explanation: "É uma Variação Estilística (ou Situacional), pois a pessoa adapta sua fala ao contexto (formal vs. informal)." },
+            { topic: "Períodos e Orações", difficulty: "Médio", question: "A frase 'Gosto de sorvete, de chocolate, de brigadeiro.' é um:", options: ["Período Simples", "Período Composto", "Oração Assindética", "Oração Subordinada"], answer: 0, explanation: "Apesar das vírgulas e dos vários itens, há apenas UM verbo ('Gosto'). Portanto, é um Período Simples." },
+            { topic: "Orações Coordenadas", difficulty: "Médio", question: "Na frase 'Estude, pois a prova será difícil', a segunda oração é:", options: ["Conclusiva", "Explicativa", "Adversativa", "Aditiva"], answer: 1, explanation: "A conjunção 'pois' (antes do verbo) está dando uma explicação/motivo para a ordem 'Estude'. É Explicativa." },
+            { topic: "Orações Coordenadas", difficulty: "Médio", question: "Na frase 'Estudei muito, portanto devo passar', a segunda oração é:", options: ["Conclusiva", "Explicativa", "Alternativa", "Adversativa"], answer: 0, explanation: "A conjunção 'portanto' indica a conclusão do pensamento iniciado na primeira oração. É Conclusiva." },
+            { topic: "Orações Coordenadas", difficulty: "Médio", question: "Na frase 'Ora ele estuda, ora ele joga', as orações são:", options: ["Aditivas", "Adversativas", "Alternativas", "Conclusivas"], answer: 2, explanation: "As conjunções 'Ora... ora' indicam alternância de ações. São Alternativas." },
+            { topic: "Subordinadas Substantivas", difficulty: "Médio", question: "Em 'É provável [que ele vença]', a oração destacada é:", options: ["Subjetiva", "Objetiva Direta", "Predicativa", "Objetiva Indireta"], answer: 0, explanation: "Podemos trocar por '[ISSO] é provável'. A oração funciona como Sujeito do verbo 'É provável'." },
+            { topic: "Subordinadas Substantivas", difficulty: "Médio", question: "Em 'O professor disse [que a prova foi cancelada]', a oração destacada é:", options: ["Subjetiva", "Objetiva Direta", "Predicativa", "Completiva Nominal"], answer: 1, explanation: "Podemos trocar por 'O professor disse [ISSO]'. O verbo 'dizer' pede um complemento sem preposição (Objeto Direto)." },
+            { topic: "Subordinadas Substantivas", difficulty: "Médio", question: "Em 'Lembrei-me [de que a prova era hoje]', a oração destacada é:", options: ["Subjetiva", "Objetiva Direta", "Objetiva Indireta", "Apositiva"], answer: 2, explanation: "Podemos trocar por 'Lembrei-me [DISSO]'. O verbo 'lembrar-se' pede a preposição 'de' (Objeto Indireto)." },
+            { topic: "Orações Coordenadas", difficulty: "Médio", question: "Em 'Ele não só estudou, mas também trabalhou', a segunda oração é:", options: ["Aditiva", "Adversativa", "Alternativa", "Explicativa"], answer: 0, explanation: "A expressão 'não só... mas também' dá ideia de soma, adição de ações. É Aditiva." },
+            { topic: "Variação Linguística", difficulty: "Médio", question: "O 'jargão' (linguajar técnico) usado por advogados ou médicos é um tipo de variação:", options: ["Regional", "Histórica", "Social (Profissional)", "Estilística"], answer: 2, explanation: "É uma Variação Social, pois é um modo de falar específico de um grupo (neste caso, profissional)." },
+            { topic: "Subordinadas Substantivas", difficulty: "Médio", question: "Em 'Todos querem [que você seja feliz]', a oração destacada é:", options: ["Subjetiva", "Objetiva Direta", "Predicativa", "Objetiva Indireta"], answer: 1, explanation: "Podemos trocar por 'Todos querem [ISSO]'. O verbo 'querer' é transitivo direto (quem quer, quer algo)." },
+
+            // NÍVEL DIFÍCIL (8 Questões)
+            { topic: "Subordinadas Substantivas", difficulty: "Difícil", question: "Em 'O problema é [que ninguém estudou]', a oração destacada é:", options: ["Subjetiva", "Objetiva Direta", "Predicativa", "Completiva Nominal"], answer: 2, explanation: "A oração vem depois do verbo de ligação 'é', funcionando como uma característica (predicativo) do sujeito 'O problema'. (O problema = ISSO)." },
+            { topic: "Subordinadas Substantivas", difficulty: "Difícil", question: "Em 'Tenho certeza [de que ele virá]', a oração destacada é:", options: ["Objetiva Indireta", "Predicativa", "Completiva Nominal", "Subjetiva"], answer: 2, explanation: "A oração completa o sentido do NOME 'certeza' (ter certeza DE algo). Como completa um nome, é Completiva Nominal." },
+            { topic: "Subordinadas Substantivas", difficulty: "Difícil", question: "Em 'Todos precisam [de que você ajude]', a oração destacada é:", options: ["Objetiva Indireta", "Predicativa", "Completiva Nominal", "Subjetiva"], answer: 0, explanation: "A oração completa o sentido do VERBO 'precisar' (quem precisa, precisa DE algo). Como completa um verbo com preposição, é Objetiva Indireta." },
+            { topic: "Subordinadas Substantivas", difficulty: "Difícil", question: "Em 'Desejo-lhe uma coisa: [que tenha sucesso]', a oração destacada é:", options: ["Subjetiva", "Apositiva", "Predicativa", "Objetiva Direta"], answer: 1, explanation: "A oração vem após dois pontos (:) e explica o termo anterior ('uma coisa'). É uma Oração Apositiva." },
+            { topic: "Orações Coordenadas", difficulty: "Difícil", question: "Em 'Ele estudou muito; não deve, pois, temer a prova', a oração 'não deve, pois, temer a prova' é:", options: ["Explicativa", "Adversativa", "Conclusiva", "Aditiva"], answer: 2, explanation: "O 'pois' quando vem DESLOCADO (entre vírgulas) tem valor de 'portanto', 'logo'. É uma Conclusiva." },
+            { topic: "Períodos e Orações", difficulty: "Difícil", question: "Quantas orações há em: 'Quando cheguei, percebi que ele queria me dizer algo'?", options: ["Uma", "Duas", "Três", "Quatro"], answer: 2, explanation: "Há 3 verbos: 'cheguei', 'percebi', 'queria dizer' (locução). Portanto, são 3 orações." },
+            { topic: "Subordinadas Substantivas", difficulty: "Difícil", question: "Em 'Convém [que todos participem]', a oração destacada é:", options: ["Objetiva Direta", "Predicativa", "Subjetiva", "Completiva Nominal"], answer: 2, explanation: "A oração é o sujeito do verbo 'Convém'. (ISSO convém)." },
+            { topic: "Subordinadas Substantivas", difficulty: "Difícil", question: "Qual frase tem uma Oração Subordinada Substantiva Objetiva Indireta?", options: ["É preciso que chova.", "Digo que choveu.", "Gosto de que chova.", "A chuva é que chova."], answer: 2, explanation: "'Gosto [de que chova]' -> Gosto [DISSO]. O verbo 'Gostar' exige a preposição 'de', sendo uma Objetiva Indireta." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- LÓGICA DO MODO DE APRENDIZAGEM ---
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('#learn-container main section');
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; // Ajustado para 0.1
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => { observer.observe(section); });
+            
+            links.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // --- LÓGICA DO MODO DE PRÁTICA ---
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnContainer = document.getElementById('learn-container');
+            const practiceSection = document.getElementById('practice-section');
+            
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreScreen = document.getElementById('score-screen');
+            const questionTopic = document.getElementById('question-topic');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const questionCounter = document.getElementById('question-counter');
+            const finalScore = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+            const restartBtn = document.getElementById('restart-btn');
+            const questionNavContainer = document.getElementById('question-nav-container');
+
+            let state = {
+                currentMode: 'learn',
+                currentQuestionIndex: 0,
+                userAnswers: [],
+                score: 0,
+            };
+
+            function switchMode(mode) {
+                state.currentMode = mode;
+                btnLearn.classList.toggle('active', mode === 'learn');
+                btnPractice.classList.toggle('active', mode !== 'learn');
+                learnContainer.classList.toggle('hidden', mode !== 'learn');
+                practiceSection.classList.toggle('hidden', mode === 'learn');
+
+                if (mode === 'practice') {
+                    startPractice();
+                }
+            }
+
+            function startPractice() {
+                state.currentQuestionIndex = 0;
+                state.score = 0;
+                state.userAnswers = Array(questions.length).fill(null);
+                quizContainer.classList.remove('hidden');
+                scoreScreen.classList.add('hidden');
+                questionNavContainer.classList.remove('hidden');
+                renderQuestionNavigation();
+                renderQuestion(0);
+            }
+            
+            function renderQuestion(index) {
+                const question = questions[index];
+                questionTopic.textContent = `${question.topic} - (Nível: ${question.difficulty})`;
+                questionText.textContent = question.question;
+                questionCounter.textContent = `${index + 1} / ${questions.length}`;
+
+                optionsContainer.innerHTML = '';
+                feedbackContainer.innerHTML = '';
+
+                question.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                    button.onclick = () => checkAnswer(i, question.answer, question.explanation);
+                    optionsContainer.appendChild(button);
+                });
+
+                updateNavButtonsState();
+                updateQuestionNavButtons();
+            }
+
+            function checkAnswer(selectedIndex, correctIndex, explanation) {
+                const isCorrect = selectedIndex === correctIndex;
+                const isFirstAttempt = state.userAnswers[state.currentQuestionIndex] === null;
+                const wasPreviouslyWrong = state.userAnswers[state.currentQuestionIndex] === false;
+
+                if (isFirstAttempt) {
+                    state.userAnswers[state.currentQuestionIndex] = isCorrect; // Set state on first try
+                    if (isCorrect) {
+                        state.score++;
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else if (wasPreviouslyWrong && isCorrect) {
+                    // This is the user's request: was wrong, retried, now correct
+                    state.userAnswers[state.currentQuestionIndex] = true; // Update state to correct
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Fire confetti on correction
+                }
+
+                Array.from(optionsContainer.children).forEach((btn, i) => {
+                    btn.disabled = true;
+                    if (i === correctIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (i === selectedIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-red-600', 'text-white');
+                    }
+                });
+
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 rounded-lg ${isCorrect ? 'bg-success-dark' : 'bg-error-dark'}">
+                        <h4 class="font-bold text-lg mb-2">${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</h4>
+                        <p class="text-sm">${explanation}</p>
+                        <button id="redo-question-btn" class="mt-4 py-2 px-4 accent-primary rounded-md font-semibold hover:accent-primary-dark transition-colors">Tentar Novamente</button>
+                    </div>`;
+                
+                // Adiciona o listener para o novo botão
+                document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
+                
+                updateQuestionNavButtons();
+            }
+            
+            function resetCurrentQuestion() {
+                // Limpa o feedback
+                feedbackContainer.innerHTML = '';
+                
+                // Re-abilita as opções e reseta os estilos
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                });
+            }
+
+            function updateNavButtonsState() {
+                prevBtn.disabled = state.currentQuestionIndex === 0;
+                nextBtn.textContent = (state.currentQuestionIndex === questions.length - 1) ? "Finalizar" : "Próxima";
+            }
+
+            function nextQuestion() {
+                if (state.currentQuestionIndex < questions.length - 1) {
+                    goToQuestion(state.currentQuestionIndex + 1);
+                } else {
+                    showFinalScore();
+                }
+            }
+
+            function prevQuestion() {
+                if (state.currentQuestionIndex > 0) {
+                   goToQuestion(state.currentQuestionIndex - 1);
+                }
+            }
+
+            function goToQuestion(index) {
+                if (index >= 0 && index < questions.length) {
+                    state.currentQuestionIndex = index;
+                    renderQuestion(index);
+                }
+            }
+
+            function renderQuestionNavigation() {
+                const grid = document.getElementById('question-buttons-grid');
+                grid.innerHTML = '';
+                for (let i = 0; i < questions.length; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i + 1;
+                    button.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+                    button.dataset.index = i;
+                    button.onclick = () => goToQuestion(i);
+                    grid.appendChild(button);
+                }
+            }
+            
+            function updateQuestionNavButtons() {
+                const buttons = document.querySelectorAll('#question-buttons-grid button');
+                buttons.forEach((btn, i) => {
+                    // Reset classes, keeping base styles
+                    btn.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+
+                    const answerState = state.userAnswers[i];
+                    
+                    if (answerState === true) {
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (answerState === false) {
+                        btn.classList.add('bg-red-600', 'text-white');
+                    } else {
+                        btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    }
+
+                    if (i === state.currentQuestionIndex) {
+                        btn.classList.add('ring-2', 'ring-offset-2', 'ring-offset-gray-800', 'ring-orange-500'); /* Alterado para ring-orange-500 */
+                        btn.classList.remove('hover:bg-gray-600');
+                    }
+                });
+            }
+            
+            function showFinalScore() {
+                quizContainer.classList.add('hidden');
+                scoreScreen.classList.remove('hidden');
+                questionNavContainer.classList.add('hidden');
+
+                const percentage = Math.round((state.score / questions.length) * 100);
+                finalScore.textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) message = "Excelente! Você dominou o assunto!";
+                else if (percentage >= 70) message = "Muito bom! Continue praticando para aperfeiçoar.";
+                else if (percentage >= 50) message = "Bom esforço! Reveja os tópicos que errou.";
+                else message = "Não desanime! Reveja a seção 'Aprender' e tente novamente.";
+                
+                scoreMessage.textContent = `Você acertou ${state.score} de ${questions.length} questões. ${message}`;
+            }
+
+            // --- INICIALIZAÇÃO ---
+            // Assegura que os botões de modo tenham a cor correta no início
+            btnLearn.classList.add('active'); // Começa no modo 'learn'
+            
+            btnLearn.addEventListener('click', () => switchMode('learn'));
+            btnPractice.addEventListener('click', () => switchMode('practice'));
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', startPractice);
+
+            // Garante que o estado inicial (learn) esteja correto
+            switchMode('learn');
+        });
+    </script>
+</body>
+</html>
