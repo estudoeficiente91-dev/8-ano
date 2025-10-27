@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos: Geografia - África (8º Ano)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Cores principais atualizadas */
+        .bg-dark-bg { background-color: #121212; } /* Fundo principal */
+        .bg-dark-surface { background-color: #1E1E1E; } /* Cartões e nav */
+        .text-dark-text { color: #E0E0E0; } /* Texto padrão */
+        .text-dark-light-text { color: #B0B0B0; } /* Texto secundário/p */
+
+        /* paleta de destaque: Tons de Bronze/Dourado Envelhecido */
+        .accent-primary { background-color: #D97706; color: white; } /* Laranja escuro/Bronze (Orange 700) */
+        .hover\:accent-primary-dark { background-color: #C26402; } /* Laranja mais escuro (Orange 800) */
+        .accent-secondary { color: #FDBA74; } /* Laranja claro/Pêssego (Orange 300) */
+        .text-highlight { color: #FED7AA; } /* Laranja mais claro (Orange 200) para destaques */
+        .text-success { color: #34D399; } /* Esmeralda para sucesso */
+        .bg-success-dark { background-color: #065F46; } /* Esmeralda mais escuro */
+        .text-error { color: #EF4444; } /* Vermelho para erro */
+        .bg-error-dark { background-color: #991B1B; } /* Vermelho mais escuro */
+        
+        .mode-button.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+        .nav-link.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+
+        .prose-headings {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-strong {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+        .prose-th, .prose-td {
+            border: 1px solid #424242; /* Cinza mais escuro para bordas da tabela */
+            padding: 0.5em 1em;
+        }
+        .prose-th {
+            background-color: #2F2F2F; /* Fundo mais escuro para cabeçalho da tabela */
+            font-weight: 600;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-dark-text">
+
+    <div class="w-full max-w-7xl mx-auto">
+        <header class="text-center py-8 px-4">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Geografia: Espaço Rural Africano</h1>
+            <p class="text-lg text-dark-light-text">Um guia sobre agropecuária, extrativismo e os desafios do continente.</p>
+        </header>
+        
+        <nav class="flex justify-center items-center bg-dark-surface rounded-lg p-2 mb-8 gap-2 flex-wrap max-w-md mx-auto">
+            <button id="btn-learn" class="mode-button accent-primary flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Aprender</button>
+            <button id="btn-practice" class="mode-button flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Praticar</button>
+        </nav>
+
+        <div id="learn-container">
+            <div class="flex flex-col lg:flex-row gap-8 p-4">
+                <!-- Navegação Lateral --><aside class="lg:w-1/4">
+                    <nav class="sticky top-4 bg-dark-surface rounded-lg p-4">
+                        <h3 class="text-xl font-bold text-white mb-4">Tópicos</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#espaco_rural" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark active">1. O Espaço Rural</a></li>
+                            <li><a href="#limitacoes" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">2. Limitações à Produção</a></li>
+                            <li><a href="#agropecuaria" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">3. Agricultura e Pecuária</a></li>
+                            <li><a href="#extrativismo" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">4. Atividades Extrativistas</a></li>
+                            <li><a href="#conservacao" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">5. Conservação e Turismo</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Conteúdo Principal --><main class="lg:w-3/4 space-y-12">
+                    
+                    <section id="espaco_rural" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">1. O Espaço Rural Africano</h2>
+                            <p>O espaço rural africano é vasto e diverso, marcado por profundos contrastes. A maior parte da população africana ainda vive no campo e depende diretamente da terra para sobreviver.</p>
+                            <p>Esse espaço foi intensamente modificado durante o <strong class="prose-strong">período colonial</strong>, que introduziu um modelo focado na exportação. Isso criou uma dualidade que existe até hoje:</p>
+                            <ul>
+                                <li>De um lado, grandes fazendas modernas (<em>plantations</em>) que produzem para o mercado externo.</li>
+                                <li>De outro, milhões de pequenas propriedades familiares que praticam uma agricultura de subsistência.</li>
+                            </ul>
+                            <h3 class="text-2xl font-semibold mt-6">Desenvolvimento das Atividades Agropecuárias</h3>
+                            <p>O desenvolvimento da agropecuária é visto como chave para o futuro do continente, mas enfrenta desafios gigantescos. O setor é vital, empregando mais de 60% da força de trabalho em muitos países, mas sua produtividade ainda é baixa em comparação com outras regiões do mundo.</p>
+                        </article>
+                    </section>
+                    
+                    <section id="limitacoes" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">2. Limitações à Produção Agropecuária</h2>
+                            <p>Apesar do potencial, a África enfrenta sérios obstáculos naturais, econômicos e políticos para desenvolver seu espaço rural:</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Limitações Naturais</h3>
+                            <ul>
+                                <li><strong>Clima:</strong> Grande parte do continente é dominada por desertos (como o <strong class="text-highlight">Saara</strong> ao norte e o Kalahari ao sul) e regiões semiáridas (como o <strong class="text-highlight">Sahel</strong>), que sofrem com secas severas e desertificação.</li>
+                                <li><strong>Solos:</strong> Muitos solos africanos são geologicamente antigos, pobres em nutrientes e suscetíveis à erosão.</li>
+                            </ul>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Limitações Humanas e Econômicas</h3>
+                            <ul>
+                                <li><strong>Falta de Infraestrutura:</strong> Carência de estradas, portos, sistemas de irrigação, armazéns e energia elétrica dificulta o escoamento da produção e o acesso a tecnologias.</li>
+                                <li><strong>Baixa Tecnologia:</strong> A maior parte da agricultura tradicional ainda usa técnicas rudimentares, com baixa mecanização e pouco uso de fertilizantes.</li>
+                                <li><strong>Questão Fundiária:</strong> A terra é mal distribuída, muitas vezes concentrada nas mãos de poucos (herança colonial) ou sob regimes de posse comunitária que dificultam o investimento.</li>
+                                <li><strong>Conflitos e Instabilidade:</strong> Guerras civis e instabilidade política em muitos países impedem o plantio, destroem colheitas e criam milhões de refugiados.</li>
+                            </ul>
+                        </article>
+                    </section>
+
+                    <section id="agropecuaria" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">3. A Agricultura e a Pecuária</h2>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Agricultura Tradicional (de Subsistência)</h3>
+                            <ul>
+                                <li><strong>O que é:</strong> Praticada pela maioria da população rural, em <strong class="text-highlight">pequenas propriedades</strong> (minifúndios).</li>
+                                <li><strong>Características:</strong> Focada no <strong class="text-highlight">consumo da própria família</strong> (subsistência), com pouca tecnologia (uso de enxada, tração animal).</li>
+                                <li><strong>Técnica:</strong> Geralmente é uma <strong class="prose-strong">policultura</strong> (cultivo de vários produtos, como milho, mandioca, sorgo, inhame) e, em algumas áreas, itinerante (queimadas).</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">Pecuária Tradicional</h3>
+                            <ul>
+                                <li><strong>O que é:</strong> Criação de gado, cabras e camelos de forma <strong class="text-highlight">extensiva</strong> (gado solto, ocupando grandes áreas).</li>
+                                <li><strong>Características:</strong> Baixa produtividade (focada mais na quantidade do que na qualidade). Em muitas culturas, o gado é um <strong class="prose-strong">símbolo de status e riqueza</strong>.</li>
+                                <li><strong>Pecuária Nômade:</strong> Comum em áreas secas (Sahel), onde os pastores se movem constantemente em busca de água e pasto.</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">Agricultura e Pecuária Comercial (Plantation)</h3>
+                            <ul>
+                                <li><strong>O que é:</strong> Grandes fazendas (latifúndios) que produzem em larga escala para <strong class="text-highlight">exportação</strong>.</li>
+                                <li><strong>Características:</strong> Prática da <strong class="prose-strong">monocultura</strong> (cultivo de um único produto de alto valor internacional).</li>
+                                <li><strong>Exemplos:</strong> <strong class="text-highlight">Cacau</strong> (Costa do Marfim, Gana), <strong class="text-highlight">Café</strong> (Etiópia, Uganda), Algodão, Amendoim, Flores (Quênia).</li>
+                                <li><strong>Pecuária Comercial:</strong> Mais moderna e intensiva, focada em carne e laticínios, encontrada principalmente na África do Sul e Quênia.</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">Desafios na Produção Agropecuária</h3>
+                            <p>O maior desafio é o <strong class="text-highlight">paradoxo da fome</strong>: a África tem vastas terras férteis usadas para produzir alimentos de luxo (cacau, café, flores) para exportar para a Europa, enquanto sua própria população sofre de insegurança alimentar. A produção agrícola compete com os preços baixos de alimentos subsidiados vindos de países ricos.</p>
+                        </article>
+                    </section>
+                    
+                    <section id="extrativismo" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">4. Atividades Extrativistas</h2>
+                            <p>O extrativismo (retirada de recursos da natureza) é uma atividade econômica vital para muitos países africanos, superando a agricultura em valor.</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">O Extrativismo Mineral</h3>
+                            <p>O subsolo africano é um dos mais ricos do mundo. Essa é a atividade econômica mais lucrativa do continente, mas também a que gera mais conflitos e desigualdade.</p>
+                            <ul>
+                                <li><strong>Petróleo e Gás Natural:</strong> Principal fonte de riqueza da <strong class="text-highlight">Nigéria</strong> e de <strong class="text-highlight">Angola</strong> (membros da OPEP).</li>
+                                <li><strong>Diamantes:</strong> <strong class="text-highlight">Botsuana</strong> (exemplo de boa gestão), Congo, Serra Leoa.</li>
+                                <li><strong>Ouro:</strong> África do Sul e Gana.</li>
+                                <li><strong>Minerais Estratégicos:</strong> <strong class="prose-strong">Coltan</strong> (essencial para celulares e eletrônicos, 80% das reservas estão na Rep. Dem. do Congo), Cobre (Zâmbia, RDC), Urânio (Níger).</li>
+                            </ul>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">A "Maldição dos Recursos"</h3>
+                            <p>É um paradoxo onde países <strong class="text-highlight">muito ricos em recursos minerais</strong> possuem uma <strong class="text-highlight">população muito pobre</strong>. Isso ocorre porque a riqueza do extrativismo fica concentrada nas mãos de elites corruptas e empresas multinacionais, além de financiar guerras civis (como os "diamantes de sangue" em Serra Leoa).</p>
+                        </article>
+                    </section>
+
+                    <section id="conservacao" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">5. Conservação Ambiental e Turismo</h2>
+                            <p>Diante dos desafios da agricultura e da "maldição" dos minérios, alguns países têm investido no <strong class="prose-strong">ecoturismo</strong> como uma alternativa de desenvolvimento sustentável.</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Turismo de Safári</h3>
+                            <ul>
+                                <li>Países como <strong class="text-highlight">Quênia, Tanzânia, África do Sul, Botsuana e Namíbia</strong> são mundialmente famosos por seus parques nacionais e pela preservação da vida selvagem (os "Big Five": leão, leopardo, elefante, rinoceronte e búfalo).</li>
+                                <li>O turismo de safári gera milhões de dólares, cria empregos e incentiva a <strong class="text-highlight">conservação ambiental</strong>, pois a floresta e os animais "em pé" valem mais do que mortos.</li>
+                            </ul>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Desafios</h3>
+                            <p>Embora seja uma alternativa positiva, o turismo também precisa ser bem gerenciado para evitar impactos negativos, como a construção excessiva de hotéis em áreas sensíveis e a perturbação da vida selvagem.</p>
+                        </article>
+                    </section>
+                </main>
+            </div>
+        </div>
+        
+        <!-- Seção Praticar --><section id="practice-section" class="hidden p-4">
+            <div id="quiz-container" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                <div id="question-header" class="mb-4 text-center">
+                    <p class="accent-secondary font-semibold" id="question-topic"></p>
+                </div>
+                <p id="question-text" class="text-xl text-center mb-6 min-h-[60px]"></p>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="feedback-container" class="mt-6 text-center"></div>
+
+                <!-- Navegação --><div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark disabled:bg-gray-600 disabled:cursor-not-allowed">Anterior</button>
+                    <span id="question-counter" class="font-semibold text-dark-text"></span>
+                    <button id="next-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark">Próxima</button>
+                </div>
+            </div>
+
+            <!-- Navegação de Questões --><div id="question-nav-container" class="hidden bg-dark-surface p-4 rounded-lg shadow-lg max-w-3xl mx-auto mt-4">
+                <div id="question-buttons-grid" class="flex flex-wrap justify-center gap-2">
+                    <!-- Buttons will be programmatically inserted here --></div>
+            </div>
+
+             <!-- Tela de Pontuação --><div id="score-screen" class="hidden text-center bg-dark-surface p-8 rounded-lg shadow-lg max-w-3xl mx-auto mt-8">
+                <h3 class="text-4xl font-bold text-white mb-4">Pontuação Final</h3>
+                <p id="final-score" class="text-6xl font-bold accent-secondary mb-2"></p>
+                <p id="score-message" class="text-lg text-dark-light-text mb-8"></p>
+                <button id="restart-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-500 transition-colors">Recomeçar</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- BANCO DE DADOS DAS QUESTÕES ---
+        const questions = [
+            // NÍVEL FÁCIL (10 Questões)
+            { topic: "Espaço Rural", difficulty: "Fácil", question: "O tipo de agricultura praticada pela família para o próprio consumo é chamada de:", options: ["Agricultura Comercial", "Agricultura de Subsistência", "Monocultura", "Ecoturismo"], answer: 1, explanation: "Agricultura de Subsistência (ou Tradicional) é aquela focada no consumo do próprio agricultor e sua família." },
+            { topic: "Agropecuária", difficulty: "Fácil", question: "A agricultura em grandes fazendas, voltada para a exportação (como café ou cacau), é a:", options: ["Agricultura Comercial (Plantation)", "Agricultura de Subsistência", "Policultura", "Pecuária Nômade"], answer: 0, explanation: "A Agricultura Comercial, ou Plantation, é feita em larga escala (monocultura) para vender no mercado internacional." },
+            { topic: "Limitações", difficulty: "Fácil", question: "Qual é o nome do grande deserto localizado ao norte da África?", options: ["Kalahari", "Atacama", "Saara", "Gobi"], answer: 2, explanation: "O Deserto do Saara é o maior deserto quente do mundo e cobre grande parte do norte da África." },
+            { topic: "Agropecuária", difficulty: "Fácil", question: "Produtos como cacau, café e flores, cultivados para exportação, são típicos da:", options: ["Agricultura Comercial", "Pecuária Tradicional", "Agricultura Tradicional", "Extrativismo Mineral"], answer: 0, explanation: "Esses são produtos de alto valor no mercado externo, típicos da agricultura comercial (Plantation)." },
+            { topic: "Agropecuária", difficulty: "Fácil", question: "O cultivo de milho, mandioca e inhame em pequenas roças para alimentar a família é:", options: ["Agricultura Comercial", "Agricultura Tradicional", "Extrativismo de Petróleo", "Pecuária Intensiva"], answer: 1, explanation: "Esses são cultivos de policultura (vários itens) típicos da agricultura de subsistência." },
+            { topic: "Extrativismo", difficulty: "Fácil", question: "Qual atividade é a principal fonte de riqueza de países como Nigéria e Angola?", options: ["Turismo de Safári", "Extrativismo Mineral (Petróleo)", "Produção de Café", "Pecuária Nômade"], answer: 1, explanation: "A economia da Nigéria e de Angola é altamente dependente da extração e exportação de petróleo." },
+            { topic: "Agropecuária", difficulty: "Fácil", question: "A pecuária extensiva, onde pastores se movem com o gado em busca de pasto (como no Sahel), é a:", options: ["Pecuária Intensiva", "Pecuária Comercial", "Pecuária Tradicional (Nômade)", "Agricultura de Jardim"], answer: 2, explanation: "Essa é a descrição da pecuária tradicional nômade, adaptada a climas secos." },
+            { topic: "Extrativismo", difficulty: "Fácil", question: "A atividade de retirar recursos da natureza, como minérios, madeira ou petróleo, é chamada de:", options: ["Agricultura", "Pecuária", "Indústria", "Extrativismo"], answer: 3, explanation: "Extrativismo é a atividade de extrair ou coletar recursos diretamente da natureza." },
+            { topic: "Conservação e Turismo", difficulty: "Fácil", question: "A atividade de safáris fotográficos no Quênia e Tanzânia é um exemplo de:", options: ["Extrativismo Mineral", "Agricultura Comercial", "Ecoturismo", "Pecuária Intensiva"], answer: 2, explanation: "O Ecoturismo usa a natureza e a vida selvagem preservadas como atração turística." },
+            { topic: "Limitações", difficulty: "Fácil", question: "A falta de boas estradas, portos e armazéns para guardar a colheita é um exemplo de limitação de:", options: ["Clima", "Solo", "Infraestrutura", "Relevo"], answer: 2, explanation: "Infraestrutura é o conjunto de obras (transporte, energia, comunicação) necessárias para a economia funcionar." },
+
+            // NÍVEL MÉDIO (12 Questões)
+            { topic: "Limitações", difficulty: "Médio", question: "Qual é a principal limitação climática na região do Sahel, ao sul do Saara?", options: ["Excesso de chuvas (monções)", "Frio e neve", "Secas severas e desertificação", "Terremotos"], answer: 2, explanation: "O Sahel é uma faixa semiárida que sofre com secas prolongadas e o avanço do deserto (desertificação)." },
+            { topic: "Agropecuária", difficulty: "Médio", question: "O modelo de *Plantation* (agricultura comercial) na África foi, em grande parte, herdado de qual período histórico?", options: ["Pré-História", "Idade Média", "Período Colonial", "Guerra Fria"], answer: 2, explanation: "Foram os colonizadores europeus que introduziram as grandes fazendas de monocultura para abastecer a Europa." },
+            { topic: "Agropecuária", difficulty: "Médio", question: "O que é policultura, prática comum na agricultura tradicional?", options: ["O cultivo de um único produto", "O uso de agrotóxicos", "O cultivo de vários produtos na mesma área", "O cultivo em curvas de nível"], answer: 2, explanation: "Poli = Muitos. Policultura é o plantio de diversos itens (milho, feijão, mandioca) juntos, garantindo a subsistência." },
+            { topic: "Agropecuária", difficulty: "Médio", question: "O que é monocultura, prática comum na agricultura comercial?", options: ["O cultivo de um único produto em larga escala", "O cultivo sem agrotóxicos", "O cultivo de vários produtos", "O cultivo em montanhas"], answer: 0, explanation: "Mono = Um. Monocultura é a especialização em um único produto (café, cacau) para exportação." },
+            { topic: "Extrativismo", difficulty: "Médio", question: "O que é a 'maldição dos recursos'?", options: ["Quando um país não tem recursos minerais", "A poluição gerada pela mineração", "Países ricos em minérios, mas com população pobre", "Minérios que explodem facilmente"], answer: 2, explanation: "É o paradoxo onde a riqueza mineral gera corrupção, conflitos e pobreza, em vez de desenvolvimento." },
+            { topic: "Extrativismo", difficulty: "Médio", question: "Conflitos violentos na África financiados pela venda ilegal de diamantes ficaram conhecidos como:", options: ["Diamantes de Sangue", "Diamantes de Fogo", "Guerra do Petróleo", "Maldição do Ouro"], answer: 0, explanation: "O termo 'Diamantes de Sangue' refere-se à mineração em zonas de guerra (como Serra Leoa e Angola) para financiar conflitos." },
+            { topic: "Conservação e Turismo", difficulty: "Médio", question: "O ecoturismo (safáris) é uma alternativa econômica que depende diretamente da:", options: ["Exploração de petróleo", "Mineração de diamantes", "Conservação da vida selvagem e dos parques", "Construção de indústrias"], answer: 2, explanation: "O ecoturismo só funciona se o meio ambiente (animais, savanas) estiver preservado." },
+            { topic: "Extrativismo", difficulty: "Médio", question: "O Coltan, mineral essencial para celulares e computadores, é explorado em condições precárias principalmente em qual país?", options: ["África do Sul", "Nigéria", "República Democrática do Congo (RDC)", "Egito"], answer: 2, explanation: "A RDC detém a maior parte das reservas mundiais de Coltan, cuja exploração está ligada a conflitos." },
+            { topic: "Agropecuária", difficulty: "Médio", question: "Qual é o principal 'desafio' ou paradoxo da agricultura comercial na África?", options: ["Ela usa pouca tecnologia", "Ela produz muito, mas para exportação, e não alimenta a população local", "Ela só produz em pequena escala", "Ela é proibida pela ONU"], answer: 1, explanation: "O paradoxo é que o continente exporta alimentos (commodities), mas sofre com a fome (insegurança alimentar)." },
+            { topic: "Limitações", difficulty: "Médio", question: "A posse da terra na África é um problema para o desenvolvimento rural devido à:", options: ["Falta de terras (continente pequeno)", "Excesso de florestas", "Concentração de terras (latifúndios) e leis indefinidas", "Terra ser muito barata"], answer: 2, explanation: "A concentração de terras (herança colonial) e a falta de títulos de propriedade claros dificultam o investimento." },
+            { topic: "Agropecuária", difficulty: "Médio", question: "Em muitas culturas tradicionais, o gado é visto mais como um símbolo de status e riqueza do que como fonte de carne. Isso é típico da:", options: ["Pecuária Comercial", "Pecuária Tradicional", "Agricultura de Plantation", "Extrativismo de Ouro"], answer: 1, explanation: "Na pecuária tradicional (extensiva ou nômade), a quantidade de cabeças de gado muitas vezes vale mais do que a produção." },
+            { topic: "Limitações", difficulty: "Médio", question: "Além do clima, a baixa produtividade da agricultura tradicional se deve principalmente à:", options: ["Preguiça dos agricultores", "Falta de tecnologia e técnicas rudimentares", "Terra muito fértil", "Excesso de chuvas"], answer: 1, explanation: "O uso de ferramentas simples (enxada), a falta de irrigação e de fertilizantes limitam a produtividade." },
+            
+            // NÍVEL DIFÍCIL (8 Questões)
+            { topic: "Agropecuária", difficulty: "Difícil", question: "A pecuária tradicional extensiva e nômade é mais comum em qual faixa climática africana, que separa o deserto da savana?", options: ["Sahel (Semiárido)", "Floresta Equatorial (Chuvoso)", "Clima Mediterrâneo (Norte)", "Clima Frio de Montanha"], answer: 0, explanation: "O Sahel é a faixa semiárida ao sul do Saara onde o pastoreio nômade é a principal atividade de sobrevivência." },
+            { topic: "Extrativismo", difficulty: "Difícil", question: "A economia da Nigéria e Angola é altamente dependente da exportação de qual commodity, tornando-as vulneráveis à variação de preço internacional?", options: ["Diamantes", "Café", "Petróleo", "Coltan"], answer: 2, explanation: "Esses dois países são grandes produtores de petróleo e membros da OPEP, sendo a principal fonte de renda do governo." },
+            { topic: "Agropecuária", difficulty: "Difícil", question: "Qual é a principal diferença entre a agricultura de 'Plantation' e a de 'Subsistência'?", options: ["Plantation usa policultura; Subsistência usa monocultura", "Plantation é para consumo local; Subsistência é para exportação", "Plantation é para exportação; Subsistência é para consumo local", "Plantation não usa tecnologia; Subsistência usa muita tecnologia"], answer: 2, explanation: "A diferença chave é o destino da produção: a Plantation visa o lucro no mercado externo, enquanto a Subsistência visa alimentar a família." },
+            { topic: "Limitações", difficulty: "Difícil", question: "A 'Revolução Verde' (uso de sementes geneticamente modificadas e agrotóxicos) teve pouco impacto na África Subsaariana. Por quê?", options: ["Porque o solo africano não aceita agrotóxicos", "Porque foi proibida pelos governos locais", "Devido ao alto custo da tecnologia, sementes e falta de irrigação", "Porque os agricultores preferem métodos tradicionais"], answer: 2, explanation: "A Revolução Verde exige alto investimento em insumos (fertilizantes, sementes) e controle da água (irrigação), o que é inacessível para a maioria dos pequenos agricultores." },
+            { topic: "Agropecuária", difficulty: "Difícil", question: "O paradoxo da fome na África rural, onde o continente é um grande produtor agrícola mas tem milhões de famintos, é explicado pelo(a):", options: ["Foco da terra na produção para exportação (commodities)", "Produção exclusiva de alimentos de baixa caloria", "Seca total do continente, impedindo qualquer plantio", "Recusa da população em comer produtos locais"], answer: 0, explanation: "As terras mais férteis são usadas para monoculturas de exportação (cacau, café, flores), e não para alimentos básicos (milho, feijão) para a população local." },
+            { topic: "Limitações", difficulty: "Difícil", question: "A instabilidade política e as guerras civis afetam diretamente a agropecuária de subsistência porque:", options: ["Aumentam o preço do petróleo", "Impedem o plantio e forçam o deslocamento (refugiados)", "Geram ecoturismo", "Aumentam a exportação de diamantes"], answer: 1, explanation: "A guerra impede que os agricultores plantem e colham, destrói a infraestrutura (estradas) e cria milhões de refugiados que abandonam suas terras." },
+            { topic: "Extrativismo", difficulty: "Difícil", question: "Qual país asiático tem aumentado massivamente sua influência na África, oferecendo infraestrutura (estradas, portos) em troca de acesso a recursos minerais?", options: ["Japão", "Índia", "Coreia do Sul", "China"], answer: 3, explanation: "A China é hoje a maior parceira comercial da África, investindo pesado em infraestrutura para garantir o fornecimento de minérios e petróleo para sua indústria." },
+            { topic: "Agropecuária", difficulty: "Difícil", question: "Em qual destes países o cultivo de flores para exportação (Agricultura Comercial) se tornou uma indústria milionária?", options: ["Egito", "Nigéria", "Quênia", "Rep. Dem. do Congo"], answer: 2, explanation: "O Quênia é um dos maiores exportadores de flores do mundo, especialmente para a Europa, graças ao seu clima de altitude." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- LÓGICA DO MODO DE APRENDIZAGEM ---
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('#learn-container main section');
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; // Ajustado para 0.1
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => { observer.observe(section); });
+            
+            links.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // --- LÓGICA DO MODO DE PRÁTICA ---
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnContainer = document.getElementById('learn-container');
+            const practiceSection = document.getElementById('practice-section');
+            
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreScreen = document.getElementById('score-screen');
+            const questionTopic = document.getElementById('question-topic');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const questionCounter = document.getElementById('question-counter');
+            const finalScore = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+            const restartBtn = document.getElementById('restart-btn');
+            const questionNavContainer = document.getElementById('question-nav-container');
+
+            let state = {
+                currentMode: 'learn',
+                currentQuestionIndex: 0,
+                userAnswers: [],
+                score: 0,
+            };
+
+            function switchMode(mode) {
+                state.currentMode = mode;
+                btnLearn.classList.toggle('active', mode === 'learn');
+                btnPractice.classList.toggle('active', mode !== 'learn');
+                learnContainer.classList.toggle('hidden', mode !== 'learn');
+                practiceSection.classList.toggle('hidden', mode === 'learn');
+
+                if (mode === 'practice') {
+                    startPractice();
+                }
+            }
+
+            function startPractice() {
+                state.currentQuestionIndex = 0;
+                state.score = 0;
+                state.userAnswers = Array(questions.length).fill(null);
+                quizContainer.classList.remove('hidden');
+                scoreScreen.classList.add('hidden');
+                questionNavContainer.classList.remove('hidden');
+                renderQuestionNavigation();
+                renderQuestion(0);
+            }
+            
+            function renderQuestion(index) {
+                const question = questions[index];
+                questionTopic.textContent = `${question.topic} - (Nível: ${question.difficulty})`;
+                questionText.textContent = question.question;
+                questionCounter.textContent = `${index + 1} / ${questions.length}`;
+
+                optionsContainer.innerHTML = '';
+                feedbackContainer.innerHTML = '';
+
+                question.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                    button.onclick = () => checkAnswer(i, question.answer, question.explanation);
+                    optionsContainer.appendChild(button);
+                });
+
+                updateNavButtonsState();
+                updateQuestionNavButtons();
+            }
+
+            function checkAnswer(selectedIndex, correctIndex, explanation) {
+                const isCorrect = selectedIndex === correctIndex;
+                const isFirstAttempt = state.userAnswers[state.currentQuestionIndex] === null;
+                const wasPreviouslyWrong = state.userAnswers[state.currentQuestionIndex] === false;
+
+                if (isFirstAttempt) {
+                    state.userAnswers[state.currentQuestionIndex] = isCorrect; // Set state on first try
+                    if (isCorrect) {
+                        state.score++;
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else if (wasPreviouslyWrong && isCorrect) {
+                    // This is the user's request: was wrong, retried, now correct
+                    state.userAnswers[state.currentQuestionIndex] = true; // Update state to correct
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Fire confetti on correction
+                }
+
+                Array.from(optionsContainer.children).forEach((btn, i) => {
+                    btn.disabled = true;
+                    if (i === correctIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (i === selectedIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-red-600', 'text-white');
+                    }
+                });
+
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 rounded-lg ${isCorrect ? 'bg-success-dark' : 'bg-error-dark'}">
+                        <h4 class="font-bold text-lg mb-2">${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</h4>
+                        <p class="text-sm">${explanation}</p>
+                        <button id="redo-question-btn" class="mt-4 py-2 px-4 accent-primary rounded-md font-semibold hover:accent-primary-dark transition-colors">Tentar Novamente</button>
+                    </div>`;
+                
+                // Adiciona o listener para o novo botão
+                document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
+                
+                updateQuestionNavButtons();
+            }
+            
+            function resetCurrentQuestion() {
+                // Limpa o feedback
+                feedbackContainer.innerHTML = '';
+                
+                // Re-abilita as opções e reseta os estilos
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                });
+            }
+
+            function updateNavButtonsState() {
+                prevBtn.disabled = state.currentQuestionIndex === 0;
+                nextBtn.textContent = (state.currentQuestionIndex === questions.length - 1) ? "Finalizar" : "Próxima";
+            }
+
+            function nextQuestion() {
+                if (state.currentQuestionIndex < questions.length - 1) {
+                    goToQuestion(state.currentQuestionIndex + 1);
+                } else {
+                    showFinalScore();
+                }
+            }
+
+            function prevQuestion() {
+                if (state.currentQuestionIndex > 0) {
+                   goToQuestion(state.currentQuestionIndex - 1);
+                }
+            }
+
+            function goToQuestion(index) {
+                if (index >= 0 && index < questions.length) {
+                    state.currentQuestionIndex = index;
+                    renderQuestion(index);
+                }
+            }
+
+            function renderQuestionNavigation() {
+                const grid = document.getElementById('question-buttons-grid');
+                grid.innerHTML = '';
+                for (let i = 0; i < questions.length; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i + 1;
+                    button.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+                    button.dataset.index = i;
+                    button.onclick = () => goToQuestion(i);
+                    grid.appendChild(button);
+                }
+            }
+            
+            function updateQuestionNavButtons() {
+                const buttons = document.querySelectorAll('#question-buttons-grid button');
+                buttons.forEach((btn, i) => {
+                    // Reset classes, keeping base styles
+                    btn.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+
+                    const answerState = state.userAnswers[i];
+                    
+                    if (answerState === true) {
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (answerState === false) {
+                        btn.classList.add('bg-red-600', 'text-white');
+                    } else {
+                        btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    }
+
+                    if (i === state.currentQuestionIndex) {
+                        btn.classList.add('ring-2', 'ring-offset-2', 'ring-offset-gray-800', 'ring-orange-500'); /* Alterado para ring-orange-500 */
+                        btn.classList.remove('hover:bg-gray-600');
+                    }
+                });
+            }
+            
+            function showFinalScore() {
+                quizContainer.classList.add('hidden');
+                scoreScreen.classList.remove('hidden');
+                questionNavContainer.classList.add('hidden');
+
+                const percentage = Math.round((state.score / questions.length) * 100);
+                finalScore.textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) message = "Excelente! Você dominou o assunto!";
+                else if (percentage >= 70) message = "Muito bom! Continue praticando para aperfeiçoar.";
+                else if (percentage >= 50) message = "Bom esforço! Reveja os tópicos que errou.";
+                else message = "Não desanime! Reveja a seção 'Aprender' e tente novamente.";
+                
+                scoreMessage.textContent = `Você acertou ${state.score} de ${questions.length} questões. ${message}`;
+            }
+
+            // --- INICIALIZAÇÃO ---
+            // Assegura que os botões de modo tenham a cor correta no início
+            btnLearn.classList.add('active'); // Começa no modo 'learn'
+            
+            btnLearn.addEventListener('click', () => switchMode('learn'));
+            btnPractice.addEventListener('click', () => switchMode('practice'));
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', startPractice);
+
+            // Garante que o estado inicial (learn) esteja correto
+            switchMode('learn');
+        });
+    </script>
+</body>
+</html>
