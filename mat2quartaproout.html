@@ -8,10 +8,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Script para KaTeX (renderizar fórmulas matemáticas) - CORRIGIDO -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0KOVEMviUpHjGzWHidOKghOzzdWISdoQeUroMQCvhfuqbFPxkafpZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmFAILKNpe" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURPlLJSytX1omGihIJ0zVabvsZCFitOQRSOIHdn1U6pRWvoIFQ5ATA" crossorigin="anonymous"></script>
+    
+    <!-- Configuração do MathJax (Novo) -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        chtml: {
+          fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2'
+        }
+      };
+    </script>
+    <!-- Adicionado MathJax (Novo método para Fórmulas) -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -74,13 +87,14 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
-        /* Estilos do KaTeX */
-        .katex-display {
+        /* Estilos para o MathJax (substituindo o katex-display) */
+        mjx-container[display="true"] {
             padding: 1em;
             background-color: #2a2a2a;
             border-radius: 8px;
             overflow-x: auto;
             overflow-y: hidden;
+            margin: 1em 0 !important;
         }
     </style>
 </head>
@@ -120,23 +134,23 @@
                             
                             <h3 class="text-2xl font-semibold mt-6">Quadrado</h3>
                             <p>Lado $l$.</p>
-                            <div class="katex-display">A = l \cdot l = l^2</div>
+                            <div class="katex-display">$$A = l \cdot l = l^2$$</div>
                             
                             <h3 class="text-2xl font-semibold mt-6">Retângulo</h3>
                             <p>Base $b$ e altura $h$.</p>
-                            <div class="katex-display">A = b \cdot h</div>
+                            <div class="katex-display">$$A = b \cdot h$$</div>
                             
                             <h3 class="text-2xl font-semibold mt-6">Paralelogramo</h3>
                             <p>Tem a mesma fórmula do retângulo. A altura ($h$) é a distância perpendicular entre as bases ($b$).</p>
-                            <div class="katex-display">A = b \cdot h</div>
+                            <div class="katex-display">$$A = b \cdot h$$</div>
                             
                             <h3 class="text-2xl font-semibold mt-6">Losango</h3>
                             <p>A área é calculada usando suas diagonais: $D$ (maior) e $d$ (menor).</p>
-                            <div class="katex-display">A = \frac{D \cdot d}{2}</div>
+                            <div class="katex-display">$$A = \frac{D \cdot d}{2}$$</div>
                             
                             <h3 class="text-2xl font-semibold mt-6">Trapézio</h3>
                             <p>Usamos a Base maior ($B$), a base menor ($b$) e a altura ($h$).</p>
-                            <div class="katex-display">A = \frac{(B + b) \cdot h}{2}</div>
+                            <div class="katex-display">$$A = \frac{(B + b) \cdot h}{2}$$</div>
                         </article>
                     </section>
                     
@@ -146,7 +160,7 @@
 
                             <h3 class="text-2xl font-semibold mt-6">Fórmula Padrão</h3>
                             <p>A área de qualquer triângulo é sempre a <strong class="text-highlight">metade da área de um retângulo</strong> com a mesma base ($b$) e altura ($h$).</p>
-                            <div class="katex-display">A = \frac{b \cdot h}{2}</div>
+                            <div class="katex-display">$$A = \frac{b \cdot h}{2}$$</div>
                             <p>Lembre-se: a <strong class="prose-strong">altura ($h$)</strong> é sempre o segmento perpendicular (que forma 90º) com a base.</p>
                         </article>
                     </section>
@@ -170,11 +184,11 @@
 
                             <h3 class="text-2xl font-semibold mt-6">Comprimento da Circunferência (Perímetro)</h3>
                             <p>É o "perímetro" do círculo. É quanto você andaria se desse uma volta completa.</p>
-                            <div class="katex-display">C = 2 \cdot \pi \cdot r</div>
+                            <div class="katex-display">$$C = 2 \cdot \pi \cdot r$$</div>
                             
                             <h3 class="text-2xl font-semibold mt-6">Área do Círculo</h3>
                             <p>É a medida da superfície interna.</p>
-                            <div class="katex-display">A = \pi \cdot r^2</div>
+                            <div class="katex-display">$$A = \pi \cdot r^2$$</div>
                         </article>
                     </section>
                     
@@ -207,11 +221,11 @@
                             <p>São medidas usadas especificamente para áreas rurais (fazendas, campos).</p>
                             <ul>
                                 <li><strong>Hectare (ha):</strong> É a medida agrária mais comum e universal. 1 Hectare é igual a 1 Hectômetro quadrado ($hm^2$).</li>
-                                <div class="katex-display">1 \text{ ha} = 1 \text{ hm}^2 = 10.000 \text{ m}^2</div>
+                                <div class="katex-display">$$1 \text{ ha} = 1 \text{ hm}^2 = 10.000 \text{ m}^2$$</div>
                                 <li><strong>Are (a):</strong> 1 Are é igual a 1 Decâmetro quadrado ($dam^2$).</li>
-                                <div class="katex-display">1 \text{ a} = 1 \text{ dam}^2 = 100 \text{ m}^2</div>
+                                <div class="katex-display">$$1 \text{ a} = 1 \text{ dam}^2 = 100 \text{ m}^2$$</div>
                                 <li><strong>Centiare (ca):</strong> 1 Centiare é igual a 1 Metro quadrado ($m^2$).</li>
-                                <div class="katex-display">1 \text{ ca} = 1 \text{ m}^2</div>
+                                <div class="katex-display">$$1 \text{ ca} = 1 \text{ m}^2$$</div>
                                 <li><strong>Alqueire:</strong> É uma medida <strong class="text-highlight">não-oficial</strong> que varia de região para região.
                                     <ul>
                                         <li><strong>Alqueire Paulista:</strong> 24.200 $m^2$</li>
@@ -294,20 +308,12 @@
             { topic: "Áreas (Quadriláteros)", difficulty: "Difícil", question: "A área de um retângulo é 75 $m^2$ e sua base é o triplo da sua altura. Quais as medidas?", options: ["b=15m, h=5m", "b=25m, h=3m", "b=7,5m, h=10m", "b=30m, h=2,5m"], answer: 0, explanation: "$A = b\\cdot h$. Se $b = 3h$, então $A = (3h)\\cdot h = 3h^2$. $75 = 3h^2 \\to h^2 = 25 \\to h = 5m$. A base $b = 3\\cdot 5 = 15m$." },
             { topic: "Medidas de Superfície", difficulty: "Difícil", question: "Converta 500.000 $cm^2$ para $dam^2$.", options: ["0,05 $dam^2$", "0,5 $dam^2$", "5 $dam^2$", "50 $dam^2$"], answer: 1, explanation: "Para ir de $cm^2$ para $dam^2$, 'subimos' 3 degraus ($cm^2 \\to dm^2 \\to m^2 \\to dam^2$). Dividimos por $100 \\cdot 100 \\cdot 100$ (1.000.000). $500.000 / 1.000.000 = 0,5 dam^2$." },
             { topic: "Circunferência (Comprimento)", difficulty: "Difícil", question: "Qual o comprimento de um arco de 90° em uma circunferência de raio 10m? (Use $\\pi \\approx 3,14$)", options: ["62,8 m", "31,4 m", "15,7 m", "7,85 m"], answer: 2, explanation: "O comprimento total é $C = 2\\cdot\\pi\\cdot r = 2\\cdot 3,14\\cdot 10 = 62,8m$. Um arco de 90° é 1/4 da circunferência (90/360). $C_{arco} = 62,8 / 4 = 15,7 m$." },
-            { topic: "Áreas (Mistas)", difficulty: "Difícil", question: "Qual a área de um quadrado de lado 10m com um círculo de raio 5m inscrito (desenhado dentro) dele? (Área que SOBRA)", options: ["100 m²", "78,5 m²", "21,5 m²", "25 m²"], answer: 2, explanation: "$A_{quadrado} = 10^2 = 100 m^2$. $A_{círculo} = \\pi r^2 = 3,14 \\cdot 5^2 = 78,5 m^2$. A área que sobra é $A_{quadrado} - A_{círculo} = 100 - 78,5 = 21,5 m^2$." }
+            { topic: "Áreas (Mistas)", difficulty: "Difdícil", question: "Qual a área de um quadrado de lado 10m com um círculo de raio 5m inscrito (desenhado dentro) dele? (Área que SOBRA)", options: ["100 m²", "78,5 m²", "21,5 m²", "25 m²"], answer: 2, explanation: "$A_{quadrado} = 10^2 = 100 m^2$. $A_{círculo} = \\pi r^2 = 3,14 \\cdot 5^2 = 78,5 m^2$. A área que sobra é $A_{quadrado} - A_{círculo} = 100 - 78,5 = 21,5 m^2$." }
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Renderiza fórmulas matemáticas
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: '$$', right: '$$', display: true},
-                    {left: '$', right: '$', display: false},
-                    {left: '\\(', right: '\\)', display: false},
-                    {left: '\\[', right: '\\]', display: true}
-                ],
-                throwOnError : false
-            });
+            // MathJax vai renderizar automaticamente no carregamento inicial.
+            // A configuração no <head> cuida da renderização inicial.
 
             // --- LÓGECA DO MODO DE APRENDIZAGEM ---
             const links = document.querySelectorAll('.nav-link');
@@ -391,12 +397,8 @@
                 questionTopic.textContent = `${question.topic} - (Nível: ${question.difficulty})`;
                 questionText.textContent = question.question;
                 
-                // Renderiza fórmulas na pergunta
-                renderMathInElement(questionText, {
-                    delimiters: [{left: '$', right: '$', display: false}],
-                    throwOnError : false
-                });
-
+                // Não precisamos mais chamar o renderMathInElement
+                
                 questionCounter.textContent = `${index + 1} / ${questions.length}`;
 
                 optionsContainer.innerHTML = '';
@@ -404,16 +406,19 @@
 
                 question.options.forEach((option, i) => {
                     const button = document.createElement('button');
-                    button.innerHTML = option; // Usamos innerHTML para KaTeX
+                    button.innerHTML = option; // Usamos innerHTML para MathJax
                     button.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
                     button.onclick = () => checkAnswer(i, question.answer, question.explanation);
                     optionsContainer.appendChild(button);
-                    // Renderiza fórmulas nas opções
-                    renderMathInElement(button, {
-                        delimiters: [{left: '$', right: '$', display: false}],
-                        throwOnError : false
-                    });
+                    // Não precisamos mais chamar o renderMathInElement
                 });
+
+                // Diz ao MathJax para renderizar o novo conteúdo
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    MathJax.typesetPromise([quizContainer]).catch((err) => console.log('Erro ao renderizar MathJax:', err));
+                } else {
+                    console.log("MathJax não está pronto ou typesetPromise não existe.");
+                }
 
                 updateNavButtonsState();
                 updateQuestionNavButtons();
@@ -454,12 +459,14 @@
                     </div>`;
                 
                 const explanationText = document.getElementById('explanation-text');
-                explanationText.innerHTML = explanation; // Usamos innerHTML para KaTeX
-                // Renderiza fórmulas na explicação
-                renderMathInElement(explanationText, {
-                    delimiters: [{left: '$', right: '$', display: false}],
-                    throwOnError : false
-                });
+                explanationText.innerHTML = explanation; // Usamos innerHTML para MathJax
+                
+                // Diz ao MathJax para renderizar a explicação
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    MathJax.typesetPromise([explanationText]).catch((err) => console.log('Erro ao renderizar MathJax:', err));
+                } else {
+                    console.log("MathJax não está pronto ou typesetPromise não existe.");
+                }
 
                 document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
                 updateQuestionNavButtons();
@@ -564,4 +571,7 @@
     </script>
 </body>
 </html>
+
+
+
 
