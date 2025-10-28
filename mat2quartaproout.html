@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos: Áreas e Medidas (8º Ano)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Script para KaTeX (renderizar fórmulas matemáticas) - CORRIGIDO -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0KOVEMviUpHjGzWHidOKghOzzdWISdoQeUroMQCvhfuqbFPxkafpZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmFAILKNpe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURPlLJSytX1omGihIJ0zVabvsZCFitOQRSOIHdn1U6pRWvoIFQ5ATA" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Cores principais atualizadas */
+        .bg-dark-bg { background-color: #121212; } /* Fundo principal */
+        .bg-dark-surface { background-color: #1E1E1E; } /* Cartões e nav */
+        .text-dark-text { color: #E0E0E0; } /* Texto padrão */
+        .text-dark-light-text { color: #B0B0B0; } /* Texto secundário/p */
+
+        /* paleta de destaque: Tons de Bronze/Dourado Envelhecido */
+        .accent-primary { background-color: #D97706; color: white; } /* Laranja escuro/Bronze (Orange 700) */
+        .hover\:accent-primary-dark { background-color: #C26402; } /* Laranja mais escuro (Orange 800) */
+        .accent-secondary { color: #FDBA74; } /* Laranja claro/Pêssego (Orange 300) */
+        .text-highlight { color: #FED7AA; } /* Laranja mais claro (Orange 200) para destaques */
+        .text-success { color: #34D399; } /* Esmeralda para sucesso */
+        .bg-success-dark { background-color: #065F46; } /* Esmeralda mais escuro */
+        .text-error { color: #EF4444; } /* Vermelho para erro */
+        .bg-error-dark { background-color: #991B1B; } /* Vermelho mais escuro */
+        
+        .mode-button.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+        .nav-link.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+
+        .prose-headings {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-strong {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            overflow: auto;
+            display: block;
+        }
+        .prose-th, .prose-td {
+            border: 1px solid #424242; /* Cinza mais escuro para bordas da tabela */
+            padding: 0.5em 1em;
+            white-space: nowrap;
+        }
+        .prose-th {
+            background-color: #2F2F2F; /* Fundo mais escuro para cabeçalho da tabela */
+            font-weight: 600;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Estilos do KaTeX */
+        .katex-display {
+            padding: 1em;
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-dark-text">
+
+    <div class="w-full max-w-7xl mx-auto">
+        <header class="text-center py-8 px-4">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Áreas e Medidas (8º Ano)</h1>
+            <p class="text-lg text-dark-light-text">Um guia sobre áreas de figuras planas, circunferência e medidas de superfície.</p>
+        </header>
+        
+        <nav class="flex justify-center items-center bg-dark-surface rounded-lg p-2 mb-8 gap-2 flex-wrap max-w-md mx-auto">
+            <button id="btn-learn" class="mode-button accent-primary flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Aprender</button>
+            <button id="btn-practice" class="mode-button flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Praticar</button>
+        </nav>
+
+        <div id="learn-container">
+            <div class="flex flex-col lg:flex-row gap-8 p-4">
+                <!-- Navegação Lateral --><aside class="lg:w-1/4">
+                    <nav class="sticky top-4 bg-dark-surface rounded-lg p-4">
+                        <h3 class="text-xl font-bold text-white mb-4">Tópicos</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#areas_quadrilateros" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark active">1. Áreas de Quadriláteros</a></li>
+                            <li><a href="#area_triangulo" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">2. Área do Triângulo</a></li>
+                            <li><a href="#circunferencia" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">3. Circunferência e Círculo</a></li>
+                            <li><a href="#medidas_superficie" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">4. Medidas de Superfície</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Conteúdo Principal --><main class="lg:w-3/4 space-y-12">
+                    
+                    <section id="areas_quadrilateros" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">1. Áreas de Quadriláteros</h2>
+                            <p>A <strong class="prose-strong">Área (A)</strong> é a medida da superfície de uma figura. A unidade padrão é o metro quadrado ($m^2$).</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Quadrado</h3>
+                            <p>Lado $l$.</p>
+                            <div class="katex-display">A = l \cdot l = l^2</div>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Retângulo</h3>
+                            <p>Base $b$ e altura $h$.</p>
+                            <div class="katex-display">A = b \cdot h</div>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Paralelogramo</h3>
+                            <p>Tem a mesma fórmula do retângulo. A altura ($h$) é a distância perpendicular entre as bases ($b$).</p>
+                            <div class="katex-display">A = b \cdot h</div>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Losango</h3>
+                            <p>A área é calculada usando suas diagonais: $D$ (maior) e $d$ (menor).</p>
+                            <div class="katex-display">A = \frac{D \cdot d}{2}</div>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Trapézio</h3>
+                            <p>Usamos a Base maior ($B$), a base menor ($b$) e a altura ($h$).</p>
+                            <div class="katex-display">A = \frac{(B + b) \cdot h}{2}</div>
+                        </article>
+                    </section>
+                    
+                    <section id="area_triangulo" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">2. Área do Triângulo</h2>
+
+                            <h3 class="text-2xl font-semibold mt-6">Fórmula Padrão</h3>
+                            <p>A área de qualquer triângulo é sempre a <strong class="text-highlight">metade da área de um retângulo</strong> com a mesma base ($b$) e altura ($h$).</p>
+                            <div class="katex-display">A = \frac{b \cdot h}{2}</div>
+                            <p>Lembre-se: a <strong class="prose-strong">altura ($h$)</strong> é sempre o segmento perpendicular (que forma 90º) com a base.</p>
+                        </article>
+                    </section>
+                    
+                    <section id="circunferencia" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">3. Circunferência e Círculo</h2>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Diferença</h3>
+                            <ul>
+                                <li><strong>Circunferência:</strong> É apenas a <strong class="text-highlight">linha (contorno)</strong>. Calculamos seu Comprimento (Perímetro).</li>
+                                <li><strong>Círculo:</strong> É a <strong class="text-highlight">superfície (preenchimento)</strong>. Calculamos sua Área.</li>
+                            </ul>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Elementos</h3>
+                            <ul>
+                                <li><strong>Raio ($r$):</strong> A distância do centro a qualquer ponto da borda.</li>
+                                <li><strong>Diâmetro ($d$):</strong> A distância total, cruzando o centro. O diâmetro é o dobro do raio ($d = 2 \cdot r$).</li>
+                                <li><strong>Pi ($\pi$):</strong> Uma constante matemática que vale aproximadamente <strong class="text-highlight">3,14</strong>.</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">Comprimento da Circunferência (Perímetro)</h3>
+                            <p>É o "perímetro" do círculo. É quanto você andaria se desse uma volta completa.</p>
+                            <div class="katex-display">C = 2 \cdot \pi \cdot r</div>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Área do Círculo</h3>
+                            <p>É a medida da superfície interna.</p>
+                            <div class="katex-display">A = \pi \cdot r^2</div>
+                        </article>
+                    </section>
+                    
+                    <section id="medidas_superficie" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">4. Medidas de Superfície e Agrárias</h2>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Medidas de Superfície (Padrão)</h3>
+                            <p>A unidade padrão é o <strong class="prose-strong">metro quadrado ($m^2$)</strong>. Ao converter unidades de área, devemos lembrar que elas "andam" de <strong class="text-highlight">100 em 100</strong> (pois é $10 \times 10$).</p>
+                            <p>Para cada "degrau" na tabela, movemos a vírgula <strong class="text-highlight">duas casas</strong>.</p>
+                            
+                            <div class="prose-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>km²</th><th>hm²</th><th>dam²</th><th>m²</th><th>dm²</th><th>cm²</th><th>mm²</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Quilômetro</td><td>Hectômetro</td><td>Decâmetro</td><td>Metro</td><td>Decímetro</td><td>Centímetro</td><td>Milímetro</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p><strong>Exemplo:</strong> 1 $m^2$ = 100 $dm^2$ = 10.000 $cm^2$.</p>
+                            <p><strong>Exemplo:</strong> 3 $km^2$ = 300 $hm^2$ = 3.000.000 $m^2$.</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Medidas Agrárias</h3>
+                            <p>São medidas usadas especificamente para áreas rurais (fazendas, campos).</p>
+                            <ul>
+                                <li><strong>Hectare (ha):</strong> É a medida agrária mais comum e universal. 1 Hectare é igual a 1 Hectômetro quadrado ($hm^2$).</li>
+                                <div class="katex-display">1 \text{ ha} = 1 \text{ hm}^2 = 10.000 \text{ m}^2</div>
+                                <li><strong>Are (a):</strong> 1 Are é igual a 1 Decâmetro quadrado ($dam^2$).</li>
+                                <div class="katex-display">1 \text{ a} = 1 \text{ dam}^2 = 100 \text{ m}^2</div>
+                                <li><strong>Centiare (ca):</strong> 1 Centiare é igual a 1 Metro quadrado ($m^2$).</li>
+                                <div class="katex-display">1 \text{ ca} = 1 \text{ m}^2</div>
+                                <li><strong>Alqueire:</strong> É uma medida <strong class="text-highlight">não-oficial</strong> que varia de região para região.
+                                    <ul>
+                                        <li><strong>Alqueire Paulista:</strong> 24.200 $m^2$</li>
+                                        <li><strong>Alqueire Mineiro:</strong> 48.400 $m^2$</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </article>
+                    </section>
+                </main>
+            </div>
+        </div>
+        
+        <!-- Seção Praticar --><section id="practice-section" class="hidden p-4">
+            <div id="quiz-container" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                <div id="question-header" class="mb-4 text-center">
+                    <p class="accent-secondary font-semibold" id="question-topic"></p>
+                </div>
+                <p id="question-text" class="text-xl text-center mb-6 min-h-[60px]"></p>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="feedback-container" class="mt-6 text-center"></div>
+
+                <!-- Navegação --><div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark disabled:bg-gray-600 disabled:cursor-not-allowed">Anterior</button>
+                    <span id="question-counter" class="font-semibold text-dark-text"></span>
+                    <button id="next-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark">Próxima</button>
+                </div>
+            </div>
+
+            <!-- Navegação de Questões --><div id="question-nav-container" class="hidden bg-dark-surface p-4 rounded-lg shadow-lg max-w-3xl mx-auto mt-4">
+                <div id="question-buttons-grid" class="flex flex-wrap justify-center gap-2">
+                    <!-- Buttons will be programmatically inserted here --></div>
+            </div>
+
+             <!-- Tela de Pontuação --><div id="score-screen" class="hidden text-center bg-dark-surface p-8 rounded-lg shadow-lg max-w-3xl mx-auto mt-8">
+                <h3 class="text-4xl font-bold text-white mb-4">Pontuação Final</h3>
+                <p id="final-score" class="text-6xl font-bold accent-secondary mb-2"></p>
+                <p id="score-message" class="text-lg text-dark-light-text mb-8"></p>
+                <button id="restart-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-500 transition-colors">Recomeçar</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- BANCO DE DADOS DAS QUESTÕES ---
+        const questions = [
+            // NÍVEL FÁCIL (10 Questões)
+            { topic: "Áreas (Quadriláteros)", difficulty: "Fácil", question: "Qual a área de um quadrado com lado de 5 m?", options: ["20 m²", "25 m²", "10 m²", "15 m²"], answer: 1, explanation: "A área do quadrado é o lado ao quadrado: $A = l^2 = 5^2 = 25 m^2$." },
+            { topic: "Áreas (Quadriláteros)", difficulty: "Fácil", question: "Qual a área de um retângulo com base 10m e altura 4m?", options: ["14 m²", "40 m²", "28 m²", "24 m²"], answer: 1, explanation: "A área do retângulo é $A = b \\cdot h = 10 \\cdot 4 = 40 m^2$." },
+            { topic: "Área (Triângulo)", difficulty: "Fácil", question: "Qual a área de um triângulo com base 6cm e altura 5cm?", options: ["30 cm²", "11 cm²", "22 cm²", "15 cm²"], answer: 3, explanation: "A área do triângulo é $A = (b \\cdot h) / 2 = (6 \\cdot 5) / 2 = 30 / 2 = 15 cm^2$." },
+            { topic: "Circunferência", difficulty: "Fácil", question: "Se o diâmetro de uma circunferência é 10 cm, qual é o seu raio?", options: ["10 cm", "5 cm", "20 cm", "2,5 cm"], answer: 1, explanation: "O raio (r) é sempre a metade do diâmetro (d). $r = 10 / 2 = 5 cm$." },
+            { topic: "Circunferência", difficulty: "Fácil", question: "Qual é a fórmula da Área do Círculo?", options: ["$A = \\pi \\cdot r^2$", "$A = 2 \\cdot \\pi \\cdot r$", "$A = \\pi \\cdot d$", "$A = l^2$"], answer: 0, explanation: "A área do círculo é $A = \\pi \\cdot r^2$ (Pi vezes o raio ao quadrado)." },
+            { topic: "Circunferência", difficulty: "Fácil", question: "Qual é a fórmula do Comprimento (Perímetro) da Circunferência?", options: ["$C = \\pi \\cdot r^2$", "$C = 2 \\cdot \\pi \\cdot r$", "$C = \\pi \\cdot d^2$", "$C = R + l$"], answer: 1, explanation: "O comprimento da circunferência é $C = 2 \\cdot \\pi \\cdot r$ (duas vezes Pi vezes o raio)." },
+            { topic: "Medidas de Superfície", difficulty: "Fácil", question: "Qual é a unidade padrão de medida de área (superfície)?", options: ["Metro (m)", "Metro cúbico ($m^3$)", "Metro quadrado ($m^2$)", "Hectare (ha)"], answer: 2, explanation: "A unidade padrão de área no Sistema Internacional é o metro quadrado ($m^2$)." },
+            { topic: "Medidas Agrárias", difficulty: "Fácil", question: "Quantos metros quadrados ($m^2$) tem 1 Hectare (ha)?", options: ["10 $m^2$", "100 $m^2$", "1.000 $m^2$", "10.000 $m^2$"], answer: 3, explanation: "1 Hectare (ha) equivale a 1 Hectômetro quadrado ($hm^2$), que por sua vez equivale a $10.000 m^2$." },
+            { topic: "Áreas (Quadriláteros)", difficulty: "Fácil", question: "A área de um quadrado é 36 $m^2$. Qual é a medida do seu lado?", options: ["6 m", "9 m", "4 m", "18 m"], answer: 0, explanation: "Se $A = l^2 = 36$, então o lado $l = \\sqrt{36} = 6 m$." },
+            { topic: "Áreas (Quadriláteros)", difficulty: "Fácil", question: "Qual a área de um paralelogramo com base 12m e altura 5m?", options: ["60 m²", "17 m²", "34 m²", "30 m²"], answer: 0, explanation: "A área do paralelogramo é $A = b \\cdot h$ (base vezes altura), assim como o retângulo. $A = 12 \\cdot 5 = 60 m^2$." },
+
+            // NÍVEL MÉDIO (12 Questões)
+            { topic: "Áreas (Quadriláteros)", difficulty: "Média", question: "Qual a área de um trapézio com Base maior (B) de 10cm, base menor (b) de 6cm e altura (h) de 5cm?", options: ["80 cm²", "40 cm²", "30 cm²", "50 cm²"], answer: 1, explanation: "$A = ((B + b) \\cdot h) / 2 = ((10 + 6) \\cdot 5) / 2 = (16 \\cdot 5) / 2 = 80 / 2 = 40 cm^2$." },
+            { topic: "Áreas (Quadriláteros)", difficulty: "Média", question: "Qual a área de um losango que possui diagonal maior (D) de 8m e diagonal menor (d) de 6m?", options: ["48 m²", "14 m²", "24 m²", "28 m²"], answer: 2, explanation: "A área do losango é $A = (D \\cdot d) / 2 = (8 \\cdot 6) / 2 = 48 / 2 = 24 m^2$." },
+            { topic: "Circunferência (Área)", difficulty: "Média", question: "Qual a área de um círculo com raio de 5cm? (Use $\\pi \\approx 3,14$)", options: ["15,7 cm²", "31,4 cm²", "78,5 cm²", "50 cm²"], answer: 2, explanation: "$A = \\pi \\cdot r^2 = 3,14 \\cdot (5)^2 = 3,14 \\cdot 25 = 78,5 cm^2$." },
+            { topic: "Circunferência (Comprimento)", difficulty: "Média", question: "Qual o comprimento de uma circunferência com raio de 10cm? (Use $\\pi \\approx 3,14$)", options: ["31,4 cm", "62,8 cm", "314 cm", "100 cm"], answer: 1, explanation: "$C = 2 \\cdot \\pi \\cdot r = 2 \\cdot 3,14 \\cdot 10 = 6,28 \\cdot 10 = 62,8 cm$." },
+            { topic: "Medidas de Superfície", difficulty: "Média", question: "Quantos centímetros quadrados ($cm^2$) tem 5 $m^2$?", options: ["50 $cm^2$", "500 $cm^2$", "5.000 $cm^2$", "50.000 $cm^2$"], answer: 3, explanation: "Para converter $m^2$ para $cm^2$, 'descemos' dois degraus ($m^2 \\to dm^2 \\to cm^2$). Cada degrau multiplica por 100. $5 \\cdot 100 \\cdot 100 = 50.000 cm^2$." },
+            { topic: "Medidas de Superfície", difficulty: "Média", question: "Quantos metros quadrados ($m^2$) tem 3 $km^2$?", options: ["3.000 $m^2$", "300.000 $m^2$", "3.000.000 $m^2$", "30.000 $m^2$"], answer: 2, explanation: "Para converter $km^2$ para $m^2$, 'descemos' três degraus ($km^2 \\to hm^2 \\to dam^2 \\to m^2$). $3 \\cdot 100 \\cdot 100 \\cdot 100 = 3.000.000 m^2$." },
+            { topic: "Medidas Agrárias", difficulty: "Média", question: "Um fazendeiro comprou 2,5 Hectares. Qual o tamanho da sua terra em $m^2$?", options: ["2.500 $m^2$", "25.000 $m^2$", "250.000 $m^2$", "250 $m^2$"], answer: 1, explanation: "Se 1 Hectare = $10.000 m^2$, então 2,5 Hectares = $2,5 \\cdot 10.000 = 25.000 m^2$." },
+            { topic: "Circunferência (Área)", difficulty: "Média", question: "Qual a área de um círculo com diâmetro de 20m? (Use $\\pi \\approx 3,14$)", options: ["314 m²", "62,8 m²", "1.256 m²", "31,4 m²"], answer: 0, explanation: "Se o diâmetro (d) é 20m, o raio (r) é 10m. $A = \\pi \\cdot r^2 = 3,14 \\cdot (10)^2 = 3,14 \\cdot 100 = 314 m^2$." },
+            { topic: "Área (Triângulo)", difficulty: "Média", question: "A área de um triângulo é 50 $cm^2$. Se sua base mede 10 cm, qual é a sua altura?", options: ["5 cm", "10 cm", "20 cm", "25 cm"], answer: 1, explanation: "$A = (b\\cdot h)/2 \\to 50 = (10\\cdot h)/2 \\to 100 = 10\\cdot h \\to h = 10 cm$." },
+            { topic: "Medidas Agrárias", difficulty: "Média", question: "Quantos Hectares (ha) tem uma fazenda de 500.000 $m^2$?", options: ["5 ha", "50 ha", "500 ha", "0,5 ha"], answer: 1, explanation: "Para converter $m^2$ para Hectare ($hm^2$), 'subimos' dois degraus ($m^2 \\to dam^2 \\to hm^2$), dividindo por 10.000. $500.000 / 10.000 = 50 ha$." },
+            { topic: "Medidas Agrárias", difficulty: "Média", question: "O Alqueire Paulista, que mede 24.200 $m^2$, é maior ou menor que o Alqueire Mineiro (48.400 $m^2$)?", options: ["É maior", "É menor", "São iguais", "Depende da fazenda"], answer: 1, explanation: "O Alqueire Paulista (2,42 ha) é exatamente a metade do Alqueire Mineiro (4,84 ha)." },
+            { topic: "Medidas Agrárias", difficulty: "Média", question: "Quantos metros quadrados ($m^2$) tem 1 'Are' (a)?", options: ["1 $m^2$", "10 $m^2$", "100 $m^2$", "1000 $m^2$"], answer: 2, explanation: "1 Are (a) é uma medida agrária que equivale a 1 Decâmetro quadrado ($dam^2$), ou seja, $100 m^2$." },
+
+            // NÍVEL DIFÍCIL (8 Questões)
+            { topic: "Medidas de Superfície", difficulty: "Difícil", question: "Converta 1,5 $hm^2$ para $m^2$.", options: ["150 $m^2$", "1.500 $m^2$", "15.000 $m^2$", "150.000 $m^2$"], answer: 2, explanation: "Para converter $hm^2$ para $m^2$, 'descemos' dois degraus ($hm^2 \\to dam^2 \\to m^2$). $1,5 \\cdot 100 \\cdot 100 = 1,5 \\cdot 10.000 = 15.000 m^2$." },
+            { topic: "Áreas (Quadriláteros)", difficulty: "Difícil", question: "A área de um losango é 100 $m^2$. Se a diagonal maior (D) mede 20 m, quanto mede a diagonal menor (d)?", options: ["10 m", "5 m", "20 m", "15 m"], answer: 0, explanation: "$A = (D\\cdot d)/2 \\to 100 = (20\\cdot d)/2 \\to 200 = 20\\cdot d \\to d = 10 m$." },
+            { topic: "Áreas (Quadriláteros)", difficulty: "Difícil", question: "A área de um trapézio é 80 $m^2$. Suas bases medem 12m e 8m. Qual é a altura (h)?", options: ["4 m", "5 m", "8 m", "10 m"], answer: 2, explanation: "$A = ((B+b)\\cdot h)/2 \\to 80 = ((12+8)\\cdot h)/2 \\to 80 = (20\\cdot h)/2 \\to 160 = 20\\cdot h \\to h = 8 m$." },
+            { topic: "Circunferência (Área)", difficulty: "Difícil", question: "Qual a área da 'coroa' (área entre dois círculos) com raio maior R=10m e raio menor r=8m? (Use $\\pi \\approx 3$)", options: ["108 m²", "36 m²", "54 m²", "6 m²"], answer: 0, explanation: "Área Coroa = $A_{maior} - A_{menor} = \\pi R^2 - \\pi r^2 = \\pi(10^2 - 8^2) = \\pi(100 - 64) = 36\\pi$. Usando $\\pi \\approx 3$, temos $36 \\cdot 3 = 108 m^2$." },
+            { topic: "Áreas (Quadriláteros)", difficulty: "Difícil", question: "A área de um retângulo é 75 $m^2$ e sua base é o triplo da sua altura. Quais as medidas?", options: ["b=15m, h=5m", "b=25m, h=3m", "b=7,5m, h=10m", "b=30m, h=2,5m"], answer: 0, explanation: "$A = b\\cdot h$. Se $b = 3h$, então $A = (3h)\\cdot h = 3h^2$. $75 = 3h^2 \\to h^2 = 25 \\to h = 5m$. A base $b = 3\\cdot 5 = 15m$." },
+            { topic: "Medidas de Superfície", difficulty: "Difícil", question: "Converta 500.000 $cm^2$ para $dam^2$.", options: ["0,05 $dam^2$", "0,5 $dam^2$", "5 $dam^2$", "50 $dam^2$"], answer: 1, explanation: "Para ir de $cm^2$ para $dam^2$, 'subimos' 3 degraus ($cm^2 \\to dm^2 \\to m^2 \\to dam^2$). Dividimos por $100 \\cdot 100 \\cdot 100$ (1.000.000). $500.000 / 1.000.000 = 0,5 dam^2$." },
+            { topic: "Circunferência (Comprimento)", difficulty: "Difícil", question: "Qual o comprimento de um arco de 90° em uma circunferência de raio 10m? (Use $\\pi \\approx 3,14$)", options: ["62,8 m", "31,4 m", "15,7 m", "7,85 m"], answer: 2, explanation: "O comprimento total é $C = 2\\cdot\\pi\\cdot r = 2\\cdot 3,14\\cdot 10 = 62,8m$. Um arco de 90° é 1/4 da circunferência (90/360). $C_{arco} = 62,8 / 4 = 15,7 m$." },
+            { topic: "Áreas (Mistas)", difficulty: "Difícil", question: "Qual a área de um quadrado de lado 10m com um círculo de raio 5m inscrito (desenhado dentro) dele? (Área que SOBRA)", options: ["100 m²", "78,5 m²", "21,5 m²", "25 m²"], answer: 2, explanation: "$A_{quadrado} = 10^2 = 100 m^2$. $A_{círculo} = \\pi r^2 = 3,14 \\cdot 5^2 = 78,5 m^2$. A área que sobra é $A_{quadrado} - A_{círculo} = 100 - 78,5 = 21,5 m^2$." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Renderiza fórmulas matemáticas
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
+
+            // --- LÓGECA DO MODO DE APRENDIZAGEM ---
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('#learn-container main section');
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; // Ajustado para 0.1
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => { observer.observe(section); });
+            
+            links.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // --- LÓGICA DO MODO DE PRÁTICA ---
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnContainer = document.getElementById('learn-container');
+            const practiceSection = document.getElementById('practice-section');
+            
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreScreen = document.getElementById('score-screen');
+            const questionTopic = document.getElementById('question-topic');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const questionCounter = document.getElementById('question-counter');
+            const finalScore = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+            const restartBtn = document.getElementById('restart-btn');
+            const questionNavContainer = document.getElementById('question-nav-container');
+
+            let state = {
+                currentMode: 'learn',
+                currentQuestionIndex: 0,
+                userAnswers: [],
+                score: 0,
+            };
+
+            function switchMode(mode) {
+                state.currentMode = mode;
+                btnLearn.classList.toggle('active', mode === 'learn');
+                btnPractice.classList.toggle('active', mode !== 'learn');
+                learnContainer.classList.toggle('hidden', mode !== 'learn');
+                practiceSection.classList.toggle('hidden', mode === 'learn');
+
+                if (mode === 'practice') {
+                    startPractice();
+                }
+            }
+
+            function startPractice() {
+                state.currentQuestionIndex = 0;
+                state.score = 0;
+                state.userAnswers = Array(questions.length).fill(null);
+                quizContainer.classList.remove('hidden');
+                scoreScreen.classList.add('hidden');
+                questionNavContainer.classList.remove('hidden');
+                renderQuestionNavigation();
+                renderQuestion(0);
+            }
+            
+            function renderQuestion(index) {
+                const question = questions[index];
+                questionTopic.textContent = `${question.topic} - (Nível: ${question.difficulty})`;
+                questionText.textContent = question.question;
+                
+                // Renderiza fórmulas na pergunta
+                renderMathInElement(questionText, {
+                    delimiters: [{left: '$', right: '$', display: false}],
+                    throwOnError : false
+                });
+
+                questionCounter.textContent = `${index + 1} / ${questions.length}`;
+
+                optionsContainer.innerHTML = '';
+                feedbackContainer.innerHTML = '';
+
+                question.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option; // Usamos innerHTML para KaTeX
+                    button.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                    button.onclick = () => checkAnswer(i, question.answer, question.explanation);
+                    optionsContainer.appendChild(button);
+                    // Renderiza fórmulas nas opções
+                    renderMathInElement(button, {
+                        delimiters: [{left: '$', right: '$', display: false}],
+                        throwOnError : false
+                    });
+                });
+
+                updateNavButtonsState();
+                updateQuestionNavButtons();
+            }
+
+            function checkAnswer(selectedIndex, correctIndex, explanation) {
+                const isCorrect = selectedIndex === correctIndex;
+                const isFirstAttempt = state.userAnswers[state.currentQuestionIndex] === null;
+                const wasPreviouslyWrong = state.userAnswers[state.currentQuestionIndex] === false;
+
+                if (isFirstAttempt) {
+                    state.userAnswers[state.currentQuestionIndex] = isCorrect; // Set state on first try
+                    if (isCorrect) {
+                        state.score++;
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else if (wasPreviouslyWrong && isCorrect) {
+                    state.userAnswers[state.currentQuestionIndex] = true; // Update state to correct
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); // Fire confetti on correction
+                }
+
+                Array.from(optionsContainer.children).forEach((btn, i) => {
+                    btn.disabled = true;
+                    if (i === correctIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (i === selectedIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-red-600', 'text-white');
+                    }
+                });
+
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 rounded-lg ${isCorrect ? 'bg-success-dark' : 'bg-error-dark'}">
+                        <h4 class="font-bold text-lg mb-2">${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</h4>
+                        <p class="text-sm" id="explanation-text"></p>
+                        <button id="redo-question-btn" class="mt-4 py-2 px-4 accent-primary rounded-md font-semibold hover:accent-primary-dark transition-colors">Tentar Novamente</button>
+                    </div>`;
+                
+                const explanationText = document.getElementById('explanation-text');
+                explanationText.innerHTML = explanation; // Usamos innerHTML para KaTeX
+                // Renderiza fórmulas na explicação
+                renderMathInElement(explanationText, {
+                    delimiters: [{left: '$', right: '$', display: false}],
+                    throwOnError : false
+                });
+
+                document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
+                updateQuestionNavButtons();
+            }
+            
+            function resetCurrentQuestion() {
+                feedbackContainer.innerHTML = '';
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                });
+            }
+
+            function updateNavButtonsState() {
+                prevBtn.disabled = state.currentQuestionIndex === 0;
+                nextBtn.textContent = (state.currentQuestionIndex === questions.length - 1) ? "Finalizar" : "Próxima";
+            }
+
+            function nextQuestion() {
+                if (state.currentQuestionIndex < questions.length - 1) {
+                    goToQuestion(state.currentQuestionIndex + 1);
+                } else {
+                    showFinalScore();
+                }
+            }
+
+            function prevQuestion() {
+                if (state.currentQuestionIndex > 0) {
+                   goToQuestion(state.currentQuestionIndex - 1);
+                }
+            }
+
+            function goToQuestion(index) {
+                if (index >= 0 && index < questions.length) {
+                    state.currentQuestionIndex = index;
+                    renderQuestion(index);
+                }
+            }
+
+            function renderQuestionNavigation() {
+                const grid = document.getElementById('question-buttons-grid');
+                grid.innerHTML = '';
+                for (let i = 0; i < questions.length; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i + 1;
+                    button.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+                    button.dataset.index = i;
+                    button.onclick = () => goToQuestion(i);
+                    grid.appendChild(button);
+                }
+            }
+            
+            function updateQuestionNavButtons() {
+                const buttons = document.querySelectorAll('#question-buttons-grid button');
+                buttons.forEach((btn, i) => {
+                    btn.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+                    const answerState = state.userAnswers[i];
+                    
+                    if (answerState === true) {
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (answerState === false) {
+                        btn.classList.add('bg-red-600', 'text-white');
+                    } else {
+                        btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    }
+
+                    if (i === state.currentQuestionIndex) {
+                        btn.classList.add('ring-2', 'ring-offset-2', 'ring-offset-gray-800', 'ring-orange-500'); 
+                        btn.classList.remove('hover:bg-gray-600');
+                    }
+                });
+            }
+            
+            function showFinalScore() {
+                quizContainer.classList.add('hidden');
+                scoreScreen.classList.remove('hidden');
+                questionNavContainer.classList.add('hidden');
+
+                const percentage = Math.round((state.score / questions.length) * 100);
+                finalScore.textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) message = "Excelente! Você dominou o assunto!";
+                else if (percentage >= 70) message = "Muito bom! Continue praticando para aperfeiçoar.";
+                else if (percentage >= 50) message = "Bom esforço! Reveja os tópicos que errou.";
+                else message = "Não desanime! Reveja a seção 'Aprender' e tente novamente.";
+                
+                scoreMessage.textContent = `Você acertou ${state.score} de ${questions.length} questões. ${message}`;
+            }
+
+            // --- INICIALIZAÇÃO ---
+            btnLearn.classList.add('active'); 
+            
+            btnLearn.addEventListener('click', () => switchMode('learn'));
+            btnPractice.addEventListener('click', () => switchMode('practice'));
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', startPractice);
+
+            switchMode('learn');
+        });
+    </script>
+</body>
+</html>
+
