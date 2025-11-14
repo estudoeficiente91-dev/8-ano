@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Católico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Novas fontes: EB Garamond para títulos e Lora para corpo -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Nova paleta de cores: Tema "Pergaminho" */
+        body {
+            /* Fonte Lora para o corpo de texto */
+            font-family: 'Lora', serif;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #FDFBF6; /* bg-cream-bg */
+        }
+        
+        /* Fonte EB Garamond para os títulos */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'EB Garamond', serif;
+        }
+
+        /* Fundo principal (cor de pergaminho/marfim) */
+        .bg-cream-bg { background-color: #FDFBF6; } 
+        /* Fundo dos cartões (um pouco mais escuro) */
+        .bg-cream-surface { background-color: #F7F3E8; box-shadow: 0 4px 12px rgba(62, 39, 35, 0.05); } 
+        /* Texto principal (cor de tinta marrom escura) */
+        .text-maroon-text { color: #3E2723; } 
+        /* Texto secundário (marrom mais claro) */
+        .text-maroon-light-text { color: #6D4C41; } 
+
+        /* paleta de destaque: Tons de Dourado e Vermelho Sóbrio */
+        /* Dourado para botões principais */
+        .accent-primary { background-color: #B8860B; color: white; } /* DarkGoldenRod */
+        .hover\:accent-primary-dark:hover { background-color: #A07409; } 
+        /* Dourado para textos de destaque */
+        .accent-secondary { color: #B8860B; } 
+        /* Amarelo para a pontuação (estrela) */
+        .text-highlight { color: #D97706; } /* text-amber-600 */
+        
+        .text-success { color: #15803D; } /* green-700 */
+        .bg-success-dark { background-color: #DCFCE7; } /* green-50 */
+        .text-error { color: #B91C1C; } /* red-700 */
+        .bg-error-dark { background-color: #FEE2E2; } /* red-50 */
+        
+        /* Animações */
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.4); /* Dourado com opacidade */
+            }
+            70% { 
+                transform: scale(1.05); 
+                box-shadow: 0 0 0 12px rgba(184, 134, 11, 0); 
+            }
+        }
+        .start-btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .slide-in {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .option-btn {
+            transition: all 0.2s ease-out;
+            border: 1px solid #D7CCC8; /* brown-200 */
+            background-color: #FFFFFF;
+            color: #3E2723;
+        }
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: #F7F3E8; /* bg-cream-surface */
+        }
+        .option-btn.correct {
+            background-color: #DCFCE7; /* green-50 */
+            border-color: #15803D; /* green-700 */
+            color: #15803D;
+        }
+        .option-btn.incorrect {
+            background-color: #FEE2E2; /* red-50 */
+            border-color: #B91C1C; /* red-700 */
+            color: #B91C1C;
+        }
+    </style>
+</head>
+<body class="bg-cream-bg text-maroon-text">
+
+    <div class="w-full max-w-7xl mx-auto p-4 min-h-screen flex flex-col justify-center">
+        <header class="text-center py-8 px-4">
+            <h1 class="text-5xl sm:text-6xl font-bold text-maroon-text mb-4">Quiz Católico</h1>
+            <p class="text-xl text-maroon-light-text">Teste seus conhecimentos sobre a fé católica.</p>
+        </header>
+        
+        <!-- Tela Inicial -->
+        <div id="start-screen" class="flex flex-col items-center justify-center bg-cream-surface p-8 rounded-lg shadow-lg max-w-3xl mx-auto w-full slide-in">
+            <!-- Novo Ícone: Cruz Latina (Substituído) -->
+            <svg class="w-16 h-16 accent-secondary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M6 9h12" />
+            </svg>
+            <h2 class="text-4xl font-bold text-maroon-text mb-4">Bem-vindo!</h2>
+            <p class="text-lg text-maroon-light-text mb-8 text-center">O quiz selecionará 10 perguntas aleatórias de um banco de 100. Pronto para começar?</p>
+            <button id="btn-start-quiz" class="accent-primary text-xl font-semibold py-3 px-10 rounded-lg transition-all duration-300 hover:accent-primary-dark hover:scale-105 start-btn-pulse shadow-lg">Começar Quiz</button>
+        </div>
+
+        <!-- Seção Praticar (Quiz) -->
+        <section id="practice-section" class="hidden p-4">
+            <div id="quiz-container" class="bg-cream-surface p-6 sm:p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                <!-- Barra de Progresso -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                    <div id="progress-bar" class="bg-yellow-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%; background-color: #B8860B;"></div>
+                </div>
+
+                <div id="question-header" class="mb-4 text-center slide-in">
+                    <p class="accent-secondary font-semibold" id="question-topic"></p>
+                </div>
+                <p id="question-text" class="text-2xl text-center mb-6 min-h-[60px] slide-in text-maroon-text"></p>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 slide-in"></div>
+                <div id="feedback-container" class="mt-6 text-center"></div>
+
+                <!-- Navegação -->
+                <div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark disabled:bg-gray-400 disabled:cursor-not-allowed">Anterior</button>
+                    <span id="question-counter" class="font-semibold text-maroon-text"></span>
+                    <button id="next-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark">Próxima</button>
+                </div>
+            </div>
+
+             <!-- Tela de Pontuação -->
+            <div id="score-screen" class="hidden text-center bg-cream-surface p-8 rounded-lg shadow-lg max-w-3xl mx-auto mt-8">
+                <!-- Novo Ícone: Chaves de São Pedro -->
+                <svg class="w-20 h-20 text-yellow-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="color: #B8860B;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H3.75v-2.25H1.5v-2.25H.75C.336 17.25 0 16.914 0 16.5v-3c0-.414.336-.75.75-.75h1.5V12h1.5V9.75h2.25V7.5h2.25v2.25H12v2.25h-2.25v2.25H7.5V15h2.25V12h2.25c.652 0 1.25-.28 1.688-.75l.188-.188m-3.188-1.688a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 3a3 3 0 00-3 3v.75m3-3v.75m-3 3v.75m3-3.75v.75m-3 3.75v.75M9 3v.75m3 3v.75m-3-3v.75m3-3v.75m-3 3v.75M9 3v.75" />
+                </svg>
+                <h3 class="text-4xl font-bold text-maroon-text mb-4">Pontuação Final</h3>
+                <p id="final-score" class="text-6xl font-bold text-highlight mb-2"></p>
+                <p id="score-message" class="text-lg text-maroon-light-text mb-8"></p>
+                <button id="restart-btn" class="bg-green-700 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-600 transition-colors">Recomeçar</sbutton>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- BANCO COMPLETO DE 100 QUESTÕES ---
+        // ... (As 100 questões estão aqui) ...
+         const fullQuestionBank = [
+            // BÍBLIA (20)
+            { topic: "Antigo Testamento", difficulty: "Fácil", question: "Quais são os primeiros cinco livros da Bíblia (Pentateuco)?", options: ["Gênesis, Êxodo, Levítico, Números, Deuteronômio", "Salmos, Provérbios, Eclesiastes, Jó, Cantares", "Mateus, Marcos, Lucas, João, Atos", "Isaías, Jeremias, Ezequiel, Daniel, Lamentações"], answer: 0, explanation: "O Pentateuco (ou Torá) é composto pelos cinco primeiros livros: Gênesis, Êxodo, Levítico, Números e Deuteronômio." },
+            { topic: "Antigo Testamento", difficulty: "Médio", question: "Quem foi o profeta que, segundo a Bíblia, tirou os hebreus do Egito?", options: ["Abraão", "Davi", "Moisés", "Isaías"], answer: 2, explanation: "Moisés foi o líder escolhido por Deus para libertar os hebreus da escravidão no Egito (o Êxodo)." },
+            { topic: "Antigo Testamento", difficulty: "Fácil", question: "Quem foi o primeiro homem, segundo o livro do Gênesis?", options: ["Noé", "Abraão", "Adão", "Moisés"], answer: 2, explanation: "Adão é apresentado no Gênesis como o primeiro homem criado por Deus." },
+            { topic: "Antigo Testamento", difficulty: "Médio", question: "Quem foi o rei de Israel famoso por sua sabedoria e por construir o Templo de Jerusalém?", options: ["Davi", "Saul", "Salomão", "Josias"], answer: 2, explanation: "Salomão, filho de Davi, é conhecido por sua sabedoria e pela construção do primeiro Templo." },
+            { topic: "Antigo Testamento", difficulty: "Médio", question: "Quantos são os Dez Mandamentos?", options: ["Sete", "Doze", "Dez", "Três"], answer: 2, explanation: "Deus entregou a Moisés no Monte Sinai as tábuas com os Dez Mandamentos." },
+            { topic: "Novo Testamento", difficulty: "Fácil", question: "Quais são os quatro Evangelhos canônicos?", options: ["Mateus, Marcos, Lucas, João", "Pedro, Tiago, João, Judas", "Atos, Romanos, Coríntios, Gálatas", "Gênesis, Êxodo, Levítico, Números"], answer: 0, explanation: "Os quatro Evangelhos que narram a vida de Jesus são Mateus, Marcos, Lucas e João." },
+            { topic: "Novo Testamento", difficulty: "Fácil", question: "Onde Jesus nasceu?", options: ["Nazaré", "Jerusalém", "Egito", "Belém"], answer: 3, explanation: "Jesus nasceu em Belém, a cidade de Davi, embora tenha crescido em Nazaré." },
+            { topic: "Novo Testamento", difficulty: "Fácil", question: "Quantos Apóstolos Jesus escolheu originalmente?", options: ["Dez", "Sete", "Três", "Doze"], answer: 3, explanation: "Jesus escolheu Doze Apóstolos para segui-lo e difundir sua mensagem." },
+            { topic: "Novo Testamento", difficulty: "Médio", question: "Quem é considerado o 'Apóstolo dos Gentios' por suas viagens missionárias?", options: ["São Pedro", "São João", "São Paulo", "São Tiago"], answer: 2, explanation: "São Paulo (antes Saulo de Tarso) foi o grande missionário que levou o cristianismo aos povos não-judeus (gentios)." },
+            { topic: "Novo Testamento", difficulty: "Fácil", question: "O que a Páscoa cristã celebra?", options: ["O nascimento de Jesus", "A Ressurreição de Jesus", "A chegada dos Reis Magos", "O Batismo de Jesus"], answer: 1, explanation: "A Páscoa é a maior festa cristã e celebra a Ressurreição de Jesus Cristo ao terceiro dia." },
+            { topic: "Antigo Testamento", difficulty: "Médio", question: "Quem foi o 'Pai da Fé', que esteve disposto a sacrificar seu filho Isaac?", options: ["Moisés", "Noé", "Davi", "Abraão"], answer: 3, explanation: "Abraão é chamado o 'Pai da Fé' por sua obediência a Deus, incluindo a provação de sacrificar Isaac." },
+            { topic: "Antigo Testamento", difficulty: "Difícil", question: "Qual profeta foi engolido por um grande peixe?", options: ["Isaías", "Jonas", "Elias", "Daniel"], answer: 1, explanation: "Jonas foi engolido por um grande peixe (ou baleia) por tentar fugir da missão de pregar em Nínive." },
+            { topic: "Antigo Testamento", difficulty: "Médio", question: "Quem derrotou o gigante Golias?", options: ["Salomão", "Sansão", "Davi", "Saul"], answer: 2, explanation: "O jovem Davi, futuro rei, derrotou o gigante filisteu Golias com uma funda (estilingue) e uma pedra." },
+            { topic: "Antigo Testamento", difficulty: "Difícil", question: "Quais são os 3 livros Sapienciais 'principais' do Antigo Testamento?", options: ["Gênesis, Êxodo, Levítico", "Salmos, Provérbios, Jó", "Isaías, Jeremias, Ezequiel", "Mateus, Marcos, Lucas"], answer: 1, explanation: "Os livros Sapienciais (de Sabedoria) incluem principalmente Jó, Salmos, Provérbios, Eclesiastes e Cântico dos Cânticos." },
+            { topic: "Novo Testamento", difficulty: "Médio", question: "Qual apóstolo negou Jesus três vezes antes que o galo cantasse?", options: ["Judas", "João", "Pedro", "Tomé"], answer: 2, explanation: "Jesus previu que Pedro, o 'Príncipe dos Apóstolos', o negaria três vezes por medo." },
+            { topic: "Novo Testamento", difficulty: "Difícil", question: "Qual é o último livro da Bíblia?", options: ["Gênesis", "Atos", "Apocalipse", "Hebreus"], answer: 2, explanation: "O Apocalipse (ou Revelação), escrito por São João, é o último livro do Novo Testamento." },
+            { topic: "Novo Testamento", difficulty: "Médio", question: "Qual foi o primeiro milagre de Jesus, realizado em Caná?", options: ["Acalmar a tempestade", "Multiplicação dos pães", "Transformar água em vinho", "Cura de um cego"], answer: 2, explanation: "O primeiro milagre público de Jesus foi transformar a água em vinho nas Bodas de Caná, a pedido de sua mãe, Maria." },
+            { topic: "Novo Testamento", difficulty: "Médio", question: "Quem batizou Jesus no Rio Jordão?", options: ["São Pedro", "João Batista", "São Paulo", "Nenhum (Ele não foi batizado)"], answer: 1, explanation: "João Batista, o precursor de Jesus, o batizou nas águas do Rio Jordão." },
+            { topic: "Bíblia", difficulty: "Difícil", question: "Qual dos Apóstolos traiu Jesus por trinta moedas de prata?", options: ["Pedro", "Judas Iscariotes", "Tomé", "João"], answer: 1, explanation: "Judas Iscariotes foi o Apóstolo que traiu Jesus, entregando-o aos guardas com um beijo." },
+            { topic: "Bíblia", difficulty: "Médio", question: "Qual livro do Novo Testamento descreve a descida do Espírito Santo e o início da Igreja Primitiva?", options: ["Evangelho de João", "Atos dos Apóstolos", "Epístola aos Romanos", "Apocalipse"], answer: 1, explanation: "Os Atos dos Apóstolos, escritos por Lucas, narram os eventos após a Ascensão de Jesus, começando com Pentecostes." },
+            
+            // DOUTRINA E CRENÇAS (20)
+            { topic: "Doutrina", difficulty: "Médio", question: "O que é a Santíssima Trindade?", options: ["Três deuses diferentes", "Um Deus em três Pessoas: Pai, Filho e Espírito Santo", "Pai, Maria e Jesus", "Jesus, Maria e José"], answer: 1, explanation: "A doutrina central do cristianismo é que Deus é Um em essência, mas subsiste em três Pessoas distintas: Pai, Filho e Espírito Santo." },
+            { topic: "Doutrina", difficulty: "Médio", question: "Qual é o 'Pecado Original'?", options: ["O pecado de Caim contra Abel", "O pecado de Adão e Eva ao desobedecerem a Deus", "O pecado de Davi com Bate-Seba", "O pecado de Judas ao trair Jesus"], answer: 1, explanation: "O Pecado Original refere-se à queda de Adão e Eva, que introduziu o pecado e a morte na condição humana." },
+            { topic: "Doutrina", difficulty: "Fácil", question: "O que se comemora no Natal?", options: ["A Ressurreição de Jesus", "A Assunção de Maria", "O Nascimento de Jesus", "Pentecostes"], answer: 2, explanation: "O Natal (25 de dezembro) celebra a Natividade, o Nascimento de Jesus Cristo." },
+            { topic: "Doutrina", difficulty: "Difícil", question: "O que é 'Transubstanciação'?", options: ["A transformação da água em vinho", "A crença de que o pão e o vinho se tornam o Corpo e Sangue de Cristo", "A ressurreição do corpo no fim dos tempos", "O batismo de Jesus"], answer: 1, explanation: "A Transubstanciação é a doutrina católica que afirma que, na Eucaristia, a substância do pão e do vinho se transforma realmente em Corpo e Sangue de Cristo." },
+            { topic: "Doutrina", difficulty: "Médio", question: "O que é 'Pentecostes'?", options: ["A descida do Espírito Santo sobre os Apóstolos", "A crucificação de Jesus", "A Anunciação a Maria", "O início do Advento"], answer: 0, explanation: "Pentecostes, 50 dias após a Páscoa, celebra a descida do Espírito Santo sobre os Apóstolos, marcando o início da Igreja." },
+            { topic: "Doutrina", difficulty: "Difícil", question: "O que é o 'Magistério da Igreja'?", options: ["A obrigação de ir à missa", "A autoridade de ensino da Igreja (Papa e Bispos)", "O livro de regras do Vaticano", "A escola de teologia em Roma"], answer: 1, explanation: "O Magistério é a autoridade oficial de ensino da Igreja, exercida pelo Papa e pelos Bispos em comunhão com ele." },
+            { topic: "Doutrina", difficulty: "Difícil", question: "Quais são as 'Quatro Marcas' da Igreja, recitadas no Credo?", options: ["Pobre, Perseguida, Humilde, Serva", "Romana, Gregoriana, Tridentina, Vaticana", "Una, Santa, Católica e Apostólica", "Batismo, Eucaristia, Crisma, Ordem"], answer: 2, explanation: "O Credo Niceno-Constantinopolitano professa a fé na Igreja 'Una, Santa, Católica e Apostólica'." },
+            { topic: "Doutrina", difficulty: "Médio", question: "O que é o 'Credo'?", options: ["A oração de perdão", "A lista dos Dez Mandamentos", "A profissão de fé (resumo das crenças)", "O livro de cânticos da missa"], answer: 2, explanation: "O Credo (como o Credo dos Apóstolos ou o Niceno) é um resumo sistemático das principais crenças da fé cristã." },
+            { topic: "Doutrina", difficulty: "Fácil", question: "O que Jesus ensinou na 'Oração do Senhor'?", options: ["O Glória", "A Salve Rainha", "O Pai Nosso", "O Credo"], answer: 2, explanation: "A oração do 'Pai Nosso' foi ensinada diretamente por Jesus aos seus discípulos (Mt 6, 9-13)." },
+            { topic: "Doutrina", difficulty: "Difícil", question: "O que é a 'Comunhão dos Santos'?", options: ["Uma missa especial celebrada pelo Papa", "A união espiritual entre os fiéis na Terra, as almas no Purgatório e os santos no Céu", "A lista de todos os santos canonizados", "O nome da Catedral do Vaticano"], answer: 1, explanation: "É a crença na união (comunhão) de todos os membros da Igreja, vivos ou mortos (Igreja Militante, Padecente e Triunfante)." },
+            { topic: "Doutrina", difficulty: "Difícil", question: "O que é 'Infalibilidade Papal'?", options: ["Que o Papa nunca peca", "Que o Papa sabe de tudo", "Que o Papa não erra ao definir solenemente doutrinas de fé e moral", "Que o Papa é imortal"], answer: 2, explanation: "É o dogma que afirma que o Papa, quando fala *Ex Cathedra* (oficialmente) sobre fé e moral, é preservado do erro pelo Espírito Santo." },
+            { topic: "Doutrina", difficulty: "Médio", question: "O que é o 'Purgatório' segundo a fé católica?", options: ["O mesmo que o Inferno", "Um estado de purificação final antes de entrar no Céu", "Um 'limbo' para crianças não batizadas", "O lugar onde os anjos moram"], answer: 1, explanation: "O Purgatório é um estado de purificação para as almas que morrem em graça e amizade com Deus, mas precisam se purificar de imperfeições antes de ver a Deus." },
+            { topic: "Doutrina", difficulty: "Difícil", question: "O que são 'Dogmas'?", options: ["As leis do Vaticano", "Verdades de fé reveladas por Deus, que exigem adesão total", "Orações antigas em latim", "Pecados contra o Espírito Santo"], answer: 1, explanation: "Dogmas são verdades centrais da fé, definidas infalivelmente pela Igreja como divinamente reveladas (Ex: A Trindade, a Ressurreição)." },
+            { topic: "Doutrina", difficulty: "Médio", question: "Quantos são os mandamentos da Igreja?", options: ["Dez", "Sete", "Três", "Cinco"], answer: 3, explanation: "São Cinco: 1) Participar da Missa aos domingos e festas; 2) Confessar-se ao menos uma vez por ano; 3) Comungar ao menos pela Páscoa; 4) Jejuar e abster-se de carne quando mandado; 5) Ajudar a Igreja (dízimo)." },
+            { topic: "Doutrina", difficulty: "Médio", question: "Quais são as três 'virtudes teologais'?", options: ["Fé, Esperança e Caridade", "Justiça, Prudência, Fortaleza", "Pobreza, Castidade, Obediência", "Humildade, Mansidão, Paciência"], answer: 0, explanation: "As virtudes teologais (que vêm de Deus) são a Fé, a Esperança e a Caridade (Amor)." },
+            { topic: "Doutrina", difficulty: "Médio", question: "Quais são as quatro 'virtudes cardeais'?", options: ["Fé, Esperança, Caridade, Humildade", "Prudência, Justiça, Fortaleza e Temperança", "Ciência, Sabedoria, Entendimento, Conselho", "Pobreza, Castidade, Obediência, Paciência"], answer: 1, explanation: "As virtudes cardeais (humanas) são a Prudência, a Justiça, a Fortaleza e a Temperança." },
+            { topic: "Doutrina", difficulty: "Fácil", question: "Como se chama o pecado mais grave, que rompe a aliança com Deus?", options: ["Pecado Venial", "Pecado Capital", "Pecado Mortal", "Pecado Original"], answer: 2, explanation: "O Pecado Mortal (grave) destrói a caridade no coração do homem; o Venial apenas a enfraquece." },
+            { topic: "Doutrina", difficulty: "Fácil", question: "Quantos são os 'dons do Espírito Santo'?", options: ["Três", "Cinco", "Doze", "Sete"], answer: 3, explanation: "São Sete: Sabedoria, Entendimento, Conselho, Fortaleza, Ciência, Piedade e Temor de Deus." },
+            { topic: "Doutrina", difficulty: "Fácil", question: "Quantos são os 'frutos do Espírito Santo'?", options: ["Três", "Sete", "Doze", "Vinte"], answer: 2, explanation: "São Doze: Caridade, Alegria, Paz, Paciência, Bondade, Benignidade, Longanimidade, Mansidão, Fé, Modéstia, Continência, Castidade." },
+            { topic: "Doutrina", difficulty: "Médio", question: "Qual é o 'Grande Mandamento' ensinado por Jesus?", options: ["Não matarás", "Amar a Deus sobre todas as coisas e ao próximo como a si mesmo", "Honrar pai e mãe", "Santificar os domingos"], answer: 1, explanation: "Jesus resumiu todos os mandamentos em dois: Amar a Deus e amar ao próximo." },
+
+            // SACRAMENTOS (10)
+            { topic: "Sacramentos", difficulty: "Fácil", question: "Quantos são os Sacramentos da Igreja Católica?", options: ["Três", "Dez", "Sete", "Doze"], answer: 2, explanation: "A Igreja Católica reconhece Sete Sacramentos como sinais visíveis da graça de Deus." },
+            { topic: "Sacramentos", difficulty: "Médio", question: "Quais são os três sacramentos da 'Iniciação Cristã'?", options: ["Batismo, Crisma (Confirmação), Eucaristia", "Batismo, Penitência, Matrimônio", "Ordem, Crisma, Unção dos Enfermos", "Eucaristia, Matrimônio, Ordem"], answer: 0, explanation: "Os sacramentos que inserem plenamente o fiel na vida da Igreja são o Batismo, a Crisma e a Eucaristia." },
+            { topic: "Sacramentos", difficulty: "Fácil", question: "Qual sacramento é considerado a 'fonte e o ápice' da vida cristã, onde se recebe o Corpo de Cristo?", options: ["Batismo", "Matrimônio", "Crisma", "Eucaristia"], answer: 3, explanation: "A Eucaristia (Comunhão) é central para a fé católica, sendo a comunhão real com Cristo." },
+            { topic: "Sacramentos", difficulty: "Médio", question: "Qual sacramento perdoa os pecados cometidos após o Batismo?", options: ["Crisma", "Penitência (Confissão)", "Unção dos Enfermos", "Batismo"], answer: 1, explanation: "A Penitência, ou Confissão, é o sacramento da reconciliação com Deus e com a Igreja." },
+            { topic: "Sacramentos", difficulty: "Médio", question: "Qual sacramento confirma a graça do Batismo e confere os dons do Espírito Santo?", options: ["Eucaristia", "Crisma (Confirmação)", "Matrimônio", "Ordem"], answer: 1, explanation: "A Crisma, ou Confirmação, é o sacramento em que o fiel recebe a plenitude do Espírito Santo para fortalecer sua fé." },
+            { topic: "Sacramentos", difficulty: "Fácil", question: "Qual sacramento une um homem e uma mulher perante Deus?", options: ["Ordem", "Batismo", "Crisma", "Matrimônio"], answer: 3, explanation: "O Matrimônio é o sacramento que une o casal em aliança." },
+            { topic: "Sacramentos", difficulty: "Difícil", question: "Qual sacramento é destinado à cura espiritual e física dos enfermos graves?", options: ["Penitência", "Unção dos Enfermos", "Crisma", "Batismo"], answer: 1, explanation: "A Unção dos Enfermos (antes chamada 'Extrema Unção') é o sacramento para confortar e dar força aos doentes." },
+            { topic: "Sacramentos", difficulty: "Médio", question: "Qual sacramento transforma um homem em padre, bispo ou diácono?", options: ["Crisma", "Batismo", "Ordem", "Matrimônio"], answer: 2, explanation: "O sacramento da Ordem é o que confere o poder sacerdotal." },
+            { topic: "Sacramentos", difficulty: "Fácil", question: "Qual é o primeiro sacramento, que nos livra do Pecado Original?", options: ["Eucaristia", "Crisma", "Batismo", "Penitência"], answer: 2, explanation: "O Batismo é a 'porta de entrada' para a Igreja, perdoando o Pecado Original." },
+            { topic: "Sacramentos", difficulty: "Médio", question: "Quais são os dois sacramentos de 'cura'?", options: ["Batismo e Crisma", "Matrimônio e Ordem", "Penitência e Unção dos Enfermos", "Eucaristia e Batismo"], answer: 2, explanation: "Os sacramentos de cura são a Penitência (cura da alma) e a Unção dos Enfermos (cura do corpo e da alma)." },
+            
+            // LITURGIA E MISSA (20)
+            { topic: "Liturgia", difficulty: "Médio", question: "Quais são as duas partes principais da Missa?", options: ["Entrada e Ofertório", "Homilia e Comunhão", "Liturgia da Palavra e Liturgia Eucarística", "Ato Penitencial e Glória"], answer: 2, explanation: "A Missa é dividida em Liturgia da Palavra (leituras, Evangelho, homilia) e Liturgia Eucarística (consagração, comunhão)." },
+            { topic: "Liturgia", difficulty: "Difícil", question: "Qual cor litúrgica é usada no Tempo Comum?", options: ["Roxo", "Vermelho", "Branco", "Verde"], answer: 3, explanation: "O Verde é usado no Tempo Comum, simbolizando a esperança e o crescimento." },
+            { topic: "Liturgia", difficulty: "Difícil", question: "Qual cor litúrgica é usada no Advento e na Quaresma?", options: ["Roxo", "Branco", "Verde", "Dourado"], answer: 0, explanation: "O Roxo é usado nestes tempos penitenciais, simbolizando preparação, penitência e conversão." },
+            { topic: "Liturgia", difficulty: "Difícil", question: "Qual cor litúrgica é usada em Pentecostes, Sexta-feira Santa e na festa de mártires?", options: ["Branco", "Verde", "Roxo", "Vermelho"], answer: 3, explanation: "O Vermelho é usado para simbolizar o fogo do Espírito Santo (Pentecostes) e o sangue (paixão de Cristo, mártires)." },
+            { topic: "Liturgia", difficulty: "Médio", question: "Como se chama o período de preparação para o Natal?", options: ["Quaresma", "Páscoa", "Advento", "Tempo Comum"], answer: 2, explanation: "O Advento (cerca de 4 semanas antes do Natal) é o tempo de preparação e espera pelo nascimento de Jesus." },
+            { topic: "Liturgia", difficulty: "Fácil", question: "Qual é o dia da semana em que os católicos celebram a Ressurreição de Cristo (Dia do Senhor)?", options: ["Sexta-feira", "Sábado", "Domingo", "Quarta-feira"], answer: 2, explanation: "O Domingo é o 'Dia do Senhor' (Dies Domini), pois foi o dia em que Jesus ressuscitou." },
+            { topic: "Liturgia", difficulty: "Fácil", question: "Como se chama o período de 40 dias de preparação para a Páscoa?", options: ["Advento", "Tempo Comum", "Quaresma", "Pentecostes"], answer: 2, explanation: "A Quaresma (Quadragésima) é o período de 40 dias de penitência, oração e jejum em preparação para a Páscoa." },
+            { topic: "Liturgia", difficulty: "Médio", question: "Qual cor litúrgica é usada no Natal, na Páscoa e em festas de Nossa Senhora e santos não-mártires?", options: ["Branco/Dourado", "Roxo", "Verde", "Vermelho"], answer: 0, explanation: "O Branco (ou Dourado) é a cor da alegria, da glória e da pureza, usada nas grandes festas." },
+            { topic: "Liturgia", difficulty: "Fácil", question: "O que é a 'Homilia'?", options: ["A oração da Ave Maria", "O sermão do padre explicando as leituras", "A bênção final", "A hora da comunhão"], answer: 1, explanation: "A Homilia é o sermão, a pregação do padre ou diácono após a leitura do Evangelho." },
+            { topic: "Liturgia", difficulty: "Difícil", question: "Quais são os 3 dias que compõem o 'Tríduo Pascal'?", options: ["Natal, Páscoa, Pentecostes", "Domingo de Ramos, Quarta de Cinzas, Páscoa", "Quinta-feira Santa, Sexta-feira Santa, Sábado Santo (Vigília)", "Domingo da Páscoa, Segunda, Terça"], answer: 2, explanation: "O Tríduo Pascal é o centro do ano litúrgico e celebra a Paixão, Morte e Ressurreição: Quinta-feira Santa (Lava-pés), Sexta-feira Santa (Paixão) e a Vigília Pascal (Ressurreição)." },
+            { topic: "Missa", difficulty: "Médio", question: "Qual é o momento central da Missa, onde ocorre a Transubstanciação?", options: ["Ato Penitencial", "Glória", "Homilia", "Consagração"], answer: 3, explanation: "A Consagração, dentro da Liturgia Eucarística, é o momento em que, pelas palavras do padre, o pão e o vinho se tornam Corpo e Sangue de Cristo." },
+            { topic: "Missa", difficulty: "Médio", question: "Qual a primeira leitura feita nas missas de domingo?", options: ["Evangelho", "Salmo", "Antigo Testamento", "Novo Testamento (Epístola)"], answer: 2, explanation: "Geralmente, a primeira leitura é tirada do Antigo Testamento." },
+            { topic: "Missa", difficulty: "Fácil", question: "A oração do 'Santo, Santo, Santo' é rezada em que parte da Missa?", options: ["No início (Ato Penitencial)", "Na Liturgia da Palavra", "Na Liturgia Eucarística (antes da Consagração)", "Na bênção final"], answer: 2, explanation: "O 'Sanctus' é rezado/cantado logo no início da Oração Eucarística, unindo a Igreja da Terra à do Céu." },
+            { topic: "Liturgia", difficulty: "Médio", question: "Como se chama o livro que contém todas as orações que o padre reza na missa?", options: ["Bíblia", "Lecionário", "Missal", "Catecismo"], answer: 2, explanation: "O Missal contém as orações da Missa. O Lecionário contém as leituras bíblicas." },
+            { topic: "Liturgia", difficulty: "Médio", question: "Como se chama o livro que contém as leituras bíblicas (Antigo Testamento, Salmo, Epístola) da missa?", options: ["Bíblia", "Lecionário", "Missal", "Catecismo"], answer: 1, explanation: "O Lecionário é o livro específico das leituras proclamadas na Liturgia da Palavra." },
+            { topic: "Liturgia", difficulty: "Difícil", question: "Qual o nome da oração que resume a fé católica, rezada aos domingos?", options: ["Pai Nosso", "Ave Maria", "Credo", "Glória"], answer: 2, explanation: "O Credo (Símbolo dos Apóstolos ou Niceno-Constantinopolitano) é a profissão de fé." },
+            { topic: "Liturgia", difficulty: "Médio", question: "Qual é o 'Tempo Litúrgico' mais longo do ano, simbolizado pela cor verde?", options: ["Advento", "Quaresma", "Páscoa", "Tempo Comum"], answer: 3, explanation: "O Tempo Comum é o período 'comum' (sem grandes festas) de crescimento e esperança." },
+            { topic: "Missa", difficulty: "Fácil", question: "Qual é o gesto que fazemos no início do Evangelho?", options: ["Ajoelhar", "Sinal da Cruz (na testa, boca e peito)", "Sinal da Cruz (grande)", "Bater no peito"], answer: 1, explanation: "Fazemos o sinal da cruz na testa (para entender), na boca (para proclamar) e no peito (para guardar no coração)." },
+            { topic: "Missa", difficulty: "Médio", question: "O que é o 'Ofertório'?", options: ["A hora da comunhão", "O momento em que se leva o pão e o vinho ao altar", "A bênção final", "A leitura do Evangelho"], answer: 1, explanation: "O Ofertório é o momento de apresentação das oferendas (pão, vinho e a coleta) no altar." },
+            { topic: "Liturgia", difficulty: "Difícil", question: "Qual a cor litúrgica usada no 3º Domingo do Advento (Gaudete) e 4º Domingo da Quaresma (Laetare)?", options: ["Branco", "Vermelho", "Róseo", "Preto"], answer: 2, explanation: "O Róseo (rosa) é usado nestes dois domingos para simbolizar uma 'pausa' na penitência (roxa) e a alegria pela proximidade da festa (Natal/Páscoa)." },
+
+            // ESTRUTURA DA IGREJA (15)
+            { topic: "Estrutura da Igreja", difficulty: "Fácil", question: "Quem é o líder supremo da Igreja Católica na Terra e sucessor de São Pedro?", options: ["Cardeal", "Bispo", "Papa", "Núncio Apostólico"], answer: 2, explanation: "O Papa, Bispo de Roma, é o sucessor de Pedro e o líder visível da Igreja Católica." },
+            { topic: "Estrutura da Igreja", difficulty: "Fácil", question: "Onde fica a sede da Igreja Católica e a residência oficial do Papa?", options: ["Jerusalém", "Cidade do Vaticano (Roma)", "Constantinopla (Istambul)", "Santiago de Compostela"], answer: 1, explanation: "A Cidade do Vaticano, um estado independente dentro de Roma, é a sede da Igreja." },
+            { topic: "Estrutura da Igreja", difficulty: "Médio", question: "Quem é o sucessor dos apóstolos em uma diocese (território específico)?", options: ["Padre", "Diácono", "Papa", "Bispo"], answer: 3, explanation: "Os Bispos são os sucessores dos apóstolos, responsáveis por governar, ensinar e santificar uma diocese." },
+            { topic: "Estrutura da Igreja", difficulty: "Difícil", question: "Como se chama a reunião de todos os Bispos do mundo com o Papa para decidir sobre fé e doutrina?", options: ["Sínodo", "Conclave", "Concílio Ecumênico", "Consistório"], answer: 2, explanation: "Um Concílio Ecumênico (como o Vaticano II) é a reunião máxima da autoridade da Igreja." },
+            { topic: "Estrutura da Igreja", difficulty: "Difícil", question: "Como se chama a reunião dos Cardeais para eleger um novo Papa?", options: ["Conclave", "Concílio", "Sínodo", "Coroação"], answer: 0, explanation: "O Conclave (do latim 'com chave') é a reunião secreta dos cardeais para a eleição papal." },
+            { topic: "Estrutura da Igreja", difficulty: "Médio", question: "Quem é o 'pároco'?", options: ["O Bispo da diocese", "O Papa", "O padre responsável por uma paróquia", "O coroinha"], answer: 2, explanation: "O Pároco é o padre nomeado pelo Bispo para administrar e pastorear uma Paróquia." },
+            { topic: "Estrutura da Igreja", difficulty: "Fácil", question: "Qual é o nome do território administrado por um Bispo?", options: ["Paróquia", "Vaticano", "Diocese", "Capela"], answer: 2, explanation: "A Diocese (ou Arquidiocese) é o conjunto de paróquias sob a autoridade de um Bispo." },
+            { topic: "Estrutura da Igreja", difficulty: "Médio", question: "Quem são os Cardeais?", options: ["Todos os padres de Roma", "Bispos de dioceses muito antigas", "Os 'príncipes da Igreja', conselheiros do Papa e seus eleitores", "Monges que vivem no Vaticano"], answer: 2, explanation: "Os Cardeais são, em sua maioria, Bispos escolhidos pelo Papa para serem seus conselheiros e para elegerem o próximo Papa." },
+            { topic: "Estrutura da Igreja", difficulty: "Médio", question: "O que é um 'Diácono'?", options: ["Um padre que ainda não rezou a primeira missa", "O mesmo que um Bispo", "Um homem ordenado para o serviço (caridade, palavra, altar), que pode ser casado", "O chefe dos coroinhas"], answer: 2, explanation: "O Diácono é o primeiro grau da Ordem. Pode batizar, abençoar matrimônios e pregar, mas não pode consagrar a Eucaristia. O diaconato permanente pode ser conferido a homens casados." },
+            { topic: "Estrutura da Igreja", difficulty: "Fácil", question: "Como se chama o conjunto de todos os fiéis batizados?", options: ["Clero", "Leigos", "Povo de Deus", "Consagrados"], answer: 2, explanation: "O Povo de Deus é o termo que engloba todos os membros da Igreja (Clero, Consagrados e Leigos)." },
+            { topic: "Estrutura da Igreja", difficulty: "Médio", question: "O que são 'Leigos'?", options: ["Pessoas que não acreditam em Deus", "Os fiéis batizados que não pertencem ao clero (padres, bispos)", "Pessoas que não vão à missa", "O mesmo que 'padres'"], answer: 1, explanation: "Os Leigos são todos os cristãos, exceto os membros do sacramento da Ordem (clero) e os religiosos consagrados." },
+            { topic: "História da Igreja", difficulty: "Difícil", question: "Qual foi o Concílio Ecumênico (1962-1965) que modernizou a Igreja, permitindo a missa na língua local?", options: ["Concílio de Trento", "Concílio de Niceia", "Concílio Vaticano I", "Concílio Vaticano II"], answer: 3, explanation: "O Concílio Vaticano II, convocado pelo Papa João XXIII, promoveu grandes atualizações (aggiornamento), incluindo a reforma litúrgica." },
+            { topic: "História da Igreja", difficulty: "Difícil", question: "O que foi o 'Concílio de Trento' (1545-1563)?", options: ["A reunião que iniciou a Igreja", "A resposta católica à Reforma Protestante de Lutero", "O concílio que modernizou a missa (Vaticano II)", "A reunião que elegeu o primeiro Papa"], answer: 1, explanation: "O Concílio de Trento foi a principal reação da Igreja Católica (a Contrarreforma) para reafirmar a doutrina católica contra os protestantes." },
+            { topic: "História da Igreja", difficulty: "Difícil", question: "Qual concílio (325 d.C.) definiu a divindade de Jesus Cristo ('Deus de Deus, Luz da Luz')?", options: ["Concílio de Trento", "Concílio de Niceia", "Concílio Vaticano I", "Concílio Vaticano II"], answer: 1, explanation: "O Primeiro Concílio de Niceia foi convocado para combater a heresia do Arianismo e definiu que Jesus é 'consubstancial' ao Pai (da mesma natureza divina)." },
+            { topic: "História da Igreja", difficulty: "Difícil", question: "O que foi o 'Grande Cisma do Ocidente' (1378-1417)?", options: ["A separação da Igreja Ortodoxa", "A Reforma Protestante", "Um período em que a Igreja teve dois (e depois três) Papas ao mesmo tempo", "A perseguição romana"], answer: 2, explanation: "Foi uma crise de autoridade onde Papas rivais (um em Roma, outro em Avignon) disputaram o poder, confundindo a cristandade." },
+
+            // SANTOS E MARIOLOGIA (15)
+            { topic: "Santos", difficulty: "Fácil", question: "Quem é a santa padroeira do Brasil?", options: ["Santa Teresinha", "Nossa Senhora de Fátima", "Santa Rita de Cássia", "Nossa Senhora Aparecida"], answer: 3, explanation: "Nossa Senhora da Conceição Aparecida foi proclamada Rainha e Padroeira do Brasil." },
+            { topic: "Santos", difficulty: "Médio", question: "Quem foi o santo que fundou η Ordem Franciscana, conhecido pelo amor à pobreza e à natureza?", options: ["São Bento", "São Domingos", "Santo Agostinho", "São Francisco de Assis"], answer: 3, explanation: "São Francisco de Assis renunciou à riqueza para viver na pobreza e é famoso por seu amor a todas as criaturas." },
+            { topic: "Mariologia", difficulty: "Difícil", question: "Qual dogma católico afirma que Maria, mãe de Jesus, foi concebida sem o Pecado Original?", options: ["Assunção de Maria", "Virgindade Perpétua", "Imaculada Conceição", "Maternidade Divina"], answer: 2, explanation: "A Imaculada Conceição (ou Concepção) é o dogma que afirma que Maria foi preservada do Pecado Original desde o primeiro instante de sua concepção." },
+            { topic: "Mariologia", difficulty: "Difícil", question: "Qual dogma católico afirma que Maria foi levada ao céu de corpo e alma ao fim de sua vida?", options: ["Imaculada Conceição", "Assunção de Maria", "Anunciação", "Visitação"], answer: 1, explanation: "A Assunção de Maria é a crença de que ela foi 'assumpta' (levada) ao céu, não sofrendo a corrupção do corpo." },
+            { topic: "Mariologia", difficulty: "Fácil", question: "A oração 'Ave Maria' é baseada principalmente em qual evento bíblico?", options: ["A Anunciação (saudação do Anjo Gabriel)", "As Bodas de Caná", "A Crucificação", "O Apocalipse"], answer: 0, explanation: "A primeira parte da oração ('Ave, cheia de graça...') é a saudação do Anjo Gabriel a Maria no momento da Anunciação." },
+            { topic: "Santos", difficulty: "Médio", question: "Quem é conhecido como o 'Príncipe dos Apóstolos' e o primeiro Papa?", options: ["São Paulo", "São João", "São Pedro", "Santo André"], answer: 2, explanation: "Jesus deu a Simão o nome de Pedro (Pedra) e disse 'sobre esta pedra edificarei minha Igreja', sendo ele o líder dos Apóstolos e o primeiro Bispo de Roma (Papa)." },
+            { topic: "Santos", difficulty: "Médio", question: "Quem foi o Apóstolo que duvidou da Ressurreição até tocar nas chagas de Jesus?", options: ["Pedro", "Judas", "Tomé", "Mateus"], answer: 2, explanation: "São Tomé é famoso por sua incredulidade inicial, afirmando que só acreditaria se tocasse nas feridas de Cristo." },
+            { topic: "Santos", difficulty: "Médio", question: "Quem é o santo padroeiro dos animais e do meio ambiente?", options: ["São Judas Tadeu", "São Francisco de Assis", "Santo Antônio", "São Jorge"], answer: 1, explanation: "São Francisco de Assis é o padroeiro dos animais e da ecologia, devido ao seu 'Cântico das Criaturas'." },
+            { topic: "Santos", difficulty: "Difícil", question: "Quem é a 'Doutora da Igreja' conhecida pela 'Pequena Via' (confiança e amor)?", options: ["Santa Teresinha do Menino Jesus", "Santa Teresa D'Ávila", "Santa Catarina de Sena", "Santa Clara de Assis"], answer: 0, explanation: "Santa Teresinha de Lisieux (do Menino Jesus) é conhecida por sua 'Pequena Via', um caminho de santidade na simplicidade." },
+            { topic: "Santos", difficulty: "Difícil", question: "Quem foi o santo que escreveu as 'Confissões' e a 'Cidade de Deus'?", options: ["Santo Tomás de Aquino", "Santo Inácio de Loyola", "Santo Agostinho", "São Bento"], answer: 2, explanation: "Santo Agostinho de Hipona é um dos maiores filósofos e Doutores da Igreja, autor das 'Confissões'." },
+            { topic: "Santos", difficulty: "Difícil", question: "Qual santo escreveu a 'Suma Teológica'?", options: ["Santo Agostinho", "São Francisco de Assis", "São Jerônimo", "Santo Tomás de Aquino"], answer: 3, explanation: "Santo Tomás de Aquino é o grande Doutor Angélico, cuja obra-prima, a Suma Teológica, é um pilar da filosofia e teologia católicas." },
+            { topic: "Santos", difficulty: "Médio", question: "Quem foi o apóstolo que era 'cobrador de impostos' antes de seguir Jesus?", options: ["Pedro", "João", "Mateus", "Judas"], answer: 2, explanation: "São Mateus (Levi) era um publicano (cobrador de impostos) quando Jesus o chamou." },
+            { topic: "Mariologia", difficulty: "Médio", question: "Em qual país ocorreram as aparições de Nossa Senhora de Fátima?", options: ["França", "Espanha", "México", "Portugal"], answer: 3, explanation: "Nossa Senhora de Fátima apareceu a três pastorinhos em Fátima, Portugal, em 1917." },
+            { topic: "Mariologia", difficulty: "Médio", question: "Em qual país ocorreram as aparições de Nossa Senhora de Lourdes?", options: ["França", "Espanha", "Itália", "Alemanha"], answer: 0, explanation: "Nossa Senhora de Lourdes apareceu a Santa Bernadette Soubirous em Lourdes, França, em 1858." },
+            { topic: "Mariologia", difficulty: "Médio", question: "Em qual país ocorreram as aparições de Nossa Senhora de Guadalupe?", options: ["Portugal", "Espanha", "México", "Argentina"], answer: 2, explanation: "Nossa Senhora de Guadalupe, padroeira das Américas, apareceu a São Juan Diego no México, em 1531." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- ELEMENTOS DOM ---
+            const btnStartQuiz = document.getElementById('btn-start-quiz');
+            const startScreen = document.getElementById('start-screen');
+            
+            const practiceSection = document.getElementById('practice-section');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreScreen = document.getElementById('score-screen');
+            
+            const progressBar = document.getElementById('progress-bar');
+            const questionTopic = document.getElementById('question-topic');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const questionCounter = document.getElementById('question-counter');
+            
+            const finalScore = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+            const restartBtn = document.getElementById('restart-btn');
+
+            // --- ESTADO DO QUIZ ---
+            let state = {
+                currentQuestionIndex: 0,
+                userAnswers: [],
+                score: 0,
+                currentQuizQuestions: [] // Array para as 10 questões aleatórias
+            };
+            
+            const TOTAL_QUIZ_QUESTIONS = 10;
+
+            // --- FUNÇÕES ---
+
+            // Embaralha um array (Fisher-Yates)
+            function shuffleArray(array) {
+                const newArray = [...array];
+                for (let i = newArray.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+                }
+                return newArray;
+            }
+
+            // Inicia o quiz (seleciona 10 questões)
+            function startQuiz() {
+                startScreen.classList.remove('slide-in');
+                startScreen.classList.add('hidden');
+                
+                practiceSection.classList.remove('hidden');
+                quizContainer.classList.remove('hidden');
+                quizContainer.classList.add('slide-in');
+                scoreScreen.classList.add('hidden');
+                scoreScreen.classList.remove('slide-in');
+                
+                // Reseta o estado
+                state.currentQuestionIndex = 0;
+                state.score = 0;
+                state.userAnswers = Array(TOTAL_QUIZ_QUESTIONS).fill(null);
+                
+                // --- LÓGICA DE SELEÇÃO BALANCEADA (3 Fácil, 4 Médio, 3 Difícil) ---
+                // 1. Separa as perguntas por dificuldade
+                const faceis = shuffleArray(fullQuestionBank.filter(q => q.difficulty === "Fácil"));
+                const medias = shuffleArray(fullQuestionBank.filter(q => q.difficulty === "Médio"));
+                const dificeis = shuffleArray(fullQuestionBank.filter(q => q.difficulty === "Difícil"));
+
+                // 2. Pega a quantidade desejada de cada
+                const questoesFaceis = faceis.slice(0, 3);
+                const questoesMedias = medias.slice(0, 4);
+                const questoesDificeis = dificeis.slice(0, 3);
+
+                // 3. Junta e embaralha a seleção final de 10 perguntas
+                const finalQuiz = shuffleArray([
+                    ...questoesFaceis,
+                    ...questoesMedias,
+                    ...questoesDificeis
+                ]);
+                
+                state.currentQuizQuestions = finalQuiz;
+                // --- FIM DA LÓGICA DE SELEÇÃO ---
+                
+                progressBar.style.width = '0%'; // Reseta a barra de progresso
+
+                renderQuestion(0);
+            }
+            
+            // Renderiza a questão atual
+            function renderQuestion(index) {
+                const question = state.currentQuizQuestions[index];
+                
+                // Elementos que serão animados
+                const elementsToAnimate = [questionTopic, questionText, optionsContainer];
+                
+                // Remove animação para reiniciar
+                elementsToAnimate.forEach(el => el.classList.remove('slide-in'));
+
+                // Atualiza conteúdo
+                questionTopic.textContent = `${question.topic} - (Nível: ${question.difficulty})`;
+                questionText.innerHTML = question.question; 
+                questionCounter.textContent = `${index + 1} / ${TOTAL_QUIZ_QUESTIONS}`;
+                
+                // Atualiza Barra de Progresso
+                const progress = ((index + 1) / TOTAL_QUIZ_QUESTIONS) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                optionsContainer.innerHTML = '';
+                feedbackContainer.innerHTML = '';
+
+                question.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option; 
+                    button.className = "w-full text-left p-4 rounded-lg transition-colors disabled:cursor-not-allowed option-btn";
+                    button.onclick = () => checkAnswer(i, question.answer, question.explanation);
+                    optionsContainer.appendChild(button);
+                });
+
+                // Força o reflow para a animação CSS reiniciar
+                void questionTopic.offsetWidth;
+                
+                // Adiciona a classe de animação
+                elementsToAnimate.forEach(el => el.classList.add('slide-in'));
+
+                updateNavButtonsState();
+            }
+
+            // Verifica a resposta
+            function checkAnswer(selectedIndex, correctIndex, explanation) {
+                const isCorrect = selectedIndex === correctIndex;
+                const isFirstAttempt = state.userAnswers[state.currentQuestionIndex] === null;
+                const wasPreviouslyWrong = state.userAnswers[state.currentQuestionIndex] === false;
+
+                if (isFirstAttempt) {
+                    state.userAnswers[state.currentQuestionIndex] = isCorrect;
+                    if (isCorrect) {
+                        state.score++;
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else if (wasPreviouslyWrong && isCorrect) {
+                    state.userAnswers[state.currentQuestionIndex] = true; 
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); 
+                }
+
+                Array.from(optionsContainer.children).forEach((btn, i) => {
+                    btn.disabled = true;
+                    if (i === correctIndex) {
+                        btn.classList.add('correct');
+                    } else if (i === selectedIndex) {
+                        btn.classList.add('incorrect');
+                    }
+                });
+
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 rounded-lg ${isCorrect ? 'bg-success-dark' : 'bg-error-dark'} slide-in">
+                        <h4 class="font-bold text-lg mb-2 ${isCorrect ? 'text-success' : 'text-error'}">${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</h4>
+                        <p class="text-sm" id="explanation-text"></p>
+                        <button id="redo-question-btn" class="mt-4 py-2 px-4 accent-primary rounded-md font-semibold hover:accent-primary-dark transition-colors">Tentar Novamente</button>
+                    </div>`;
+                
+                const explanationText = document.getElementById('explanation-text');
+                explanationText.innerHTML = explanation; 
+
+                document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
+            }
+            
+            // Reseta apenas as opções da questão atual
+            function resetCurrentQuestion() {
+                feedbackContainer.innerHTML = '';
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.className = "w-full text-left p-4 rounded-lg transition-colors disabled:cursor-not-allowed option-btn";
+                });
+            }
+
+            // Atualiza os botões "Anterior" e "Próxima"
+            function updateNavButtonsState() {
+                prevBtn.disabled = state.currentQuestionIndex === 0;
+                nextBtn.textContent = (state.currentQuestionIndex === TOTAL_QUIZ_QUESTIONS - 1) ? "Finalizar" : "Próxima";
+            }
+
+            // Vai para a próxima questão ou finaliza
+            function nextQuestion() {
+                if (state.currentQuestionIndex < TOTAL_QUIZ_QUESTIONS - 1) {
+                    goToQuestion(state.currentQuestionIndex + 1);
+                } else {
+                    showFinalScore();
+                }
+            }
+
+            // Vai para a questão anterior
+            function prevQuestion() {
+                if (state.currentQuestionIndex > 0) {
+                   goToQuestion(state.currentQuestionIndex - 1);
+                }
+            }
+
+            // Navega para uma questão específica
+            function goToQuestion(index) {
+                if (index >= 0 && index < state.currentQuizQuestions.length) {
+                    state.currentQuestionIndex = index;
+                    renderQuestion(index);
+                }
+            }
+            
+            // Mostra a tela de pontuação final
+            function showFinalScore() {
+                quizContainer.classList.remove('slide-in');
+                quizContainer.classList.add('hidden');
+                scoreScreen.classList.remove('hidden');
+                scoreScreen.classList.add('slide-in');
+
+                const percentage = Math.round((state.score / TOTAL_QUIZ_QUESTIONS) * 100);
+                finalScore.textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) message = "Excelente! Você tem um conhecimento sólido!";
+                else if (percentage >= 70) message = "Muito bom! Continue praticando.";
+                else if (percentage >= 50) message = "Bom esforço! Reveja os tópicos que errou.";
+                else message = "Não desanime! O importante é aprender.";
+                
+                scoreMessage.textContent = `Você acertou ${state.score} de ${TOTAL_QUIZ_QUESTIONS} questões. ${message}`;
+            }
+            
+            // Reinicia o quiz (volta para a tela inicial)
+            function restartQuiz() {
+                scoreScreen.classList.remove('slide-in');
+                scoreScreen.classList.add('hidden');
+                practiceSection.classList.add('hidden');
+                startScreen.classList.remove('hidden');
+                startScreen.classList.add('slide-in');
+            }
+
+            // --- LISTENERS DE EVENTOS ---
+            btnStartQuiz.addEventListener('click', startQuiz);
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+
+        });
+    </script>
+</body>
+</html>
