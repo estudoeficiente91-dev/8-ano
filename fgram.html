@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos: Gramática e Argumentação (8º Ano)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Cores principais atualizadas */
+        .bg-dark-bg { background-color: #121212; } /* Fundo principal */
+        .bg-dark-surface { background-color: #1E1E1E; } /* Cartões e nav */
+        .text-dark-text { color: #E0E0E0; } /* Texto padrão */
+        .text-dark-light-text { color: #B0B0B0; } /* Texto secundário/p */
+
+        /* paleta de destaque: Tons de Bronze/Dourado Envelhecido */
+        .accent-primary { background-color: #D97706; color: white; } /* Laranja escuro/Bronze (Orange 700) */
+        .hover\:accent-primary-dark { background-color: #C26402; } /* Laranja mais escuro (Orange 800) */
+        .accent-secondary { color: #FDBA74; } /* Laranja claro/Pêssego (Orange 300) */
+        .text-highlight { color: #FED7AA; } /* Laranja mais claro (Orange 200) para destaques */
+        .text-success { color: #34D399; } /* Esmeralda para sucesso */
+        .bg-success-dark { background-color: #065F46; } /* Esmeralda mais escuro */
+        .text-error { color: #EF4444; } /* Vermelho para erro */
+        .bg-error-dark { background-color: #991B1B; } /* Vermelho mais escuro */
+        
+        .mode-button.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+        .nav-link.active {
+            background-color: #D97706; /* Cor principal de destaque */
+            color: white;
+        }
+
+        .prose-headings {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-strong {
+            color: #FDBA74; /* Laranja claro (Orange 300) */
+        }
+        .prose-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            overflow: auto;
+            display: block;
+        }
+        .prose-th, .prose-td {
+            border: 1px solid #424242; /* Cinza mais escuro para bordas da tabela */
+            padding: 0.5em 1em;
+            white-space: nowrap;
+        }
+        .prose-th {
+            background-color: #2F2F2F; /* Fundo mais escuro para cabeçalho da tabela */
+            font-weight: 600;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-dark-text">
+
+    <div class="w-full max-w-7xl mx-auto">
+        <header class="text-center py-8 px-4">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Gramática e Argumentação</h1>
+            <p class="text-lg text-dark-light-text">Um guia sobre Orações Subordinadas e Recursos Argumentativos (8º Ano).</p>
+        </header>
+        
+        <nav class="flex justify-center items-center bg-dark-surface rounded-lg p-2 mb-8 gap-2 flex-wrap max-w-md mx-auto">
+            <button id="btn-learn" class="mode-button accent-primary flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Aprender</button>
+            <button id="btn-practice" class="mode-button flex-grow sm:flex-grow-0 text-center py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">Praticar</button>
+        </nav>
+
+        <div id="learn-container">
+            <div class="flex flex-col lg:flex-row gap-8 p-4">
+                <!-- Navegação Lateral --><aside class="lg:w-1/4">
+                    <nav class="sticky top-4 bg-dark-surface rounded-lg p-4">
+                        <h3 class="text-xl font-bold text-white mb-4">Tópicos</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#argumentacao" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark active">1. Argumentação</a></li>
+                            <li><a href="#substantivas" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">2. Orações Substantivas</a></li>
+                            <li><a href="#adverbiais" class="nav-link block py-2 px-4 rounded-md font-semibold transition-all duration-300 hover:accent-primary-dark">3. Orações Adverbiais</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Conteúdo Principal --><main class="lg:w-3/4 space-y-12">
+                    
+                    <section id="argumentacao" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">1. Recursos de Argumentação</h2>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Pressuposto vs. Subentendido</h3>
+                            <p>São informações implícitas (não ditas claramente) no texto.</p>
+                            <ul>
+                                <li><strong>Pressuposto:</strong> É uma informação que o falante assume como <strong class="text-highlight">verdadeira e indiscutível</strong> para que a frase faça sentido. O pressuposto está "preso" em certas palavras (verbos de mudança, advérbios).
+                                    <ul>
+                                        <li>Frase: "João <strong class="prose-strong">parou</strong> de fumar."</li>
+                                        <li>Pressuposto: "João fumava antes." (O verbo "parar" exige isso).</li>
+                                        <li>Frase: "O Brasil <strong class="prose-strong">continua</strong> violento."</li>
+                                        <li>Pressuposto: "O Brasil já era violento antes."</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Subentendido:</strong> É uma <strong class="text-highlight">insinuação</strong>, uma ideia sugerida pelo contexto, mas que o falante pode negar.
+                                    <ul>
+                                        <li>Frase: "Nossa, está <strong class="prose-strong">frio</strong> aqui, não acha?"</li>
+                                        <li>Subentendido: "Por favor, feche a janela." (O falante pode negar: "Não, só comentei mesmo.").</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Operadores Argumentativos</h3>
+                            <p>São palavras ou expressões (geralmente conjunções) que <strong class="text-highlight">dão direção</strong> ao argumento, indicando soma, oposição, causa, conclusão, etc.</p>
+                            <ul>
+                                <li><strong>Adição/Soma:</strong> e, nem, não só... mas também. (Ex: "Ele é inteligente <strong class="prose-strong">e</strong> esforçado.")</li>
+                                <li><strong>Oposição/Contraste:</strong> mas, porém, contudo, todavia, embora. (Ex: "Ele é inteligente, <strong class="prose-strong">mas</strong> preguiçoso.")</li>
+                                <li><strong>Causa/Explicação:</strong> porque, pois, já que, visto que. (Ex: "Não fui <strong class="prose-strong">porque</strong> choveu.")</li>
+                                <li><strong>Conclusão:</strong> logo, portanto, por isso. (Ex: "Estudei, <strong class="prose-strong">portanto</strong> devo ir bem.")</li>
+                            </ul>
+
+                            <h3 class="text-2xl font-semibold mt-6">Modalizadores</h3>
+                            <p>São palavras que mostram a <strong class="text-highlight">atitude do falante</strong> (certeza, dúvida, obrigação) em relação ao que ele está dizendo.</p>
+                            <ul>
+                                <li><strong>Certeza:</strong> <strong class="prose-strong">Certamente</strong>, <strong class="prose-strong">é óbvio que</strong>, <strong class="prose-strong">sem dúvida</strong>... (Ex: "Ele, <strong class="text-highlight">certamente</strong>, vencerá.")</li>
+                                <li><strong>Dúvida/Possibilidade:</strong> <strong class="prose-strong">Talvez</strong>, <strong class="prose-strong">provavelmente</strong>, <strong class="prose-strong">é possível que</strong>... (Ex: "<strong class="text-highlight">Talvez</strong> ele vença.")</li>
+                                <li><strong>Obrigação/Necessidade:</strong> <strong class="prose-strong">É preciso</strong>, <strong class="prose-strong">deve</strong>, <strong class="prose-strong">necessariamente</strong>... (Ex: "<strong class="text-highlight">É preciso</strong> vencer.")</li>
+                            </ul>
+                        </article>
+                    </section>
+                    
+                    <section id="substantivas" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">2. Orações Subordinadas Substantivas</h2>
+                            <p>São orações que funcionam como um <strong class="prose-strong">Substantivo</strong> (Sujeito, Objeto Direto, etc.) para a oração principal.</p>
+                            <p class="text-highlight key-point"><strong>MACETE:</strong> A oração subordinada substantiva (geralmente iniciada por 'que' ou 'se') pode ser substituída pela palavra <strong class="text-highlight">"ISSO"</strong>, "DISSO" ou "NISSO".</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Principais Tipos</h3>
+                            <ul>
+                                <li><strong>Subjetiva (Função de Sujeito):</strong>
+                                    <ul>
+                                        <li>Ex: "É necessário <strong class="prose-strong">que você estude</strong>."</li>
+                                        <li>Teste: "<strong class="text-highlight">ISSO</strong> é necessário." (A oração é o sujeito do verbo 'é necessário').</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Objetiva Direta (Função de Objeto Direto):</strong>
+                                    <ul>
+                                        <li>Ex: "Eu quero <strong class="prose-strong">que você estude</strong>."</li>
+                                        <li>Teste: "Eu quero <strong class="text-highlight">ISSO</strong>." (A oração completa o verbo 'querer', sem preposição).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Objetiva Indireta (Função de Objeto Indireto):</strong>
+                                    <ul>
+                                        <li>Ex: "Eu preciso <strong class="prose-strong">de que você estude</strong>."</li>
+                                        <li>Teste: "Eu preciso <strong class="text-highlight">DISSO</strong>." (A oração completa o verbo 'precisar', com preposição 'de').</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Completiva Nominal (Função de Complemento Nominal):</strong>
+                                    <ul>
+                                        <li>Ex: "Eu tenho necessidade <strong class="prose-strong">de que você estude</strong>."</li>
+                                        <li>Teste: "Eu tenho necessidade <strong class="text-highlight">DISSO</strong>." (Cuidado! A oração completa o NOME 'necessidade', e não um verbo).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Predicativa (Função de Predicativo):</strong>
+                                    <ul>
+                                        <li>Ex: "Meu desejo é <strong class="prose-strong">que você estude</strong>."</li>
+                                        <li>Teste: "Meu desejo é <strong class="text-highlight">ISSO</strong>." (Vem depois de um verbo de ligação: SER, ESTAR, PARECER...).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Apositiva (Função de Aposto):</strong>
+                                    <ul>
+                                        <li>Ex: "Só peço uma coisa: <strong class="prose-strong">que você estude</strong>."</li>
+                                        <li>(Explica o termo 'uma coisa', geralmente após dois-pontos).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </article>
+                    </section>
+
+                    <section id="adverbiais" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg">
+                        <article class="prose prose-invert max-w-none text-dark-light-text">
+                            <h2 class="text-3xl font-bold border-b border-gray-700 pb-2 mb-4 prose-headings">3. Orações Subordinadas Adverbiais</h2>
+                            <p>São orações que funcionam como um <strong class="prose-strong">Advérbio</strong>, indicando uma <strong class="text-highlight">circunstância</strong> (de tempo, causa, condição, etc.) para a oração principal.</p>
+                            
+                            <h3 class="text-2xl font-semibold mt-6">Principais Tipos (Circunstâncias)</h3>
+                            <div class="prose-table">
+                                <table>
+                                    <thead><tr><th>Tipo</th><th>Ideia de...</th><th>Conjunções Principais</th><th>Exemplo</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Temporal</strong></td><td>Tempo</td><td>quando, enquanto, assim que</td><td>"Eu saí <strong class="text-highlight">quando</strong> a chuva começou."</td></tr>
+                                        <tr><td><strong>Causal</strong></td><td>Causa</td><td>porque, já que, visto que</td><td>"Não saí <strong class="text-highlight">porque</strong> choveu."</td></tr>
+                                        <tr><td><strong>Condicional</strong></td><td>Condição</td><td>se, caso</td><td>"Eu sairei <strong class="text-highlight">se</strong> a chuva parar."</td></tr>
+                                        <tr><td><strong>Concessiva</strong></td><td>Oposição/Contraste</td><td>embora, mesmo que, apesar de</td><td>"Eu saí <strong class="text-highlight">embora</strong> estivesse chovendo."</td></tr>
+                                        <tr><td><strong>Consecutiva</strong></td><td>Consequência</td><td>tão... que, tanto... que</td><td>"Chover <strong class="text-highlight">tanto que</strong> a rua alagou."</td></tr>
+                                        <tr><td><strong>Final</strong></td><td>Finalidade, Objetivo</td><td>para que, a fim de que</td><td>"Levei o guarda-chuva <strong class="text-highlight">para que</strong> não me molhasse."</td></tr>
+                                        <tr><td><strong>Comparativa</strong></td><td>Comparação</td><td>como, mais... (do) que</td><td>"Ele é rápido <strong class="text-highlight">como</strong> um raio."</td></tr>
+                                        <tr><td><strong>Conformativa</strong></td><td>Conformidade, Acordo</td><td>conforme, segundo</td><td>"Fiz o bolo <strong class="text-highlight">conforme</strong> a receita."</td></tr>
+                                        <tr><td><strong>Proporcional</strong></td><td>Proporção</td><td>à medida que, quanto mais</td><td>"<strong class="text-highlight">À medida que</strong> chovia, a rua enchia."</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </section>
+                </main>
+            </div>
+        </div>
+        
+        <!-- Seção Praticar --><section id="practice-section" class="hidden p-4">
+            <div id="quiz-container" class="bg-dark-surface p-6 sm:p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                <div id="question-header" class="mb-4 text-center">
+                    <p class="accent-secondary font-semibold" id="question-topic"></p>
+                </div>
+                <p id="question-text" class="text-xl text-center mb-6 min-h-[60px]"></p>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="feedback-container" class="mt-6 text-center"></div>
+
+                <!-- Navegação --><div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark disabled:bg-gray-600 disabled:cursor-not-allowed">Anterior</button>
+                    <span id="question-counter" class="font-semibold text-dark-text"></span>
+                    <button id="next-btn" class="accent-primary py-2 px-5 rounded-md font-semibold transition-colors hover:accent-primary-dark">Próxima</button>
+                </div>
+            </div>
+
+            <!-- Navegação de Questões --><div id="question-nav-container" class="hidden bg-dark-surface p-4 rounded-lg shadow-lg max-w-3xl mx-auto mt-4">
+                <div id="question-buttons-grid" class="flex flex-wrap justify-center gap-2">
+                    <!-- Buttons will be programmatically inserted here --></div>
+            </div>
+
+             <!-- Tela de Pontuação --><div id="score-screen" class="hidden text-center bg-dark-surface p-8 rounded-lg shadow-lg max-w-3xl mx-auto mt-8">
+                <h3 class="text-4xl font-bold text-white mb-4">Pontuação Final</h3>
+                <p id="final-score" class="text-6xl font-bold accent-secondary mb-2"></p>
+                <p id="score-message" class="text-lg text-dark-light-text mb-8"></p>
+                <button id="restart-btn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-semibold text-lg hover:bg-green-500 transition-colors">Recomeçar</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- BANCO DE DADOS DAS QUESTÕES ---
+        const questions = [
+            // NÍVEL FÁCIL (10 Questões)
+            { topic: "Argumentação", difficulty: "Fácil", question: "Na frase 'João parou de fumar', qual é o pressuposto?", options: ["João nunca fumou", "João fumava antes", "João vai voltar a fumar", "Fumar faz bem"], answer: 1, explanation: "O verbo 'parar' pressupõe que a ação (fumar) acontecia antes." },
+            { topic: "Argumentação", difficulty: "Fácil", question: "A palavra 'mas' (em 'Ele é rico, mas é triste') é um operador argumentativo que indica:", options: ["Soma", "Causa", "Oposição", "Conclusão"], answer: 2, explanation: "'Mas' (assim como 'porém', 'contudo') é o principal operador de oposição/contraste." },
+            { topic: "Argumentação", difficulty: "Fácil", question: "A palavra 'Talvez' (em 'Talvez eu vá à festa') é um modalizador que indica:", options: ["Certeza", "Obrigação", "Dúvida", "Ordem"], answer: 2, explanation: "Modalizadores como 'talvez' e 'provavelmente' indicam dúvida ou possibilidade." },
+            { topic: "Orações Subordinadas", difficulty: "Fácil", question: "Qual é o 'macete' para identificar uma Oração Subordinada Substantiva?", options: ["Trocar a oração por 'HOJE'", "Trocar a oração por 'ISSO'", "Verificar se termina com 'mente'", "Verificar se tem a palavra 'que'"], answer: 1, explanation: "A oração substantiva (iniciada por 'que' ou 'se') quase sempre pode ser substituída por 'ISSO', 'DISSO' ou 'NISSO'." },
+            { topic: "Orações Substantivas", difficulty: "Fácil", question: "Em 'Eu quero QUE VOCÊ VENHA', a oração destacada é:", options: ["Objetiva Direta", "Subjetiva", "Adjetiva", "Adverbial"], answer: 0, explanation: "Eu quero ISSO. A oração completa o sentido do verbo 'querer' (sem preposição), funcionando como Objeto Direto." },
+            { topic: "Orações Substantivas", difficulty: "Fácil", question: "Em 'É necessário QUE VOCÊ VENHA', a oração destacada é:", options: ["Objetiva Direta", "Subjetiva", "Predicativa", "Adverbial"], answer: 1, explanation: "ISSO é necessário. A oração funciona como Sujeito do verbo 'é necessário'." },
+            { topic: "Orações Adverbiais", difficulty: "Fácil", question: "Em 'Eu saí QUANDO A CHUVA COMEÇOU', a oração destacada dá ideia de:", options: ["Causa", "Condição", "Tempo", "Finalidade"], answer: 2, explanation: "A conjunção 'quando' é o principal marcador de Tempo, indicando o momento da ação." },
+            { topic: "Orações Adverbiais", difficulty: "Fácil", question: "Em 'Eu não saí PORQUE CHOVEU', a oração destacada dá ideia de:", options: ["Tempo", "Causa", "Consequência", "Condição"], answer: 1, explanation: "'Porque' (assim como 'já que', 'visto que') indica a Causa da oração principal." },
+            { topic: "Argumentação", difficulty: "Fácil", question: "A palavra 'logo' (em 'Penso, logo existo') é um operador argumentativo que indica:", options: ["Causa", "Oposição", "Conclusão", "Adição"], answer: 2, explanation: "'Logo' (assim como 'portanto', 'por isso') é um operador que introduz uma conclusão lógica." },
+            { topic: "Argumentação", difficulty: "Fácil", question: "Se alguém diz 'Que calor!', dentro de uma sala fechada, o que está subentendido?", options: ["Que a pessoa está com frio.", "Uma sugestão para ligar o ar ou abrir a janela.", "Que o dia está bonito.", "Que a pessoa gosta de calor."], answer: 1, explanation: "O subentendido é uma insinuação. A pessoa não está apenas constatando um fato, ela provavelmente quer uma ação (abrir a janela)." },
+
+            // NÍVEL MÉDIO (10 Questões)
+            { topic: "Argumentação", difficulty: "Médio", question: "Em 'O Brasil continua sendo um país desigual', qual é o pressuposto?", options: ["O Brasil vai deixar de ser desigual.", "O Brasil não é desigual.", "O Brasil já era desigual antes.", "O Brasil é igualitário."], answer: 2, explanation: "O verbo 'continuar' pressupõe que a ação ou estado (ser desigual) já existia no passado." },
+            { topic: "Argumentação", difficulty: "Médio", question: "Em 'Ele não só estudou, MAS TAMBÉM limpou a casa', o operador 'mas também' indica:", options: ["Oposição", "Conclusão", "Explicação", "Adição (Soma)"], answer: 3, explanation: "A expressão 'não só... mas também' é um operador argumentativo de Adição (soma de argumentos)." },
+            { topic: "Argumentação", difficulty: "Médio", question: "Na frase 'É óbvio que ele vencerá', a expressão 'É óbvio que' funciona como um modalizador de:", options: ["Dúvida", "Certeza", "Obrigação", "Sentimento"], answer: 1, explanation: "Os modalizadores 'É óbvio que', 'certamente', 'sem dúvida' indicam um alto grau de certeza do falante." },
+            { topic: "Orações Adverbiais", difficulty: "Médio", question: "Em 'EMBORA estivesse doente, foi trabalhar', a oração destacada indica:", options: ["Causa", "Condição", "Concessão", "Tempo"], answer: 2, explanation: "'Embora' (assim como 'mesmo que') introduz uma Concessão: um fato que deveria impedir a ação principal, mas não impediu." },
+            { topic: "Orações Adverbiais", difficulty: "Médio", question: "Em 'SE chover, não irei à praia', a oração destacada indica:", options: ["Causa", "Condição", "Concessão", "Finalidade"], answer: 1, explanation: "'Se' (assim como 'caso') introduz uma Condição para que a outra ação ocorra (ou não)." },
+            { topic: "Orações Substantivas", difficulty: "Médio", question: "Em 'Eu preciso DE QUE VOCÊ ME AJUDE', a oração destacada é:", options: ["Objetiva Direta", "Completiva Nominal", "Objetiva Indireta", "Subjetiva"], answer: 2, explanation: "Eu preciso DISSO. A oração completa o sentido do VERBO 'precisar', que exige a preposição 'de'. É Objetiva Indireta." },
+            { topic: "Orações Substantivas", difficulty: "Médio", question: "Em 'Tenho necessidade DE QUE VOCÊ ME AJUDE', a oração destacada é:", options: ["Objetiva Direta", "Completiva Nominal", "Objetiva Indireta", "Subjetiva"], answer: 1, explanation: "Tenho necessidade DISSO. A oração completa o sentido do NOME (substantivo) 'necessidade', que exige a preposição 'de'. É Completiva Nominal." },
+            { topic: "Orações Substantivas", difficulty: "Médio", question: "Em 'Meu sonho é QUE VOCÊ PASSE', a oração destacada é:", options: ["Predicativa", "Subjetiva", "Apositiva", "Objetiva Direta"], answer: 0, explanation: "Meu sonho é ISSO. A oração vem depois do verbo de ligação 'é' e funciona como um predicativo (característica) do sujeito 'Meu sonho'." },
+            { topic: "Orações Adverbiais", difficulty: "Médio", question: "Em 'Fiz o bolo PARA QUE VOCÊ COMESSE', a oração destacada indica:", options: ["Causa", "Consequência", "Finalidade (Objetivo)", "Modo"], answer: 2, explanation: "'Para que' (assim como 'a fim de que') introduz a Finalidade, o objetivo da ação principal." },
+            { topic: "Orações Adverbiais", difficulty: "Médio", question: "Em 'Ele gritou TANTO QUE ficou rouco', a oração destacada indica:", options: ["Causa", "Consequência", "Condição", "Comparação"], answer: 1, explanation: "'Tanto... que' (assim como 'tão... que', 'tamanho... que') introduz a Consequência da ação principal." },
+
+            // NÍVEL DIFÍCIL (10 Questões)
+            { topic: "Argumentação", difficulty: "Difícil", question: "Qual a diferença entre 'Ele é pobre, MAS é honesto' e 'Ele é pobre, E é honesto'?", options: ["Nenhuma, significam o mesmo.", "'Mas' opõe; 'E' soma. A primeira sugere que pobres não costumam ser honestos.", "'Mas' soma; 'E' opõe.", "'E' é mais formal que 'mas'."], answer: 1, explanation: "O 'mas' (oposição) cria um pressuposto de que as duas ideias não deveriam andar juntas (pobreza e honestidade). O 'e' (adição) apenas soma as duas características sem conflito." },
+            { topic: "Orações Substantivas", difficulty: "Difícil", question: "Em 'Desejo-lhe uma coisa: QUE SEJA FELIZ', a oração destacada é:", options: ["Predicativa", "Subjetiva", "Objetiva Direta", "Apositiva"], answer: 3, explanation: "A oração 'que seja feliz' vem após dois pontos e serve para explicar o termo anterior ('uma coisa'). Essa é a função do Aposto. É uma oração Apositiva." },
+            { topic: "Orações Adverbiais", difficulty: "Difícil", question: "Em 'À MEDIDA QUE envelhecia, ficava mais sábio', a oração destacada indica:", options: ["Tempo", "Modo", "Proporção", "Comparação"], answer: 2, explanation: "'À medida que' (assim como 'quanto mais... mais') indica Proporção, ou seja, as duas ações ocorrem simultaneamente e dependem uma da outra." },
+            { topic: "Orações Adverbiais", difficulty: "Difícil", question: "Em 'Ele agiu CONFORME o combinado', a oração destacada indica:", options: ["Causa", "Modo", "Comparação", "Conformidade"], answer: 3, explanation: "'Conforme' (assim como 'segundo', 'como') indica que a ação foi feita "em conformidade com" (de acordo com) o combinado." },
+            { topic: "Orações Substantivas", difficulty: "Difícil", question: "Qual a classificação da oração 'de que ele voltasse' na frase 'A família tinha esperança de que ele voltasse'?", options: ["Objetiva Indireta", "Subjetiva", "Completiva Nominal", "Adjetiva"], answer: 2, explanation: "A oração completa o sentido do NOME (substantivo) 'esperança' (ter esperança *de algo*). Portanto, é Completiva Nominal." },
+            { topic: "Orações Subordinadas", difficulty: "Difícil", question: "Qual a diferença entre 'Eu preciso DE QUE chova' e 'Eu tenho necessidade DE QUE chova'?", options: ["Nenhuma, as duas são Objetivas Indiretas.", "A primeira é Objetiva Indireta (completa verbo); a segunda é Completiva Nominal (completa nome).", "A primeira é Completiva Nominal; a segunda é Objetiva Indireta.", "As duas são Completivas Nominais."], answer: 1, explanation: "Na primeira, 'de que chova' completa o VERBO 'precisar'. Na segunda, completa o NOME 'necessidade'. Ambas são Substantivas, mas de tipos diferentes." },
+            { topic: "Argumentação", difficulty: "Difícil", question: "Na frase 'Felizmente, o ladrão foi preso', a palavra 'Felizmente' atua como:", options: ["Operador argumentativo de causa", "Modalizador (indicando a opinião/sentimento do falante)", "Pressuposto (de que ele era feliz)", "Subentendido (de que a polícia é boa)"], answer: 1, explanation: "Modalizadores também podem indicar a opinião ou sentimento do falante sobre o que é dito. 'Felizmente' (assim como 'infelizmente') mostra o que o falante sente sobre o fato." },
+            { topic: "Orações Adverbiais", difficulty: "Difícil", question: "Na frase 'Ele é mais alto DO QUE eu (sou)', a oração 'do que eu sou' é:", options: ["Temporal", "Proporcional", "Comparativa", "Consecutiva"], answer: 2, explanation: "A estrutura 'mais... (do) que' indica uma Comparação. O verbo 'sou' está subentendido no final." },
+            { topic: "Orações Subordinadas", difficulty: "Difícil", question: "Qual oração abaixo é Subordinada Adverbial Causal (indica a causa)?", options: ["Estudou tanto QUE passou. (Consecutiva)", "Não fui à aula PORQUE fiquei doente.", "Vou à aula PARA QUE aprenda.", "Irei à aula SE melhorar."], answer: 1, explanation: "'Porque fiquei doente' é a CAUSA de 'Não fui à aula'. As outras são Consecutiva, Final e Condicional, respectivamente." },
+            { topic: "Orações Subordinadas", difficulty: "Difícil", question: "Qual oração abaixo é Subordinada Adverbial Concessiva (oposição que não impede)?", options: ["EMBORA estivesse doente, fui à aula.", "Fiquei doente, MAS fui à aula.", "Fiquei doente, PORTANTO não fui à aula.", "Fiquei doente QUANDO fui à aula."], answer: 0, explanation: "'Embora' introduz uma Concessão (um obstáculo que foi superado). A opção com 'mas' é uma oração COORDENADA adversativa (são duas ideias independentes)." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- LÓGECA DO MODO DE APRENDIZAGEM ---
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('#learn-container main section');
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => { observer.observe(section); });
+            
+            links.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // --- LÓGICA DO MODO DE PRÁTICA ---
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
+            const learnContainer = document.getElementById('learn-container');
+            const practiceSection = document.getElementById('practice-section');
+            
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreScreen = document.getElementById('score-screen');
+            const questionTopic = document.getElementById('question-topic');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const questionCounter = document.getElementById('question-counter');
+            const finalScore = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+            const restartBtn = document.getElementById('restart-btn');
+            const questionNavContainer = document.getElementById('question-nav-container');
+
+            let state = {
+                currentMode: 'learn',
+                currentQuestionIndex: 0,
+                userAnswers: [],
+                score: 0,
+            };
+
+            function switchMode(mode) {
+                state.currentMode = mode;
+                btnLearn.classList.toggle('active', mode === 'learn');
+                btnPractice.classList.toggle('active', mode !== 'learn');
+                learnContainer.classList.toggle('hidden', mode !== 'learn');
+                practiceSection.classList.toggle('hidden', mode === 'learn');
+
+                if (mode === 'practice') {
+                    startPractice();
+                }
+            }
+
+            function startPractice() {
+                state.currentQuestionIndex = 0;
+                state.score = 0;
+                state.userAnswers = Array(questions.length).fill(null);
+                quizContainer.classList.remove('hidden');
+                scoreScreen.classList.add('hidden');
+                questionNavContainer.classList.remove('hidden');
+                renderQuestionNavigation();
+                renderQuestion(0);
+            }
+            
+            function renderQuestion(index) {
+                const question = questions[index];
+                questionTopic.textContent = `${question.topic} - (Nível: ${question.difficulty})`;
+                questionText.innerHTML = question.question; 
+                
+                questionCounter.textContent = `${index + 1} / ${questions.length}`;
+
+                optionsContainer.innerHTML = '';
+                feedbackContainer.innerHTML = '';
+
+                question.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.innerHTML = option; 
+                    button.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                    button.onclick = () => checkAnswer(i, question.answer, question.explanation);
+                    optionsContainer.appendChild(button);
+                });
+
+                updateNavButtonsState();
+                updateQuestionNavButtons();
+            }
+
+            function checkAnswer(selectedIndex, correctIndex, explanation) {
+                const isCorrect = selectedIndex === correctIndex;
+                const isFirstAttempt = state.userAnswers[state.currentQuestionIndex] === null;
+                const wasPreviouslyWrong = state.userAnswers[state.currentQuestionIndex] === false;
+
+                if (isFirstAttempt) {
+                    state.userAnswers[state.currentQuestionIndex] = isCorrect;
+                    if (isCorrect) {
+                        state.score++;
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    }
+                } else if (wasPreviouslyWrong && isCorrect) {
+                    state.userAnswers[state.currentQuestionIndex] = true;
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                }
+
+                Array.from(optionsContainer.children).forEach((btn, i) => {
+                    btn.disabled = true;
+                    if (i === correctIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (i === selectedIndex) {
+                        btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                        btn.classList.add('bg-red-600', 'text-white');
+                    }
+                });
+
+                feedbackContainer.innerHTML = `
+                    <div class="p-4 rounded-lg ${isCorrect ? 'bg-success-dark' : 'bg-error-dark'}">
+                        <h4 class="font-bold text-lg mb-2">${isCorrect ? 'Resposta Correta!' : 'Resposta Incorreta!'}</h4>
+                        <p class="text-sm" id="explanation-text"></p>
+                        <button id="redo-question-btn" class="mt-4 py-2 px-4 accent-primary rounded-md font-semibold hover:accent-primary-dark transition-colors">Tentar Novamente</button>
+                    </div>`;
+                
+                const explanationText = document.getElementById('explanation-text');
+                explanationText.innerHTML = explanation; 
+
+                document.getElementById('redo-question-btn').addEventListener('click', resetCurrentQuestion);
+                updateQuestionNavButtons();
+            }
+            
+            function resetCurrentQuestion() {
+                feedbackContainer.innerHTML = '';
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.className = "w-full text-left p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors disabled:cursor-not-allowed";
+                });
+            }
+
+            function updateNavButtonsState() {
+                prevBtn.disabled = state.currentQuestionIndex === 0;
+                nextBtn.textContent = (state.currentQuestionIndex === questions.length - 1) ? "Finalizar" : "Próxima";
+            }
+
+            function nextQuestion() {
+                if (state.currentQuestionIndex < questions.length - 1) {
+                    goToQuestion(state.currentQuestionIndex + 1);
+                } else {
+                    showFinalScore();
+                }
+            }
+
+            function prevQuestion() {
+                if (state.currentQuestionIndex > 0) {
+                   goToQuestion(state.currentQuestionIndex - 1);
+                }
+            }
+
+            function goToQuestion(index) {
+                if (index >= 0 && index < questions.length) {
+                    state.currentQuestionIndex = index;
+                    renderQuestion(index);
+                }
+            }
+
+            function renderQuestionNavigation() {
+                const grid = document.getElementById('question-buttons-grid');
+                grid.innerHTML = '';
+                for (let i = 0; i < questions.length; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i + 1;
+                    button.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+                    button.dataset.index = i;
+                    button.onclick = () => goToQuestion(i);
+                    grid.appendChild(button);
+                }
+            }
+            
+            function updateQuestionNavButtons() {
+                const buttons = document.querySelectorAll('#question-buttons-grid button');
+                buttons.forEach((btn, i) => {
+                    btn.className = 'w-9 h-9 flex items-center justify-center rounded-md font-semibold transition-all duration-200';
+                    const answerState = state.userAnswers[i];
+                    
+                    if (answerState === true) {
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else if (answerState === false) {
+                        btn.classList.add('bg-red-600', 'text-white');
+                    } else {
+                        btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    }
+
+                    if (i === state.currentQuestionIndex) {
+                        btn.classList.add('ring-2', 'ring-offset-2', 'ring-offset-gray-800', 'ring-orange-500'); 
+                        btn.classList.remove('hover:bg-gray-600');
+                    }
+                });
+            }
+            
+            function showFinalScore() {
+                quizContainer.classList.add('hidden');
+                scoreScreen.classList.remove('hidden');
+                questionNavContainer.classList.add('hidden');
+
+                const percentage = Math.round((state.score / questions.length) * 100);
+                finalScore.textContent = `${percentage}%`;
+
+                let message = '';
+                if (percentage >= 90) message = "Excelente! Você dominou o assunto!";
+                else if (percentage >= 70) message = "Muito bom! Continue praticando para aperfeiçoar.";
+                else if (percentage >= 50) message = "Bom esforço! Reveja os tópicos que errou.";
+                else message = "Não desanime! Reveja a seção 'Aprender' e tente novamente.";
+                
+                scoreMessage.textContent = `Você acertou ${state.score} de ${questions.length} questões. ${message}`;
+            }
+
+            // --- INICIALIZAÇÃO ---
+            btnLearn.classList.add('active'); 
+            
+            btnLearn.addEventListener('click', () => switchMode('learn'));
+            btnPractice.addEventListener('click', () => switchMode('practice'));
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            restartBtn.addEventListener('click', startPractice);
+
+            switchMode('learn');
+        });
+    </script>
+</body>
+</html>
