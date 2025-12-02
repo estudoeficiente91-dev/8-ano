@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ciências – 8º Ano (Biologia)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root{
+            --bg:#111827; 
+            --card:#1f2937; 
+            --accent:#818cf8; 
+            --muted:#9ca3af; 
+            --text:#e5e7eb;
+            --success:#34d399;
+            --danger:#f87171; 
+            --border:rgba(255,255,255,0.1); 
+            --muted-2: rgba(230,238,248,0.9);
+        }
+        html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
+        .container{max-width:980px;margin:28px auto;padding:18px}
+        .page-header{ padding:1.25rem; border-radius:12px; background: linear-gradient(180deg, rgba(129, 140, 248, 0.06), transparent); box-shadow: 0 8px 24px rgba(2,6,23,0.6); }
+        .card{ background: var(--card); color: var(--text); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 6px 20px rgba(2,6,23,0.6); padding:18px }
+        .btn-primary{ background: linear-gradient(90deg,var(--accent), #6366f1); color: #ffffff; padding: .5rem 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 6px 18px rgba(129, 140, 248, 0.12); cursor: pointer; }
+        .btn-ghost{ background: transparent; color: var(--muted-2); padding: .45rem .9rem; border-radius: 10px; border: 1px solid var(--border); cursor:pointer; }
+        .option-btn{ display:block; width:100%; text-align:left; padding:.75rem 1rem; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid var(--border); color:var(--muted-2); cursor:pointer; transition: transform 150ms ease, background 150ms ease; }
+        .option-btn:hover:not(:disabled){ background: rgba(255,255,255,0.035); transform: translateY(-1px); }
+        .option-btn.correct{ background: var(--success) !important; color: #062e1f !important; border-color: rgba(4,120,87,0.18) !important; }
+        .option-btn.wrong{ background: var(--danger) !important; color: #fff !important; border-color: rgba(185,28,28,0.18) !important; }
+        .option-btn:disabled { cursor: not-allowed; }
+        #question-buttons{ display:flex; flex-wrap:wrap; gap:8px; }
+        #question-buttons button{ 
+            position: relative;
+            background: transparent; 
+            color: var(--muted-2); 
+            border:1px solid var(--border); 
+            padding:.45rem .6rem; 
+            border-radius:8px; 
+            cursor:pointer; 
+            min-width: 42px;
+        }
+        #question-buttons button.current-question { background-color: rgba(129, 140, 248, 0.2); border-color: var(--accent); }
+        #question-buttons button.correct-status { background-color: var(--success); color: #062e1f; border-color: var(--success); }
+        #question-buttons button.wrong-status { background-color: var(--danger); color: white; border-color: var(--danger); }
+        .feedback-correct{ background: rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.22); color: #bbf7d0; padding:12px; border-radius:8px }
+        .feedback-wrong{ background: rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.22); color: #ffdede; padding:12px; border-radius:8px }
+        .celebrate{ animation: pop 480ms cubic-bezier(.2,.9,.3,1); box-shadow: 0 12px 36px rgba(129, 140, 248, 0.18), 0 0 28px rgba(16,185,129,0.12); }
+        @keyframes pop{ 0%{ transform: scale(1); } 50%{ transform: scale(1.08); } 100%{ transform: scale(1); } }
+        .confetti{ position: fixed; z-index: 9999; pointer-events: none; font-size: 18px; opacity: 1; transform-origin: center; }
+        @keyframes confetti-fall { 0%{ transform: translateY(-10vh) rotate(0deg); opacity:1 } 100%{ transform: translateY(100vh) rotate(540deg); opacity:0 } }
+        
+        .theme-light{ 
+            --bg: #ffffff; 
+            --card: #f9fafb; 
+            --muted: #4b5563; 
+            --text: #111827; 
+            --accent: #4f46e5; 
+            --success: #047857; 
+            --danger: #b91c1c; 
+            --border: rgba(15,23,42,0.1); 
+            --muted-2: rgba(17, 24, 39, 0.9);
+        }
+        .topic-section { margin-bottom: 2.5rem; border-left: 3px solid var(--accent); padding-left: 1.5rem; }
+        .topic-title { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+        .sub-topic-title { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .topic-section p, .topic-section ul { font-size: 1rem; color: var(--muted-2); line-height: 1.7; text-align: justify; }
+        .topic-section ul { list-style-position: inside; list-style-type: disc; margin-top: 0.5rem; padding-left: 1rem;}
+        .highlight { background-color: rgba(129, 140, 248, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600; color: var(--accent); }
+        
+        .difficulty-badge { padding: 0.1rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .difficulty-facil { background-color: rgba(52, 211, 153, 0.2); color: #6ee7b7; }
+        .difficulty-medio { background-color: rgba(250, 204, 21, 0.2); color: #facc15; }
+        .difficulty-dificil { background-color: rgba(248, 113, 113, 0.2); color: #f87171; }
+        
+        .difficulty-dot {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        .difficulty-facil-dot { background-color: #34d399; }
+        .difficulty-medio-dot { background-color: #facc15; }
+        .difficulty-dificil-dot { background-color: #ef4444; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <header class="page-header">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">Ciências — 8º Ano</h1>
+                    <p class="text-sm text-slate-400">Guia de estudos: Sistema Endócrino e Reprodução.</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="btn-ghost">Tema</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="mt-6">
+            <div class="card">
+                <nav class="mb-4">
+                    <button id="btn-learn" class="btn-primary">Aprender</button>
+                    <button id="btn-practice" class="btn-ghost ml-2">Praticar</button>
+                </nav>
+
+                <section id="learn-section">
+                    <div class="space-y-8">
+                        
+                        <div class="topic-section">
+                            <h2 class="topic-title">Sistema Endócrino: Regulação do Corpo</h2>
+                            <p>O sistema endócrino é composto por <span class="highlight">glândulas endócrinas</span> que produzem substâncias químicas chamadas <span class="highlight">hormônios</span>. Esses hormônios são lançados na corrente sanguínea e atuam como mensageiros, regulando o funcionamento de órgãos e tecidos distantes.</p>
+                            
+                            <h3 class="sub-topic-title">Principais Glândulas e Hormônios</h3>
+                            <ul>
+                                <li><strong>Hipotálamo:</strong> Localizado no cérebro, é o "chefe". Conecta o sistema nervoso ao endócrino e controla a hipófise.</li>
+                                <li><strong>Hipófise (Pituitária):</strong> Conhecida como a "glândula mestra". Produz hormônios que controlam outras glândulas (tireoide, suprarrenais, gônadas) e também o <span class="highlight">GH (Hormônio do Crescimento)</span>.</li>
+                                <li><strong>Glândula Pineal:</strong> Produz a <span class="highlight">melatonina</span>, que regula o sono e os ritmos biológicos (dia/noite).</li>
+                                <li><strong>Tireoide:</strong> Localizada no pescoço, produz <span class="highlight">T3 e T4</span>, que regulam o metabolismo (velocidade do corpo). Doenças comuns: <span class="highlight">Hipotireoidismo</span> (metabolismo lento, ganho de peso) e <span class="highlight">Hipertireoidismo</span> (metabolismo acelerado, perda de peso).</li>
+                                <li><strong>Timo:</strong> Importante para o sistema imunológico (defesa), amadurecendo os linfócitos T. Atrofia na idade adulta.</li>
+                                <li><strong>Suprarrenais (Adrenais):</strong> Ficam sobre os rins. Produzem <span class="highlight">Adrenalina</span> (prepara para luta ou fuga) e <span class="highlight">Cortisol</span> (hormônio do estresse e anti-inflamatório).</li>
+                                <li><strong>Pâncreas:</strong> Glândula mista. Produz <span class="highlight">Insulina</span> (baixa a glicose no sangue) e <span class="highlight">Glucagon</span> (aumenta a glicose no sangue).</li>
+                            </ul>
+
+                            <h3 class="sub-topic-title">Regulação e Diabetes</h3>
+                             <p><strong>Retroalimentação (Feedback):</strong> É o mecanismo de controle. Se um hormônio está alto demais, o corpo manda um sinal para parar de produzi-lo (Feedback Negativo), mantendo o equilíbrio.</p>
+                             <p><strong>Diabetes Mellitus:</strong> Doença caracterizada pelo excesso de glicose (açúcar) no sangue.</p>
+                             <ul>
+                                 <li><strong>Tipo 1:</strong> O sistema imune destrói as células do pâncreas. O corpo <span class="highlight">não produz insulina</span>. Geralmente surge na infância.</li>
+                                 <li><strong>Tipo 2:</strong> O corpo produz insulina, mas ela <span class="highlight">não funciona direito</span> (resistência à insulina). Associada à obesidade e sedentarismo.</li>
+                             </ul>
+                        </div>
+                        
+                        <div class="topic-section">
+                             <h2 class="topic-title">Puberdade e Sistema Genital</h2>
+                             <p>A <strong>Puberdade</strong> é o período de transição entre a infância e a vida adulta, marcado pelo amadurecimento sexual. É desencadeada pelo hipotálamo e hipófise, que estimulam as gônadas.</p>
+                             
+                             <h3 class="sub-topic-title">Gônadas e Hormônios Sexuais</h3>
+                             <ul>
+                                <li><strong>Testículos (Homens):</strong> Produzem <span class="highlight">Testosterona</span> (características masculinas: pelos, voz grossa, músculos) e espermatozoides.</li>
+                                <li><strong>Ovários (Mulheres):</strong> Produzem <span class="highlight">Estrogênio</span> (características femininas: seios, quadril) e <span class="highlight">Progesterona</span> (prepara o útero para gravidez) e óvulos.</li>
+                             </ul>
+
+                             <h3 class="sub-topic-title">Desenvolvimento do Sexo Biológico</h3>
+                             <p>O sexo biológico é determinado na fecundação (XX para feminino, XY para masculino). As gônadas se diferenciam durante a gestação, mas é na puberdade que as características sexuais secundárias (corpo de homem ou mulher) se definem plenamente sob ação dos hormônios.</p>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                <section id="practice-section" class="hidden">
+                     <div class="mb-4 flex justify-end">
+                        <!-- Botão de ordem removido -->
+                    </div>
+                    <div id="question-buttons" class="mb-4"></div>
+                    <div id="quiz-container">
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const root = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const btnLearn = document.getElementById('btn-learn');
+        const btnPractice = document.getElementById('btn-practice');
+        const learnSection = document.getElementById('learn-section');
+        const practiceSection = document.getElementById('practice-section');
+        const questionButtons = document.getElementById('question-buttons');
+        const quizContainer = document.getElementById('quiz-container');
+        
+        if(!btnLearn || !btnPractice || !learnSection || !practiceSection || !questionButtons || !quizContainer){
+            console.error('Elementos DOM não encontrados.');
+            return;
+        }
+
+        (function(){
+            const t = localStorage.getItem('cmf-science-8ano-bio-theme') || 'dark';
+            if(t === 'light') root.classList.add('theme-light');
+            themeToggle.addEventListener('click', () => {
+                root.classList.toggle('theme-light');
+                localStorage.setItem('cmf-science-8ano-bio-theme', root.classList.contains('theme-light') ? 'light' : 'dark');
+            });
+        })();
+        
+        const quizData = [
+            { topic: 'Sistema Endócrino', difficulty: 'Fácil', q: '1) Qual é a função principal das glândulas endócrinas?', options: ['Produzir suor', 'Produzir hormônios e lançá-los no sangue', 'Produzir saliva', 'Filtrar o sangue'], answer: 'Produzir hormônios e lançá-los no sangue', explanation: 'Glândulas endócrinas secretam mensageiros químicos (hormônios) diretamente na corrente sanguínea.'},
+            { topic: 'Glândulas: Hipófise', difficulty: 'Fácil', q: '2) Qual glândula é conhecida como a "glândula mestra" por controlar várias outras?', options: ['Tireoide', 'Pâncreas', 'Hipófise', 'Suprarrenal'], answer: 'Hipófise', explanation: 'A hipófise (ou pituitária) produz hormônios que estimulam o funcionamento de outras glândulas, como a tireoide e as gônadas.'},
+            { topic: 'Glândulas: Tireoide', difficulty: 'Médio', q: '3) O hipotireoidismo é uma condição causada pela:', options: ['Produção excessiva de hormônios da tireoide', 'Baixa produção de hormônios da tireoide', 'Falta de insulina', 'Excesso de adrenalina'], answer: 'Baixa produção de hormônios da tireoide', explanation: 'No "hipo" (baixo), o metabolismo fica lento, causando cansaço e ganho de peso.'},
+            { topic: 'Glândulas: Pâncreas', difficulty: 'Fácil', q: '4) Qual é a função da insulina produzida pelo pâncreas?', options: ['Aumentar o nível de açúcar no sangue', 'Diminuir o nível de glicose (açúcar) no sangue', 'Acelerar o coração', 'Controlar o sono'], answer: 'Diminuir o nível de glicose (açúcar) no sangue', explanation: 'A insulina permite que a glicose entre nas células para ser usada como energia, baixando sua taxa no sangue.'},
+            { topic: 'Glândulas: Pâncreas', difficulty: 'Médio', q: '5) Qual hormônio tem o efeito oposto ao da insulina, aumentando a glicose no sangue quando estamos em jejum?', options: ['Adrenalina', 'Glucagon', 'Cortisol', 'Melatonina'], answer: 'Glucagon', explanation: 'O glucagon libera a glicose armazenada no fígado para o sangue, evitando a hipoglicemia.'},
+            { topic: 'Diabetes', difficulty: 'Médio', q: '6) O Diabetes Tipo 1 é caracterizado por:', options: ['Resistência à insulina devido à obesidade', 'O corpo parar de produzir insulina por um ataque autoimune', 'Excesso de produção de insulina', 'Falta de hormônio do crescimento'], answer: 'O corpo parar de produzir insulina por um ataque autoimune', explanation: 'No Tipo 1, o sistema imunológico destrói as células do pâncreas que produzem insulina.'},
+            { topic: 'Diabetes', difficulty: 'Fácil', q: '7) O Diabetes Tipo 2 está frequentemente associado a:', options: ['Fatores genéticos apenas', 'Má alimentação, obesidade e sedentarismo', 'Infecções virais', 'Excesso de exercícios'], answer: 'Má alimentação, obesidade e sedentarismo', explanation: 'O estilo de vida é o principal fator de risco para o desenvolvimento da resistência à insulina no Tipo 2.'},
+            { topic: 'Glândulas: Suprarrenais', difficulty: 'Fácil', q: '8) Qual hormônio é liberado em situações de perigo ou estresse agudo ("luta ou fuga")?', options: ['Insulina', 'Melatonina', 'Adrenalina', 'Testosterona'], answer: 'Adrenalina', explanation: 'A adrenalina prepara o corpo para ação rápida: acelera o coração, dilata as pupilas e aumenta a energia.'},
+            { topic: 'Glândulas: Suprarrenais', difficulty: 'Médio', q: '9) O cortisol, também produzido pelas suprarrenais, é conhecido como o hormônio do:', options: ['Amor', 'Crescimento', 'Sono', 'Estresse crônico e inflamação'], answer: 'Estresse crônico e inflamação', explanation: 'O cortisol ajuda o corpo a lidar com o estresse prolongado e atua como anti-inflamatório.'},
+            { topic: 'Glândulas: Pineal', difficulty: 'Fácil', q: '10) A melatonina, produzida pela glândula pineal, é responsável por regular:', options: ['O nível de açúcar', 'O ciclo do sono e vigília', 'O crescimento dos ossos', 'A pressão arterial'], answer: 'O ciclo do sono e vigília', explanation: 'A melatonina é liberada no escuro e prepara o corpo para dormir.'},
+            { topic: 'Puberdade', difficulty: 'Fácil', q: '11) O hormônio sexual masculino predominante, produzido nos testículos, é a:', options: ['Progesterona', 'Estrogênio', 'Testosterona', 'Insulina'], answer: 'Testosterona', explanation: 'A testosterona é responsável pelas características sexuais secundárias masculinas (pelos, voz grossa, massa muscular).'},
+            { topic: 'Puberdade', difficulty: 'Fácil', q: '12) Quais são os principais hormônios sexuais femininos produzidos nos ovários?', options: ['Testosterona e Adrenalina', 'Estrogênio e Progesterona', 'Insulina e Glucagon', 'GH e TSH'], answer: 'Estrogênio e Progesterona', explanation: 'O estrogênio define as características femininas e a progesterona regula o ciclo menstrual e a gravidez.'},
+            { topic: 'Puberdade', difficulty: 'Médio', q: '13) O que marca o início da puberdade biológica nas meninas?', options: ['O crescimento dos pés', 'A primeira menstruação (menarca)', 'A mudança de voz', 'O aparecimento de barba'], answer: 'A primeira menstruação (menarca)', explanation: 'A menarca é o marco biológico que indica o amadurecimento do sistema reprodutor feminino.'},
+            { topic: 'Regulação Hormonal', difficulty: 'Difícil', q: '14) O mecanismo de "Feedback Negativo" (Retroalimentação) serve para:', options: ['Aumentar a produção de hormônios indefinidamente', 'Manter o equilíbrio, inibindo a produção de um hormônio quando seu nível já está alto', 'Destruir as glândulas', 'Criar novos hormônios'], answer: 'Manter o equilíbrio, inibindo a produção de um hormônio quando seu nível já está alto', explanation: 'É como um termostato: se está quente o suficiente (nível alto de hormônio), o sistema desliga (para a produção) para não superaquecer.'},
+            { topic: 'Hipotálamo', difficulty: 'Médio', q: '15) O hipotálamo é uma estrutura do cérebro que faz a conexão entre quais sistemas?', options: ['Digestório e Respiratório', 'Nervoso e Endócrino', 'Circulatório e Excretor', 'Muscular e Esquelético'], answer: 'Nervoso e Endócrino', explanation: 'Ele recebe sinais nervosos e comanda a hipófise para liberar hormônios, integrando os dois sistemas de controle do corpo.'},
+            { topic: 'Glândulas: Timo', difficulty: 'Difícil', q: '16) O Timo é uma glândula muito ativa na infância que desempenha um papel crucial no sistema:', options: ['Digestório', 'Imunológico (defesa)', 'Nervoso', 'Reprodutor'], answer: 'Imunológico (defesa)', explanation: 'No timo ocorre a maturação dos linfócitos T, células de defesa essenciais. Ele diminui de tamanho (atrofia) na idade adulta.'},
+            { topic: 'Hormônios e Digestão', difficulty: 'Difícil', q: '17) Além da insulina e glucagon, o sistema digestório produz hormônios como a grelina e a leptina, que controlam:', options: ['A cor da pele', 'O crescimento do cabelo', 'A fome e a saciedade', 'A força muscular'], answer: 'A fome e a saciedade', explanation: 'A grelina estimula a fome ("estômago vazio") e a leptina sinaliza saciedade ("estômago cheio").'},
+            { topic: 'Puberdade', difficulty: 'Fácil', q: '18) Qual glândula produz o Hormônio do Crescimento (GH)?', options: ['Tireoide', 'Pâncreas', 'Hipófise', 'Pineal'], answer: 'Hipófise', explanation: 'O GH é essencial para o crescimento de ossos e tecidos, principalmente durante a infância e adolescência.'},
+            { topic: 'Glândulas: Tireoide', difficulty: 'Fácil', q: '19) Onde a glândula tireoide está localizada?', options: ['No cérebro', 'No pescoço', 'Em cima dos rins', 'No abdômen'], answer: 'No pescoço', explanation: 'Ela tem formato de borboleta e fica na parte anterior do pescoço, logo abaixo do "gogó".'},
+            { topic: 'Puberdade', difficulty: 'Médio', q: '20) A puberdade é desencadeada quando o hipotálamo estimula a hipófise a produzir hormônios que ativam as:', options: ['Suprarrenais', 'Tireoides', 'Gônadas (testículos e ovários)', 'Células da pele'], answer: 'Gônadas (testículos e ovários)', explanation: 'Esse eixo Hipotálamo-Hipófise-Gônadas é o responsável pelo início da produção dos hormônios sexuais.'},
+            { topic: 'Geral', difficulty: 'Difícil', q: '21) O bócio ("papo") é um inchaço na tireoide causado historicamente pela falta de qual mineral na alimentação?', options: ['Cálcio', 'Ferro', 'Iodo', 'Sódio'], answer: 'Iodo', explanation: 'O iodo é fundamental para a produção dos hormônios T3 e T4. Sem ele, a tireoide aumenta de tamanho tentando compensar a falta.'},
+            { topic: 'Diabetes', difficulty: 'Médio', q: '22) Qual o principal sintoma do diabetes não tratado?', options: ['Febre alta', 'Muita sede e muita vontade de urinar', 'Dor nas juntas', 'Tosse seca'], answer: 'Muita sede e muita vontade de urinar', explanation: 'O corpo tenta eliminar o excesso de glicose pela urina, o que leva à desidratação e sede excessiva.'},
+            { topic: 'Glândulas: Pâncreas', difficulty: 'Difícil', q: '23) O pâncreas é considerado uma glândula mista porque:', options: ['Produz hormônios e suco digestivo', 'Fica no meio do corpo', 'Produz hormônios masculinos e femininos', 'Funciona de dia e de noite'], answer: 'Produz hormônios e suco digestivo', explanation: 'Ele tem função endócrina (insulina/glucagon no sangue) e exócrina (suco pancreático no intestino).'},
+            { topic: 'Puberdade', difficulty: 'Fácil', q: '24) O aparecimento de pelos pubianos e axilares é uma característica sexual:', options: ['Primária', 'Secundária', 'Terciária', 'Inexistente'], answer: 'Secundária', explanation: 'Características primárias são os órgãos reprodutores. As secundárias surgem na puberdade.'},
+            { topic: 'Desenvolvimento do Sexo', difficulty: 'Médio', q: '25) O sexo biológico de um bebê é determinado geneticamente no momento da:', options: ['Fecundação', 'Nascimento', 'Puberdade', 'Primeira ultrassom'], answer: 'Fecundação', explanation: 'Os cromossomos sexuais (XX ou XY) são definidos assim que o espermatozoide fecunda o óvulo.'},
+            { topic: 'Glândulas: Suprarrenais', difficulty: 'Difícil', q: '26) Além de adrenalina e cortisol, as suprarrenais também produzem pequenas quantidades de:', options: ['Insulina', 'Hormônios sexuais', 'Hormônio do crescimento', 'Melatonina'], answer: 'Hormônios sexuais', explanation: 'Elas produzem andrógenos (hormônios masculinos) em ambos os sexos, importantes para o início da puberdade.'},
+            { topic: 'Regulação Hormonal', difficulty: 'Fácil', q: '27) Hormônios agem em qualquer célula do corpo?', options: ['Sim, em todas', 'Não, apenas nas células-alvo que têm receptores específicos', 'Apenas nas células do sangue', 'Apenas nas células do cérebro'], answer: 'Não, apenas nas células-alvo que têm receptores específicos', explanation: 'Funciona como chave e fechadura: o hormônio só "liga" as células que têm a fechadura (receptor) correta para ele.'},
+            { topic: 'Glândulas: Tireoide', difficulty: 'Médio', q: '28) Sintomas como agitação, perda de peso rápida e olhos saltados são típicos de:', options: ['Hipotireoidismo', 'Hipertireoidismo', 'Diabetes', 'Falta de crescimento'], answer: 'Hipertireoidismo', explanation: 'O excesso de hormônios da tireoide acelera demais o metabolismo.'},
+            { topic: 'Geral', difficulty: 'Fácil', q: '29) Qual sistema atua em conjunto com o sistema endócrino para controlar o corpo?', options: ['Sistema Digestório', 'Sistema Nervoso', 'Sistema Esquelético', 'Sistema Muscular'], answer: 'Sistema Nervoso', explanation: 'O sistema nervoso (rápido, elétrico) e o endócrino (lento, químico) são os dois grandes sistemas de coordenação.'},
+            { topic: 'Puberdade', difficulty: 'Difícil', q: '30) A menopausa marca o fim de qual fase na vida da mulher?', options: ['A infância', 'A fase reprodutiva', 'A velhice', 'O crescimento'], answer: 'A fase reprodutiva', explanation: 'É quando os ovários param de liberar óvulos e a produção de hormônios femininos cai drasticamente.'},
+            { topic: 'Hipotálamo', difficulty: 'Difícil', q: '31) Além de controlar a hipófise, o hipotálamo regula funções vitais como:', options: ['A respiração', 'Os batimentos cardíacos apenas', 'A temperatura corporal, a fome e a sede', 'A digestão mecânica'], answer: 'A temperatura corporal, a fome e a sede', explanation: 'Ele é o centro de controle da homeostase (equilíbrio) do corpo.'},
+            { topic: 'Hormônios', difficulty: 'Fácil', q: '32) O hormônio testosterona é produzido em maior quantidade:', options: ['Nos homens', 'Nas mulheres', 'Nas crianças', 'Nos idosos'], answer: 'Nos homens', explanation: 'Embora mulheres também tenham (em pequena quantidade), é o principal hormônio masculino.'},
+            { topic: 'Geral', difficulty: 'Médio', q: '33) Qual hormônio é responsável por preparar o útero para receber o bebê?', options: ['Adrenalina', 'Insulina', 'Progesterona', 'Testosterona'], answer: 'Progesterona', explanation: 'Ela espessa a parede do útero (endométrio) para a implantação do embrião.'},
+            { topic: 'Diabetes', difficulty: 'Difícil', q: '34) A hiperglicemia é:', options: ['Baixo nível de açúcar no sangue', 'Alto nível de açúcar no sangue', 'Falta de sal no sangue', 'Excesso de gordura no sangue'], answer: 'Alto nível de açúcar no sangue', explanation: 'Hiper = muito; Glicemia = glicose no sangue. É a condição marcante do diabetes.'},
+            { topic: 'Glândulas: Pineal', difficulty: 'Médio', q: '35) Por que a luz azul de celulares atrapalha o sono?', options: ['Porque esquenta os olhos', 'Porque inibe a produção de melatonina pela glândula pineal', 'Porque estimula a adrenalina', 'Porque causa dor de cabeça'], answer: 'Porque inibe a produção de melatonina pela glândula pineal', explanation: 'A pineal entende a luz azul como "dia" e para de produzir o hormônio do sono.'},
+            { topic: 'Puberdade', difficulty: 'Médio', q: '36) O estirão do crescimento na puberdade ocorre devido à ação conjunta de quais hormônios?', options: ['Insulina e Glucagon', 'Adrenalina e Cortisol', 'GH (crescimento) e hormônios sexuais', 'Melatonina e TSH'], answer: 'GH (crescimento) e hormônios sexuais', explanation: 'Os hormônios sexuais potencializam o efeito do GH, causando o crescimento rápido.'},
+            { topic: 'Geral', difficulty: 'Fácil', q: '37) O sistema endócrino utiliza qual meio para transportar suas mensagens?', options: ['Nervos', 'Sangue', 'Ossos', 'Músculos'], answer: 'Sangue', explanation: 'Os hormônios são lançados na corrente sanguínea para chegar a todo o corpo.'},
+            { topic: 'Glândulas: Suprarrenais', difficulty: 'Difícil', q: '38) O uso prolongado de corticoides (remédios sintéticos que imitam o cortisol) pode causar:', options: ['Perda de peso', 'Aumento da imunidade', 'Inchaço, ganho de peso e aumento da glicose', 'Melhora no sono'], answer: 'Inchaço, ganho de peso e aumento da glicose', explanation: 'O excesso de cortisol (ou seus análogos) tem diversos efeitos colaterais metabólicos.'},
+            { topic: 'Regulação Hormonal', difficulty: 'Médio', q: '39) Se o nível de cálcio no sangue cai, as glândulas paratireoides (atrás da tireoide) liberam um hormônio para:', options: ['Retirar cálcio dos ossos e jogar no sangue', 'Jogar cálcio fora na urina', 'Transformar cálcio em ferro', 'Parar o coração'], answer: 'Retirar cálcio dos ossos e jogar no sangue', explanation: 'O corpo prioriza o nível de cálcio no sangue para o funcionamento dos músculos e nervos, sacrificando os ossos se necessário.'},
+            { topic: 'Formação Sistema Genital', difficulty: 'Difícil', q: '40) Durante o desenvolvimento embrionário, a presença do cromossomo Y leva à formação de:', options: ['Ovários', 'Testículos', 'Útero', 'Nenhuma gônada'], answer: 'Testículos', explanation: 'O gene SRY no cromossomo Y desencadeia a transformação das gônadas indiferenciadas em testículos.'}
+        ];
+
+        // Ordenar o quizData por dificuldade
+        const difficultyOrder = { 'Fácil': 1, 'Médio': 2, 'Difícil': 3 };
+        quizData.sort((a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);
+
+        let questionOrder = quizData.map((_,i)=>i);
+        let currentIndex = 0;
+        let questionStatus = Array(quizData.length).fill(null);
+        let quizStarted = false;
+        let retryQueue = []; // Fila para as questões erradas
+
+        // DOM Elements for the quiz
+        const questionInfoContainer = document.createElement('div');
+        questionInfoContainer.className = 'flex justify-between items-center mb-2';
+        const questionTopic = document.createElement('p');
+        questionTopic.className='text-sm font-semibold text-[var(--accent)]';
+        const questionDifficulty = document.createElement('span');
+        const questionText = document.createElement('p');
+        questionText.className='text-xl mt-2';
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className='mt-4 grid gap-3';
+        const feedbackContainer = document.createElement('div');
+        const nextBtn = document.createElement('button');
+        nextBtn.className='btn-primary mt-4 hidden';
+        nextBtn.textContent='Próxima';
+        const redoBtn = document.createElement('button');
+        redoBtn.className='btn-ghost mt-4 ml-3 hidden';
+        redoBtn.textContent='Refazer';
+
+        quizContainer.appendChild(questionInfoContainer);
+        quizContainer.appendChild(questionText);
+        quizContainer.appendChild(optionsContainer);
+        quizContainer.appendChild(feedbackContainer);
+        quizContainer.appendChild(nextBtn);
+        quizContainer.appendChild(redoBtn);
+        
+        function setupNavEvents() {
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
+        }
+
+        function switchView(view){
+            learnSection.classList.add('hidden');
+            practiceSection.classList.add('hidden');
+
+            btnLearn.classList.replace('btn-primary', 'btn-ghost');
+            btnPractice.classList.replace('btn-primary', 'btn-ghost');
+
+            if(view === 'learn'){
+                learnSection.classList.remove('hidden');
+                btnLearn.classList.replace('btn-ghost', 'btn-primary');
+            } else if (view === 'practice') {
+                practiceSection.classList.remove('hidden');
+                btnPractice.classList.replace('btn-ghost', 'btn-primary');
+                if (!quizStarted) {
+                    startQuiz();
+                    quizStarted = true;
+                }
+            }
+        }
+        
+        // --- Regular Quiz Logic ---
+
+        function renderQuestionButtons(buttonsEl, statusArr, index, orderArr){
+            buttonsEl.innerHTML='';
+            quizData.forEach((qObj,originalIndex)=>{
+                const b = document.createElement('button');
+                b.textContent = (originalIndex + 1);
+                b.setAttribute('data-original-index', String(originalIndex));
+                
+                const dot = document.createElement('span');
+                dot.className = `difficulty-dot difficulty-${qObj.difficulty.toLowerCase()}-dot`;
+                b.appendChild(dot);
+                
+                b.title = `Questão ${originalIndex+1}: Dificuldade ${qObj.difficulty}`;
+                
+                // Se a questão estiver na fila de repetição (ou seja, foi errada e ainda não acertada),
+                // não permitimos navegar diretamente para ela pelos botões numéricos para forçar a sequência de repetição.
+                // A navegação livre só funciona na primeira rodada ou para questões já acertadas.
+                
+                b.onclick = ()=>{
+                    // Permitir navegação apenas se não estivermos no modo de repetição forçada
+                    if (retryQueue.length === 0) {
+                         const pos = orderArr.indexOf(originalIndex);
+                        if(pos >= 0){ 
+                            currentIndex = pos; 
+                            showQuestion(); 
+                        }
+                    }
+                };
+
+                if(questionStatus[originalIndex]==='correct') b.classList.add('correct-status');
+                if(questionStatus[originalIndex]==='wrong') b.classList.add('wrong-status');
+                
+                if (quizStarted && index < orderArr.length) {
+                     const currentQuestionOriginalIndex = orderArr[index];
+                    if(originalIndex === currentQuestionOriginalIndex) {
+                        b.classList.add('current-question');
+                    }
+                }
+                
+                buttonsEl.appendChild(b);
+            });
+        }
+        
+        function startQuiz(){
+            // Ordena por dificuldade
+            quizData.sort((a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);
+            questionOrder = quizData.map((_, i) => i);
+            currentIndex = 0;
+            questionStatus = Array(quizData.length).fill(null);
+            retryQueue = []; 
+            showQuestion();
+        }
+
+        function showQuestion(){
+            const finalResultsDiv = document.getElementById('final-results');
+            if (finalResultsDiv) finalResultsDiv.remove();
+            quizContainer.style.display = 'block';
+
+            if (currentIndex >= questionOrder.length) {
+                 if (retryQueue.length > 0) {
+                    // Inicia rodada de repetição
+                    questionOrder = [...retryQueue];
+                    retryQueue = []; 
+                    currentIndex = 0;
+                    // Embaralha para não ficar repetitivo na mesma ordem
+                    for(let i=questionOrder.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [questionOrder[i],questionOrder[j]]=[questionOrder[j],questionOrder[i]]; }
+                    
+                    alert("Você errou algumas questões. Vamos revisá-las agora!");
+                    showQuestion(); 
+                    return;
+                } else {
+                    showFinalResults();
+                    return;
+                }
+            }
+        
+            const qIdx = questionOrder[currentIndex];
+            const qObj = quizData[qIdx];
+            
+            questionInfoContainer.classList.remove('hidden');
+            questionTopic.textContent = qObj.topic;
+            questionDifficulty.textContent = qObj.difficulty;
+            questionDifficulty.className = `difficulty-badge difficulty-${qObj.difficulty.toLowerCase()}`;
+            
+            questionText.innerHTML = `${qIdx + 1}) ${qObj.q.replace(/^[\s\d\)\(\.\:\-–—_]+/,'').trim()}`;
+            
+            optionsContainer.innerHTML='';
+            feedbackContainer.innerHTML='';
+            nextBtn.classList.add('hidden'); 
+            
+            qObj.options.forEach(opt =>{
+                const b = document.createElement('button');
+                b.className='option-btn'; 
+                b.textContent=opt;
+                b.onclick = ()=> selectAnswer(b, opt, qObj.answer, qObj.explanation, qIdx);
+                optionsContainer.appendChild(b);
+            });
+
+            renderQuestionButtons(questionButtons, questionStatus, currentIndex, questionOrder);
+        }
+        
+        function showFinalResults() {
+            const correctCount = questionStatus.filter(s => s === 'correct').length;
+            const total = quizData.length;
+            
+            quizContainer.style.display = 'none';
+
+            let finalResultsDiv = document.createElement('div');
+            finalResultsDiv.id = 'final-results';
+            finalResultsDiv.className = 'text-center';
+            practiceSection.appendChild(finalResultsDiv);
+
+            finalResultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold">🎉 Parabéns! Você completou o Quiz! 🎉</h2>
+                <p class="text-lg mt-4">Você dominou todas as questões.</p>
+                <button id="restart-btn" class="btn-primary mt-6">Recomeçar do Zero</button>
+            `;
+            
+            document.getElementById('restart-btn').onclick = () => {
+                quizStarted = false;
+                startQuiz(); 
+                quizStarted = true;
+            };
+        }
+
+        function selectAnswer(btn,opt,correct,explanation,qIdx){
+            Array.from(optionsContainer.children).forEach(b=> {
+                b.disabled=true;
+                if(b.textContent === correct) {
+                    b.classList.add('correct');
+                }
+            });
+            nextBtn.classList.remove('hidden');
+
+            if(opt===correct){
+                btn.classList.add('celebrate');
+                createConfetti();
+                // Só marca como 'correct' no status global se não estava na fila de repetição (primeira tentativa)
+                // Se estava na fila, a gente não muda o status visual original para 'certo' para manter o histórico,
+                // mas o usuário conseguiu passar por ela.
+                // Na verdade, para simplificar visualmente, podemos marcar como 'correct' agora para mostrar progresso.
+                questionStatus[qIdx]='correct';
+                
+                feedbackContainer.className='feedback-correct mt-4';
+                feedbackContainer.textContent = 'Correto! ' + (explanation || '');
+            } else {
+                btn.classList.add('wrong');
+                questionStatus[qIdx]='wrong';
+                retryQueue.push(qIdx); // Adiciona à fila para refazer
+                feedbackContainer.className='feedback-wrong mt-4';
+                feedbackContainer.innerHTML = `<strong>Errado.</strong> ${explanation || ''}`;
+            }
+            renderQuestionButtons(questionButtons, questionStatus, currentIndex, questionOrder);
+        }
+
+        nextBtn.addEventListener('click', ()=>{
+            currentIndex++; 
+            showQuestion(); 
+        });
+
+        function createConfetti(){
+            const colors = ['#f59e0b','#ef4444','#10b981','#3b82f6','#8b5cf6'];
+            for(let i=0;i<12;i++){
+                const el = document.createElement('div');
+                el.className='confetti';
+                el.style.left = (30 + Math.random()*40) + '%';
+                el.style.top = (10 + Math.random()*10) + 'vh';
+                el.style.color = colors[Math.floor(Math.random()*colors.length)];
+                el.textContent = '🎉';
+                el.style.transform = `rotate(${Math.random()*360}deg)`;
+                el.style.animation = `confetti-fall ${1.2 + Math.random()*1}s linear forwards`;
+                document.body.appendChild(el);
+                setTimeout(()=> el.remove(), 2200);
+            }
+        }
+        
+        setupNavEvents();
+        switchView('learn');
+    });
+    </script>
+</body>
+</html>
