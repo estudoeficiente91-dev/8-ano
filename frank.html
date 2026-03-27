@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promover Frankenstein</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            /* TEMA: GÓTICO/FRANKENSTEIN (Roxo Noturno & Verde Eletricidade) */
+            --bg-color: #F8FAFC; /* Cinza Névoa */
+            --text-color: #1E1B4B; /* Roxo Quase Preto */
+            --border-color: #000000;
+            
+            --theme-light: #E9D5FF; /* Roxo Claro */
+            --theme-medium: #8B5CF6; /* Roxo */
+            --theme-dark: #4C1D95; /* Roxo Profundo */
+            --theme-contrast: #10B981; /* Verde "Monstro/Raio" */
+            --theme-accent: #F59E0B; /* Amarelo Fogo */
+            --theme-text-active: #FFFFFF;
+            
+            /* FEEDBACK */
+            --correct-bg: #D1FAE5;
+            --correct-border: #059669;
+            --wrong-bg: #FFE4E6;
+            --wrong-border: #BE123C;
+            
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* ANIMAÇÕES TEMÁTICAS */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-6px); }
+            100% { transform: translateX(0); }
+        }
+        .shake-effect { animation: shake 0.4s ease-in-out; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        /* Efeito de Raio (Piscar) */
+        @keyframes flash {
+            0%, 95%, 98% { opacity: 1; color: var(--theme-contrast); text-shadow: 0 0 10px var(--theme-contrast); }
+            96%, 99% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .lightning-effect { animation: flash 4s infinite; display: inline-block; }
+
+        /* --- HEADER --- */
+        .logo-header {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0 10px 0;
+        }
+
+        .css-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--theme-dark);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            border: 3px solid var(--theme-dark);
+            padding: 5px 15px;
+            border-radius: 12px;
+            background: var(--white);
+            box-shadow: 4px 4px 0px var(--theme-contrast); /* Sombra Verde Neon */
+            text-align: center;
+        }
+
+        .container { width: 100%; max-width: 600px; padding: 20px; }
+
+        /* --- NAVEGAÇÃO --- */
+        .top-nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .btn-close {
+            text-decoration: none;
+            color: var(--theme-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            box-shadow: 2px 2px 0px var(--border-color);
+        }
+
+        .toggle-container {
+            background-color: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 4px;
+            display: flex;
+            margin-bottom: 25px;
+            box-shadow: 3px 3px 0px var(--border-color);
+        }
+        .toggle-btn {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 12px 0;
+            border-radius: 40px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .toggle-btn.active {
+            background-color: var(--theme-dark);
+            color: var(--theme-text-active);
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-view { display: none; animation: fadeIn 0.3s ease-in-out; }
+        
+        /* --- CONTEÚDO --- */
+        .card-content {
+            background-color: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 4px 4px 0px var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--theme-dark);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--theme-contrast);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* EFEITO COSTURA (Temático Frankenstein) */
+        .stitch-box {
+            background-color: #F3F4F6;
+            border: 2px dashed var(--theme-dark); /* Borda "costurada" */
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin: 15px 0;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .visual-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            background: #FAFAFA;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+
+        svg { max-width: 100%; height: auto; }
+
+        /* --- QUIZ --- */
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+        .dif-facil { background: #D1FAE5; color: #065F46; }
+        .dif-medio { background: #FEF08A; color: #713F12; }
+        .dif-dificil { background: #FECACA; color: #7F1D1D; }
+
+        .question-map {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 5px;
+            margin-bottom: 20px;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+        .question-map::-webkit-scrollbar { display: none; }
+
+        .map-dot {
+            min-width: 35px; height: 35px; border: 2px solid var(--border-color); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.8rem; color: #888; background: white; cursor: pointer;
+            transition: all 0.2s; flex-shrink: 0;
+        }
+
+        .map-dot.active {
+            background-color: var(--theme-dark);
+            color: white; box-shadow: 2px 2px 0px var(--theme-contrast); transform: scale(1.1);
+        }
+        
+        .map-dot.answered-correct { background-color: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-border); }
+        .map-dot.answered-wrong { background-color: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-border); }
+
+        .option-btn {
+            display: flex; align-items: center; width: 100%; padding: 16px;
+            background-color: var(--white); border: 2px solid var(--border-color); border-radius: 12px;
+            margin-bottom: 12px; cursor: pointer; transition: all 0.2s;
+            box-shadow: 2px 2px 0px #eee;
+        }
+        .option-btn:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 4px 4px 0px var(--theme-contrast); border-color: var(--theme-dark); }
+        
+        .opt-circle {
+            width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border-color);
+            margin-right: 15px; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; flex-shrink: 0; background: #FAFAFA;
+        }
+        
+        .option-btn.correct { background-color: var(--correct-bg); border-color: var(--correct-border); box-shadow: 2px 2px 0px var(--correct-border); }
+        .option-btn.correct .opt-circle { background-color: var(--correct-border); color: white; border-color: var(--correct-border); }
+        .option-btn.wrong { background-color: var(--wrong-bg); border-color: var(--wrong-border); opacity: 0.9; box-shadow: none; }
+        .option-btn.wrong .opt-circle { background-color: var(--wrong-border); color: white; border-color: var(--wrong-border); }
+        .option-btn.disabled { pointer-events: none; opacity: 0.8; box-shadow: none; }
+
+        /* FEEDBACK DETALHADO */
+        .feedback-box {
+            display: block; margin-top: 20px; background-color: #FAFAFA;
+            border: 2px dashed var(--theme-dark); border-radius: 12px; padding: 20px;
+            animation: slideUp 0.3s ease-out;
+        }
+        .feedback-title { font-weight: 800; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px; display:flex; align-items:center; gap:8px; color: var(--theme-dark); }
+        .feedback-item { margin-bottom: 8px; font-size: 0.85rem; padding-left: 10px; border-left: 3px solid #ddd; line-height: 1.5; color: #333; }
+        .feedback-item.correct-opt { border-left-color: var(--correct-border); font-weight: 600; color: var(--correct-border); background: #D1FAE5; padding: 10px; border-radius: 0 6px 6px 0; }
+        .feedback-item.wrong-opt { border-left-color: var(--wrong-border); }
+
+        /* --- RESULTADO --- */
+        #viewResult { text-align: center; display: none; animation: fadeIn 0.5s; }
+        .result-card {
+            background: white; border: 2px solid black; border-radius: 20px;
+            padding: 30px; box-shadow: 6px 6px 0px black; margin-bottom: 30px;
+        }
+        .stars-container { font-size: 3rem; margin: 10px 0; }
+        .percentage-big { font-size: 3.5rem; font-weight: 800; color: var(--theme-dark); line-height: 1; margin: 10px 0; text-shadow: 2px 2px 0px var(--theme-contrast); }
+        
+        .btn-retry {
+            width: 100%; padding: 15px; background-color: var(--theme-dark); color: white;
+            border: 2px solid black; border-radius: 12px; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; box-shadow: 4px 4px 0px var(--theme-contrast); transition: transform 0.1s;
+        }
+        .btn-retry:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--theme-contrast); }
+
+        .quiz-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background-color: var(--white); border-top: 2px solid var(--border-color);
+            padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 100;
+        }
+        .nav-btn { padding: 12px 24px; border-radius: 8px; font-weight: 700; border: 2px solid var(--border-color); cursor: pointer; box-shadow: 2px 2px 0px var(--border-color); }
+        .btn-next { background-color: var(--theme-dark); color: white; }
+        .btn-prev { background-color: #f0f0f0; color: #333; }
+
+    </style>
+</head>
+<body>
+
+    <div class="logo-header">
+        <div class="css-logo"><span class="lightning-effect">⚡</span> Promover Frankenstein</div>
+    </div>
+
+    <div class="container">
+        <nav class="top-nav">
+            <a href="index.html" class="btn-close">⬅ Voltar</a>
+            <span style="font-size: 0.8rem; font-weight: 700; color: #888;">LITERATURA</span>
+        </nav>
+
+        <div class="toggle-container">
+            <button class="toggle-btn active" id="btnExp" onclick="setMode('explanation')">📘 Resumo da Obra</button>
+            <button class="toggle-btn" id="btnPrac" onclick="setMode('practice')">🧠 Prova (30)</button>
+        </div>
+
+        <div id="viewExplanation" class="section-view" style="display: block;">
+            
+            <h1 style="font-size: 1.6rem; margin-bottom: 10px; line-height: 1.2; font-weight: 800; color: var(--theme-dark);">
+                Frankenstein <span style="color:var(--theme-contrast)">ou O Prometeu Moderno</span>
+            </h1>
+            <p style="color: #555; margin-bottom: 25px;">Romance gótico de Mary Shelley (1818). A tragédia de um criador e da sua criatura rejeitada.</p>
+            
+            <div class="card-content" style="border-color: var(--theme-dark); border-width: 3px;">
+                <div class="section-title"><span class="lightning-effect">⚡</span> O Resumo Absoluto</div>
+                
+                <div class="visual-row">
+                    <svg width="200" height="100" viewBox="0 0 200 100">
+                        <rect x="50" y="20" width="100" height="60" fill="#E9D5FF" stroke="#4C1D95" stroke-width="3" rx="5"/>
+                        <path d="M 50 30 L 150 30 M 50 70 L 150 70" stroke="#4C1D95" stroke-width="2"/>
+                        <text x="100" y="55" text-anchor="middle" font-weight="bold" font-size="12" fill="#4C1D95">FRANKENSTEIN</text>
+                        <text x="100" y="65" text-anchor="middle" font-size="8">Mary Shelley</text>
+                    </svg>
+                </div>
+
+                <p style="font-size: 0.95rem; line-height: 1.6; color: #333;">
+                    A história começa no gelo do Ártico, onde o explorador <strong>Robert Walton</strong> resgata o cientista suíço <strong>Victor Frankenstein</strong>. Victor relata como, obcecado por descobrir o segredo da vida, construiu um ser vivo unindo partes de cadáveres.
+                </p>
+                <p style="font-size: 0.95rem; line-height: 1.6; color: #333; margin-top: 10px;">
+                    Ao ver o monstro ganhar vida, Victor foge aterrorizado. A criatura, abandonada e rejeitada pela sociedade por causa da sua aparência horrenda, aprende a falar, descobre como foi criada e exige que Victor crie uma companheira para ela. Quando Victor recusa, a criatura vinga-se assassinando todos os entes queridos do cientista, levando ambos a uma perseguição mortal até ao fim do mundo.
+                </p>
+            </div>
+
+            <div class="card-content">
+                <div class="section-title">1. Estrutura em "Caixas"</div>
+                <div class="stitch-box">
+                    O livro usa uma <strong>narrativa emoldurada</strong> (história dentro de história):
+                    <br><br>
+                    ✉️ <strong>1ª Camada:</strong> Cartas de Robert Walton para a irmã.<br>
+                    🔬 <strong>2ª Camada:</strong> Relato de Victor a Walton.<br>
+                    🧟‍♂️ <strong>3ª Camada:</strong> História da Criatura contada a Victor.
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="section-title">2. Ambição e Abandono</div>
+                <p style="font-size:0.95rem; margin-bottom:10px;">Victor estuda ciências na universidade de <strong>Ingolstadt (Alemanha)</strong>.</p>
+                <div class="visual-row">
+                    <svg width="150" height="100" viewBox="0 0 150 100">
+                        <path d="M 50 90 L 50 40 Q 75 10 100 40 L 100 90 Z" fill="#D1FAE5" stroke="#065F46" stroke-width="3"/>
+                        <rect x="40" y="90" width="70" height="10" fill="#000"/>
+                        <path d="M 75 50 L 65 70 L 75 70 L 65 85" stroke="#10B981" stroke-width="3" fill="none"/>
+                    </svg>
+                </div>
+                <div class="stitch-box">
+                    Motivado por antigos alquimistas e ciência moderna, ele gera vida. Mas o choque com a fealdade da obra provoca <strong>horror e arrependimento</strong>, fazendo-o fugir.
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="section-title">3. A Rejeição e o Ódio</div>
+                <p style="font-size:0.95rem;">Sozinha, a criatura observa a família pobre <strong>De Lacey</strong> escondida num anexo.</p>
+                <ul style="font-size:0.9rem; padding-left:20px; line-height:1.6; margin-top:10px;">
+                    <li>Ela aprende a <strong>ler e falar</strong> ao ouvir as aulas dadas à árabe Safie.</li>
+                    <li>Lê "O Paraíso Perdido" e compara-se a Adão (rejeitado) e Satanás.</li>
+                    <li>Ao tentar fazer amizade, é espancada e expulsa. A solidão transforma-se em sede de vingança.</li>
+                </ul>
+            </div>
+
+            <div class="card-content">
+                <div class="section-title">4. As Vítimas</div>
+                <div class="stitch-box" style="background-color: #FFE4E6; border-color: #BE123C; color: #991B1B;">
+                    Após Victor destruir a 2ª criatura (a fêmea que o monstro exigiu), a matança atinge o seu ápice:
+                </div>
+                <ul style="font-size:0.9rem; padding-left:20px; line-height:1.6;">
+                    <li><strong>William:</strong> Irmão caçula. A culpa recai sobre <strong>Justine</strong>, enforcada injustamente.</li>
+                    <li><strong>Henry Clerval:</strong> Melhor amigo, morto na Irlanda.</li>
+                    <li><strong>Elizabeth:</strong> A esposa de Victor, estrangulada na noite de núpcias (<em>"Estarei contigo..."</em>).</li>
+                </ul>
+            </div>
+
+            <button onclick="setMode('practice')" style="width: 100%; padding: 15px; background: var(--theme-dark); color: white; border: 2px solid #000; border-radius: 12px; font-weight: 700; margin-bottom: 20px; box-shadow: 4px 4px 0px var(--theme-contrast);">
+                Fazer a Prova Oficial (30 Questões) ➜
+            </button>
+        </div>
+
+        <div id="viewPractice" class="section-view">
+            <div style="margin-bottom: 15px;">
+                <h2 style="color:var(--theme-dark);">Prova de Literatura</h2>
+                <p style="color: #666; font-size: 0.9rem;">Acerta 80% (24/30) para passares. Lê as explicações!</p>
+            </div>
+            <div class="question-map" id="qMap"></div>
+            <div id="quizContainer" style="margin-bottom: 100px;"></div>
+        </div>
+
+        <div id="viewResult">
+            <div class="result-card">
+                <h2>Veredicto Final</h2>
+                <div class="stars-container" id="finalStars">⭐⭐⭐</div>
+                <div class="percentage-big" id="finalPercent">0%</div>
+                <p class="score-text" id="finalScoreText">Acertaste 0 de 30</p>
+                <div id="review-container"></div>
+            </div>
+            <div id="action-buttons"></div>
+        </div>
+
+    </div>
+
+    <footer class="quiz-footer" id="quizFooter">
+        <button class="nav-btn btn-prev" id="btnPrev" onclick="changeQuestion(-1)">Anterior</button>
+        <button class="nav-btn btn-next" id="btnNext" onclick="changeQuestion(1)">Próxima</button>
+    </footer>
+
+    <script>
+        const questions = [
+            // BLOCO 1: AUTORIA, ESTRUTURA E PUBLICAÇÃO
+            { 
+                id: 1, level: "Fácil", 
+                text: "Qual é o nome do criador da criatura no romance?", 
+                options: ["Robert Walton", "Victor Frankenstein", "Henry Clerval", "William Frankenstein"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Victor Frankenstein é o cientista suíço que dá vida à criatura. Um erro comum é achar que Frankenstein é o nome do monstro.", 
+                    options: [
+                        "Walton é o explorador do Ártico.", 
+                        "Certa.", 
+                        "Clerval é o melhor amigo de Victor.", 
+                        "William é o irmão mais novo."
+                    ] 
+                } 
+            },
+            { 
+                id: 2, level: "Fácil", 
+                text: "A estrutura narrativa do romance é composta por:", 
+                options: ["Narrador único em primeira pessoa do início ao fim", "Cartas e narrativas emolduradas (uma história dentro de outra)", "Diário íntimo do monstro", "Narrador onisciente"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "A história é uma 'Matrioska' literária. Walton escreve cartas, dentro das cartas ele transcreve o relato de Victor, e Victor relata o que ouviu da criatura.", 
+                    options: [
+                        "Existem três vozes diferentes (Walton, Victor, Criatura).", 
+                        "Certa.", 
+                        "A criatura fala com Victor oralmente na montanha.", 
+                        "Não há uma voz externa a observar tudo."
+                    ] 
+                } 
+            },
+            { 
+                id: 3, level: "Médio", 
+                text: "O subtítulo original do romance publicado por Mary Shelley é:", 
+                options: ["O Prometeu Moderno", "O Golem", "A Criação", "O Novo Adão"], 
+                correct: 0, 
+                explanation: { 
+                    correct: "Referência ao mito grego. Prometeu roubou o fogo dos deuses e foi punido. Victor roubou o segredo da vida (fogo divino) e também sofreu as consequências.", 
+                    options: [
+                        "Certa.", 
+                        "Golem é um monstro de barro do folclore judaico.", 
+                        "Invenção da prova.", 
+                        "A criatura chama-se a si mesma assim, mas não é o subtítulo do livro."
+                    ] 
+                } 
+            },
+            { 
+                id: 4, level: "Fácil", 
+                text: "Quem é o narrador das cartas iniciais que resgata o cientista?", 
+                options: ["Victor Frankenstein", "Robert Walton", "Alphonse Frankenstein", "Henry Clerval"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "O capitão Robert Walton, na sua expedição ao Polo Norte, encontra Victor quase morto no gelo e ouve a sua história.", 
+                    options: [
+                        "Narra o 'recheio' da história.", 
+                        "Certa.", 
+                        "Pai de Victor.", 
+                        "Amigo de Victor."
+                    ] 
+                } 
+            },
+            { 
+                id: 5, level: "Difícil", 
+                text: "A obra Frankenstein foi publicada pela primeira vez no ano de:", 
+                options: ["1798", "1818", "1831", "1840"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Foi publicada anonimamente em 1818 (Romantismo/Gótico). A edição de 1831 trouxe o nome de Mary Shelley e algumas revisões.", 
+                    options: [
+                        "Data incorreta.", 
+                        "Certa.", 
+                        "Foi o ano da segunda edição.", 
+                        "Data incorreta."
+                    ] 
+                } 
+            },
+
+            // BLOCO 2: ORIGEM E A CRIAÇÃO
+            { 
+                id: 6, level: "Fácil", 
+                text: "Onde Victor Frankenstein nasceu e foi criado?", 
+                options: ["Inglaterra", "Alemanha", "Suíça (Genebra)", "França"], 
+                correct: 2, 
+                explanation: { 
+                    correct: "A família Frankenstein faz parte da elite de Genebra, Suíça. É lá que ocorre grande parte da trama.", 
+                    options: [
+                        "Terra de Walton.", 
+                        "Local de estudo (Ingolstadt).", 
+                        "Certa.", 
+                        "Terra de origem dos De Lacey."
+                    ] 
+                } 
+            },
+            { 
+                id: 7, level: "Fácil", 
+                text: "Em qual universidade Victor estuda e constrói o monstro?", 
+                options: ["Genebra", "Ingolstadt", "Paris", "Londres"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Ingolstadt, na Alemanha. Um centro universitário famoso na época, onde ele se tranca num laboratório macabro.", 
+                    options: [
+                        "A sua casa.", 
+                        "Certa.", 
+                        "Não.", 
+                        "Não."
+                    ] 
+                } 
+            },
+            { 
+                id: 8, level: "Médio", 
+                text: "Antes da universidade, quais cientistas/autores influenciavam Victor?", 
+                options: ["Físicos modernos", "Biólogos iluministas", "Alquimistas (Paracelso, Agripa)", "Astrônomos gregos"], 
+                correct: 2, 
+                explanation: { 
+                    correct: "Ele lia os velhos alquimistas, sonhando em descobrir a 'Pedra Filosofal' e o elixir da vida, antes de aprender química de verdade.", 
+                    options: [
+                        "A física moderna surgiu depois.", 
+                        "Ele achava-os aborrecidos no início.", 
+                        "Certa.", 
+                        "Não era o seu foco."
+                    ] 
+                } 
+            },
+            { 
+                id: 9, level: "Fácil", 
+                text: "Qual é a principal motivação de Victor para criar o monstro?", 
+                options: ["Salvar a humanidade", "Descobrir o segredo da vida", "Ficar rico", "Vingar-se"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Uma mistura de curiosidade científica, vaidade e obsessão por derrotar a morte.", 
+                    options: [
+                        "A motivação era puramente egoísta.", 
+                        "Certa.", 
+                        "Ele já era rico.", 
+                        "Não tinha de quem se vingar."
+                    ] 
+                } 
+            },
+            { 
+                id: 10, level: "Fácil", 
+                text: "Qual é a reação de Victor no instante em que a criatura ganha vida?", 
+                options: ["Alegria e orgulho", "Horror e arrependimento", "Indiferença", "Amor paterno"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Ao ver a pele amarelada esticada e os olhos opacos, toda a beleza do seu sonho desmorona. Ele entra em pânico e foge, abandonando-a.", 
+                    options: [
+                        "Acontece exatamente o oposto.", 
+                        "Certa.", 
+                        "Ele tem um colapso nervoso.", 
+                        "Ele rejeita-a no mesmo segundo."
+                    ] 
+                } 
+            },
+
+            // BLOCO 3: A CRIATURA E A SOCIEDADE
+            { 
+                id: 11, level: "Médio", 
+                text: "A criatura aprende a ler e falar observando qual família?", 
+                options: ["Frankenstein", "De Lacey", "Clerval", "Beaufort"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Escondido num anexo, o monstro observa o velho cego De Lacey e os seus filhos Felix e Agatha, desenvolvendo amor por eles.", 
+                    options: [
+                        "Ele foge dessa casa.", 
+                        "Certa.", 
+                        "Família do amigo.", 
+                        "Amigo do pai de Victor."
+                    ] 
+                } 
+            },
+            { 
+                id: 12, level: "Difícil", 
+                text: "Qual mulher chega à cabana dos De Lacey, facto que ajuda a criatura a aprender o idioma?", 
+                options: ["Safie", "Agatha", "Caroline", "Elizabeth"], 
+                correct: 0, 
+                explanation: { 
+                    correct: "Safie é uma árabe amada por Felix. Ao ensinar francês a ela, Felix inadvertidamente ensina a criatura que espia através da parede.", 
+                    options: [
+                        "Certa.", 
+                        "Agatha é irmã de Felix.", 
+                        "Mãe de Victor.", 
+                        "Esposa de Victor."
+                    ] 
+                } 
+            },
+            { 
+                id: 13, level: "Difícil", 
+                text: "A criatura lê 'O Paraíso Perdido' e compara-se a dois personagens. Quais?", 
+                options: ["Adão e Moisés", "Adão e Satanás", "Prometeu e Jesus", "Caim e Abel"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Adão, porque foi o primeiro da sua espécie, criado sem pai. E Satanás, pois foi banido pelo Criador e tornou-se cheio de inveja e ódio.", 
+                    options: [
+                        "Não cita Moisés.", 
+                        "Certa.", 
+                        "Prometeu é Victor.", 
+                        "Metáfora errada."
+                    ] 
+                } 
+            },
+            { 
+                id: 14, level: "Médio", 
+                text: "Como a família De Lacey reage ao descobrir a criatura na cabana?", 
+                options: ["Adotam com carinho", "Fugindo, com Felix espancando a criatura", "Chamam a polícia", "Conversam calmamente"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "O velho cego conversa bem com a criatura, mas quando os jovens chegam, o terror visual faz Felix atacar o monstro com um porrete.", 
+                    options: [
+                        "Infelizmente não.", 
+                        "Certa.", 
+                        "Fugiram de lá para sempre.", 
+                        "O velho cego sim, os demais não."
+                    ] 
+                } 
+            },
+            { 
+                id: 15, level: "Fácil", 
+                text: "Como a mãe de Victor (Caroline) morreu?", 
+                options: ["Assassinada pelo monstro", "A contrair escarlatina ao cuidar de Elizabeth", "De parto", "Afogada"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Antes de Victor ir para a faculdade, ela cuidou da jovem Elizabeth que estava doente, apanhou a infeção e faleceu. Isso gerou o trauma de Victor com a morte.", 
+                    options: [
+                        "O monstro não existia.", 
+                        "Certa.", 
+                        "Não.", 
+                        "Não."
+                    ] 
+                } 
+            },
+
+            // BLOCO 4: VINGANÇA E MORTES
+            { 
+                id: 16, level: "Médio", 
+                text: "Quem é a primeira vítima assassinada pelo monstro?", 
+                options: ["Elizabeth", "Henry Clerval", "William Frankenstein", "Alphonse"], 
+                correct: 2, 
+                explanation: { 
+                    correct: "O irmão caçula. A criatura encontra-o na floresta, descobre o seu sobrenome e estrangula-o como primeira vingança contra Victor.", 
+                    options: [
+                        "Morre depois.", 
+                        "Morre depois.", 
+                        "Certa.", 
+                        "Morre no fim (de tristeza)."
+                    ] 
+                } 
+            },
+            { 
+                id: 17, level: "Médio", 
+                text: "Quem é acusada injustamente e morta pelo assassinato de William?", 
+                options: ["Elizabeth", "Justine Moritz", "Safie", "Agatha"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "A criatura coloca a joia do menino na roupa de Justine (a empregada inocente). Ela confessa sob pressão e é enforcada.", 
+                    options: [
+                        "Ela sabe que Justine é inocente.", 
+                        "Certa.", 
+                        "Não está envolvida.", 
+                        "Não está envolvida."
+                    ] 
+                } 
+            },
+            { 
+                id: 18, level: "Fácil", 
+                text: "O que a criatura exige de Victor nas montanhas?", 
+                options: ["Que a mate", "Que crie uma companheira fêmea", "Que a aceite de volta", "O diário do laboratório"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Ela quer uma parceira tão horrenda quanto ela, prometendo que, se a tiver, fugirão para o fim do mundo e deixarão a humanidade em paz.", 
+                    options: [
+                        "Ela quer viver em paz.", 
+                        "Certa.", 
+                        "Ela sabe que ele a odeia.", 
+                        "Ela já encontrou os papéis antes."
+                    ] 
+                } 
+            },
+            { 
+                id: 19, level: "Médio", 
+                text: "Onde Victor se isola para construir a segunda criatura?", 
+                options: ["Genebra", "Londres", "Nas ilhas Órcades (Escócia)", "Ingolstadt"], 
+                correct: 2, 
+                explanation: { 
+                    correct: "Ele encontra uma ilhota miserável e isolada no norte da Escócia para fazer o trabalho sujo longe da civilização.", 
+                    options: [
+                        "Casa.", 
+                        "Cidade de passagem.", 
+                        "Certa.", 
+                        "Onde fez a primeira."
+                    ] 
+                } 
+            },
+            { 
+                id: 20, level: "Difícil", 
+                text: "Por que Victor destrói a segunda criatura antes de terminá-la?", 
+                options: ["Defeito técnico", "Medo de que o casal de monstros gerasse filhos e aniquilasse a humanidade", "O monstro atacou", "A fêmea acordou agressiva"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Victor teme que a fêmea não aceite o acordo, ou que eles se reproduzam criando uma 'raça de demónios'. Ele despedaça-a em frente ao monstro.", 
+                    options: [
+                        "A decisão foi ética/moral.", 
+                        "Certa.", 
+                        "O monstro apenas olhava da janela.", 
+                        "Ela não estava viva ainda."
+                    ] 
+                } 
+            },
+
+            // BLOCO 5: O CLÍMAX
+            { 
+                id: 21, level: "Difícil", 
+                text: "Ao ter a fêmea destruída, qual é a ameaça feita pela criatura a Victor?", 
+                options: ["'Eu matarei o teu pai'", "'Eu estarei contigo na tua noite de núpcias'", "'Eu queimarei Genebra'", "'Atirar-te-ei ao mar'"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "A frase mais sombria do livro. Victor acha que ele mesmo será o alvo do assassinato, mas a criatura planeava matar a noiva.", 
+                    options: [
+                        "Não.", 
+                        "Certa.", 
+                        "Não.", 
+                        "Não."
+                    ] 
+                } 
+            },
+            { 
+                id: 22, level: "Médio", 
+                text: "Onde a criatura assassina Henry Clerval?", 
+                options: ["Inglaterra", "Genebra", "Irlanda", "Suíça"], 
+                correct: 2, 
+                explanation: { 
+                    correct: "Victor adormece no barco após atirar as peças da fêmea ao mar e vai parar à Irlanda. Lá descobre que a criatura estrangulou o seu melhor amigo.", 
+                    options: [
+                        "Não.", 
+                        "Não.", 
+                        "Certa.", 
+                        "Não."
+                    ] 
+                } 
+            },
+            { 
+                id: 23, level: "Médio", 
+                text: "Victor é preso sob a suspeita de matar quem?", 
+                options: ["A criatura", "Henry Clerval", "William", "Justine"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Ao chegar à costa irlandesa de barco, é acusado de assassinar o homem encontrado na praia (que era Clerval).", 
+                    options: [
+                        "Ninguém sabe dela.", 
+                        "Certa.", 
+                        "Foi na Suíça.", 
+                        "Morreu enforcada."
+                    ] 
+                } 
+            },
+            { 
+                id: 24, level: "Fácil", 
+                text: "O que ocorre com Elizabeth?", 
+                options: ["Morta no laboratório", "Morta na noite de casamento", "Sobrevive", "Foge com Clerval"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "Ameaça cumprida. Enquanto Victor patrulhava os corredores da estalagem com uma arma, a criatura invade o quarto e estrangula-a.", 
+                    options: [
+                        "Nunca foi lá.", 
+                        "Certa.", 
+                        "Não.", 
+                        "Clerval já estava morto."
+                    ] 
+                } 
+            },
+            { 
+                id: 25, level: "Fácil", 
+                text: "Quem é o pai de Victor?", 
+                options: ["Alphonse Frankenstein", "Beaufort", "Krempe", "M. Waldman"], 
+                correct: 0, 
+                explanation: { 
+                    correct: "Alphonse, um magistrado benevolente que cuida da família e acaba por morrer de tristeza após a morte de Elizabeth.", 
+                    options: [
+                        "Certa.", 
+                        "Sogro de Alphonse.", 
+                        "Professor.", 
+                        "Professor."
+                    ] 
+                } 
+            },
+
+            // BLOCO 6: DESFECHO E TEMAS
+            { 
+                id: 26, level: "Fácil", 
+                text: "Qual a reação do pai de Victor à morte de Elizabeth?", 
+                options: ["Vai atrás da criatura", "Morre de desgosto/tristeza logo depois", "Muda-se para a Inglaterra", "Manda prender Victor"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "O peso de ver todos os filhos e a nora morrerem quebra o coração de Alphonse, que falece pouco tempo depois em Genebra.", 
+                    options: [
+                        "Ele nem sabe que a criatura existe.", 
+                        "Certa.", 
+                        "Não.", 
+                        "Não."
+                    ] 
+                } 
+            },
+            { 
+                id: 27, level: "Médio", 
+                text: "Como Victor morre?", 
+                options: ["Assassinado pela criatura num duelo", "Afogado no mar", "Morre doente e exausto no navio de Walton no Ártico", "Enforcado na prisão"], 
+                correct: 2, 
+                explanation: { 
+                    correct: "Ele gasta as últimas energias a perseguir o monstro pelo gelo. É resgatado, conta a sua história e sucumbe.", 
+                    options: [
+                        "Eles não lutam.", 
+                        "Não.", 
+                        "Certa.", 
+                        "Ficou livre da acusação na Irlanda."
+                    ] 
+                } 
+            },
+            { 
+                id: 28, level: "Difícil", 
+                text: "O que a criatura faz quando encontra o corpo de Victor no navio?", 
+                options: ["Ri e comemora", "Mata o capitão Walton", "Chora lamentando a morte do seu criador e mostra remorso", "Toma o controlo do navio"], 
+                correct: 2, 
+                explanation: { 
+                    correct: "A criatura diz a Walton que, ao matar Victor, também se destruiu a si mesma. Apesar do ódio, Victor era a sua única ligação com a existência.", 
+                    options: [
+                        "Sente imensa tristeza.", 
+                        "Walton não sofre violência.", 
+                        "Certa.", 
+                        "Ela não tem interesse em nada humano mais."
+                    ] 
+                } 
+            },
+            { 
+                id: 29, level: "Médio", 
+                text: "Qual é o plano final da criatura para si mesma?", 
+                options: ["Ir ao extremo norte, construir uma fogueira (pira) e queimar-se até às cinzas", "Viver como eremita nas montanhas", "Criar outra fêmea", "Entregar-se à justiça"], 
+                correct: 0, 
+                explanation: { 
+                    correct: "O fogo garantiria que nenhum traço do seu corpo maldito ficasse para trás, impedindo que outro cientista fizesse o mesmo experimento.", 
+                    options: [
+                        "Certa.", 
+                        "O remorso é grande demais para viver.", 
+                        "Ela não tem o conhecimento.", 
+                        "Ela sabe que a justiça a veria apenas como um monstro."
+                    ] 
+                } 
+            },
+            { 
+                id: 30, level: "Fácil", 
+                text: "Qual é o tema principal tratado no livro?", 
+                options: ["Romance medieval de cavaleiros", "A responsabilidade ética do criador perante a sua criação", "Guerras napoleónicas", "Exploração espacial"], 
+                correct: 1, 
+                explanation: { 
+                    correct: "A obra de Mary Shelley avisa: a ciência sem ética e sem compaixão pelas consequências gera monstros. Victor é culpado por ter abandonado o seu 'filho'.", 
+                    options: [
+                        "É romance Gótico/Ficção Científica.", 
+                        "Certa.", 
+                        "Fora do tema.", 
+                        "Ocorreu séculos depois."
+                    ] 
+                } 
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+
+        function setMode(mode) {
+            const views = ['viewExplanation', 'viewPractice', 'viewResult'];
+            views.forEach(v => document.getElementById(v).style.display = 'none');
+            document.getElementById('quizFooter').style.display = 'none';
+
+            if(mode === 'explanation') {
+                document.getElementById('viewExplanation').style.display = 'block';
+                document.getElementById('btnExp').classList.add('active');
+                document.getElementById('btnPrac').classList.remove('active');
+            } else if (mode === 'practice') {
+                document.getElementById('viewPractice').style.display = 'block';
+                document.getElementById('quizFooter').style.display = 'flex';
+                document.getElementById('btnExp').classList.remove('active');
+                document.getElementById('btnPrac').classList.add('active');
+                renderQuestion();
+                renderMap();
+            } else if (mode === 'result') {
+                document.getElementById('viewResult').style.display = 'block';
+            }
+            window.scrollTo(0,0);
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const container = document.getElementById('quizContainer');
+            const letters = ['A', 'B', 'C', 'D'];
+            const ans = userAnswers[currentQuestion];
+
+            let badgeClass = '';
+            if(q.level === 'Fácil') badgeClass = 'dif-facil';
+            else if(q.level === 'Médio') badgeClass = 'dif-medio';
+            else badgeClass = 'dif-dificil';
+
+            container.innerHTML = `
+                <div class="card-content" style="border: 2px solid #000; box-shadow: 4px 4px 0px #000;">
+                    <span class="difficulty-badge ${badgeClass}">${q.level}</span>
+                    <div style="margin-bottom: 20px;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: #888;">QUESTÃO ${currentQuestion + 1} DE ${questions.length}</span>
+                        <h2 style="font-size: 1.1rem; margin-top: 5px; color: var(--theme-dark);">${q.text}</h2>
+                    </div>
+                    <div class="options-list">
+                        ${q.options.map((opt, i) => {
+                            let cls = '';
+                            if (ans !== null) {
+                                if (i === q.correct) cls = 'correct';
+                                else if (i === ans) cls = 'wrong';
+                                else cls = 'disabled';
+                            }
+                            return `
+                                <div class="option-btn ${cls}" onclick="handleAnswer(${i})">
+                                    <div class="opt-circle">${letters[i]}</div>
+                                    <div>${opt}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ${ans !== null ? `
+                        <div class="feedback-box">
+                            <div class="feedback-title" style="color:${ans === q.correct ? 'var(--correct-border)' : 'var(--wrong-border)'}">
+                                ${ans === q.correct ? '✅ Mandaste bem!' : '❌ Ops! Análise do erro:'}
+                            </div>
+                            <div class="feedback-item correct-opt"><strong>Gabarito:</strong> ${q.options[q.correct]}</div>
+                            <div style="margin-top:10px; font-size:0.95rem; color:#222; margin-bottom:15px; font-weight:500;">
+                                ${q.explanation.correct}
+                            </div>
+                            <div style="margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
+                                <small><strong>Por que as outras alternativas estão incorretas?</strong></small>
+                                ${q.explanation.options.map((exp, i) => i !== q.correct ? `<div class="feedback-item wrong-opt" style="color:#666; margin-top:8px;"><strong>${letters[i]})</strong> ${exp}</div>` : '').join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            updateNav();
+        }
+
+        function handleAnswer(idx) {
+            if (userAnswers[currentQuestion] !== null) return;
+            userAnswers[currentQuestion] = idx;
+            if (idx === questions[currentQuestion].correct) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#4C1D95', '#F97316', '#3B82F6'] });
+            } else {
+                document.body.classList.add('shake-effect');
+                setTimeout(() => document.body.classList.remove('shake-effect'), 500);
+            }
+            renderQuestion();
+            renderMap();
+        }
+
+        function renderMap() {
+            const map = document.getElementById('qMap');
+            map.innerHTML = questions.map((q, i) => {
+                let cls = 'map-dot';
+                if (i === currentQuestion) cls += ' active';
+                if (userAnswers[i] !== null) {
+                    cls += userAnswers[i] === q.correct ? ' answered-correct' : ' answered-wrong';
+                }
+                return `<div class="${cls}" onclick="goTo(${i})">${i+1}</div>`;
+            }).join('');
+        }
+
+        function goTo(i) { currentQuestion = i; renderQuestion(); renderMap(); }
+        function changeQuestion(d) {
+            let n = currentQuestion + d;
+            if (n >= 0 && n < questions.length) goTo(n);
+        }
+
+        function updateNav() {
+            document.getElementById('btnPrev').disabled = (currentQuestion === 0);
+            const next = document.getElementById('btnNext');
+            if (currentQuestion === questions.length - 1) {
+                next.textContent = "Finalizar";
+                next.onclick = finish;
+            } else {
+                next.textContent = "Próxima";
+                next.onclick = () => changeQuestion(1);
+            }
+        }
+
+        function finish() {
+            let correct = userAnswers.filter((a, i) => a === questions[i].correct).length;
+            let percent = Math.round((correct / questions.length) * 100);
+            
+            document.getElementById('finalPercent').textContent = percent + "%";
+            document.getElementById('finalScoreText').textContent = `Acertaste ${correct} de ${questions.length}`;
+            document.getElementById('finalStars').textContent = percent >= 80 ? "⭐⭐⭐⭐⭐" : percent >= 60 ? "⭐⭐⭐" : "⭐";
+            
+            let summary = '<div style="text-align:left; margin-top:20px;">';
+            if (percent < 80) {
+                summary += `<div style="background:#FFE4E6; padding:15px; border-radius:8px; margin-bottom:20px; border:2px solid #BE123C; color:#991B1B;">
+                    <strong>⚠️ Atenção:</strong> Precisas de 80% (24 acertos) para aprovação. O livro do Frankenstein não perdoa erros!
+                </div>`;
+                document.getElementById('action-buttons').innerHTML = `<button class="btn-retry" onclick="reset()">🔄 Refazer a Prova</button>`;
+            } else {
+                summary += `<div style="background:#D1FAE5; padding:15px; border-radius:8px; margin-bottom:20px; border:2px solid #059669; color:#065F46;">
+                    <strong>🎉 Monstruosamente Bem!</strong> Sobreviveste à prova de Frankenstein com louvor!
+                </div>`;
+                document.getElementById('action-buttons').innerHTML = `<button class="btn-retry" onclick="reset()">🔄 Tentar 100%</button>`;
+            }
+
+            if (correct < questions.length) {
+                summary += '<h4>As Tuas Revisões Necessárias:</h4>';
+                questions.forEach((q, i) => {
+                    if(userAnswers[i] !== q.correct) {
+                        summary += `<div style="margin-bottom:10px; padding:15px; background:#FAFAFA; border-radius:8px; border:2px dashed #ddd;">
+                            <strong>Q${i+1}:</strong> ${q.text}<br>
+                            <span style="color:#BE123C; font-size:0.9rem; font-weight:600;">A tua resposta: ${q.options[userAnswers[i]]}</span><br>
+                            <span style="color:#059669; font-size:0.9rem; font-weight:600;">Gabarito: ${q.options[q.correct]}</span>
+                        </div>`;
+                    }
+                });
+            }
+            summary += '</div>';
+            
+            document.getElementById('review-container').innerHTML = summary;
+            setMode('result');
+        }
+
+        function reset() { userAnswers = new Array(questions.length).fill(null); currentQuestion = 0; setMode('explanation'); }
+        setMode('explanation');
+    </script>
+</body>
+</html>
