@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inglês: Revisão 8º Ano - Promover</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* --- VARIÁVEIS DE COR E TEMA: INGLÊS (Azul Royal e Dourado) --- */
+        :root {
+            --bg-color: #F8FAFC; 
+            --text-color: #0F172A; 
+            --border-color: #1E3A8A; 
+            --white: #FFFFFF;
+            
+            --theme-light: #DBEAFE; 
+            --theme-medium: #3B82F6; 
+            --theme-dark: #1D4ED8; 
+            --theme-contrast: #F59E0B; 
+            --theme-accent: #10B981; 
+            --theme-text-active: #FFFFFF;
+            
+            --correct-bg: #D1FAE5;
+            --correct-border: #059669;
+            --wrong-bg: #FFE4E6;
+            --wrong-border: #E11D48;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 15px 120px 15px;
+            background-image: radial-gradient(var(--theme-light) 2px, transparent 2px);
+            background-size: 25px 25px;
+        }
+
+        @keyframes pop { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+        .shake-effect { animation: shake 0.4s ease-in-out; }
+
+        .container { width: 100%; max-width: 650px; display: flex; flex-direction: column; gap: 20px; }
+        
+        .logo-header { display: flex; flex-direction: column; align-items: center; padding: 15px 0 20px 0; text-align: center; }
+        .css-logo { font-size: 1.5rem; font-weight: 900; color: var(--theme-text-active); text-transform: uppercase; letter-spacing: -1px; border: 3px solid var(--border-color); padding: 8px 24px; border-radius: 12px; background: var(--theme-dark); box-shadow: 4px 4px 0px var(--theme-contrast); margin-bottom: 15px; transform: rotate(-2deg); }
+        h1 { font-size: 2rem; font-weight: 900; color: var(--text-color); text-transform: uppercase; letter-spacing: -0.5px; line-height: 1.1; }
+        .subtitle { font-size: 1rem; color: var(--white); font-weight: 700; margin-top: 5px; background: var(--theme-contrast); padding: 4px 12px; border-radius: 8px; border: 2px solid var(--border-color); }
+
+        .nav-tabs { display: flex; background: white; border: 4px solid var(--border-color); border-radius: 16px; padding: 6px; box-shadow: 0 4px 0 var(--border-color); position: sticky; top: 15px; z-index: 50; gap: 5px;}
+        .nav-btn { flex: 1; border: none; background: transparent; padding: 12px 0; border-radius: 10px; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.05rem; color: #64748B; cursor: pointer; transition: all 0.2s; }
+        .nav-btn.active { background: var(--theme-dark); color: white; border: 2px solid var(--border-color); box-shadow: 0 3px 0 var(--border-color); transform: translateY(-2px); }
+
+        .view-section { display: none; animation: pop 0.3s ease-out; flex-direction: column; gap: 25px; }
+        .view-section.active { display: flex; }
+
+        .theory-card { background: var(--white); border: 4px solid var(--border-color); border-radius: 16px; padding: 25px; box-shadow: 0 6px 0 var(--border-color); position: relative; }
+        .card-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: var(--theme-dark); border-bottom: 3px solid var(--theme-light); padding-bottom: 10px;}
+        .card-text { font-size: 1.05rem; font-weight: 500; color: #334155; line-height: 1.6; margin-bottom: 15px; }
+
+        .highlight-box { background: #FFFBEB; border: 3px solid var(--theme-contrast); border-left: 8px solid var(--theme-contrast); padding: 15px; border-radius: 8px; font-weight: 600; color: #92400E; margin: 15px 0; }
+        .highlight-box.blue { background: #EFF6FF; border-color: var(--theme-medium); border-left-color: var(--theme-dark); color: #1E3A8A; }
+
+        /* RELATIVE PRONOUNS TREE */
+        .pronoun-tree { display: flex; flex-direction: column; align-items: center; font-family: 'Poppins', sans-serif; margin: 20px 0; background: #F8FAFC; padding: 20px; border-radius: 12px; border: 3px dashed #CBD5E1; }
+        .tree-root { font-weight: 900; font-size: 1.2rem; background: var(--theme-dark); color: white; padding: 5px 15px; border-radius: 8px; margin-bottom: 15px; }
+        .tree-branches { display: flex; width: 100%; justify-content: space-around; position: relative; flex-wrap: wrap; gap: 10px; }
+        .tree-branch { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; flex: 1; min-width: 120px; }
+        .branch-title { font-weight: 800; color: #475569; font-size: 1.1rem; }
+        .leaf-box { background: white; border: 2px solid var(--border-color); padding: 10px; border-radius: 8px; font-weight: 700; width: 100%; box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+        .leaf-word { font-size: 1.3rem; color: var(--theme-dark); font-weight: 900; }
+        .leaf-desc { font-size: 0.85rem; color: #64748B; }
+        .leaf-example { font-size: 0.85rem; color: #0F172A; margin-top: 5px; font-weight: 500; font-style: italic; }
+
+        .btn-action { width: 100%; padding: 18px; background-color: var(--theme-dark); color: white; border: 4px solid var(--border-color); border-radius: 16px; font-size: 1.2rem; font-weight: 900; cursor: pointer; box-shadow: 0 6px 0 var(--border-color); transition: all 0.1s; text-transform: uppercase; font-family: 'Poppins', sans-serif;}
+        .btn-action:active { transform: translateY(6px); box-shadow: 0 0 0 var(--border-color); }
+
+        /* QUIZ STYLES */
+        .difficulty-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; border: 2px solid var(--border-color); box-shadow: 2px 2px 0px rgba(0,0,0,1); }
+        .dif-facil { background: #D1FAE5; color: #065F46; }
+        .dif-medio { background: #FEF08A; color: #713F12; }
+        .dif-dificil { background: #FECACA; color: #7F1D1D; }
+
+        .question-map { display: flex; gap: 8px; overflow-x: auto; padding: 10px 5px; margin-bottom: 20px; white-space: nowrap; scroll-behavior: smooth; }
+        .question-map::-webkit-scrollbar { display: none; }
+        .map-dot { min-width: 38px; height: 38px; border: 2px solid var(--border-color); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; color: var(--theme-dark); background: white; cursor: pointer; transition: all 0.2s; box-shadow: 2px 2px 0px rgba(0,0,0,0.1);}
+        .map-dot.active { background-color: var(--theme-dark); color: white; box-shadow: 3px 3px 0px var(--theme-contrast); transform: scale(1.15); border-color: var(--theme-contrast);}
+        .map-dot.answered-correct { background-color: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-border); }
+        .map-dot.answered-wrong { background-color: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-border); }
+
+        .quiz-question-card { border: 4px solid var(--border-color); box-shadow: 0 6px 0 var(--border-color); padding: 30px; border-radius: 16px; background: var(--white); }
+        .quiz-question-counter { font-size: 0.85rem; font-weight: 900; color: var(--theme-dark); letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center;}
+        .quiz-question-text { font-size: 1.15rem; margin-top: 15px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin-bottom: 25px;}
+
+        .option-btn { display: flex; align-items: center; width: 100%; padding: 15px; background-color: var(--white); border: 3px solid #CBD5E1; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.1s ease; box-shadow: 0 4px 0 #CBD5E1; font-family: 'Poppins', sans-serif; font-size: 1.05rem; font-weight: 600; text-align: left; color: #334155; }
+        .option-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 0 var(--theme-medium); border-color: var(--theme-medium); }
+        .option-btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+        .opt-circle { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #94A3B8; margin-right: 15px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.05rem; flex-shrink: 0; background: #F8FAFC; color: #64748B; }
+        
+        .option-btn.correct { background-color: var(--correct-bg); border-color: var(--correct-border); box-shadow: 0 4px 0 var(--correct-border); color: #064E3B; }
+        .option-btn.correct .opt-circle { background-color: var(--correct-border); color: white; border-color: var(--correct-border); }
+        .option-btn.wrong { background-color: var(--wrong-bg); border-color: var(--wrong-border); opacity: 0.9; box-shadow: 0 4px 0 var(--wrong-border); color: #991B1B;}
+        .option-btn.wrong .opt-circle { background-color: var(--wrong-border); color: white; border-color: var(--wrong-border); }
+        .option-btn.disabled { pointer-events: none; opacity: 0.8; }
+
+        .feedback-box { display: block; margin-top: 25px; background-color: var(--white); border: 3px solid var(--border-color); border-radius: 12px; padding: 20px; animation: fadeIn 0.4s ease-out; }
+        .feedback-title { font-weight: 900; text-transform: uppercase; font-size: 1.2rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .feedback-item { margin-bottom: 10px; font-size: 1rem; padding: 12px; border-radius: 8px; border: 2px solid var(--border-color); line-height: 1.5; font-weight: 500; }
+        .feedback-item.correct-opt { background: var(--correct-bg); border-color: var(--correct-border); color: #064E3B; font-weight: 700; }
+
+        .result-card { background: white; border: 4px solid var(--border-color); border-radius: 16px; padding: 40px 20px; box-shadow: 0 8px 0 var(--border-color); margin-bottom: 30px; text-align: center; }
+        .stars-container { font-size: 3rem; margin: 15px 0; letter-spacing: 5px; }
+        .percentage-big { font-size: 5rem; font-weight: 900; color: var(--theme-dark); line-height: 1; margin: 15px 0; text-shadow: 4px 4px 0px var(--theme-light); }
+        
+        .result-summary-box { padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 3px solid; font-size: 1.1rem; }
+        .result-summary-box.success { background: var(--correct-bg); border-color: var(--correct-border); color: #064E3B; }
+        .result-summary-box.error { background: var(--wrong-bg); border-color: var(--wrong-border); color: #991B1B; }
+        .error-log-item { margin-bottom: 15px; padding: 20px; background: #F8FAFC; border-radius: 12px; border: 2px dashed #94A3B8; text-align: left;}
+
+        .quiz-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: var(--white); border-top: 4px solid var(--border-color); padding: 15px 20px; display: none; justify-content: center; gap: 20px; z-index: 100; box-shadow: 0px -4px 10px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="logo-header">
+            <div class="css-logo"><span class="pulse-effect">🇬🇧</span> PROMOVER</div>
+            <h1>Inglês / 8º Ano</h1>
+            <p class="subtitle">Revisão para a Prova VP2</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="nav-btn active" id="btnExp" onclick="changeApplicationView('explanation')">📚 Aprender (Teoria)</button>
+            <button class="nav-btn" id="btnPrac" onclick="changeApplicationView('practice')">🧠 Praticar (Questões)</button>
+        </div>
+
+        <main id="viewExplanation" class="view-section active">
+
+            <!-- TÓPICO 1: PRONOMES RELATIVOS -->
+            <div class="theory-card">
+                <div class="card-title">🗣️ 1. Relative Pronouns (Super Importante!)</div>
+                <p class="card-text">Eles ligam frases e evitam a repetição. O grande segredo é olhar para a palavra que vem <strong>ANTES</strong> e <strong>DEPOIS</strong> do espaço em branco.</p>
+                
+                <div class="pronoun-tree">
+                    <div class="tree-root">RELATIVE PRONOUNS (Pronomes Relativos)</div>
+                    <div class="tree-branches">
+                        <!-- PEOPLE -->
+                        <div class="tree-branch">
+                            <span class="branch-title">PEOPLE<br><small>(Pessoas)</small></span>
+                            <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
+                                <div class="leaf-box" style="border-color: var(--theme-dark);">
+                                    <div class="leaf-word">WHO</div>
+                                    <div class="leaf-desc">(Subject / Sujeito)</div>
+                                    <div class="leaf-example">The boy <strong>who</strong> runs fast<br><small><em>(O garoto <strong>que</strong> corre rápido)</em></small></div>
+                                </div>
+                                <div class="leaf-box" style="border-color: var(--theme-contrast);">
+                                    <div class="leaf-word">WHOM</div>
+                                    <div class="leaf-desc">(Object / Objeto)</div>
+                                    <div class="leaf-example">The man <strong>whom</strong> you met<br><small><em>(O homem <strong>que/quem</strong> você conheceu)</em></small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- THINGS -->
+                        <div class="tree-branch">
+                            <span class="branch-title">THINGS<br><small>(Coisas/Animais)</small></span>
+                            <div class="leaf-box" style="border-color: var(--theme-accent);">
+                                <div class="leaf-word">WHICH</div>
+                                <div class="leaf-desc"> </div>
+                                <div class="leaf-example">The book <strong>which</strong> I bought<br><small><em>(O livro <strong>que</strong> eu comprei)</em></small></div>
+                            </div>
+                        </div>
+
+                        <!-- POSSESSION -->
+                        <div class="tree-branch">
+                            <span class="branch-title">POSSESSION<br><small>(Posse)</small></span>
+                            <div class="leaf-box" style="border-color: #E11D48;">
+                                <div class="leaf-word">WHOSE</div>
+                                <div class="leaf-desc">(Cujo/Cuja)</div>
+                                <div class="leaf-example">The girl <strong>whose</strong> bag is red<br><small><em>(A garota <strong>cuja</strong> bolsa é vermelha)</em></small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box blue">
+                    <strong>Macetes de Prova:</strong><br>
+                    • Tem uma <strong>preposição</strong> (with, for, to) antes do espaço e fala de pessoa? ➔ Usa <strong>WHOM</strong>. Ex: The woman <em>with</em> <strong>whom</strong> you spoke.<br>
+                    • Indica que algo pertence a alguém? (Ex: a bolsa <em>da</em> garota) ➔ Usa <strong>WHOSE</strong>.<br>
+                    • É um objeto, lugar, animal ou tempestade (storm)? ➔ Usa <strong>WHICH</strong>.
+                </div>
+            </div>
+
+            <!-- TÓPICO 2: ADVERBS OF FREQUENCY -->
+            <div class="theory-card">
+                <div class="card-title">⏱️ 2. Adverbs of Frequency</div>
+                <p class="card-text">Mostram a regularidade de uma ação. A linha do tempo da frequência é:</p>
+                
+                <div style="background: #F8FAFC; padding: 15px; border-radius: 8px; border: 2px solid #CBD5E1; font-family: monospace; font-size: 1.1rem; line-height: 1.8;">
+                    <strong>100%</strong> ➔ 🟢 ALWAYS (Sempre / Every day without exception)<br>
+                    <strong>80%</strong>  ➔ 🟢 USUALLY (Geralmente / Most days)<br>
+                    <strong>70%</strong>  ➔ 🟡 OFTEN (Frequentemente / 3 or 4 times a week)<br>
+                    <strong>50%</strong>  ➔ 🟡 SOMETIMES (Às vezes)<br>
+                    <strong>10%</strong>  ➔ 🔴 RARELY (Raramente / Once or twice a year)<br>
+                    <strong>0%</strong>   ➔ 🔴 NEVER (Nunca / I don't eat it at all)
+                </div>
+            </div>
+
+            <!-- TÓPICO 3: THE BUYING CYCLE (ADVERTISING) -->
+            <div class="theory-card">
+                <div class="card-title">🛒 3. O Ciclo da Publicidade</div>
+                <p class="card-text">O seu TC mostra um infográfico de como compramos coisas. Decore as etapas:</p>
+                <ol style="padding-left: 20px; font-weight: 500; line-height: 1.5; color: #334155;">
+                    <li><strong>Trigger (Gatilho):</strong> Algo que faz você querer o produto (ex: um amigo, um anúncio).</li>
+                    <li><strong>Think about it (Consideration):</strong> Você começa a pensar nas opções.</li>
+                    <li><strong>Online Research (ZMOT - Zero Moment of Truth):</strong> Você lê avaliações (<em>reviews</em>) e verifica preços online <em>antes</em> de comprar.</li>
+                    <li><strong>Purchase Decision (Decisão de Compra):</strong> Você decide comprar.</li>
+                    <li><strong>Experience (Second moment of truth):</strong> Você usa o produto e decide se é bom ou ruim.</li>
+                    <li><strong>Share Opinions (Compartilhar Opiniões):</strong> Você fala online, recomendando ou reclamando. Isso influencia outras pessoas (o ciclo recomeça!).</li>
+                </ol>
+            </div>
+
+            <!-- TÓPICO 4: VOCABULÁRIO & NATIVE AMERICANS -->
+            <div class="theory-card">
+                <div class="card-title">🏕️ 4. Vocabulário & Textos</div>
+                
+                <h4 style="color: var(--theme-dark); margin-bottom: 5px;">Mundo do Trabalho:</h4>
+                <ul style="padding-left: 20px; font-weight: 500; margin-bottom: 15px;">
+                    <li><strong>Employee:</strong> Funcionário (trabalha em tempo integral, recebe um salário fixo / <em>fixed salary</em>).</li>
+                    <li><strong>Volunteer:</strong> Voluntário (oferece seu tempo sem recompensa financeira). Desenvolve "skills" (habilidades).</li>
+                </ul>
+
+                <h4 style="color: var(--theme-dark); margin-bottom: 5px;">Profissões Antigas (Jobs of the past):</h4>
+                <ul style="padding-left: 20px; font-weight: 500; margin-bottom: 15px;">
+                    <li><strong>Ice cutter:</strong> Cortador de gelo (antes das geladeiras).</li>
+                    <li><strong>Portrait Painter:</strong> Pintor de retratos (antes da fotografia).</li>
+                    <li><strong>Town crier:</strong> Pregonheiro (andava nas ruas gritando anúncios públicos).</li>
+                    <li><strong>Telephone Operator:</strong> Operador de telefone (conectava chamadas manualmente).</li>
+                    <li><strong>Lamplighter:</strong> Acendedor de lampiões (postes de luz).</li>
+                    <li><strong>Chimney sweep:</strong> Limpador de chaminés (tirava a fuligem / <em>soot</em>).</li>
+                </ul>
+
+                <h4 style="color: var(--theme-dark); margin-bottom: 5px;">Natureza e Meio Ambiente:</h4>
+                <ul style="padding-left: 20px; font-weight: 500; margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                    <li><strong>Bark:</strong> Casca de árvore</li>
+                    <li><strong>Bush:</strong> Arbusto</li>
+                    <li><strong>Outskirts:</strong> Periferia / Arredores</li>
+                    <li><strong>Wildlife:</strong> Vida selvagem</li>
+                    <li><strong>Clans:</strong> Clãs</li>
+                    <li><strong>Seasons:</strong> Estações do ano</li>
+                    <li><strong>Earth:</strong> Terra / Solo</li>
+                    <li><strong>Undergrowth:</strong> Vegetação rasteira</li>
+                </ul>
+
+                <h4 style="color: var(--theme-dark); margin-bottom: 5px;">Native American Communities:</h4>
+                <p class="card-text">As tribos indígenas são <strong>extremamente diversas</strong> (línguas e tradições diferentes). Algumas eram <strong>nomadic</strong> (nômades, mudavam de lugar). Hoje, existem 574 nações reconhecidas nos EUA, que são <strong>sovereign</strong> (soberanas, têm o próprio governo). A crença espiritual deles é conectada com a <strong>natureza</strong>.</p>
+            </div>
+
+            <button class="btn-action" onclick="changeApplicationView('practice')">
+                Iniciar a Avaliação ➜
+            </button>
+        </main>
+
+        <main id="viewPractice" class="view-section">
+            <div style="background-color: var(--white); padding: 15px; border-radius: 12px; border: 3px solid var(--border-color); text-align: center;">
+                <h2 style="color:var(--theme-dark); font-weight:900; margin-bottom: 5px;">A Prova de Fogo</h2>
+                <p style="color: #475569; font-size: 0.95rem; font-weight:600;">
+                    Treino focado exatamente no seu TC. Preste muita atenção nos Pronomes Relativos! Acerta <strong>80%</strong> para mostrar que estás pronto!
+                </p>
+            </div>
+            
+            <div class="question-map" id="qMap"></div>
+            <div id="quizContainer" style="margin-bottom: 40px;"></div>
+        </main>
+
+        <main id="viewResult" class="view-section">
+            <div class="result-card">
+                <h2 style="font-weight:900; text-transform:uppercase; color:var(--theme-dark);">Relatório Final</h2>
+                <div class="stars-container" id="finalStars">⭐⭐⭐</div>
+                <div class="percentage-big" id="finalPercent">0%</div>
+                <p style="font-size:1.2rem; font-weight:700; color:#475569;" id="finalScoreText">Você acertou 0 de 30</p>
+                <div id="review-container" style="text-align: left; margin-top: 20px;"></div>
+            </div>
+            <div id="action-buttons"></div>
+        </main>
+
+    </div>
+
+    <footer class="quiz-footer" id="quizFooter">
+        <button class="nav-btn" id="btnPrev" onclick="navigateQuestion(-1)">Anterior</button>
+        <button class="nav-btn btn-next" id="btnNext" onclick="navigateQuestion(1)">Próxima ➡️</button>
+    </footer>
+
+<script>
+    /* --- BASE DE QUESTÕES (Focada no TC enviado pelo aluno) --- */
+    const questionsDatabase = [
+        // RELATIVE PRONOUNS
+        { level: "Médio", text: "Complete the sentence: 'The girl _______ is talking to the teacher is my cousin.'", options: ["which", "who", "whose", "whom"], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>'A garota <u>QUE</u> está conversando com o professor é minha prima.'</em><br>Usamos <strong>who</strong> porque estamos nos referindo a uma pessoa (The girl) que é o sujeito da frase (ela é quem está falando)." } },
+        { level: "Difícil", text: "Complete the sentence: 'The woman with _______ you spoke yesterday is very friendly.'", options: ["who", "which", "whose", "whom"], correctIndex: 3, explanation: { correctText: "<strong>Tradução:</strong> <em>'A mulher com <u>QUEM</u> você falou ontem é muito amigável.'</em><br>Regra de Ouro: Sempre que houver uma PREPOSIÇÃO (with, for, to) antes do espaço e nos referirmos a uma pessoa, usamos <strong>WHOM</strong>." } },
+        { level: "Fácil", text: "Complete the sentence: 'This is the house _______ had the roof damaged by the storm.'", options: ["whose", "who", "which", "whom"], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>'Esta é a casa <u>QUE</u> teve o telhado danificado pela tempestade.'</em><br>Usamos <strong>which</strong> porque nos referimos a uma COISA ou objeto (The house - a casa)." } },
+        { level: "Médio", text: "Complete the sentence: 'The students _______ project won the competition are very proud.'", options: ["who", "which", "whom", "whose"], correctIndex: 3, explanation: { correctText: "<strong>Tradução:</strong> <em>'Os alunos <u>CUJO</u> projeto venceu a competição estão muito orgulhosos.'</em><br>Usamos <strong>whose</strong> (cujo/cuja) para indicar POSSE. O 'project' pertence aos 'students'." } },
+        { level: "Fácil", text: "Complete the sentence: 'The actor _______ won the Oscar was in a film based on a true story.'", options: ["who", "which", "whom", "whose"], correctIndex: 0, explanation: { correctText: "<strong>Tradução:</strong> <em>'O ator <u>QUE</u> ganhou o Oscar estava em um filme baseado em uma história real.'</em><br>Usamos <strong>who</strong> porque estamos falando de uma pessoa (The actor) que praticou a ação (ganhou o Oscar)." } },
+        { level: "Médio", text: "Complete the sentence: 'The man _______ car was stolen reported it to the police.'", options: ["who", "which", "whose", "whom"], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>'O homem <u>CUJO</u> carro foi roubado relatou isso à polícia.'</em><br>Usamos <strong>whose</strong> porque indica posse. O 'car' pertence ao 'man'." } },
+        { level: "Difícil", text: "Complete the sentence: 'That's the employee _______ we hired last month.'", options: ["who", "whom", "which", "whose"], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>'Esse é o funcionário <u>QUE (QUEM)</u> nós contratamos no mês passado.'</em><br>Neste caso gramatical formal do seu TC, usamos <strong>whom</strong> porque o 'employee' é o OBJETO da ação (Nós = sujeito, contratamos = verbo, quem? = whom)." } },
+        { level: "Fácil", text: "Complete: 'The book _______ I bought is very interesting.'", options: ["who", "whose", "whom", "which"], correctIndex: 3, explanation: { correctText: "<strong>Tradução:</strong> <em>'O livro <u>QUE</u> eu comprei é muito interessante.'</em><br>Usamos <strong>which</strong> porque 'book' é um objeto inanimado." } },
+        { level: "Médio", text: "Complete: 'I have a friend _______ father is a famous writer.'", options: ["who", "whom", "which", "whose"], correctIndex: 3, explanation: { correctText: "<strong>Tradução:</strong> <em>'Eu tenho um amigo <u>CUJO</u> pai é um escritor famoso.'</em><br>Indica posse! O pai (father) pertence ao amigo (friend). Usa-se <strong>whose</strong>." } },
+        { level: "Difícil", text: "Complete: 'The teacher to _______ I gave my assignment is absent today.'", options: ["who", "whose", "which", "whom"], correctIndex: 3, explanation: { correctText: "<strong>Tradução:</strong> <em>'O professor para <u>QUEM</u> eu entreguei minha tarefa está ausente hoje.'</em><br>Olha a preposição 'to' antes do espaço! Para pessoas após preposições, a única escolha gramatical correta é <strong>whom</strong>." } },
+
+        // ADVERBS OF FREQUENCY
+        { level: "Médio", text: "Complete with the correct adverb: 'I _______ eat fast food; I don't eat it at all.'", options: ["always", "sometimes", "usually", "never"], correctIndex: 3, explanation: { correctText: "<strong>Tradução:</strong> <em>'Eu <u>NUNCA</u> como fast food; eu não como isso de jeito nenhum.'</em><br>A expressão 'I don't eat it at all' significa 0% de frequência. O advérbio correspondente é <strong>never</strong>." } },
+        { level: "Fácil", text: "Complete with the correct adverb: 'My parents _______ watch TV after dinner; they do it every day without exception.'", options: ["always", "rarely", "sometimes", "never"], correctIndex: 0, explanation: { correctText: "<strong>Tradução:</strong> <em>'Meus pais <u>SEMPRE</u> assistem TV depois do jantar; eles fazem isso todos os dias sem exceção.'</em><br>Indica 100% de frequência. O advérbio correto é <strong>always</strong>." } },
+        { level: "Médio", text: "Complete: 'He is _______ late for class; it happens once or twice a year.'", options: ["always", "often", "rarely", "usually"], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>'Ele <u>RARAMENTE</u> está atrasado para a aula; isso acontece uma ou duas vezes por ano.'</em><br>Frequência muito baixa. O advérbio correto é <strong>rarely</strong>." } },
+        { level: "Fácil", text: "Complete: 'They _______ go to the gym, about three or four times a week.'", options: ["often", "rarely", "never", "always"], correctIndex: 0, explanation: { correctText: "<strong>Tradução:</strong> <em>'Eles <u>FREQUENTEMENTE</u> vão à academia, cerca de três ou quatro vezes por semana.'</em><br>Ir à academia 3 a 4 vezes por semana indica uma boa regularidade. Usamos <strong>often</strong>." } },
+        { level: "Médio", text: "Complete: 'She _______ studies at night; she prefers studying in the morning most days.'", options: ["always", "sometimes", "often", "usually"], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>'Ela <u>ÀS VEZES (ou raramente)</u> estuda à noite; ela prefere estudar de manhã na maioria dos dias.'</em><br>Se ela prefere de manhã, estudar à noite acontece com menos frequência. A melhor opção é <strong>sometimes</strong>." } },
+
+        // JOBS FROM THE PAST
+        { level: "Fácil", text: "What was the job of a 'Lamplighter'?", options: ["Making phone calls.", "Cutting ice blocks from frozen lakes.", "Lighting and turning off street lamps before electric lighting.", "Cleaning soot and dirt from chimneys."], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>Acender e apagar os lampiões de rua antes da iluminação elétrica.</em><br>Lamp (lâmpada/lampião) + Lighter (acendedor)." } },
+        { level: "Médio", text: "Before photography became common, who was the professional responsible for painting pictures of people?", options: ["Town crier.", "Portrait Painter.", "Ice cutter.", "Chimney sweep."], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>Pintor de Retratos.</em><br>O 'Portrait Painter' era quem registrava os rostos das pessoas antes das câmeras fotográficas." } },
+        { level: "Fácil", text: "What did a 'Town crier' do?", options: ["Walked through streets making public announcements.", "Worked manually connecting phone calls.", "Cleaned dirty chimneys.", "Lit the street lamps."], correctIndex: 0, explanation: { correctText: "<strong>Tradução:</strong> <em>Caminhava pelas ruas fazendo anúncios públicos.</em><br>O 'Town crier' era o pregonheiro da cidade, o homem que andava gritando as notícias." } },
+        { level: "Médio", text: "What was the role of a 'Chimney sweep'?", options: ["Painting portraits of rich people.", "Cutting blocks of ice from rivers.", "Connecting phone calls manually.", "Cleaning chimneys to remove soot and dirt so smoke can pass."], correctIndex: 3, explanation: { correctText: "<strong>Tradução:</strong> <em>Limpar chaminés para remover a fuligem e a sujeira.</em><br>Sweep significa limpar/varrer. O 'Chimney sweep' era o limpador de chaminés." } },
+        { level: "Fácil", text: "Before modern refrigerators existed, who was responsible for storing ice?", options: ["The Telephone Operator.", "The Lamplighter.", "The Ice cutter.", "The Town crier."], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>O Cortador de Gelo.</em><br>O 'Ice cutter' cortava blocos de gelo de lagos congelados no inverno para vender." } },
+
+        // JOB MARKET & VOCAB
+        { level: "Fácil", text: "Complete the sentence from the text: 'However, not all work is paid. A _________ offers their time without financial reward, often to support a cause.'", options: ["employee", "manager", "volunteer", "business"], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>'Um <u>VOLUNTÁRIO</u> oferece seu tempo sem recompensa financeira, frequentemente para apoiar uma causa.'</em>" } },
+        { level: "Médio", text: "Complete the sentence: 'A full-time _________ usually receives a fixed salary, but their total remuneration may include bonuses.'", options: ["volunteer", "employee", "organization", "skills"], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>'Um <u>FUNCIONÁRIO (EMPREGADO)</u> em tempo integral geralmente recebe um salário fixo...'</em>" } },
+        { level: "Difícil", text: "In a professional setting, experiences help individuals develop valuable ________, such as communication and teamwork.", options: ["salary", "remuneration", "skills", "outskirts"], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>'...ajudam os indivíduos a desenvolver <u>HABILIDADES</u> valiosas, como comunicação e trabalho em equipe.'</em><br>'Skills' significa Habilidades." } },
+
+        // ADVERTISING CYCLE
+        { level: "Médio", text: "According to the infographic about advertising, what is ZMOT?", options: ["Zero Moment of Transfer.", "Zero Moment of Truth (checking information online, reading reviews before buying).", "Zero Marketing Online Test.", "Zone of Money Transfer."], correctIndex: 1, explanation: { correctText: "ZMOT significa 'Zero Moment of Truth' (Momento Zero da Verdade). É quando você pesquisa online ANTES de comprar o produto." } },
+        { level: "Fácil", text: "In the Advertising cycle, what does the 'Trigger' do?", options: ["It makes you want a product.", "It helps you complain online.", "It calculates the final price.", "It is the moment of use."], correctIndex: 0, explanation: { correctText: "<strong>Tradução:</strong> <em>'Faz você querer um produto.'</em><br>O 'Trigger' (Gatilho) é o passo 1 que desperta a sua vontade de comprar." } },
+        { level: "Médio", text: "Why is the cycle of Advertising considered 'continuous'?", options: ["Because stores never close.", "Because your shared opinion influences other people's decisions, creating a new trigger for them.", "Because the internet is infinite.", "Because products break fast."], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>'Porque sua opinião compartilhada influencia as decisões de outras pessoas...'</em><br>O ciclo recomeça porque a sua avaliação (review) vira o Gatilho para o próximo cliente." } },
+        { level: "Fácil", text: "What happens in the 'Experience' stage of the advertising funnel?", options: ["You watch TV ads.", "You use the product and decide if it is good or bad.", "You look at prices.", "You choose a product in the store."], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>'Você usa o produto e decide se é bom ou ruim.'</em>" } },
+
+        // NATIVE AMERICAN COMMUNITIES
+        { level: "Fácil", text: "What is TRUE about Indigenous nations in the Americas according to the text?", options: ["They all share exactly the same traditions and language.", "They are only part of the past.", "They are extremely diverse, speaking many different languages and having distinct traditions.", "They never built permanent settlements."], correctIndex: 2, explanation: { correctText: "<strong>Tradução:</strong> <em>'Eles são extremamente diversos, falando muitos idiomas diferentes e tendo tradições distintas.'</em>" } },
+        { level: "Médio", text: "According to the text, how are Native American nations politically organized today in the United States?", options: ["There are 574 federally recognized nations, and they are considered sovereign (they have the right to govern themselves).", "They are governed entirely by European laws.", "They are not recognized at all by any government.", "They are organized into one single large nation."], correctIndex: 0, explanation: { correctText: "Existem 574 nações reconhecidas. O termo chave é 'Sovereign' (Soberanas), o que significa que eles têm os próprios governos independentes." } },
+        { level: "Médio", text: "Based on the text, what does it mean when some groups are described as 'nomadic'?", options: ["They built huge permanent cities.", "They moved from place to place instead of staying in one permanent location.", "They refused to trade.", "They only lived in deserts."], correctIndex: 1, explanation: { correctText: "<strong>Tradução:</strong> <em>'Eles se mudavam de um lugar para outro em vez de ficar em um local permanente.'</em><br>A palavra 'nomadic' significa nômades." } }
+    ];
+
+    /* --- ESTADO DO JOGO --- */
+    const STORAGE_KEY = 'promover_ingles8_revisao_vp2';
+    
+    let quizState = {
+        currentIndex: 0,
+        userAnswers: new Array(questionsDatabase.length).fill(null),
+        confettiAnimationId: null
+    };
+
+    function loadSavedProgress() {
+        try {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                const parsed = JSON.parse(savedData);
+                if (parsed && Array.isArray(parsed) && parsed.length === questionsDatabase.length) {
+                    quizState.userAnswers = parsed;
+                    
+                    let lastAnswered = -1;
+                    for (let i = parsed.length - 1; i >= 0; i--) {
+                        if (parsed[i] !== null) { lastAnswered = i; break; }
+                    }
+
+                    if (lastAnswered < questionsDatabase.length - 1) {
+                        quizState.currentIndex = lastAnswered + 1;
+                    } else {
+                        quizState.currentIndex = questionsDatabase.length - 1;
+                    }
+                }
+            }
+        } catch (e) { console.error("Erro progresso:", e); }
+    }
+
+    function saveProgress() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(quizState.userAnswers)); } 
+        catch (e) { console.error("Erro ao salvar:", e); }
+    }
+
+    function resetFullProgress() {
+        if(confirm("Tem certeza que deseja apagar os dados e refazer a prova?")) {
+            localStorage.removeItem(STORAGE_KEY);
+            quizState.userAnswers = new Array(questionsDatabase.length).fill(null);
+            quizState.currentIndex = 0;
+            changeApplicationView('practice');
+        }
+    }
+
+    /* --- NAVEGAÇÃO VIEWS --- */
+    function changeApplicationView(viewName) {
+        const views = ['viewExplanation', 'viewPractice', 'viewResult'];
+        views.forEach(v => document.getElementById(v).classList.remove('active'));
+        
+        const quizFooter = document.getElementById('quizFooter');
+        if (quizFooter) quizFooter.style.display = 'none';
+
+        if (viewName === 'explanation') {
+            document.getElementById('viewExplanation').classList.add('active');
+            document.getElementById('btnExp').classList.add('active');
+            document.getElementById('btnPrac').classList.remove('active');
+        } else if (viewName === 'practice') {
+            document.getElementById('viewPractice').classList.add('active');
+            if (quizFooter) quizFooter.style.display = 'flex';
+            document.getElementById('btnExp').classList.remove('active');
+            document.getElementById('btnPrac').classList.add('active');
+            renderCurrentQuestion();
+            renderNavigationMap();
+        } else if (viewName === 'result') {
+            document.getElementById('viewResult').classList.add('active');
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function getDifficultyBadgeClass(level) {
+        if (level === 'Fácil') return 'dif-facil';
+        if (level === 'Médio') return 'dif-medio';
+        return 'dif-dificil';
+    }
+
+    function buildOptionsHTML(question, selectedAnswerIndex) {
+        const alphabet = ['A', 'B', 'C', 'D'];
+        return question.options.map((optionText, optionIndex) => {
+            let cssClass = '';
+            if (selectedAnswerIndex !== null) {
+                if (optionIndex === question.correctIndex) cssClass = 'correct';
+                else if (optionIndex === selectedAnswerIndex) cssClass = 'wrong';
+                else cssClass = 'disabled';
+            }
+            const isDisabled = selectedAnswerIndex !== null ? 'disabled' : '';
+            return `
+                <button class="option-btn ${cssClass}" onclick="handleOptionSelection(${optionIndex})" ${isDisabled}>
+                    <div class="opt-circle">${alphabet[optionIndex]}</div>
+                    <div>${optionText}</div>
+                </button>
+            `;
+        }).join('');
+    }
+
+    function renderCurrentQuestion() {
+        const container = document.getElementById('quizContainer');
+        if (!container) return;
+
+        const question = questionsDatabase[quizState.currentIndex];
+        const selectedAnswerIndex = quizState.userAnswers[quizState.currentIndex];
+        const badgeClass = getDifficultyBadgeClass(question.level);
+        
+        let feedbackHTML = '';
+        if (selectedAnswerIndex !== null) {
+            const isCorrect = selectedAnswerIndex === question.correctIndex;
+            const titleClass = isCorrect ? 'success' : 'error';
+            const titleText = isCorrect ? '✅ Well done! (Correto!)' : '❌ Oops! (Erro!)';
+
+            feedbackHTML = `
+                <div class="feedback-box">
+                    <div class="feedback-title ${titleClass}" style="color: ${isCorrect ? 'var(--correct-border)' : 'var(--wrong-border)'}">${titleText}</div>
+                    <div style="font-size:1.05rem; font-weight:700; color:var(--text-color); margin-bottom:10px;">A Resposta Certa: ${question.options[question.correctIndex]}</div>
+                    <div style="font-weight:500; color:#334155;">${question.explanation.correctText}</div>
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            <div class="quiz-question-card">
+                <div class="quiz-question-counter">
+                    <span class="difficulty-badge ${badgeClass}" style="margin:0;">${question.level}</span>
+                    <span style="color:#64748B;">QUESTÃO ${quizState.currentIndex + 1} DE ${questionsDatabase.length}</span>
+                </div>
+                <h2 class="quiz-question-text">${question.text}</h2>
+                <div class="options-list">
+                    ${buildOptionsHTML(question, selectedAnswerIndex)}
+                </div>
+                ${feedbackHTML}
+            </div>
+        `;
+        updateNavigationButtons();
+    }
+
+    function handleOptionSelection(selectedIndex) {
+        if (quizState.userAnswers[quizState.currentIndex] !== null) return;
+        
+        quizState.userAnswers[quizState.currentIndex] = selectedIndex;
+        saveProgress();
+
+        if (selectedIndex === questionsDatabase[quizState.currentIndex].correctIndex) {
+            startSuccessAnimation();
+        } else {
+            triggerErrorShakeEffect();
+        }
+        
+        renderCurrentQuestion();
+        renderNavigationMap();
+    }
+
+    function triggerErrorShakeEffect() {
+        const container = document.getElementById('quizContainer');
+        if (container) { 
+            container.classList.remove('shake-effect'); void container.offsetWidth; container.classList.add('shake-effect'); 
+            setTimeout(() => container.classList.remove('shake-effect'), 500); 
+        }
+    }
+
+    function startSuccessAnimation() {
+        stopSuccessAnimation();
+        const end = Date.now() + 1500;
+        function animateFrame() {
+            if(window.confetti) {
+                confetti({ particleCount: 5, spread: 55, colors: ['#3B82F6', '#1D4ED8', '#F59E0B', '#10B981'], angle: 60, origin: { x: 0, y: 0.6 } });
+                confetti({ particleCount: 5, spread: 55, colors: ['#3B82F6', '#1D4ED8', '#F59E0B', '#10B981'], angle: 120, origin: { x: 1, y: 0.6 } });
+            }
+            if (Date.now() < end) quizState.confettiAnimationId = requestAnimationFrame(animateFrame);
+        }
+        animateFrame();
+    }
+
+    function stopSuccessAnimation() {
+        if (window.confetti && typeof confetti.reset === 'function') confetti.reset(); 
+        if (quizState.confettiAnimationId) {
+            cancelAnimationFrame(quizState.confettiAnimationId);
+            quizState.confettiAnimationId = null;
+        }
+    }
+
+    function renderNavigationMap() {
+        const mapContainer = document.getElementById('qMap');
+        if (!mapContainer) return;
+        
+        mapContainer.innerHTML = questionsDatabase.map((question, index) => {
+            const isCurrent = index === quizState.currentIndex;
+            const userAnswer = quizState.userAnswers[index];
+            let cssClass = 'map-dot';
+            if (isCurrent) cssClass += ' active';
+            if (userAnswer !== null) cssClass += (userAnswer === question.correctIndex) ? ' answered-correct' : ' answered-wrong';
+            return `<div class="${cssClass}" onclick="goToQuestion(${index})">${index + 1}</div>`;
+        }).join('');
+        
+        setTimeout(() => { 
+            const activeDot = mapContainer.querySelector('.map-dot.active'); 
+            if (activeDot) activeDot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); 
+        }, 50);
+    }
+
+    function goToQuestion(targetIndex) { 
+        stopSuccessAnimation();
+        quizState.currentIndex = targetIndex; 
+        renderCurrentQuestion(); 
+        renderNavigationMap(); 
+    }
+    
+    function navigateQuestion(directionOffset) { 
+        const nextIndex = quizState.currentIndex + directionOffset; 
+        if (nextIndex >= 0 && nextIndex < questionsDatabase.length) goToQuestion(nextIndex); 
+    }
+
+    function updateNavigationButtons() {
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        if (btnPrev) btnPrev.disabled = (quizState.currentIndex === 0);
+        if (btnNext) {
+            if (quizState.currentIndex === questionsDatabase.length - 1) { 
+                btnNext.textContent = "Finalizar Prova"; 
+                btnNext.onclick = finishQuiz; 
+            } else { 
+                btnNext.textContent = "Próxima ➡️"; 
+                btnNext.onclick = () => navigateQuestion(1); 
+            }
+        }
+    }
+
+    function calculateStars(percent) {
+        if (percent === 100) return "⭐⭐⭐⭐⭐";
+        if (percent >= 80) return "⭐⭐⭐⭐";
+        if (percent >= 60) return "⭐⭐⭐";
+        if (percent >= 40) return "⭐⭐";
+        if (percent > 0) return "⭐";
+        return "🌑"; 
+    }
+
+    function finishQuiz() {
+        const unansweredCount = quizState.userAnswers.filter(answer => answer === null).length;
+        if (unansweredCount > 0) {
+            if (!confirm(`Ainda faltam ${unansweredCount} questões. Tem a certeza que quer finalizar?`)) return;
+        }
+
+        stopSuccessAnimation();
+
+        const correctCount = quizState.userAnswers.filter((answer, index) => answer === questionsDatabase[index].correctIndex).length;
+        const totalQ = questionsDatabase.length;
+        const pct = Math.round((correctCount / totalQ) * 100);
+        
+        document.getElementById('finalPercent').textContent = `${pct}%`;
+        document.getElementById('finalScoreText').textContent = `Você acertou ${correctCount} de ${totalQ}`;
+        document.getElementById('finalStars').textContent = calculateStars(pct);
+
+        const actionButtonsContainer = document.getElementById('action-buttons');
+        const reviewContainer = document.getElementById('review-container');
+        
+        let summaryHTML = '';
+
+        if (pct >= 80) {
+            summaryHTML += `
+                <div class="result-summary-box success">
+                    <strong>🎉 EXCELENTE! (GREAT JOB!)</strong> Sua base gramatical em pronomes relativos e interpretação de texto está incrível. Você está mais do que preparado(a) para sua prova do 2º Bimestre!
+                </div>
+            `;
+            actionButtonsContainer.innerHTML = `<button class="btn-action" onclick="resetFullProgress()">🔄 LIMPAR DADOS E REPETIR PARA 100%</button>`;
+        } else {
+            summaryHTML += `
+                <div class="result-summary-box error">
+                    <strong>⚠️ PRECISA DE MAIS ESTUDO (STUDY MORE!)</strong> Você foi avaliado(a) abaixo da meta (80%). Revise com atenção a diferença entre WHO (pessoas) e WHICH (coisas) antes do teste.
+                </div>
+            `;
+            actionButtonsContainer.innerHTML = `<button class="btn-action" onclick="resetFullProgress()">🔄 LIMPAR E REFAZER AVALIAÇÃO</button>`;
+        }
+        
+        if (correctCount < totalQ) {
+            summaryHTML += '<h4 style="margin-top:15px; color:var(--text-color); font-size:1.15rem;">Revisão das Falhas:</h4>';
+            questionsDatabase.forEach((question, index) => {
+                const userAnswerIndex = quizState.userAnswers[index];
+                if (userAnswerIndex !== question.correctIndex) {
+                    const userAnswerText = userAnswerIndex === null ? "Você deixou em branco" : question.options[userAnswerIndex];
+                    const correctAnswerText = question.options[question.correctIndex];
+
+                    summaryHTML += `
+                        <div class="error-log-item">
+                            <strong style="color:var(--theme-dark); font-size:1.05rem; display:block; margin-bottom:8px;">Q${index + 1}: ${question.text}</strong>
+                            <span style="color:var(--wrong-border); font-weight: 600; display:block; margin-bottom:5px;">Sua resposta: ${userAnswerText}</span>
+                            <span style="color:var(--correct-border); font-weight: 700; display:block;">A Resposta Correta: ${correctAnswerText}</span>
+                        </div>
+                    `;
+                }
+            });
+        }
+        reviewContainer.innerHTML = summaryHTML;
+        changeApplicationView('result');
+    }
+    
+    // START
+    loadSavedProgress();
+    changeApplicationView('explanation');
+</script>
+</body>
+</html>
