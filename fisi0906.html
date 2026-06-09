@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termologia e Escalas - Promover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root {
+/* Tema de Física/Termologia: Tons de Laranja, Vermelho e Aço */
+--bg-color: #FAFAFA;
+--text-color: #171717;
+--border-color: #171717;
+--white: #FFFFFF;
+--theme-light: #FFEDD5;
+--theme-medium: #FB923C;
+--theme-dark: #EA580C;
+--theme-contrast: #9A3412;
+--theme-accent: #DC2626;
+--theme-text-active: #FFFFFF;
+
+/* Cores de Feedback - NÃO ALTERAR */
+--correct-bg: #D1FAE5;
+--correct-border: #059669;
+--wrong-bg: #FFE4E6;
+--wrong-border: #BE123C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: 'Poppins', sans-serif; 
+background-color: var(--bg-color); 
+color: var(--text-color);
+display: flex; 
+flex-direction: column; 
+align-items: center; 
+min-height: 100vh; 
+padding: 20px; 
+padding-bottom: 100px;
+background-image: linear-gradient(var(--theme-light) 1px, transparent 1px),
+linear-gradient(90deg, var(--theme-light) 1px, transparent 1px);
+background-size: 20px 20px;
+}
+
+@keyframes shake {
+0% { transform: translateX(0); }
+25% { transform: translateX(-6px); }
+50% { transform: translateX(6px); }
+75% { transform: translateX(-6px); }
+100% { transform: translateX(0); }
+}
+
+.shake-effect { animation: shake 0.4s ease-in-out; }
+@keyframes fadeIn { from {opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.pulse-effect { animation: pulse 1s infinite; display: inline-block; }
+@keyframes pulse {
+0% { transform: scale(1); }
+15% { transform: scale(1.15); color: var(--theme-contrast); }
+30% { transform: scale(1); }
+45% { transform: scale(1.15); color: var(--theme-contrast); }
+100% { transform: scale(1); }
+}
+
+.logo-header { width: 100%; max-width: 600px; display: flex; justify-content: center;
+flex-direction: column; align-items: center; padding: 20px 0 10px 0; }
+.css-logo { font-size: 1.6rem; font-weight: 900; color: var(--white); text-transform: uppercase; letter-spacing: -1px; border: 3px solid var(--border-color); padding: 8px 20px; border-radius: 12px; background: var(--theme-dark); box-shadow: 4px 4px 0px var(--theme-contrast); text-align: center; margin-bottom: 15px; }
+h1 { font-size: 1.8rem; font-weight: 900; color: var(--text-color); text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0px rgba(0,0,0,0.1); text-align: center; }
+.subtitle { font-size: 0.95rem; color: var(--theme-dark); font-weight: 600; text-align: center; }
+.container { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 20px; }
+.toggle-container { background-color: var(--white); border: 2px solid var(--border-color); border-radius: 50px; padding: 4px; display: flex; margin-bottom: 10px; box-shadow: 3px 3px 0px var(--border-color); }
+.toggle-btn {flex: 1; border: none; background: none; padding: 12px 0; border-radius: 40px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: var(--theme-dark); cursor: pointer; transition: all 0.3s ease; }
+.toggle-btn.active { background-color: var(--theme-dark); color: var(--theme-text-active); box-shadow: 0px 2px 5px rgba(0,0,0,0.2); }
+.view-section { display: none; animation: fadeIn 0.4s ease; flex-direction: column; gap: 20px; }
+.search-container { position: relative; width: 100%; }
+.search-input { width: 100%; padding: 15px 20px 15px 50px; border: 2px solid var(--border-color); border-radius: 50px; background-color: var(--white); font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text-color); box-shadow: 4px 4px 0px var(--border-color); outline: none; transition: all 0.2s ease; }
+.search-input:focus { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--theme-contrast); border-color: var(--theme-dark); }
+.search-icon {position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; opacity: 0.7; }
+#no-results { text-align: center; color: var(--theme-dark); font-weight: 600; display: none; }
+.content-group {display: flex; flex-direction: column; gap: 12px; }
+.section-badge { display: inline-block; padding: 8px 16px; background-color: var(--theme-dark); color: var(--white); font-size: 0.9rem; font-weight: 700; border-radius: 8px; border: 2px solid var(--border-color); box-shadow: 3px 3px 0px rgba(0,0,0,0.2); text-transform: uppercase; align-self: flex-start; margin-bottom: 5px; }
+.theory-box { display: flex; flex-direction: column; padding: 20px; border-radius: 16px; background-color: var(--white); border: 2px solid var(--border-color); box-shadow: 4px 4px 0px var(--border-color); font-weight: 500; font-size: 0.95rem; line-height: 1.6; position: relative; overflow: hidden; gap: 15px; }
+.theory-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background-color: var(--theme-contrast); border-right: 2px solid var(--border-color); }
+.theory-box h3 {font-size: 1.2rem; font-weight: 900; color: var(--theme-dark); margin-bottom: 5px; border-bottom: 2px solid var(--theme-light); padding-bottom: 5px; display: flex; align-items: center; gap: 8px;}
+.visual-area { background: #FAFAFA; border: 2px dashed var(--theme-dark); border-radius: 8px; padding: 15px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; font-weight: bold; font-size: 1.5rem; color: var(--theme-contrast); text-align: center; }
+.highlight-box { background-color: #FFEDD5; border-left: 4px solid var(--theme-contrast); padding: 15px; border-radius: 6px; font-size: 0.9rem; color: #9A3412; }
+.highlight-box.warning { background-color: #FEF2F2; border-left-color: #BE123C; color: #881337; }
+.difficulty-badge {display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border: 2px solid var(--border-color); box-shadow: 2px 2px 0px rgba(0,0,0,1); }
+.dif-facil {background: #D1FAE5; color: #065F46; }
+.dif-medio { background: #FEF08A; color: #713F12; }
+.dif-dificil { background: #FECACA; color: #7F1D1D; }
+.question-map { display: flex; gap: 8px; overflow-x: auto; padding: 10px 5px; margin-bottom: 20px; white-space: nowrap; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+.question-map::-webkit-scrollbar {display: none; }
+.map-dot { min-width: 35px; height: 35px; border: 2px solid var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; color: var(--theme-dark); background: white; cursor: pointer; transition: all 0.2s; }
+.map-dot.active { background-color: var(--theme-dark); color: white; box-shadow: 2px 2px 0px var(--theme-contrast); transform: scale(1.1); }
+.map-dot.answered-correct {background-color: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-border); }
+.map-dot.answered-wrong { background-color: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-border); }
+.option-btn { display: flex; align-items: center; width: 100%; padding: 16px; background-color: var(--white); border: 2px solid var(--border-color); border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.1s ease; box-shadow: 3px 3px 0px rgba(0,0,0,0.1); font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; text-align: left; color: var(--text-color); }
+.option-btn:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px var(--theme-contrast); border-color: var(--theme-dark); }
+.opt-circle { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border-color); margin-right: 15px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0; background: var(--theme-light); color: var(--theme-dark); }
+.option-btn.correct {background-color: var(--correct-bg); border-color: var(--correct-border); box-shadow: 2px 2px 0px var(--correct-border); }
+.option-btn.correct .opt-circle {background-color: var(--correct-border); color: white; border-color: var(--correct-border); }
+.option-btn.wrong {background-color: var(--wrong-bg); border-color: var(--wrong-border); opacity: 0.9; box-shadow: none; }
+.option-btn.wrong .opt-circle {background-color: var(--wrong-border); color: white; border-color: var(--wrong-border); }
+.option-btn.disabled {pointer-events: none; opacity: 0.7; }
+.feedback-box { display: block; margin-top: 20px; background-color: #FAFAFA; border: 2px dashed var(--theme-dark); border-radius: 12px; padding: 20px; animation: slideUp 0.3s ease-out; }
+.feedback-title { font-weight: 900; text-transform: uppercase; font-size: 0.95rem; margin-bottom: 10px; display:flex; align-items:center; gap:8px; color: var(--theme-dark); }
+.feedback-item { margin-bottom: 8px; font-size: 0.85rem; padding-left: 10px; border-left: 3px solid #CBD5E1; line-height: 1.5; color: #0F172A; }
+.feedback-item.correct-opt {border-left-color: var(--correct-border); font-weight: 700; color: var(--correct-border); background: var(--correct-bg); padding: 10px; border-radius: 0 6px 6px 0; }
+.feedback-item.wrong-opt {border-left-color: var(--wrong-border); color: #7F1D1D; }
+.result-card {background: white; border: 3px solid var(--border-color); border-radius: 20px; padding: 30px; box-shadow: 6px 6px 0px var(--border-color); margin-bottom: 30px; text-align: center; }
+.stars-container { font-size: 3.5rem; margin: 10px 0; letter-spacing: 5px; }
+.percentage-big {font-size: 4.5rem; font-weight: 900; color: var(--theme-dark); line-height: 1; margin: 10px 0; text-shadow: 3px 3px 0px var(--theme-contrast); }
+.btn-action { width: 100%; padding: 18px; background-color: var(--theme-dark); color: white; border: 3px solid var(--border-color); border-radius: 12px; font-size: 1.1rem; font-weight: 900; cursor: pointer; box-shadow: 4px 4px 0px var(--theme-contrast); transition: all 0.1s; text-transform: uppercase; margin-top: 20px; }
+.btn-action:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--theme-contrast); }
+.quiz-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: var(--bg-color); border-top: 3px solid var(--border-color); padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 100; }
+.nav-btn { padding: 12px 24px; border-radius: 8px; font-weight: 800; border: 2px solid var(--border-color); cursor: pointer; box-shadow: 2px 2px 0px var(--border-color); font-family: 'Poppins', sans-serif; text-transform: uppercase;}
+.nav-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; transform: none; }
+.btn-next { background-color: var(--theme-dark); color: white; }
+.btn-prev { background-color: white; color: var(--text-color); }
+</style>
+</head>
+<body>
+
+<div class="container">
+<header class="logo-header">
+<div class="css-logo"><span class="pulse-effect">🌡️</span> PROMOVER</div>
+<h1>FÍSICA - 8º ANO</h1>
+<p class="subtitle">Termologia, Escalas e Conversões</p>
+</header>
+
+<div class="toggle-container">
+<button class="toggle-btn active" id="btnExp" onclick="setMode('explanation')">Teoria</button>
+<button class="toggle-btn" id="btnPrac" onclick="setMode('practice')">Prática Nível Forte (15)</button>
+</div>
+
+<div id="viewExplanation" class="view-section" style="display: flex;">
+<div class="search-container">
+<span class="search-icon" aria-hidden="true">🔍</span>
+<input type="text" id="searchInput" class="search-input" aria-label="Pesquisar conteúdo" placeholder="Pesquisar conceito...">
+</div>
+<div id="no-results"><p>Termo não encontrado.</p></div>
+
+<!-- TEORIA 1 -->
+<div class="content-group">
+<span class="section-badge">Fundamentos</span>
+<div class="theory-box">
+<h3>1. O que é Temperatura?</h3>
+<div style="display: flex; justify-content: center; gap: 20px; margin: 10px 0;">
+  <svg viewBox="0 0 200 100" width="100%" height="100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="10" width="80" height="60" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+    <circle cx="30" cy="40" r="5" fill="#0284C7"/> <path d="M22,35 A8,8 0 0,0 22,45" fill="none" stroke="#0284C7"/> <path d="M38,35 A8,8 0 0,1 38,45" fill="none" stroke="#0284C7"/>
+    <circle cx="50" cy="30" r="5" fill="#0284C7"/> <path d="M42,25 A8,8 0 0,0 42,35" fill="none" stroke="#0284C7"/> <path d="M58,25 A8,8 0 0,1 58,35" fill="none" stroke="#0284C7"/>
+    <circle cx="70" cy="50" r="5" fill="#0284C7"/> <path d="M62,45 A8,8 0 0,0 62,55" fill="none" stroke="#0284C7"/> <path d="M78,45 A8,8 0 0,1 78,55" fill="none" stroke="#0284C7"/>
+    <text x="50" y="85" font-size="10" text-anchor="middle" font-weight="bold">Frio (Baixa Agitação)</text>
+    
+    <rect x="110" y="10" width="80" height="60" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <circle cx="130" cy="40" r="5" fill="#DC2626"/> 
+    <path d="M120,32 A12,12 0 0,0 120,48 M116,30 A16,16 0 0,0 116,50" fill="none" stroke="#DC2626"/>
+    <path d="M140,32 A12,12 0 0,1 140,48 M144,30 A16,16 0 0,1 144,50" fill="none" stroke="#DC2626"/>
+    
+    <circle cx="150" cy="25" r="5" fill="#DC2626"/>
+    <path d="M140,17 A12,12 0 0,0 140,33" fill="none" stroke="#DC2626"/>
+    <path d="M160,17 A12,12 0 0,1 160,33" fill="none" stroke="#DC2626"/>
+    
+    <circle cx="170" cy="55" r="5" fill="#DC2626"/>
+    <path d="M160,47 A12,12 0 0,0 160,63" fill="none" stroke="#DC2626"/>
+    <path d="M180,47 A12,12 0 0,1 180,63" fill="none" stroke="#DC2626"/>
+    <text x="150" y="85" font-size="10" text-anchor="middle" font-weight="bold">Quente (Alta Agitação)</text>
+  </svg>
+</div>
+<p>Temperatura é a grandeza física que mede o <strong>grau de agitação térmica (energia cinético-molecular)</strong> das partículas de um corpo. Quanto mais rápido as moléculas vibram, maior a temperatura.</p>
+<div class="highlight-box warning">
+<strong>Atenção: Temperatura NÃO é Calor!</strong> Calor é energia térmica em trânsito entre dois corpos de temperaturas diferentes. Um corpo possui temperatura, mas nunca "possui" calor.
+</div>
+</div>
+</div>
+
+<!-- TEORIA 2 -->
+<div class="content-group">
+<span class="section-badge">Escalas Tradicionais</span>
+<div class="theory-box">
+<h3>2. Celsius, Fahrenheit e Kelvin</h3>
+<p>As escalas baseiam-se em dois pontos fixos: Fusão do Gelo e Ebulição da Água (ao nível do mar).</p>
+<div class="visual-area">
+  <svg viewBox="0 0 250 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+    <!-- Linhas Guia -->
+    <line x1="45" y1="25" x2="205" y2="25" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="45" y1="95" x2="205" y2="95" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="4"/>
+
+    <!-- Celsius -->
+    <rect x="30" y="20" width="10" height="100" fill="#E5E7EB" stroke="#171717" stroke-width="2" rx="5"/>
+    <rect x="32" y="50" width="6" height="70" fill="#DC2626" rx="3"/>
+    <circle cx="35" cy="115" r="8" fill="#DC2626" stroke="#171717" stroke-width="2"/>
+    <line x1="40" y1="25" x2="48" y2="25" stroke="#171717" stroke-width="2"/>
+    <text x="52" y="28" font-size="9" font-weight="bold">100 °C</text>
+    <line x1="40" y1="95" x2="48" y2="95" stroke="#171717" stroke-width="2"/>
+    <text x="52" y="98" font-size="9" font-weight="bold">0 °C</text>
+    
+    <!-- Fahrenheit -->
+    <rect x="110" y="20" width="10" height="100" fill="#E5E7EB" stroke="#171717" stroke-width="2" rx="5"/>
+    <rect x="112" y="50" width="6" height="70" fill="#DC2626" rx="3"/>
+    <circle cx="115" cy="115" r="8" fill="#DC2626" stroke="#171717" stroke-width="2"/>
+    <line x1="120" y1="25" x2="128" y2="25" stroke="#171717" stroke-width="2"/>
+    <text x="132" y="28" font-size="9" font-weight="bold">212 °F</text>
+    <line x1="120" y1="95" x2="128" y2="95" stroke="#171717" stroke-width="2"/>
+    <text x="132" y="98" font-size="9" font-weight="bold">32 °F</text>
+
+    <!-- Kelvin -->
+    <rect x="190" y="20" width="10" height="100" fill="#E5E7EB" stroke="#171717" stroke-width="2" rx="5"/>
+    <rect x="192" y="50" width="6" height="70" fill="#DC2626" rx="3"/>
+    <circle cx="195" cy="115" r="8" fill="#DC2626" stroke="#171717" stroke-width="2"/>
+    <line x1="200" y1="25" x2="208" y2="25" stroke="#171717" stroke-width="2"/>
+    <text x="212" y="28" font-size="9" font-weight="bold">373 K</text>
+    <line x1="200" y1="95" x2="208" y2="95" stroke="#171717" stroke-width="2"/>
+    <text x="212" y="98" font-size="9" font-weight="bold">273 K</text>
+  </svg>
+</div>
+</div>
+</div>
+
+<!-- TEORIA 3 -->
+<div class="content-group">
+<span class="section-badge">O Limite da Natureza</span>
+<div class="theory-box">
+<h3>3. O Zero Absoluto</h3>
+<p>A escala <strong>Kelvin (K)</strong> é a escala absoluta usada no Sistema Internacional. Ela não usa "graus" (°).</p>
+<div class="highlight-box">
+O marco inicial da escala Kelvin é o <strong>0 K (-273 °C)</strong>. Neste ponto hipotético, as partículas de um corpo atingiriam o repouso total (ausência de energia cinética). Como o movimento não pode ser "negativo", <strong>não existem temperaturas negativas na escala Kelvin.</strong>
+</div>
+</div>
+</div>
+
+<!-- TEORIA 4 -->
+<div class="content-group">
+<span class="section-badge">Matemática Térmica</span>
+<div class="theory-box">
+<h3>4. Fórmulas de Conversão</h3>
+<p>O Teorema de Tales permite criar equações entre qualquer escala termométrica:</p>
+<div class="highlight-box">
+<strong>Celsius para Fahrenheit:</strong><br>
+C / 5 = (F - 32) / 9<br><br>
+<strong>Celsius para Kelvin:</strong><br>
+K = C + 273
+</div>
+<div class="highlight-box warning">
+<strong>Pegadinha Mortal (Variação - Δ):</strong><br>
+Uma variação de temperatura não obedece à fórmula acima. Se a temperatura sobe 10 °C, ela também sobe 10 K (a proporção é 1:1). Mas, nas escalas C e F, a fórmula da variação é: <strong>ΔC / 5 = ΔF / 9</strong>.
+</div>
+</div>
+</div>
+
+<button class="btn-action" onclick="setMode('practice')">
+Iniciar Prova Nível Forte (15 Q) →
+</button>
+</div>
+
+<div id="viewPractice" class="view-section">
+<div style="margin-bottom: 20px; background-color: var(--white); padding: 15px; border-radius: 12px; border: 3px solid var(--border-color); box-shadow: 4px 4px 0px var(--border-color);">
+<h2 style="color:var(--theme-dark); font-weight:900; margin-bottom: 5px;">A Prova de Fogo - Nível IFCE</h2>
+<p style="color: #0F172A; font-size: 0.95rem; font-weight:600;">
+15 questões táticas de termologia (com cálculos e pegadinhas teóricas). Pegue em papel e caneta. Acerte <strong>80% (12/15)</strong> para ser aprovado!
+</p>
+</div>
+
+<div class="question-map" id="qMap"></div>
+<div id="quizContainer" style="margin-bottom: 100px;"></div>
+</div>
+
+<div id="viewResult" class="view-section">
+<div class="result-card">
+<h2 style="font-weight:900; text-transform:uppercase;">Relatório Final</h2>
+<div class="stars-container" id="finalStars">★</div>
+<div class="percentage-big" id="finalPercent">0%</div>
+<p style="font-size:1.2rem; font-weight:700; color:#555;" id="finalScoreText">Você acertou 0 de 15</p>
+<div id="review-container"></div>
+</div>
+<div id="action-buttons"></div>
+</div>
+</div>
+
+<footer class="quiz-footer" id="quizFooter">
+<button class="nav-btn btn-prev" id="btnPrev" onclick="changeQuestion(-1)">Anterior</button>
+<button class="nav-btn btn-next" id="btnNext" onclick="changeQuestion(1)">Próxima</button>
+</footer>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const contentGroups = document.querySelectorAll('.content-group');
+const noResultsMsg = document.getElementById('no-results');
+
+searchInput.addEventListener('input', function(e) {
+const term = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+let totalVisible = 0;
+contentGroups.forEach(group => {
+const textContent = group.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+if (textContent.includes(term)) {
+group.style.display = 'flex';
+totalVisible++;
+} else {
+group.style.display = 'none';
+}
+});
+noResultsMsg.style.display = totalVisible === 0 ? 'block' : 'none';
+});
+
+// BANCO DE DADOS DE QUESTÕES - FÍSICA (TERMOLOGIA)
+const questions = [
+// FÁCEIS (1-5)
+{
+id: 1, level: "Fácil",
+text: "Ao medir a temperatura de um bebê com um termómetro digital, a mãe encontra 37 °C. Do ponto de vista da física moderna, esse valor representa rigorosamente:",
+options: ["A quantidade de calor presente no corpo do bebê.", "A energia térmica radiante sendo expulsa pelo corpo.", "O grau de agitação térmica das partículas do corpo do bebê.", "O peso molecular do sistema sanguíneo."],
+correct: 2,
+explanation: { correct: "A temperatura é a leitura macroscópica da energia cinética (agitação) das partículas microscópicas. Quanto mais as moléculas vibram, maior o número no termómetro.", options: ["Erro: Temperatura não é calor. Um corpo nunca \"contém\" calor, ele contém energia interna.", "Erro: O termómetro clínico de contato não mede a radiação, mede o equilíbrio térmico da agitação molecular.", "", "Erro: Opção sem qualquer nexo com a termodinâmica."] }
+},
+{
+id: 2, level: "Fácil",
+text: "William Thomson, mais conhecido como Lord Kelvin, propôs uma escala de temperatura que possui um 'Zero Absoluto' (0 K). O que esse ponto representa fisicamente?",
+options: ["O congelamento perfeito da água nos oceanos.", "O estado onde a água atinge sua densidade máxima.", "A temperatura de fusão do Nitrogênio líquido.", "A ausência total de movimento molecular (energia cinética nula)."],
+correct: 3,
+explanation: { correct: "O Zero Absoluto (-273,15 °C) é o limite térmico inferior do universo. É o ponto teórico onde toda a vibração atômica cessaria completamente.", options: ["Erro: A água congela a 273 K (0°C), um valor muito distante do zero absoluto.", "Erro: A água atinge densidade máxima a 4°C, não no zero absoluto.", "Erro: O Nitrogênio funde a aproximadamente 63 K.", ""] }
+},
+{
+id: 3, level: "Fácil",
+text: "Durante um experimento de laboratório, a temperatura de uma substância é aferida em 77 °F. Qual é o valor algébrico correspondente em graus Celsius?",
+options: ["18 °C", "25 °C", "20 °C", "15 °C"],
+correct: 1,
+explanation: { correct: "Aplicando a fórmula: C/5 = (F-32)/9 -> C/5 = (77-32)/9 -> C/5 = 45/9 -> C/5 = 5 -> C = 25.", options: ["Erro: Erro de matemática básica ao subtrair ou dividir a fórmula.", "", "Erro: Se fosse 20°C, a temperatura em Fahrenheit seria 68°F.", "Erro: Se fosse 15°C, a temperatura em Fahrenheit seria 59°F."] }
+},
+{
+id: 4, level: "Fácil",
+text: "Um engenheiro monitoriza o funcionamento de uma máquina importada que opera a exatos 320 K. Qual é a temperatura correspondente dessa máquina em graus Celsius?",
+options: ["47 °C", "57 °C", "60 °C", "45 °C"],
+correct: 0,
+explanation: { correct: "A fórmula de conversão é K = C + 273. Substituindo: 320 = C + 273 -> C = 320 - 273 -> C = 47.", options: ["", "Erro: O aluno provavelmente somou errado ou subtraiu com descuido.", "Erro: Incorreto. O valor exato é 47.", "Erro: Incorreto. Revisar a subtração básica."] }
+},
+{
+id: 5, level: "Fácil",
+text: "Existe uma temperatura específica em que o valor numérico lido no termómetro de Celsius é exatamente igual ao lido no termómetro de Fahrenheit (ou seja, C = F). Que temperatura letal é essa?",
+options: ["0", "-40", "100", "-273"],
+correct: 1,
+explanation: { correct: "Substituindo C e F por 'x' na fórmula: x/5 = (x-32)/9 -> 9x = 5x - 160 -> 4x = -160 -> x = -40. Em -40°C e -40°F, os termómetros marcam a mesma coisa.", options: ["Erro: 0°C equivale a 32°F.", "", "Erro: 100°C equivale a 212°F.", "Erro: -273°C é o zero absoluto em Kelvin."] }
+},
+
+// MÉDIAS (6-10)
+{
+id: 6, level: "Médio",
+text: "Um forno de pizzaria industrial no Brasil marca 300 °C. O pizzaiolo estrangeiro, recém-chegado, está acostumado com a escala Fahrenheit e deseja saber qual é a temperatura equivalente. O valor exato é:",
+options: ["500 °F", "572 °F", "600 °F", "480 °F"],
+correct: 1,
+explanation: { correct: "Fórmula: 300/5 = (F-32)/9 -> 60 = (F-32)/9 -> 540 = F-32 -> F = 540 + 32 -> F = 572.", options: ["Erro: O aluno provavelmente fez uma conta mental simplificada e arredondada, ignorando o fator 32.", "", "Erro: O aluno multiplicou 300 por 2 direto.", "Erro: Incorreto. Falha na aplicação algébrica de proporções."] }
+},
+{
+id: 7, level: "Médio",
+text: "⚠️ PEGADINHA: Pela manhã, a temperatura de uma sala era de 15 °C. À tarde, um termómetro marcou 35 °C. A *variação de temperatura* (ΔT) sofrida por essa sala, expressa na escala Kelvin, foi de:",
+options: ["293 K", "20 K", "273 K", "308 K"],
+correct: 1,
+explanation: { correct: "Cuidado! A temperatura variou (subiu) 20 °C (de 15 para 35). A escala Celsius possui 100 divisões (0 a 100), e a Kelvin também (273 a 373). Logo, a variação (os 'degraus') tem o mesmo tamanho: ΔC = ΔK. A sala variou 20 K.", options: ["Erro: O aluno converteu a variação (20) somando 273. Isso está errado! Você converte a temperatura exata, não a variação.", "", "Erro: Resposta aleatória utilizando a constante da fórmula.", "Erro: O aluno converteu os 35°C para Kelvin (35+273=308), mas a pergunta quer o valor da VARIAÇÃO (a diferença entre manhã e tarde)."] }
+},
+{
+id: 8, level: "Médio",
+text: "A termometria tradicional depende de líquidos (como mercúrio ou álcool colorido) dentro de tubos de vidro. Qual o princípio da física que permite a esses termómetros funcionarem e marcarem a temperatura?",
+options: ["A variação do peso do líquido em diferentes pressões.", "A dilatação térmica: o volume do líquido expande ou contrai proporcionalmente à agitação molecular.", "A mudança da densidade do ar dentro do vidro.", "A radiação infravermelha emitida pelo mercúrio."],
+correct: 1,
+explanation: { correct: "Quando a temperatura sobe, as moléculas do mercúrio/álcool agitam-se mais e afastam-se umas das outras. Isso faz o volume do líquido aumentar (dilatação térmica) e subir no tubo.", options: ["Erro: O peso não se altera com a temperatura.", "", "Erro: O tubo de vidro de um termómetro clínico contém vácuo parcial, não ar interferindo na medição.", "Erro: Termómetros de mercúrio não funcionam captando radiação, mas por contato e dilatação."] }
+},
+{
+id: 9, level: "Médio",
+text: "Na antiguidade, acreditava-se que o calor era um fluido invisível chamado 'calórico', que passava de um corpo quente para um frio. Por que a Física Moderna declarou essa teoria como um erro brutal?",
+options: ["Porque o calor não é um fluido, mas sim energia térmica em trânsito devido exclusivamente a uma diferença de temperatura.", "Porque o calor é, na verdade, uma partícula sólida subatómica chamada Bóson Térmico.", "Porque o fluido calórico só existe em temperaturas acima de 100°C.", "Porque descobriram que o frio é que é um fluido transferível."],
+correct: 0,
+explanation: { correct: "A teoria do calórico ruiu quando Joule provou que calor e trabalho mecânico eram intercambiáveis (ambos são formas de energia). Calor não é matéria/fluido, é ENERGIA passando de um lado para o outro.", options: ["", "Erro: Absurdo científico. Não existem 'partículas' sólidas de calor.", "Erro: O fluido calórico nunca existiu em temperatura alguma.", "Erro: O 'frio' não existe na física como uma grandeza transferível. Frio é apenas a sensação de perda de calor."] }
+},
+{
+id: 10, level: "Médio",
+text: "Um estudante precisa organizar os três ambientes abaixo do MAIS FRIO para o MAIS QUENTE. \nAmbiente X: 0 K\nAmbiente Y: 0 °C\nAmbiente Z: 0 °F\nA ordem exata do mais frio para o mais quente é:",
+options: ["Y, Z, X", "X, Y, Z", "X, Z, Y", "Z, Y, X"],
+correct: 2,
+explanation: { correct: "O mais frio é 0 K (-273 °C). O próximo mais frio é 0 °F (-17,7 °C). O mais quente desses três 'zeros' é o 0 °C (ponto onde a água congela). A ordem é X, Z, Y.", options: ["Erro: Você considerou o Celsius (0°C) como o mais frio, o que é falso. 0 K é quase 300 graus mais frio que ele.", "Erro: 0°F é mais frio que 0°C. Você inverteu a ordem de Z e Y.", "", "Erro: Z (0°F) não é o mais frio do universo. O 0 K é."] }
+},
+
+// DIFÍCEIS (11-15)
+{
+id: 11, level: "Difícil",
+text: "Um investigador excêntrico criou uma escala arbitrária chamada Escala X. Nela, a fusão do gelo ocorre a 10 °X e a ebulição da água a 130 °X. Se um paciente estiver com febre de 40 °C, qual será a leitura no termómetro da escala X?",
+illustration: `
+<svg viewBox="0 0 150 150" width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+  <line x1="50" y1="10" x2="50" y2="135" stroke="var(--theme-dark)" stroke-width="2"/>
+  <line x1="100" y1="10" x2="100" y2="135" stroke="var(--theme-dark)" stroke-width="2"/>
+  <text x="50" y="10" font-size="12" font-weight="bold" text-anchor="middle">°C</text>
+  <text x="100" y="10" font-size="12" font-weight="bold" text-anchor="middle">°X</text>
+  
+  <line x1="45" y1="20" x2="55" y2="20" stroke="var(--border-color)"/> 
+  <text x="40" y="24" font-size="10" text-anchor="end">100</text>
+  <line x1="95" y1="20" x2="105" y2="20" stroke="var(--border-color)"/> 
+  <text x="110" y="24" font-size="10" text-anchor="start">130</text>
+  <line x1="55" y1="20" x2="95" y2="20" stroke="#CBD5E1" stroke-dasharray="3"/>
+  
+  <line x1="45" y1="120" x2="55" y2="120" stroke="var(--border-color)"/> 
+  <text x="40" y="124" font-size="10" text-anchor="end">0</text>
+  <line x1="95" y1="120" x2="105" y2="120" stroke="var(--border-color)"/> 
+  <text x="110" y="124" font-size="10" text-anchor="start">10</text>
+  <line x1="55" y1="120" x2="95" y2="120" stroke="#CBD5E1" stroke-dasharray="3"/>
+  
+  <line x1="45" y1="80" x2="55" y2="80" stroke="var(--theme-accent)" stroke-width="2"/> 
+  <text x="40" y="84" font-size="10" fill="var(--theme-accent)" font-weight="bold" text-anchor="end">40</text>
+  <line x1="95" y1="80" x2="105" y2="80" stroke="var(--theme-accent)" stroke-width="2"/> 
+  <text x="110" y="84" font-size="10" fill="var(--theme-accent)" font-weight="bold" text-anchor="start">?</text>
+  <line x1="55" y1="80" x2="95" y2="80" stroke="var(--theme-accent)" stroke-dasharray="3" opacity="0.5"/>
+</svg>`,
+options: ["48 °X", "58 °X", "40 °X", "50 °X"],
+correct: 1,
+explanation: { correct: "Teorema de Tales: (X - MínimoX) / (MáximoX - MínimoX) = C / 100. Substituindo: (X - 10) / (130 - 10) = 40 / 100. Ficamos com: (X - 10) / 120 = 0.4. Multiplicando: X - 10 = 48. X = 58 °X.", options: ["Erro: Você encontrou 48 na multiplicação, mas esqueceu de somar os 10 do ponto de fusão da escala X.", "", "Erro: Chute numérico.", "Erro: Falha na montagem da proporção algébrica de Tales."] }
+},
+{
+id: 12, level: "Difícil",
+text: "⚠️ CUIDADO: Um aquecedor sofreu uma avaria e elevou a temperatura de um tanque de água em 45 °F (variação = Δ 45 °F). Essa mesma elevação térmica lida em graus Celsius foi de:",
+options: ["25 °C", "45 °C", "7.2 °C", "77 °C"],
+correct: 0,
+explanation: { correct: "Pergunta sobre VARIAÇÃO (Δ). Não pode usar a fórmula normal, tem de usar a fórmula de degraus: ΔC / 5 = ΔF / 9. Substituindo: ΔC / 5 = 45 / 9. Ficamos com ΔC / 5 = 5. Logo, ΔC = 25 °C.", options: ["", "Erro: 1 grau Celsius é muito maior que 1 grau Fahrenheit. As variações não são idênticas numericamente.", "Erro: O aluno aplicou a fórmula tradicional de conversão de ponto fixo (subtraindo 32), o que é um erro teórico crasso quando se trata de 'elevação/variação'.", "Erro: Contas invertidas na fórmula de conversão de pontos fixos."] }
+},
+{
+id: 13, level: "Difícil",
+text: "Durante uma análise criogénica, um cientista deparou-se com o valor de -30 K num software de simulação descalibrado. Na física real e termodinâmica clássica, essa temperatura:",
+options: ["Equivale a -303 °C e congela imediatamente a matéria.", "Representa uma quebra na lei da conservação da massa.", "Equivale a um estado onde as partículas estariam a rodar para trás.", "É impossível de existir, pois não há agitação térmica menor que zero absoluto."],
+correct: 3,
+explanation: { correct: "A escala Kelvin é a métrica absoluta da energia cinética (movimento). Zero é a paragem total. Como um carro não pode andar a 'menos 30 km/h', as partículas não podem vibrar menos do que totalmente paradas.", options: ["Erro: 0 K é o limite. Matematicamente daria -303, mas a física proíbe limites abaixo de 0 K (-273,15 °C).", "Erro: Termodinâmica não lida com perda de massa neste contexto, mas com energia.", "Erro: As partículas não andam 'para trás' no tempo ou no espaço num hipotético sistema negativo.", ""] }
+},
+{
+id: 14, level: "Difícil",
+text: "Num artigo científico britânico lê-se que uma liga metálica suporta uma variação térmica brutal de Δ 90 K antes de romper. Se exportarmos esse material para os EUA, essa variação de resistência em Fahrenheit será reportada como:",
+options: ["90 °F", "162 °F", "50 °F", "180 °F"],
+correct: 1,
+explanation: { correct: "Primeira regra: A variação em Kelvin é IGUAL à variação em Celsius (ΔK = ΔC = 90). Agora aplica a fórmula de variação para o Fahrenheit: ΔC / 5 = ΔF / 9. Fica: 90 / 5 = ΔF / 9. Resulta em 18 = ΔF / 9. Multiplicando: ΔF = 18 * 9 = 162 °F.", options: ["Erro: Graus Fahrenheit são menores, logo precisa de um número maior para representar o mesmo 'salto' térmico.", "", "Erro: O aluno inverteu a fórmula dividindo 90 por 9 e multiplicando por 5 (como se convertesse de F para C).", "Erro: O aluno apenas dobrou o valor inicial sem critério algébrico."] }
+},
+{
+id: 15, level: "Difícil",
+text: "Uma nova escala termométrica Y marca -20 °Y para o ponto de fusão do gelo e 80 °Y para a ebulição da água. Se um termómetro em Celsius marcar 30 °C, qual será a temperatura idêntica no termómetro Y?",
+options: ["10 °Y", "30 °Y", "50 °Y", "24 °Y"],
+correct: 0,
+explanation: { correct: "Teorema de Tales: (Y - (-20)) / (80 - (-20)) = C / 100. Ficamos com: (Y + 20) / 100 = 30 / 100. Como os denominadores são 100, podemos cortar: Y + 20 = 30. O resultado final é Y = 10 °Y.", options: ["", "Erro: A escala Y possui um ponto zero deslocado (-20), logo 30°C não equivale a 30°Y.", "Erro: Você somou 30 + 20 em vez de subtrair para isolar a incógnita Y na equação.", "Erro: Chute utilizando proporções sem montar o Teorema de Tales."] }
+}
+];
+
+// VARIÁVEIS DE ESTADO E PERSISTÊNCIA
+const storageKey = 'promover_fisica_estado';
+let currentQuestion = 0;
+let savedAnswers = localStorage.getItem(storageKey);
+let userAnswers = savedAnswers ? JSON.parse(savedAnswers) : new Array(questions.length).fill(null);
+
+// Prevenção de crash: limpa o histórico se a quantidade de questões for alterada pelo professor
+if (userAnswers.length !== questions.length) {
+    userAnswers = new Array(questions.length).fill(null);
+    localStorage.removeItem(storageKey);
+}
+
+function setMode(mode) {
+const views = ['viewExplanation', 'viewPractice', 'viewResult'];
+views.forEach(v => document.getElementById(v).style.display = 'none');
+document.getElementById('quizFooter').style.display = 'none';
+
+if(mode === 'explanation') {
+document.getElementById('viewExplanation').style.display = 'flex';
+document.getElementById('btnExp').classList.add('active');
+document.getElementById('btnPrac').classList.remove('active');
+} else if (mode === 'practice') {
+document.getElementById('viewPractice').style.display = 'block';
+document.getElementById('quizFooter').style.display = 'flex';
+document.getElementById('btnExp').classList.remove('active');
+document.getElementById('btnPrac').classList.add('active');
+renderQuestion();
+renderMap();
+} else if (mode === 'result') {
+document.getElementById('viewResult').style.display = 'block';
+document.getElementById('quizFooter').style.display = 'none';
+}
+window.scrollTo(0,0);
+}
+
+function renderQuestion() {
+if(questions.length === 0) return;
+const q = questions[currentQuestion];
+const container = document.getElementById('quizContainer');
+const letters = ['A', 'B', 'C', 'D'];
+const ans = userAnswers[currentQuestion];
+let badgeClass = '';
+
+if(q.level === 'Fácil') badgeClass = 'dif-facil';
+else if(q.level === 'Médio') badgeClass = 'dif-medio';
+else badgeClass = 'dif-dificil';
+
+let html = `
+<div class="card-content" style="border: 3px solid var(--border-color); box-shadow: 4px 4px 0px var(--border-color); padding: 15px; border-radius: 12px; background: white;">
+<span class="difficulty-badge ${badgeClass}">${q.level}</span>
+<div style="margin-bottom: 20px;">
+<span style="font-size: 0.8rem; font-weight: 800; color: var(--theme-dark);">QUESTÃO ${currentQuestion + 1} DE ${questions.length}</span>
+<h2 style="font-size: 1.15rem; margin-top: 5px; color: var(--text-color); font-weight: 900;">${q.text}</h2>
+</div>
+${q.illustration ? `<div style="text-align: center; margin: 15px 0; background: #FAFAFA; border-radius: 8px; padding: 15px; border: 2px dashed var(--theme-light);">${q.illustration}</div>` : ''}
+<div class="options-list">
+`;
+
+q.options.forEach((opt, i) => {
+let cls = '';
+if (ans !== null) {
+if (i === q.correct) cls = 'correct';
+else if (i === ans) cls = 'wrong';
+else cls = 'disabled';
+}
+html += `
+<button class="option-btn ${cls}" onclick="handleAnswer(${i})" ${ans !== null ? 'disabled' : ''}>
+<div class="opt-circle">${letters[i]}</div>
+<div>${opt}</div>
+</button>
+`;
+});
+
+html += `</div>`;
+
+if(ans !== null) {
+let feedbackTitleColor = ans === q.correct ? 'var(--correct-border)' : 'var(--wrong-border)';
+let feedbackTitleText = ans === q.correct ? '☑ Raciocínio Aprovado!' : '☒ Ops! Falha Detectada!';
+let wrongExplanations = q.explanation.options.map((exp, i) => {
+if (i !== q.correct && exp !== "") {
+return `<div class="feedback-item wrong-opt" style="margin-top:8px;"><strong>${letters[i]})</strong> ${exp}</div>`;
+}
+return "";
+}).join("");
+
+html += `
+<div class="feedback-box">
+<div class="feedback-title" style="color:${feedbackTitleColor}">${feedbackTitleText}</div>
+<div class="feedback-item correct-opt"><strong>A Verdade:</strong> ${q.options[q.correct]}</div>
+<div style="margin-top:10px; font-size:0.95rem; color:var(--text-color); margin-bottom:15px; font-weight:600;">
+${q.explanation.correct}
+</div>
+<div style="margin-top:15px; border-top:1px dashed var(--theme-light); padding-top:10px;">
+<small style="color:var(--theme-dark);"><strong>Diagnóstico Técnico dos Distratores:</strong></small>
+${wrongExplanations}
+</div>
+</div>
+`;
+}
+
+html += `</div>`;
+container.innerHTML = html;
+updateNav();
+}
+
+function handleAnswer(idx) {
+if (userAnswers[currentQuestion] !== null) return;
+userAnswers[currentQuestion] = idx;
+localStorage.setItem(storageKey, JSON.stringify(userAnswers));
+
+if (idx === questions[currentQuestion].correct) {
+const duration = 1500;
+const end = Date.now() + duration;
+(function frame() {
+confetti({ particleCount: 5, angle: 60, spread: 55, origin: {x: 0, y: 0.6 }, colors: ['#EA580C', '#FB923C', '#F97316', '#C2410C'] });
+confetti({ particleCount: 5, angle: 120, spread: 55, origin: {x: 1, y: 0.6}, colors: ['#EA580C', '#FB923C', '#F97316', '#C2410C'] });
+if (Date.now() < end) { requestAnimationFrame(frame); }
+}());
+} else {
+const quizContainer = document.getElementById('quizContainer');
+quizContainer.classList.remove('shake-effect');
+void quizContainer.offsetWidth;
+quizContainer.classList.add('shake-effect');
+setTimeout(() => quizContainer.classList.remove('shake-effect'), 500);
+}
+renderQuestion();
+renderMap();
+}
+
+function renderMap() {
+if(questions.length === 0) return;
+const map = document.getElementById('qMap');
+map.innerHTML = questions.map((q, i) => {
+let cls = 'map-dot';
+if (i === currentQuestion) cls += ' active';
+if (userAnswers[i] !== null) {
+cls += userAnswers[i] === q.correct ? ' answered-correct' : ' answered-wrong';
+}
+return `<div class="${cls}" onclick="goTo(${i})">${i + 1}</div>`;
+}).join("");
+
+setTimeout(() => {
+const activeDot = map.querySelector('.map-dot.active');
+if (activeDot) {
+activeDot.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+}, 50);
+}
+
+function goTo(i) {
+if (window.confetti) confetti.reset();
+currentQuestion = i;
+renderQuestion();
+renderMap();
+}
+
+function changeQuestion(d) {
+let n = currentQuestion + d;
+if (n >= 0 && n < questions.length) goTo(n);
+}
+
+function updateNav() {
+document.getElementById('btnPrev').disabled = (currentQuestion === 0);
+const next = document.getElementById('btnNext');
+
+if (currentQuestion === questions.length - 1) {
+next.textContent = "Finalizar Prova";
+next.onclick = finish;
+} else {
+next.textContent = "Avançar";
+next.onclick = () => changeQuestion(1);
+}
+}
+
+function finish() {
+let correct = userAnswers.filter((a, i) => a === questions[i].correct).length;
+let percent = Math.round((correct / questions.length) * 100);
+
+if (window.confetti) confetti.reset();
+document.getElementById('finalPercent').textContent = percent + "%";
+document.getElementById('finalScoreText').textContent = `Você acertou ${correct} de ${questions.length} questões.`;
+document.getElementById('finalStars').textContent = percent >= 80 ? "⭐⭐⭐" : percent >= 60 ? "⭐⭐" : "⭐";
+
+let summary = '<div style="text-align:left; margin-top:20px;">';
+if (percent < 80) {
+summary += `<div style="background:var(--wrong-bg); padding:15px; border-radius:8px; margin-bottom:20px; border:2px solid var(--wrong-border); color:var(--wrong-border);">
+<strong>⚠️ Reprovado no Diagnóstico!</strong> O seu desempenho não atingiu a nota de corte (80%). Você está a cair nas armadilhas de matemática básica ou a confundir variação com escala absoluta. Revise a teoria e o Teorema de Tales.
+</div>`;
+document.getElementById('action-buttons').innerHTML = `<button class="btn-action" onclick="reset()">Zerar e Tentar Novamente</button>`;
+} else {
+summary += `<div style="background:var(--correct-bg); padding:15px; border-radius:8px; margin-bottom:20px; border:2px solid var(--correct-border); color:var(--correct-border);">
+<strong>🎯 Aprovado com Louvor!</strong> Demonstrou um excelente raciocínio matemático e físico. Consegue interpretar gráficos, fugir de pegadinhas de variação (Δ) e conhece as leis da Termodinâmica. Muito bem!
+</div>`;
+document.getElementById('action-buttons').innerHTML = `<button class="btn-action" onclick="reset()">Refazer Prova</button>`;
+}
+
+if (correct < questions.length) {
+summary += '<h4 style="margin-bottom:10px; color:var(--text-color);">Auditoria das Questões Erradas e Omitidas:</h4>';
+questions.forEach((q, i) => {
+if(userAnswers[i] !== q.correct) {
+let markedAnswer = userAnswers[i] !== null ? q.options[userAnswers[i]] : "<em style='color: #64748B;'>Em branco (Não respondida)</em>";
+summary += `<div style="margin-bottom:10px; padding:15px; background:var(--white); border-radius:8px; border:2px dashed var(--theme-dark);">
+<strong style="color:var(--theme-dark);">Q${i+1}:</strong> ${q.text}<br>
+<span style="color:var(--wrong-border); font-size:0.9rem; font-weight:600; display:block; margin-top:5px;">O que marcou: ${markedAnswer}</span>
+<span style="color:var(--correct-border); font-size:0.9rem; font-weight:600; display:block; margin-top:2px;">A Verdade: ${q.options[q.correct]}</span>
+</div>`;
+}
+});
+}
+summary += '</div>';
+document.getElementById('review-container').innerHTML = summary;
+setMode('result');
+}
+
+function reset() {
+localStorage.removeItem(storageKey);
+userAnswers = new Array(questions.length).fill(null);
+currentQuestion = 0;
+setMode('practice');
+}
+
+setMode(userAnswers.some(ans => ans !== null) ? 'practice' : 'explanation');
+</script>
+</body>
+</html>

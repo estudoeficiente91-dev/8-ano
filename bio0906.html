@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fisiologia Humana 8º Ano - Promover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root {
+/* Tema de Fisiologia/Medicina: Tons de Vermelho Sangue, Roxo e Gelo */
+--bg-color: #FAFAFA;
+--text-color: #171717;
+--border-color: #171717;
+--white: #FFFFFF;
+--theme-light: #FFE4E6;
+--theme-medium: #F43F5E;
+--theme-dark: #E11D48;
+--theme-contrast: #881337;
+--theme-accent: #4C1D95; /* Roxo para o Sistema Nervoso */
+--theme-text-active: #FFFFFF;
+
+/* Cores de Feedback */
+--correct-bg: #D1FAE5;
+--correct-border: #059669;
+--wrong-bg: #FFE4E6;
+--wrong-border: #BE123C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: 'Poppins', sans-serif; 
+background-color: var(--bg-color); 
+color: var(--text-color);
+display: flex; 
+flex-direction: column; 
+align-items: center; 
+min-height: 100vh; 
+padding: 20px; 
+padding-bottom: 100px;
+background-image: linear-gradient(var(--theme-light) 1px, transparent 1px),
+linear-gradient(90deg, var(--theme-light) 1px, transparent 1px);
+background-size: 20px 20px;
+}
+
+@keyframes shake {
+0% { transform: translateX(0); }
+25% { transform: translateX(-6px); }
+50% { transform: translateX(6px); }
+75% { transform: translateX(-6px); }
+100% { transform: translateX(0); }
+}
+
+.shake-effect { animation: shake 0.4s ease-in-out; }
+@keyframes fadeIn { from {opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.pulse-effect { animation: pulse 1s infinite; display: inline-block; }
+@keyframes pulse {
+0% { transform: scale(1); }
+15% { transform: scale(1.15); color: var(--theme-contrast); }
+30% { transform: scale(1); }
+45% { transform: scale(1.15); color: var(--theme-contrast); }
+100% { transform: scale(1); }
+}
+
+.logo-header { width: 100%; max-width: 600px; display: flex; justify-content: center;
+flex-direction: column; align-items: center; padding: 20px 0 10px 0; }
+.css-logo { font-size: 1.6rem; font-weight: 900; color: var(--white); text-transform: uppercase; letter-spacing: -1px; border: 3px solid var(--border-color); padding: 8px 20px; border-radius: 12px; background: var(--theme-dark); box-shadow: 4px 4px 0px var(--theme-contrast); text-align: center; margin-bottom: 15px; }
+h1 { font-size: 1.8rem; font-weight: 900; color: var(--text-color); text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0px rgba(0,0,0,0.1); text-align: center; }
+.subtitle { font-size: 0.95rem; color: var(--theme-dark); font-weight: 600; text-align: center; }
+.container { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 20px; }
+.toggle-container { background-color: var(--white); border: 2px solid var(--border-color); border-radius: 50px; padding: 4px; display: flex; margin-bottom: 10px; box-shadow: 3px 3px 0px var(--border-color); }
+.toggle-btn {flex: 1; border: none; background: none; padding: 12px 0; border-radius: 40px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: var(--theme-dark); cursor: pointer; transition: all 0.3s ease; }
+.toggle-btn.active { background-color: var(--theme-dark); color: var(--theme-text-active); box-shadow: 0px 2px 5px rgba(0,0,0,0.2); }
+.view-section { display: none; animation: fadeIn 0.4s ease; flex-direction: column; gap: 20px; }
+.search-container { position: relative; width: 100%; }
+.search-input { width: 100%; padding: 15px 20px 15px 50px; border: 2px solid var(--border-color); border-radius: 50px; background-color: var(--white); font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text-color); box-shadow: 4px 4px 0px var(--border-color); outline: none; transition: all 0.2s ease; }
+.search-input:focus { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--theme-contrast); border-color: var(--theme-dark); }
+.search-icon {position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; opacity: 0.7; }
+#no-results { text-align: center; color: var(--theme-dark); font-weight: 600; display: none; }
+.content-group {display: flex; flex-direction: column; gap: 12px; }
+.section-badge { display: inline-block; padding: 8px 16px; background-color: var(--theme-dark); color: var(--white); font-size: 0.9rem; font-weight: 700; border-radius: 8px; border: 2px solid var(--border-color); box-shadow: 3px 3px 0px rgba(0,0,0,0.2); text-transform: uppercase; align-self: flex-start; margin-bottom: 5px; }
+.theory-box { display: flex; flex-direction: column; padding: 20px; border-radius: 16px; background-color: var(--white); border: 2px solid var(--border-color); box-shadow: 4px 4px 0px var(--border-color); font-weight: 500; font-size: 0.95rem; line-height: 1.6; position: relative; overflow: hidden; gap: 15px; }
+.theory-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background-color: var(--theme-contrast); border-right: 2px solid var(--border-color); }
+.theory-box h3 {font-size: 1.2rem; font-weight: 900; color: var(--theme-dark); margin-bottom: 5px; border-bottom: 2px solid var(--theme-light); padding-bottom: 5px; display: flex; align-items: center; gap: 8px;}
+.visual-area { background: #FAFAFA; border: 2px dashed var(--theme-dark); border-radius: 8px; padding: 15px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; font-weight: bold; font-size: 1.5rem; color: var(--theme-contrast); text-align: center; }
+.highlight-box { background-color: #FFE4E6; border-left: 4px solid var(--theme-contrast); padding: 15px; border-radius: 6px; font-size: 0.9rem; color: #881337; }
+.highlight-box.warning { background-color: #FEF2F2; border-left-color: #BE123C; color: #881337; }
+.highlight-box.info { background-color: #F0F9FF; border-left-color: #0284C7; color: #075985; }
+.difficulty-badge {display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; border: 2px solid var(--border-color); box-shadow: 2px 2px 0px rgba(0,0,0,1); }
+.dif-facil {background: #D1FAE5; color: #065F46; }
+.dif-medio { background: #FEF08A; color: #713F12; }
+.dif-dificil { background: #FECACA; color: #7F1D1D; }
+.question-map { display: flex; gap: 8px; overflow-x: auto; padding: 10px 5px; margin-bottom: 20px; white-space: nowrap; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+.question-map::-webkit-scrollbar {display: none; }
+.map-dot { min-width: 35px; height: 35px; border: 2px solid var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; color: var(--theme-dark); background: white; cursor: pointer; transition: all 0.2s; }
+.map-dot.active { background-color: var(--theme-dark); color: white; box-shadow: 2px 2px 0px var(--theme-contrast); transform: scale(1.1); }
+.map-dot.answered-correct {background-color: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-border); }
+.map-dot.answered-wrong { background-color: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-border); }
+.option-btn { display: flex; align-items: center; width: 100%; padding: 16px; background-color: var(--white); border: 2px solid var(--border-color); border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.1s ease; box-shadow: 3px 3px 0px rgba(0,0,0,0.1); font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; text-align: left; color: var(--text-color); }
+.option-btn:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px var(--theme-contrast); border-color: var(--theme-dark); }
+.opt-circle { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border-color); margin-right: 15px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0; background: var(--theme-light); color: var(--theme-dark); }
+.option-btn.correct {background-color: var(--correct-bg); border-color: var(--correct-border); box-shadow: 2px 2px 0px var(--correct-border); }
+.option-btn.correct .opt-circle {background-color: var(--correct-border); color: white; border-color: var(--correct-border); }
+.option-btn.wrong {background-color: var(--wrong-bg); border-color: var(--wrong-border); opacity: 0.9; box-shadow: none; }
+.option-btn.wrong .opt-circle {background-color: var(--wrong-border); color: white; border-color: var(--wrong-border); }
+.option-btn.disabled {pointer-events: none; opacity: 0.7; }
+.feedback-box { display: block; margin-top: 20px; background-color: #FAFAFA; border: 2px dashed var(--theme-dark); border-radius: 12px; padding: 20px; animation: slideUp 0.3s ease-out; }
+.feedback-title { font-weight: 900; text-transform: uppercase; font-size: 0.95rem; margin-bottom: 10px; display:flex; align-items:center; gap:8px; color: var(--theme-dark); }
+.feedback-item { margin-bottom: 8px; font-size: 0.85rem; padding-left: 10px; border-left: 3px solid #CBD5E1; line-height: 1.5; color: #0F172A; }
+.feedback-item.correct-opt {border-left-color: var(--correct-border); font-weight: 700; color: var(--correct-border); background: var(--correct-bg); padding: 10px; border-radius: 0 6px 6px 0; }
+.feedback-item.wrong-opt {border-left-color: var(--wrong-border); color: #7F1D1D; }
+.result-card {background: white; border: 3px solid var(--border-color); border-radius: 20px; padding: 30px; box-shadow: 6px 6px 0px var(--border-color); margin-bottom: 30px; text-align: center; }
+.stars-container { font-size: 3.5rem; margin: 10px 0; letter-spacing: 5px; }
+.percentage-big {font-size: 4.5rem; font-weight: 900; color: var(--theme-dark); line-height: 1; margin: 10px 0; text-shadow: 3px 3px 0px var(--theme-contrast); }
+.btn-action { width: 100%; padding: 18px; background-color: var(--theme-dark); color: white; border: 3px solid var(--border-color); border-radius: 12px; font-size: 1.1rem; font-weight: 900; cursor: pointer; box-shadow: 4px 4px 0px var(--theme-contrast); transition: all 0.1s; text-transform: uppercase; margin-top: 20px; }
+.btn-action:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--theme-contrast); }
+.quiz-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: var(--bg-color); border-top: 3px solid var(--border-color); padding: 15px 20px; display: none; justify-content: space-between; align-items: center; z-index: 100; }
+.nav-btn { padding: 12px 24px; border-radius: 8px; font-weight: 800; border: 2px solid var(--border-color); cursor: pointer; box-shadow: 2px 2px 0px var(--border-color); font-family: 'Poppins', sans-serif; text-transform: uppercase;}
+.nav-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; transform: none; }
+.btn-next { background-color: var(--theme-dark); color: white; }
+.btn-prev { background-color: white; color: var(--text-color); }
+</style>
+</head>
+<body>
+
+<div class="container">
+<header class="logo-header">
+<div class="css-logo"><span class="pulse-effect">🧠</span> PROMOVER</div>
+<h1>BIOLOGIA - 8º ANO</h1>
+<p class="subtitle">Fisiologia: O Corpo em Movimento e Controle</p>
+</header>
+
+<div class="toggle-container">
+<button class="toggle-btn active" id="btnExp" onclick="setMode('explanation')">Teoria</button>
+<button class="toggle-btn" id="btnPrac" onclick="setMode('practice')">Prática IFCE (15)</button>
+</div>
+
+<div id="viewExplanation" class="view-section" style="display: flex;">
+<div class="search-container">
+<span class="search-icon" aria-hidden="true">🔍</span>
+<input type="text" id="searchInput" class="search-input" aria-label="Pesquisar conteúdo" placeholder="Pesquisar órgão ou sistema...">
+</div>
+<div id="no-results"><p>Termo não encontrado.</p></div>
+
+<!-- TEORIA 1 -->
+<div class="content-group">
+<span class="section-badge" style="background-color: var(--theme-contrast);">Sistemas Locomotores</span>
+<div class="theory-box">
+<h3>1. Esquelético e Muscular</h3>
+<p>Os ossos são vivos! Possuem Cálcio (que dá dureza) e Colágeno (que dá flexibilidade). Para nos movermos, o esqueleto precisa de "cordas e motores".</p>
+<div class="visual-area" style="padding: 10px;">
+  <svg viewBox="0 0 220 130" width="100%" height="130" xmlns="http://www.w3.org/2000/svg">
+    <!-- Osso Superior -->
+    <path d="M 60 10 C 60 50 80 70 110 70 C 140 70 160 50 160 10" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
+    <!-- Osso Inferior -->
+    <path d="M 80 120 C 80 95 90 90 110 90 C 130 90 140 95 140 120" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
+    <!-- Ligamento -->
+    <path d="M 75 60 L 95 100 M 145 60 L 125 100" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+    <text x="35" y="85" font-size="10" fill="#0284C7" font-weight="bold">LIGAMENTO</text>
+    <!-- Músculo e Tendão -->
+    <path d="M 180 10 Q 200 40 170 70" fill="#EF4444" stroke="#B91C1C" stroke-width="1"/>
+    <path d="M 170 70 Q 155 85 135 105" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+    <text x="195" y="80" font-size="10" fill="#B91C1C" font-weight="bold">TENDÃO</text>
+  </svg>
+</div>
+<div class="highlight-box">
+<strong>Diferenças Cruciais:</strong><br>
+🦴 <strong>LIGAMENTOS:</strong> Unem Osso ao Osso (não deixam o joelho desmontar).<br>
+🥩 <strong>TENDÕES:</strong> Unem Músculo ao Osso (quando o músculo encolhe, o tendão puxa o osso).
+</div>
+<div class="visual-area" style="padding: 10px; margin-top: 10px;">
+  <svg viewBox="0 0 300 100" width="100%" height="110" xmlns="http://www.w3.org/2000/svg">
+    <!-- Esquelético -->
+    <rect x="10" y="10" width="80" height="50" fill="#FFE4E6" stroke="#E11D48" rx="4"/>
+    <line x1="15" y1="20" x2="85" y2="20" stroke="#BE123C" stroke-width="4" stroke-dasharray="3 1"/>
+    <line x1="15" y1="35" x2="85" y2="35" stroke="#BE123C" stroke-width="4" stroke-dasharray="3 1"/>
+    <line x1="15" y1="50" x2="85" y2="50" stroke="#BE123C" stroke-width="4" stroke-dasharray="3 1"/>
+    <text x="50" y="80" font-size="10" font-weight="bold" fill="#881337" text-anchor="middle">ESQUELÉTICO</text>
+    <text x="50" y="92" font-size="8" fill="#171717" text-anchor="middle">(Voluntário)</text>
+    
+    <!-- Cardíaco -->
+    <rect x="110" y="10" width="80" height="50" fill="#FFE4E6" stroke="#E11D48" rx="4"/>
+    <path d="M 120 25 L 140 25 M 140 25 L 140 45 L 160 45" stroke="#BE123C" stroke-width="4" stroke-dasharray="3 1" fill="none"/>
+    <line x1="140" y1="20" x2="140" y2="30" stroke="#171717" stroke-width="2"/> <!-- Disco intercalar -->
+    <text x="150" y="80" font-size="10" font-weight="bold" fill="#881337" text-anchor="middle">CARDÍACO</text>
+    <text x="150" y="92" font-size="8" fill="#171717" text-anchor="middle">(Involuntário/Rápido)</text>
+
+    <!-- Liso -->
+    <rect x="210" y="10" width="80" height="50" fill="#FFE4E6" stroke="#E11D48" rx="4"/>
+    <ellipse cx="250" cy="25" rx="30" ry="8" fill="#F43F5E"/>
+    <ellipse cx="250" cy="45" rx="30" ry="8" fill="#F43F5E"/>
+    <text x="250" y="80" font-size="10" font-weight="bold" fill="#881337" text-anchor="middle">LISO</text>
+    <text x="250" y="92" font-size="8" fill="#171717" text-anchor="middle">(Involuntário/Lento)</text>
+  </svg>
+</div>
+<div class="highlight-box info">
+<strong>Tipos de Tecido Muscular:</strong><br>
+- <strong>Estriado Esquelético:</strong> Tem estrias (linhas de força). Mexe porque você quer (voluntário). Ex: Bíceps.<br>
+- <strong>Estriado Cardíaco:</strong> Fibras ramificadas e estriadas. Exclusivo do coração. Bate forte, mas sozinho.<br>
+- <strong>Liso:</strong> Sem estrias (células em formato de fuso). Movimentos lentos e automáticos. Ex: Estômago e vasos sanguíneos.
+</div>
+</div>
+</div>
+
+<!-- TEORIA 2 -->
+<div class="content-group">
+<span class="section-badge" style="background-color: var(--theme-accent);">Sistema Nervoso</span>
+<div class="theory-box">
+<h3>2. O Fio Elétrico do Corpo</h3>
+<p>O Sistema Nervoso Central (Encéfalo e Medula Espinhal) envia ordens através do Sistema Nervoso Periférico (Nervos).</p>
+<div class="visual-area">
+  <svg viewBox="0 0 300 100" width="100%" height="100" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dendrito -->
+    <path d="M 20 40 L 40 50 L 20 60 M 30 30 L 40 50 L 30 70" stroke="var(--theme-accent)" stroke-width="2" fill="none"/>
+    <text x="25" y="25" font-size="9" font-weight="bold" fill="var(--theme-accent)">Dendrito (Recebe)</text>
+    
+    <!-- Corpo -->
+    <circle cx="45" cy="50" r="15" fill="#E9D5FF" stroke="var(--theme-accent)" stroke-width="2"/>
+    <circle cx="45" cy="50" r="4" fill="var(--theme-accent)"/>
+    <text x="45" y="80" font-size="9" font-weight="bold" fill="var(--theme-accent)" text-anchor="middle">Corpo</text>
+    
+    <!-- Axônio -->
+    <line x1="60" y1="50" x2="180" y2="50" stroke="var(--theme-accent)" stroke-width="4"/>
+    <text x="120" y="45" font-size="9" font-weight="bold" fill="var(--theme-accent)" text-anchor="middle">Axônio (Envia)</text>
+    
+    <!-- Fenda e Neurotransmissores -->
+    <circle cx="195" cy="45" r="3" fill="#D97706"/>
+    <circle cx="200" cy="55" r="3" fill="#D97706"/>
+    <text x="210" y="30" font-size="9" font-weight="bold" fill="#D97706">Sinapse</text>
+    
+    <!-- Novo Dendrito -->
+    <path d="M 240 40 L 220 50 L 240 60" stroke="#BE123C" stroke-width="2" fill="none"/>
+    
+    <line x1="80" y1="20" x2="160" y2="20" stroke="#171717" stroke-width="2" stroke-dasharray="4"/>
+    <polygon points="160,15 170,20 160,25" fill="#171717"/>
+  </svg>
+</div>
+<div class="highlight-box warning">
+<strong>O Arco Reflexo:</strong> Se encostar numa panela quente, o nervo leva a dor só até a <strong>Medula Espinhal</strong>. Para ser mais rápido, a própria medula já manda você tirar a mão ANTES mesmo do cérebro sentir a dor!
+</div>
+</div>
+</div>
+
+<!-- TEORIA 3 -->
+<div class="content-group">
+<span class="section-badge" style="background-color: #059669;">Sistema Endócrino</span>
+<div class="theory-box">
+<h3>3. Hormônios e Pâncreas</h3>
+<p>Hormônios são mensagens químicas enviadas pelo sangue. O caso mais cobrado em provas é o controle do açúcar (glicose) pelo <strong>Pâncreas</strong>.</p>
+<div class="visual-area">
+  <svg viewBox="0 0 250 120" width="100%" height="130" xmlns="http://www.w3.org/2000/svg">
+    <!-- Balança -->
+    <line x1="50" y1="80" x2="200" y2="80" stroke="#171717" stroke-width="4"/>
+    <polygon points="125,60 115,100 135,100" fill="#94A3B8"/>
+    
+    <!-- Insulina -->
+    <circle cx="50" cy="65" r="15" fill="#3B82F6"/>
+    <text x="50" y="45" font-size="10" font-weight="bold" fill="#1D4ED8" text-anchor="middle">INSULINA</text>
+    <text x="50" y="110" font-size="9" fill="#171717" text-anchor="middle">Baixa o Açúcar</text>
+    
+    <!-- Glucagon -->
+    <circle cx="200" cy="65" r="15" fill="#EF4444"/>
+    <text x="200" y="45" font-size="10" font-weight="bold" fill="#B91C1C" text-anchor="middle">GLUCAGON</text>
+    <text x="200" y="110" font-size="9" fill="#171717" text-anchor="middle">Aumenta o Açúcar</text>
+  </svg>
+</div>
+<div class="highlight-box">
+Comer muito doce = Sangue doce. O pâncreas libera <strong>Insulina</strong> para tirar o açúcar do sangue e guardar na célula.<br><br>
+Muitas horas sem comer (jejum) = Sangue sem energia. O pâncreas libera <strong>Glucagon</strong> para retirar o açúcar guardado no fígado e devolvê-lo ao sangue.
+</div>
+</div>
+</div>
+
+<!-- TEORIA 4 -->
+<div class="content-group">
+<span class="section-badge" style="background-color: #171717;">Integração Sistêmica</span>
+<div class="theory-box">
+<h3>4. Luta ou Fuga (Os sistemas juntos)</h3>
+<p>A biologia é uma máquina única. Se você vir um cachorro feroz na rua, o que o seu corpo faz?</p>
+<ul style="padding-left: 20px; font-size: 0.9rem; line-height: 1.6;">
+  <li><strong>Nervoso:</strong> Os olhos veem o perigo, o cérebro manda a Glândula Suprarrenal soltar <strong>Adrenalina</strong>.</li>
+  <li><strong>Endócrino:</strong> A Adrenalina no sangue manda o fígado liberar energia e bloqueia o estômago (a digestão PARA).</li>
+  <li><strong>Cardiovascular:</strong> O coração (músculo cardíaco) dispara para enviar muito sangue às pernas.</li>
+  <li><strong>Locomotor:</strong> Os músculos das pernas puxam os tendões e os ossos, e você corre!</li>
+</ul>
+</div>
+</div>
+
+<button class="btn-action" onclick="setMode('practice')">
+Iniciar Teste do 8º Ano (15 Q) →
+</button>
+</div>
+
+<div id="viewPractice" class="view-section">
+<div style="margin-bottom: 20px; background-color: var(--white); padding: 15px; border-radius: 12px; border: 3px solid var(--border-color); box-shadow: 4px 4px 0px var(--border-color);">
+<h2 style="color:var(--theme-dark); font-weight:900; margin-bottom: 5px;">A Prova de Fogo - IFCE</h2>
+<p style="color: #0F172A; font-size: 0.95rem; font-weight:600;">
+15 questões desenhadas para o 8º ano. Não decore, entenda os processos! Acerte <strong>80% (12/15)</strong> para provar que está pronto.
+</p>
+</div>
+
+<div class="question-map" id="qMap"></div>
+<div id="quizContainer" style="margin-bottom: 100px;"></div>
+</div>
+
+<div id="viewResult" class="view-section">
+<div class="result-card">
+<h2 style="font-weight:900; text-transform:uppercase;">Relatório Clínico</h2>
+<div class="stars-container" id="finalStars">★</div>
+<div class="percentage-big" id="finalPercent">0%</div>
+<p style="font-size:1.2rem; font-weight:700; color:#555;" id="finalScoreText">Você acertou 0 de 15</p>
+<div id="review-container"></div>
+</div>
+<div id="action-buttons"></div>
+</div>
+</div>
+
+<footer class="quiz-footer" id="quizFooter">
+<button class="nav-btn btn-prev" id="btnPrev" onclick="changeQuestion(-1)">Anterior</button>
+<button class="nav-btn btn-next" id="btnNext" onclick="changeQuestion(1)">Próxima</button>
+</footer>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const contentGroups = document.querySelectorAll('.content-group');
+const noResultsMsg = document.getElementById('no-results');
+
+searchInput.addEventListener('input', function(e) {
+const term = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+let totalVisible = 0;
+contentGroups.forEach(group => {
+const textContent = group.textContent.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+if (textContent.includes(term)) {
+group.style.display = 'flex';
+totalVisible++;
+} else {
+group.style.display = 'none';
+}
+});
+noResultsMsg.style.display = totalVisible === 0 ? 'block' : 'none';
+});
+
+// BANCO DE DADOS DE QUESTÕES - 8º ANO
+const questions = [
+// FÁCEIS (1-5)
+{
+id: 1, level: "Fácil",
+text: "Qual é a direção correta do impulso elétrico através de um neurônio?",
+options: ["Axônio → Corpo Celular → Dendrito.", "Dendrito → Axônio → Corpo Celular.", "Dendrito → Corpo Celular → Axônio.", "Corpo Celular → Dendrito → Axônio."],
+correct: 2,
+explanation: { correct: "Os dendritos funcionam como antenas que captam o sinal. O corpo celular processa e despacha a eletricidade pelo fio longo, chamado axônio.", options: ["Erro: O impulso nervoso nunca anda de ré.", "Erro: O axônio é a parte final do envio, não o meio do caminho.", "", "Erro: O sinal normalmente não começa pelo corpo celular."] }
+},
+{
+id: 2, level: "Fácil",
+text: "O que impede que os ossos do seu joelho se separem quando você salta? E o que liga o músculo da sua coxa a esse osso para movimentá-lo?",
+options: ["Os ligamentos unem osso a músculo, e os tendões unem osso a osso.", "Os tendões unem músculo a osso, enquanto os ligamentos unem osso a osso.", "Ambos os tecidos são ossos flexíveis.", "Tendões são continuações dos nervos que controlam o esqueleto."],
+correct: 1,
+explanation: { correct: "Lembre-se da física: O músculo precisa de uma corda forte para puxar o osso (Tendão). Para a articulação não desmontar, um osso precisa ser amarrado ao outro (Ligamento).", options: ["Erro: A definição está exatamente invertida.", "", "Erro: Nenhum dos dois é feito de tecido ósseo; são tecidos fibrosos.", "Erro: Tendão é tecido conjuntivo fibroso, não tecido nervoso."] }
+},
+{
+id: 3, level: "Fácil",
+text: "Após uma lauta refeição, o sangue humano fica cheio de glicose (açúcar). Que glândula percebe esse pico e qual hormônio ela lança para 'guardar' esse açúcar?",
+options: ["O fígado lança Glucagon.", "A tireoide lança T4.", "A suprarrenal lança Adrenalina.", "O pâncreas lança Insulina."],
+correct: 3,
+explanation: { correct: "A Insulina é o hormônio que tira o açúcar do sangue e o coloca dentro das células. Ela é fabricada exclusivamente pelo pâncreas.", options: ["Erro: O glucagon AUMENTA a glicose no sangue (no jejum), e quem o fabrica também é o pâncreas.", "Erro: A tireoide foca na velocidade do metabolismo, não abaixa a glicose aguda.", "Erro: Adrenalina aumenta a glicose no sangue para te preparar para fugir.", ""] }
+},
+{
+id: 4, level: "Fácil",
+text: "Se deixarmos um osso de galinha mergulhado em vinagre (ácido) por vários dias, o ácido destrói o cálcio do osso, mas deixa o colágeno intacto. O que acontece com o osso?",
+options: ["Ele perde a flexibilidade e vira vidro.", "Ele perde a dureza, fica mole e pode ser dobrado como borracha.", "Ele perde a medula óssea, mas fica duro por fora.", "Não acontece nada, o colágeno é mais duro que o cálcio."],
+correct: 1,
+explanation: { correct: "O Cálcio dá a DUREZA e o Colágeno dá a FLEXIBILIDADE. Se você destrói o cálcio no ácido, tira a dureza, sobrando só a 'borracha' colagênica.", options: ["Erro: Isso aconteceria se destruíssemos o colágeno (queimando o osso, por exemplo).", "", "Erro: O ácido ataca a estrutura dura, amolecendo-a inteiramente.", "Erro: O colágeno é uma proteína macia e flexível; o cálcio é o mineral duro."] }
+},
+{
+id: 5, level: "Fácil",
+text: "Abaixo temos representações microscópicas dos três tipos de tecido muscular humano. O tecido responsável por empurrar o bolo alimentar pelo intestino (peristaltismo) sem que você precise pensar nisso corresponde à:",
+illustration: `
+<svg viewBox="0 0 300 90" width="100%" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- A: Esquelético -->
+  <rect x="20" y="10" width="70" height="60" fill="#FFE4E6" stroke="#E11D48" rx="4"/>
+  <line x1="25" y1="20" x2="85" y2="20" stroke="#BE123C" stroke-width="5" stroke-dasharray="3 1"/>
+  <line x1="25" y1="40" x2="85" y2="40" stroke="#BE123C" stroke-width="5" stroke-dasharray="3 1"/>
+  <text x="55" y="85" font-size="12" font-weight="bold" fill="#881337" text-anchor="middle">Imagem 1</text>
+  
+  <!-- B: Cardíaco -->
+  <rect x="115" y="10" width="70" height="60" fill="#FFE4E6" stroke="#E11D48" rx="4"/>
+  <path d="M 125 30 L 145 30 M 145 30 L 145 50 L 165 50" stroke="#BE123C" stroke-width="5" stroke-dasharray="3 1" fill="none"/>
+  <line x1="145" y1="25" x2="145" y2="35" stroke="#171717" stroke-width="2"/> <!-- Disco intercalar -->
+  <text x="150" y="85" font-size="12" font-weight="bold" fill="#881337" text-anchor="middle">Imagem 2</text>
+
+  <!-- C: Liso -->
+  <rect x="210" y="10" width="70" height="60" fill="#FFE4E6" stroke="#E11D48" rx="4"/>
+  <ellipse cx="245" cy="30" rx="25" ry="8" fill="#F43F5E"/>
+  <ellipse cx="245" cy="50" rx="25" ry="8" fill="#F43F5E"/>
+  <text x="245" y="85" font-size="12" font-weight="bold" fill="#881337" text-anchor="middle">Imagem 3</text>
+</svg>
+`,
+options: ["Imagem 2 (Músculo Cardíaco).", "Imagem 3 (Músculo Liso).", "Imagem 1 (Músculo Estriado Esquelético).", "Nenhuma, pois o intestino não possui fibras musculares."],
+correct: 1,
+explanation: { correct: "A Imagem 3 mostra o Músculo Liso (células sem estrias). Ele reveste os órgãos ocos internos (estômago, intestinos, bexiga) e trabalha de forma lenta e involuntária.", options: ["Erro: A Imagem 2 mostra fibras bifurcadas e discos intercalares, exclusividade do miocárdio (coração).", "", "Erro: A Imagem 1 representa o esquelético, de contração voluntária (braços/pernas).", "Erro: Todo o trato digestivo possui espessas camadas de músculo liso para empurrar o alimento."] }
+},
+
+// MÉDIAS (6-10)
+{
+id: 6, level: "Médio",
+text: "O Sistema Nervoso Central (SNC), responsável por receber as informações e tomar decisões, é formado por quais órgãos?",
+options: ["Cérebro e Nervos periféricos.", "Encéfalo (Cérebro, Cerebelo, Tronco) e Medula Espinhal.", "Medula Espinhal e Nervos cranianos.", "Cerebelo e Gânglios simpáticos."],
+correct: 1,
+explanation: { correct: "O SNC é o 'computador' principal, guardado dentro dos ossos: O Encéfalo fica no crânio, e a Medula Espinhal fica dentro da coluna vertebral.", options: ["Erro: Nervos fazem parte do Sistema Nervoso Periférico (SNP).", "", "Erro: Nervos são a 'fiação' periférica (SNP).", "Erro: Gânglios também pertencem ao Sistema Nervoso Periférico."] }
+},
+{
+id: 7, level: "Médio",
+text: "Ao pisar um prego, você levanta o pé numa fração de segundo, muito antes de sentir a dor e gritar. Como o seu corpo fez isso tão rápido?",
+options: ["O nervo do pé decidiu sozinho encolher o músculo.", "O cérebro acelerou os nervos motores sem usar a medula.", "A informação foi à medula espinhal e ELA mesma já mandou a ordem para a perna contrair (Arco Reflexo).", "Os músculos agiram sozinhos graças à adrenalina."],
+correct: 2,
+explanation: { correct: "Isso é o Arco Reflexo. A medula atua como um 'mini-cérebro' de emergência. A dor sobe pelo nervo até a medula, que manda você contrair imediatamente. Depois, o sinal termina de subir ao cérebro e você sente a dor.", options: ["Erro: O nervo apenas conduz eletricidade, ele não toma decisões.", "Erro: O cérebro demora mais para processar a dor. A decisão rápida foi da medula.", "", "Erro: Nenhum músculo esquelético humano age sem uma ordem elétrica do sistema nervoso."] }
+},
+{
+id: 8, level: "Médio",
+text: "Um impulso nervoso desce pelo neurônio, mas ele NÃO encosta diretamente no próximo neurônio. Existe um pequeno espaço chamado Fenda Sináptica. Como a mensagem atravessa esse espaço vazio?",
+options: ["Através de uma faísca elétrica microscópica.", "Através de substâncias químicas chamadas Neurotransmissores.", "O neurônio se estica até encostar no outro.", "O sangue empurra o sinal de um lado para o outro."],
+correct: 1,
+explanation: { correct: "O sinal elétrico no axônio faz o neurônio soltar 'bolsas' de produtos químicos (neurotransmissores). Eles nadam pelo espaço vazio, encaixam no outro neurônio e o sinal elétrico recomeça.", options: ["Erro: A energia elétrica não salta fendas como uma faísca no corpo humano; ela vira química.", "", "Erro: O neurônio não estica e encolhe como um músculo para dar o choque.", "Erro: O sangue não tem papel na transmissão sináptica local."] }
+},
+{
+id: 9, level: "Médio",
+text: "Um menino se perde na floresta e fica 2 dias sem comer. Como o corpo dele impede que o nível de açúcar no sangue zere e ele desmaie?",
+options: ["O pâncreas libera Glucagon, mandando o fígado jogar o açúcar guardado de volta ao sangue.", "O pâncreas libera Insulina, retirando mais açúcar do sangue.", "A tireoide cria açúcar novo a partir das gorduras.", "Os músculos passam a fazer fotossíntese para criar glicose."],
+correct: 0,
+explanation: { correct: "O Glucagon é o hormônio do jejum e do resgate. Quando o açúcar cai muito, o glucagon entra na corrente sanguínea e obriga o fígado a quebrar suas reservas de glicogênio.", options: ["", "Erro: Isso agravaria o quadro; a insulina abaixa ainda mais o açúcar do sangue.", "Erro: A tireoide regula a velocidade do metabolismo, não fabrica açúcar.", "Erro: Animais não fazem fotossíntese."] }
+},
+{
+id: 10, level: "Médio",
+text: "O mecanismo de 'Feedback Negativo' é o termostato do corpo humano. Como ele atua na relação entre a glândula Hipófise (no cérebro) e a Tireoide (no pescoço)?",
+options: ["Se a Tireoide produzir hormônios demais, a Hipófise percebe e PARA de estimulá-la, equilibrando as coisas.", "Se a Tireoide falhar, o pâncreas passa a fabricar os hormônios dela.", "Quanto mais a Tireoide trabalha, mais a Hipófise manda ela trabalhar, até o limite.", "A Tireoide e a Hipófise nunca se comunicam."],
+correct: 0,
+explanation: { correct: "É o freio da natureza. Quando os hormônios da tireoide chegam num nível alto no sangue, esse excesso vai até o cérebro e 'desliga' a Hipófise, parando a produção e impedindo o excesso.", options: ["", "Erro: O pâncreas só fabrica insulina, glucagon e sucos digestivos. Não fabrica hormônios da tireoide.", "Erro: Isso seria um feedback POSITIVO, uma bola de neve que levaria o corpo à falência.", "Erro: O sistema endócrino funciona inteiramente na base da comunicação entre glândulas."] }
+},
+
+// DIFÍCEIS (11-15)
+{
+id: 11, level: "Difícil",
+text: "Músculo Cardíaco vs Músculo Esquelético: O coração bate forte, rápido, mas você não precisa pensar para ele bater. Qual a diferença fundamental entre eles?",
+options: ["O coração é de contração voluntária e lenta.", "O músculo esquelético é estriado involuntário.", "Ambos são rápidos, mas o músculo esquelético nós controlamos (voluntário), enquanto o coração bate sozinho (involuntário).", "O coração não é formado por tecido muscular, mas por tecido nervoso que pulsa."],
+correct: 2,
+explanation: { correct: "Essa é a grande sacada evolutiva do coração (miocárdio): Ele tem a mesma velocidade e força dos músculos do braço (estrias), mas não precisa do nosso comando consciente, batendo de forma autônoma e involuntária.", options: ["Erro: O coração tem contração rápida e involuntária.", "Erro: O músculo esquelético (braços/pernas) é voluntário, nós o controlamos.", "", "Erro: O coração é primordialmente um órgão muscular (miocárdio)."] }
+},
+{
+id: 12, level: "Difícil",
+text: "A Diabetes é uma falha grave na regulação do açúcar. De forma simplificada para o 8º ano, qual a principal diferença entre a Diabetes Tipo 1 e a Diabetes Tipo 2?",
+options: ["Na Tipo 1 há excesso de glucagon. Na Tipo 2, excesso de insulina.", "Na Tipo 1 o pâncreas foi destruído e não faz insulina. Na Tipo 2, o pâncreas faz insulina, mas o corpo (obesidade/sedentarismo) não consegue mais usá-la direito.", "A Tipo 1 é adquirida pela má alimentação do idoso. A Tipo 2 é de nascença.", "Ambas causam falta de açúcar crônica no sangue."],
+correct: 1,
+explanation: { correct: "A Tipo 1 é comum em jovens, onde o corpo destrói a própria 'fábrica' (o pâncreas). A Tipo 2 é mais comum em adultos que comeram mal por anos: o pâncreas fabrica a insulina, mas os 'cadeados' da célula enguiçam e o açúcar não entra.", options: ["Erro: Ambas são ligadas a problemas com a ação da insulina.", "", "Erro: Os conceitos estão invertidos. A Tipo 2 é a associada ao estilo de vida e idade avançada.", "Erro: Ambas causam EXCESSO de açúcar no sangue (hiperglicemia), não falta."] }
+},
+{
+id: 13, level: "Difícil",
+text: "Um atleta sofreu uma pancada nas costas que cortou o nervo motor (nervo que DESCE da medula para a perna), mas manteve o nervo sensitivo (que SOBE da perna para a medula) intacto. O que ele sente?",
+options: ["Ele não sente dor na perna e não consegue movê-la.", "Ele consegue mover a perna, mas não sente nenhuma dor.", "Ele SENTE a dor normalmente, mas NÃO consegue mover a perna.", "Ele perde os reflexos, mas consegue caminhar lentamente."],
+correct: 2,
+explanation: { correct: "Pense em cabos de mão única: O nervo que SOFREU o corte foi o motor, então a ordem do cérebro não chega no músculo (paralisia). O nervo sensitivo, que leva a dor ao cérebro, está perfeito. Ou seja: ele sente tudo, mas não mexe nada.", options: ["Erro: Ele sente dor, pois o nervo sensitivo está intacto.", "Erro: Ele não consegue mover, pois o nervo motor foi cortado.", "", "Erro: Cortar o nervo motor gera paralisia; é impossível caminhar."] }
+},
+{
+id: 14, level: "Difícil",
+text: "Para dar um simples chute numa bola de futebol, uma viagem de informações ocorre no seu corpo. Qual a sequência exata dessa ordem?",
+options: ["Cérebro → Nervos → Músculo → Osso (Tendão puxa).", "Osso → Ligamentos → Músculo → Cérebro.", "Músculo → Cérebro → Pâncreas → Osso.", "Medula → Cérebro → Osso → Nervos Sensitivos."],
+correct: 0,
+explanation: { correct: "A vontade nasce no cérebro. O sinal elétrico desce pela medula e sai pelos nervos. O nervo dá um choque no músculo. O músculo encolhe. E, como o músculo está preso ao osso pelo tendão, a perna levanta e chuta a bola.", options: ["", "Erro: O osso não cria a vontade de se mover. A ordem começa no cérebro.", "Erro: O pâncreas não tem papel na contração de movimento voluntário agudo.", "Erro: O cérebro não fica depois da medula num comando descendente, e nervos sensitivos não mandam ordens aos ossos."] }
+},
+{
+id: 15, level: "Difícil",
+text: "Fuga ou Luta! Um cão feroz solta-se da coleira na sua frente. O seu Sistema Nervoso Simpático aciona a Adrenalina. O que ACONTECE no seu corpo agora?",
+options: ["Sua frequência cardíaca cai para você pensar com calma e seu estômago digere rápido.", "As pupilas dos seus olhos dilatam para você enxergar melhor, o coração dispara e a digestão PARA para poupar energia.", "Sua tireoide faz você dormir e a insulina guarda todo o açúcar do sangue.", "O corpo desvia o sangue das pernas para o cérebro, impedindo você de correr, mas deixando você super inteligente."],
+correct: 1,
+explanation: { correct: "A adrenalina prepara o corpo para correr: o coração dispara para levar sangue aos músculos, a pupila abre para entrar mais luz, e funções 'inúteis' na hora da morte (como digerir o almoço) são totalmente pausadas.", options: ["Erro: O coração bate muito rápido (taquicardia), não cai.", "", "Erro: O estresse joga açúcar NO sangue (não guarda) e te deixa super acordado.", "Erro: O sangue VAI para as pernas para você conseguir correr do cachorro."] }
+}
+];
+
+// VARIÁVEIS DE ESTADO E PERSISTÊNCIA
+const storageKey = 'promover_biologia_8ano';
+let currentQuestion = 0;
+let savedAnswers = localStorage.getItem(storageKey);
+let userAnswers = savedAnswers ? JSON.parse(savedAnswers) : new Array(questions.length).fill(null);
+
+// Prevenção de crash
+if (userAnswers.length !== questions.length) {
+    userAnswers = new Array(questions.length).fill(null);
+    localStorage.removeItem(storageKey);
+}
+
+function setMode(mode) {
+const views = ['viewExplanation', 'viewPractice', 'viewResult'];
+views.forEach(v => document.getElementById(v).style.display = 'none');
+document.getElementById('quizFooter').style.display = 'none';
+
+if(mode === 'explanation') {
+document.getElementById('viewExplanation').style.display = 'flex';
+document.getElementById('btnExp').classList.add('active');
+document.getElementById('btnPrac').classList.remove('active');
+} else if (mode === 'practice') {
+document.getElementById('viewPractice').style.display = 'block';
+document.getElementById('quizFooter').style.display = 'flex';
+document.getElementById('btnExp').classList.remove('active');
+document.getElementById('btnPrac').classList.add('active');
+renderQuestion();
+renderMap();
+} else if (mode === 'result') {
+document.getElementById('viewResult').style.display = 'block';
+document.getElementById('quizFooter').style.display = 'none';
+}
+window.scrollTo(0,0);
+}
+
+function renderQuestion() {
+if(questions.length === 0) return;
+const q = questions[currentQuestion];
+const container = document.getElementById('quizContainer');
+const letters = ['A', 'B', 'C', 'D'];
+const ans = userAnswers[currentQuestion];
+let badgeClass = '';
+
+if(q.level === 'Fácil') badgeClass = 'dif-facil';
+else if(q.level === 'Médio') badgeClass = 'dif-medio';
+else badgeClass = 'dif-dificil';
+
+let html = `
+<div class="card-content" style="border: 3px solid var(--border-color); box-shadow: 4px 4px 0px var(--border-color); padding: 15px; border-radius: 12px; background: white;">
+<span class="difficulty-badge ${badgeClass}">${q.level}</span>
+<div style="margin-bottom: 20px;">
+<span style="font-size: 0.8rem; font-weight: 800; color: var(--theme-dark);">QUESTÃO ${currentQuestion + 1} DE ${questions.length}</span>
+<h2 style="font-size: 1.15rem; margin-top: 5px; color: var(--text-color); font-weight: 900;">${q.text}</h2>
+</div>
+${q.illustration ? `<div style="text-align: center; margin: 15px 0; background: #FAFAFA; border-radius: 8px; padding: 15px; border: 2px dashed var(--theme-light);">${q.illustration}</div>` : ''}
+<div class="options-list">
+`;
+
+q.options.forEach((opt, i) => {
+let cls = '';
+if (ans !== null) {
+if (i === q.correct) cls = 'correct';
+else if (i === ans) cls = 'wrong';
+else cls = 'disabled';
+}
+html += `
+<button class="option-btn ${cls}" onclick="handleAnswer(${i})" ${ans !== null ? 'disabled' : ''}>
+<div class="opt-circle">${letters[i]}</div>
+<div>${opt}</div>
+</button>
+`;
+});
+
+html += `</div>`;
+
+if(ans !== null) {
+let feedbackTitleColor = ans === q.correct ? 'var(--correct-border)' : 'var(--wrong-border)';
+let feedbackTitleText = ans === q.correct ? '☑ Muito Bem!' : '☒ Erro de Conceito!';
+let wrongExplanations = q.explanation.options.map((exp, i) => {
+if (i !== q.correct && exp !== "") {
+return `<div class="feedback-item wrong-opt" style="margin-top:8px;"><strong>${letters[i]})</strong> ${exp}</div>`;
+}
+return "";
+}).join("");
+
+html += `
+<div class="feedback-box">
+<div class="feedback-title" style="color:${feedbackTitleColor}">${feedbackTitleText}</div>
+<div class="feedback-item correct-opt"><strong>A Fisiologia Correta:</strong> ${q.options[q.correct]}</div>
+<div style="margin-top:10px; font-size:0.95rem; color:var(--text-color); margin-bottom:15px; font-weight:600;">
+${q.explanation.correct}
+</div>
+<div style="margin-top:15px; border-top:1px dashed var(--theme-light); padding-top:10px;">
+<small style="color:var(--theme-dark);"><strong>Por que as outras estão erradas:</strong></small>
+${wrongExplanations}
+</div>
+</div>
+`;
+}
+
+html += `</div>`;
+container.innerHTML = html;
+updateNav();
+}
+
+function handleAnswer(idx) {
+if (userAnswers[currentQuestion] !== null) return;
+userAnswers[currentQuestion] = idx;
+localStorage.setItem(storageKey, JSON.stringify(userAnswers));
+
+if (idx === questions[currentQuestion].correct) {
+const duration = 1500;
+const end = Date.now() + duration;
+(function frame() {
+confetti({ particleCount: 5, angle: 60, spread: 55, origin: {x: 0, y: 0.6 }, colors: ['#E11D48', '#4C1D95', '#F43F5E', '#881337'] });
+confetti({ particleCount: 5, angle: 120, spread: 55, origin: {x: 1, y: 0.6}, colors: ['#E11D48', '#4C1D95', '#F43F5E', '#881337'] });
+if (Date.now() < end) { requestAnimationFrame(frame); }
+}());
+} else {
+const quizContainer = document.getElementById('quizContainer');
+quizContainer.classList.remove('shake-effect');
+void quizContainer.offsetWidth;
+quizContainer.classList.add('shake-effect');
+setTimeout(() => quizContainer.classList.remove('shake-effect'), 500);
+}
+renderQuestion();
+renderMap();
+}
+
+function renderMap() {
+if(questions.length === 0) return;
+const map = document.getElementById('qMap');
+map.innerHTML = questions.map((q, i) => {
+let cls = 'map-dot';
+if (i === currentQuestion) cls += ' active';
+if (userAnswers[i] !== null) {
+cls += userAnswers[i] === q.correct ? ' answered-correct' : ' answered-wrong';
+}
+return `<div class="${cls}" onclick="goTo(${i})">${i + 1}</div>`;
+}).join("");
+
+setTimeout(() => {
+const activeDot = map.querySelector('.map-dot.active');
+if (activeDot) {
+activeDot.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+}, 50);
+}
+
+function goTo(i) {
+if (window.confetti) confetti.reset();
+currentQuestion = i;
+renderQuestion();
+renderMap();
+}
+
+function changeQuestion(d) {
+let n = currentQuestion + d;
+if (n >= 0 && n < questions.length) goTo(n);
+}
+
+function updateNav() {
+document.getElementById('btnPrev').disabled = (currentQuestion === 0);
+const next = document.getElementById('btnNext');
+
+if (currentQuestion === questions.length - 1) {
+next.textContent = "Finalizar Prova";
+next.onclick = finish;
+} else {
+next.textContent = "Avançar";
+next.onclick = () => changeQuestion(1);
+}
+}
+
+function finish() {
+let correct = userAnswers.filter((a, i) => a === questions[i].correct).length;
+let percent = Math.round((correct / questions.length) * 100);
+
+if (window.confetti) confetti.reset();
+document.getElementById('finalPercent').textContent = percent + "%";
+document.getElementById('finalScoreText').textContent = `Você acertou ${correct} de ${questions.length} questões.`;
+document.getElementById('finalStars').textContent = percent >= 80 ? "⭐⭐⭐" : percent >= 60 ? "⭐⭐" : "⭐";
+
+let summary = '<div style="text-align:left; margin-top:20px;">';
+if (percent < 80) {
+summary += `<div style="background:var(--wrong-bg); padding:15px; border-radius:8px; margin-bottom:20px; border:2px solid var(--wrong-border); color:var(--wrong-border);">
+<strong>⚠️ Reprovado! Faltou base biológica.</strong> O seu desempenho não atingiu a nota de corte (80%). Você está a cair em armadilhas simples de fisiologia ou não interpretou os esquemas com calma. Leia as correções e tente outra vez.
+</div>`;
+document.getElementById('action-buttons').innerHTML = `<button class="btn-action" onclick="reset()">Zerar Histórico e Tentar Novamente</button>`;
+} else {
+summary += `<div style="background:var(--correct-bg); padding:15px; border-radius:8px; margin-bottom:20px; border:2px solid var(--correct-border); color:var(--correct-border);">
+<strong>🎯 Aprovado! Mandou muito bem.</strong> Você domina os conceitos básicos da biologia celular e da interação entre os órgãos. Excelente nível para o 8º ano.
+</div>`;
+document.getElementById('action-buttons').innerHTML = `<button class="btn-action" onclick="reset()">Refazer Prova</button>`;
+}
+
+if (correct < questions.length) {
+summary += '<h4 style="margin-bottom:10px; color:var(--text-color);">Revisão dos Seus Erros e Questões Pulas:</h4>';
+questions.forEach((q, i) => {
+if(userAnswers[i] !== q.correct) {
+let markedAnswer = userAnswers[i] !== null ? q.options[userAnswers[i]] : "<em style='color: #64748B;'>Em branco (Não respondeu)</em>";
+summary += `<div style="margin-bottom:10px; padding:15px; background:var(--white); border-radius:8px; border:2px dashed var(--theme-dark);">
+<strong style="color:var(--theme-dark);">Q${i+1}:</strong> ${q.text}<br>
+<span style="color:var(--wrong-border); font-size:0.9rem; font-weight:600; display:block; margin-top:5px;">O que você marcou: ${markedAnswer}</span>
+<span style="color:var(--correct-border); font-size:0.9rem; font-weight:600; display:block; margin-top:2px;">A Fisiologia Correta: ${q.options[q.correct]}</span>
+</div>`;
+}
+});
+}
+summary += '</div>';
+document.getElementById('review-container').innerHTML = summary;
+setMode('result');
+}
+
+function reset() {
+localStorage.removeItem(storageKey);
+userAnswers = new Array(questions.length).fill(null);
+currentQuestion = 0;
+setMode('practice');
+}
+
+setMode(userAnswers.some(ans => ans !== null) ? 'practice' : 'explanation');
+</script>
+</body>
+</html>
